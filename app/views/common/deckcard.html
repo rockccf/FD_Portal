@@ -1,0 +1,20 @@
+<div class="photo">
+    <div data-ng-click="card.showIndex = !card.showIndex">
+        <div data-ng-if="card.showIndex" class="photo-index">
+            <p>Photo position is</p>
+            <p class="balloon-wrapper">
+                <span class="balloon">{{card.$index + 1}}</span>
+            </p>
+        </div>
+        <div class="photo-wrapper">
+            <img src="" data-ng-src="data:{{card.fileType}};base64,{{card.base64Content}}" data-imageloaded="" data-loadedclass="photoloaded" class="img-responsive" />
+            <div class="photo-loader">
+                <div class="sk-spinner sk-spinner-rotating-plane"></div>
+            </div>
+        </div>
+        <div class="text-center" style="width:100px; font-size:16px; word-break:break-all; padding-left:5px;">
+            {{card.filename}}
+        </div>
+    </div>
+    <a ng-click="mother.$parent.$parent[card.imageOwnerTypeController].deleteSecondaryImage(card.$index,card.id)" role="button"><span class="fa fa-times"></span></a>
+</div>

@@ -1,0 +1,10 @@
+<div>
+    <ul uib-pagination
+            total-items="totalItemCount" items-per-page="stItemsByPage"
+            ng-change="selectPage(currentPage)" ng-model="currentPage"
+            max-size="5" class="pagination-sm" boundary-links="true" force-ellipses="true">
+    </ul>
+</div>
+<div class="col-lg-1 pull-right">
+    <select ng-options="option as option for option in $root.pagingButtons" ng-model="stItemsByPage"></select>
+</div>

@@ -1,0 +1,68 @@
+<menu-button-div/>
+<div class="panel panel-primary">
+    <div class="panel-heading" translate="role.heading.roleCreate"></div>
+    <div class="panel-body">
+        <alert-message-div/>
+        <uib-tabset>
+            <uib-tab heading="{{'role.heading.roleInformation'|translate}}">
+                <form name="roleForm" class="form-horizontal form-validate" ng-submit="role.createRole(roleForm.$valid)" novalidate>
+                    <div class="form-group required" ng-class="{ 'has-error' : roleForm.name.$invalid && roleForm.name.$touched}">
+                        <label for="name" class="col-lg-3 control-label" translate="role.label.name"></label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="{{'role.placeholder.name'|translate}}"
+                                   ng-model="role.role.name" ng-pattern="/^[a-zA-Z0-9\._ -]*$/"
+                                   ng-minlength="2" ng-maxlength="100" required>
+                            <div class="help-block" ng-messages="roleForm.name.$error" ng-show="roleForm.name.$touched">
+                                <div ng-messages-include="views/common/messages.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : roleForm.remarks.$invalid && roleForm.remarks.$touched}">
+                        <label for="remarks" class="col-lg-3 control-label" translate="role.label.remarks"></label>
+                        <div class="col-lg-6">
+                            <textarea class="form-control" id="remarks" name="remarks" placeholder="{{'role.placeholder.remarks'|translate}}"
+                                   ng-model="role.role.remarks" ng-minlength="2" ng-maxlength="255" rows="4"/>
+                            <div class="help-block" ng-messages="roleForm.remarks.$error" ng-show="roleForm.remarks.$touched">
+                                <div ng-messages-include="views/common/messages.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group required" ng-class="{ 'has-error' : roleForm.permissionsList.$invalid && roleForm.permissionsList.$touched}">
+                        <label class="col-lg-3 control-label" translate="role.label.permission"></label>
+                        <div class="col-lg-9" ng-repeat="categoryObj in role.permissionCategories" ng-class="{ 'col-lg-offset-3': $index!=0 }">
+                            <div class="col-lg-12">
+                                <br/>
+                                <label class="col-lg-3">{{categoryObj.translationId | translate}}</label>
+                            </div>
+                            <div class="col-lg-12">
+                                <div ng-repeat="permissionObj in role.permissionOptions">
+                                    <div class="checkbox c-checkbox needsclick col-lg-5" ng-if="permissionObj.category == categoryObj.id">
+                                        <label class="needsclick">
+                                            <input type="checkbox" ng-true-value="'{{permissionObj.id}}'" ng-false-value="''" class="needsclick form-control"
+                                                   id="permissionsList{{index}}" name="permissionsList"
+                                                   ng-model="role.role.permissions.selected[$index]" ng-blur="role.doTouched(roleForm)"
+                                                   ng-checked="role.previousPermissions.indexOf(permissionObj.id) > -1"
+                                                   ng-change="role.toggleSelection()" ng-required="role.setRequired()"/>
+                                            <span class="fa fa-check"></span> {{permissionObj.name}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <br/><br/>
+                            </div>
+                        </div>
+                        <div class="row col-lg-8 col-lg-offset-3 help-block"  ng-messages="roleForm.permissionsList.$error" ng-show="roleForm.permissionsList.$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                    <fieldset ng-disabled="role.isSaving">
+                        <div class="form-group">
+                            <div class="col-lg-8 col-lg-offset-3">
+                                <button type="submit" class="btn btn-primary" ng-disabled="roleForm.$invalid" translate="role.button.btnCreate"></button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+</div>

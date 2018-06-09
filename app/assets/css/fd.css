@@ -1,0 +1,356 @@
+/* ========================================================================
+   Component: preloader.less
+ ========================================================================== */
+/*@noflip*/
+.preloader-hrcb {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #f05050;
+    background-image: -webkit-linear-gradient(90deg, #f15824 10%, #f47d54 90%);
+    /* Chrome 10+, Saf5.1+ */
+    background-image: -moz-linear-gradient(90deg, #f15824 10%, #f47d54 90%);
+    /* FF3.6+ */
+    background-image: -ms-linear-gradient(90deg, #f15824 10%, #f47d54 90%);
+    /* IE10 */
+    background-image: -o-linear-gradient(90deg, #f15824 10%, #f47d54 90%);
+    /* Opera 11.10+ */
+    background-image: linear-gradient(90deg, #f15824 10%, #f47d54 90%);
+    /* W3C */
+    z-index: 9999;
+    -webkit-transition: opacity 0.65s;
+    -o-transition: opacity 0.65s;
+    transition: opacity 0.65s;
+}
+/*@noflip*/
+.preloader-progress-hrcb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 157px;
+    height: 100px;
+    margin: auto;
+    overflow: auto;
+    background-image: url(/assets/images/preloader.empty.png);
+    background-size: 157px 100px;
+}
+/*@noflip*/
+.preloader-progress-bar-hrcb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    min-width: 10px;
+    background-image: url(/assets/images/preloader.full.png);
+    background-size: 157px 100px;
+}
+.preloader-hidden-hrcb {
+    display: none;
+}
+.preloader-hidden-add-hrcb {
+    opacity: 1;
+    display: block;
+}
+.preloader-hidden-add-hrcb .preloader-progress-hrcb {
+    -webkit-transition: -webkit-transform 0.4s ease;
+    -moz-transition: -moz-transform 0.4s ease;
+    -o-transition: -o-transform 0.4s ease;
+    transition: transform 0.4s ease;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
+}
+.preloader-hidden-add-active-hrcb {
+    opacity: 0;
+}
+
+/* ========================================================================
+   Component: loading-bar.less
+ ========================================================================== */
+/*
+ * angular-loading-bar v0.6.0 * https://chieffancypants.github.io/angular-loading-bar
+ * Copyright (c) 2014 Wes Cruver * License: MIT
+ */
+#loading-bar {
+    position: absolute;
+    z-index: 90002;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+}
+/* Make clicks pass-through */
+#loading-bar,
+#loading-bar-spinner {
+    pointer-events: none;
+    -webkit-pointer-events: none;
+    -webkit-transition: 350ms linear all;
+    -moz-transition: 350ms linear all;
+    -o-transition: 350ms linear all;
+    transition: 350ms linear all;
+}
+#loading-bar.ng-enter,
+#loading-bar.ng-leave.ng-leave-active,
+#loading-bar-spinner.ng-enter,
+#loading-bar-spinner.ng-leave.ng-leave-active {
+    opacity: 0;
+}
+#loading-bar.ng-enter.ng-enter-active,
+#loading-bar.ng-leave,
+#loading-bar-spinner.ng-enter.ng-enter-active,
+#loading-bar-spinner.ng-leave {
+    opacity: 1;
+}
+#loading-bar .bar {
+    height: 100%;
+    width: 100%;
+    -webkit-transition: width 350ms;
+    -moz-transition: width 350ms;
+    -o-transition: width 350ms;
+    transition: width 350ms;
+    background: #23b7e5;
+    border-bottom-right-radius: 1px;
+    border-top-right-radius: 1px;
+}
+/* Fancy blur effect */
+#loading-bar .peg {
+    position: absolute;
+    width: 70px;
+    right: 0;
+    top: 0;
+    height: 2px;
+    opacity: .45;
+    -moz-box-shadow: #23b7e5 1px 0 6px 1px;
+    -ms-box-shadow: #23b7e5 1px 0 6px 1px;
+    -webkit-box-shadow: #23b7e5 1px 0 6px 1px;
+    box-shadow: #23b7e5 1px 0 6px 1px;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+}
+#loading-bar-spinner {
+    display: block;
+    position: absolute;
+    z-index: 90002;
+    top: 10px;
+    left: 10px;
+}
+#loading-bar-spinner .spinner-icon {
+    width: 14px;
+    height: 14px;
+    border: solid 2px transparent;
+    border-top-color: #23b7e5;
+    border-left-color: #23b7e5;
+    border-radius: 10px;
+    -webkit-animation: loading-bar-spinner 400ms linear infinite;
+    -moz-animation: loading-bar-spinner 400ms linear infinite;
+    -ms-animation: loading-bar-spinner 400ms linear infinite;
+    -o-animation: loading-bar-spinner 400ms linear infinite;
+    animation: loading-bar-spinner 400ms linear infinite;
+}
+@-webkit-keyframes loading-bar-spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@-moz-keyframes loading-bar-spinner {
+    0% {
+        -moz-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -moz-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@-o-keyframes loading-bar-spinner {
+    0% {
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@-ms-keyframes loading-bar-spinner {
+    0% {
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes loading-bar-spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* To center the element */
+.elem-center
+{
+    float: none;
+    margin: 0 auto;
+}
+
+/* To add asterisk to the label of required fields */
+.form-group.required .control-label:after {
+    content:"*";
+    color:red;
+}
+
+/* NG File Upload CSS classes */
+.upload-drop-zone {
+    margin-top: 10px;
+    color: #999;
+    border-style: dashed;
+    border-color: #ccc;
+    line-height: 150px;
+    text-align: center;
+}
+.dragover {
+    color: #999;
+    border-color: #e84c3d;
+}
+
+.vertical-center-nav-text {
+    padding-top: 17px;
+}
+
+/* Smart Table Sorting Classes */
+.st-sort-ascent:before{
+    content: '\25B2';
+}
+
+.st-sort-descent:before{
+    content: '\25BC';
+}
+
+.ta-editor {
+  min-height: 300px;
+  height: auto;
+  overflow: auto;
+  font-family: inherit;
+  font-size: 100%;
+  margin:5px 0;
+}
+
+.ta-toolbar .btn-group {
+  margin-bottom: 5px;
+}
+
+.angular-google-map,
+.angular-google-map-container {
+    height: 95%;
+}
+
+.map-modal .modal-content,
+.map-modal .modal-dialog {
+    top: 10%;
+    left: 15%;
+    width: 90%;
+    height: 70%;
+    padding: 0;
+    margin-left: -10%
+}
+
+.map-modal .modal-header {
+    height: 10%;
+}
+
+.map-modal .modal-body {
+    height: 60%;
+}
+
+/* Make the google map div position fixed, so the right column scrolling won't affect its position */
+.map-modal .gmap {
+    top: 20%;
+    height: 62%;
+    width: 62%;
+    position: fixed;
+}
+
+.panel-hrcb {
+    border-color: #cfdbe2;
+}
+.panel-hrcb > .panel-heading {
+    color: #fff;
+    background-color: #f15824;
+    border-color: #cfdbe2;
+}
+.panel-hrcb > .panel-heading + .panel-collapse > .panel-body {
+    border-top-color: #cfdbe2;
+}
+.panel-hrcb > .panel-heading .badge {
+    color: #f15824;
+    background-color: #fff;
+}
+.panel-hrcb > .panel-footer + .panel-collapse > .panel-body {
+    border-bottom-color: #cfdbe2;
+}
+
+.loader-hrcb {
+    height: 70px;
+    text-align: center;
+}
+.loader-hrcb > div {
+    display: inline-block;
+}
+.loader-hrcb.loader-hrcb-sk {
+    padding-top: 0;
+}
+
+.ui-select-multiple.ui-select-bootstrap { min-height: 31px; }
+
+.ui-select-multiple .ui-select-search.ng-hide{ width: 100%; display: inline-block !important; cursor: not-allowed; }
+
+/* Center vertical align */
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+/* Smart table selection color */
+.st-selected{
+    background-color: #dff0d8;
+}
+
+/* Customized bigger modal size */
+.app-modal-window .modal-dialog {
+    width: 90%;
+}
+
+/* Table column vertical center */
+.vertical-center {
+    vertical-align: middle !important;
+}
+
+/* Set margin-top space */
+.voffset  { margin-top: 2px; }
+.voffset1 { margin-top: 5px; }
+.voffset2 { margin-top: 10px; }
+.voffset3 { margin-top: 15px; }
+.voffset4 { margin-top: 30px; }
+.voffset5 { margin-top: 40px; }
+.voffset6 { margin-top: 60px; }
+.voffset7 { margin-top: 80px; }
+.voffset8 { margin-top: 100px; }
+.voffset9 { margin-top: 150px; }

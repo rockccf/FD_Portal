@@ -1,0 +1,6 @@
+<ui-select class="control-label" ng-model="valueObj.id" on-select="change($item,$model)" theme="bootstrap" append-to-body="true">
+    <ui-select-match>{{$select.selected.name}}</ui-select-match>
+    <ui-select-choices repeat="selectDataObj.id as selectDataObj in selectData | filter: $select.search">
+        <span ng-bind-html="selectDataObj.name | highlight: $select.search"></span>
+    </ui-select-choices>
+</ui-select>

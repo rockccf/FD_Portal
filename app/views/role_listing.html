@@ -1,0 +1,55 @@
+<menu-button-div/>
+<div class="panel panel-info">
+    <div class="panel-heading" translate="role.heading.roleListing"></div>
+    <div class="panel-body">
+        <!-- START table-responsive-->
+        <div class="table-responsive">
+            <table st-pipe="role.roleListing" st-table="role.tableData" class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th st-sort="description" st-sort-default="true" st-skip-natural="true" translate="role.label.name"></th>
+                    <th translate="role.label.remarks"></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th><input class="form-control" st-search="description"/></th>
+                    <th><input class="form-control" st-search="remarks"/></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody ng-show="!role.isLoading">
+                <tr ng-repeat="roleObj in role.tableData" ng-dblclick="role.viewRole(roleObj.id)">
+                    <td data-title="#">{{role.recordsToSkip + $index + 1}}</td>
+                    <td data-title="Name">{{roleObj.description}}</td>
+                    <td data-title="Name">{{roleObj.remarks}}</td>
+                    <td class="text-right">
+                        <a ui-sref="root.main.roleView({id:roleObj.id})" class="btn btn-oval btn-lg btn-info" role="button" translate="role.button.btnView"></a>
+                    </td>
+                    <td class="text-left">
+                        <a ui-sref="root.main.roleEdit({id:roleObj.id})" class="btn btn-oval btn-lg btn-primary" role="button" translate="role.button.btnEdit"></a>
+                    </td>
+                </tr>
+                </tbody>
+                <tbody ng-show="role.isLoading">
+                <tr>
+                    <td colspan="5" class="bg-white loader-hrcb">
+                        <loader-div/>
+                    </td>
+                </tr>
+                </tbody>
+
+                <tfoot>
+                <tr>
+                    <td class="text-center" colspan="5">
+                        <div st-items-by-page="role.recordsPerPage" st-pagination="" st-template="views/common/pagination_template.html"></div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

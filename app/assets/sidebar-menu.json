@@ -1,0 +1,86 @@
+[
+    {
+        "text": "Menu Heading",
+        "heading": "true",
+        "translate": "text.menuHeading",
+        "bypassPermission": "true"
+    },
+    {
+        "text": "Home",
+        "sref": "root.main.home",
+        "icon": "icon-home",
+        "translate": "text.home",
+        "bypassPermission": "true"
+    },
+    {
+        "text": "Setup",
+        "sref": "#",
+        "icon": "fa fa-cog",
+        "submenu": [
+            {
+                "text": "Profile",
+                "sref": "root.main.profileView",
+                "icon": "fa fa-info-circle",
+                "substate": [
+                    {"sref":"root.main.profileView"}
+                ],
+                "translate": "text.profile",
+                "permission" : "VIEW_TENANT"
+            },
+            {
+                "text": "User",
+                "sref": "root.main.userListing",
+                "icon": "fa fa-users",
+                "substate": [
+                    {"sref":"root.main.userCreate"},
+                    {"sref":"root.main.userListing"},
+                    {"sref":"root.main.userView"},
+                    {"sref":"root.main.userEdit"}
+                ],
+                "translate": "text.user",
+                "permission" : "VIEW_USER"
+            },
+            {
+                "text": "Role",
+                "sref": "root.main.roleListing",
+                "icon": "fa fa-street-view",
+                "substate": [
+                    {"sref":"root.main.roleCreate"},
+                    {"sref":"root.main.roleListing"}
+                ],
+                "translate": "text.role",
+                "permission" : "VIEW_ROLE"
+            }
+        ],
+        "translate": "sidebar.menu.setup"
+    },
+    {
+        "text": "Maintenance",
+        "sref": "#",
+        "icon": "fa fa-cogs",
+        "submenu": [
+            {
+                "text": "Master",
+                "sref": "root.main.masterListing",
+                "icon": "fa fa-shopping-basket",
+                "substate" : [
+                    {"sref": "root.main.masterCreate"},
+                    {"sref": "root.main.masterListing"}
+                ],
+                "translate": "text.master",
+                "permission" : "VIEW_MASTER"
+            }
+        ],
+        "translate": "text.maintenance"
+    },
+    {
+        "text": "Report",
+        "sref": "root.main.report",
+        "icon": "fa fa-book",
+        "substate": [
+            {"sref": "root.main.poReport"}
+        ],
+        "translate": "text.report",
+        "bypassPermission": "true"
+    }
+]

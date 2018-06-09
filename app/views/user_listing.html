@@ -1,0 +1,81 @@
+<menu-button-div/>
+<div class="panel panel-info">
+    <div class="panel-heading" translate="user.heading.userListing"></div>
+    <div class="panel-body">
+        <!-- START table-responsive-->
+        <div class="table-responsive">
+            <table st-pipe="user.userListing" st-table="user.tableData" class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th st-sort="username" st-sort-default="true" st-skip-natural="true" translate="user.label.username"></th>
+                    <th st-sort="firstName" st-skip-natural="true" translate="user.label.firstName"></th>
+                    <th st-sort="lastName" st-skip-natural="true" translate="user.label.lastName"></th>
+                    <th st-sort="email" st-skip-natural="true" translate="user.label.email"></th>
+                    <th st-sort="name" st-skip-natural="true" translate="user.label.department"></th>
+                    <th st-sort="item_name" st-skip-natural="true" translate="user.label.role"></th>
+                    <th st-sort="active" st-skip-natural="true" translate="user.label.active"></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th><input class="form-control" st-search="username"/></th>
+                    <th><input class="form-control" st-search="firstName"/></th>
+                    <th><input class="form-control" st-search="lastName"/></th>
+                    <th><input class="form-control" st-search="email"/></th>
+                    <th>
+                        <select class="form-control" st-search="departmentId">
+                            <option ng-repeat="departmentObj in user.departmentFilters" value="{{departmentObj.id}}">{{departmentObj.name | translate}}</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select class="form-control" st-search="item_name">
+                            <option ng-repeat="roleObj in user.roleFilters" value="{{roleObj.id}}">{{roleObj.name | translate}}</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select class="form-control" st-search="active">
+                            <option ng-repeat="activeObj in user.activeFilters" value="{{activeObj.id}}">{{activeObj.name | translate}}</option>
+                        </select>
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody ng-show="!user.isLoading">
+                <tr ng-repeat="userObj in user.tableData" ng-dblclick="user.viewUser(userObj.id)">
+                    <td data-title="#">{{user.recordsToSkip + $index + 1}}</td>
+                    <td data-title="User Name">{{userObj.username}}</td>
+                    <td data-title="First Name">{{userObj.userProfile.firstName}}</td>
+                    <td data-title="Last Name">{{userObj.userProfile.lastName}}</td>
+                    <td data-title="Email">{{userObj.email}}</td>
+                    <td data-title="Department">{{userObj.department.name}}</td>
+                    <td data-title="Role">{{userObj.roles[0].description}}</td>
+                    <td data-title="Active">{{userObj.active}}</td>
+                    <td class="text-center">
+                        <a ui-sref="root.main.userView({id:userObj.id})" class="btn btn-oval btn-lg btn-info" role="button" translate="user.button.btnView"></a>
+                    </td>
+                    <td class="text-center">
+                        <a ui-sref="root.main.userEdit({id:userObj.id})" class="btn btn-oval btn-lg btn-primary" role="button" translate="user.button.btnEdit"></a>
+                    </td>
+                </tr>
+                </tbody>
+                <tbody ng-show="user.isLoading">
+                <tr>
+                    <td colspan="10" class="bg-white loader-hrcb">
+                        <loader-div/>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td class="text-center" colspan="10">
+                        <div st-items-by-page="user.recordsPerPage" st-pagination="" st-template="views/common/pagination_template.html"></div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

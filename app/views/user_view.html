@@ -1,0 +1,76 @@
+<div class="panel panel-info">
+    <div class="panel-heading" translate="user.heading.userView"></div>
+    <div class="panel-body">
+        <alert-message-div/>
+        <uib-tabset>
+            <uib-tab heading="{{'user.heading.userInformation'|translate}}">
+                <form name="userForm" class="form-horizontal" ng-submit="user.deleteUser()" novalidate>
+                    <div class="form-group required">
+                        <label class="col-lg-3 control-label" translate="user.label.username"></label>
+                        <div class="col-lg-6">
+                            <pre class="form-control-static" ng-bind="user.user.username"></pre>
+                        </div>
+                    </div>
+                    <div class="form-group required">
+                        <label class="col-lg-3 control-label" translate="user.label.firstName"></label>
+                        <div class="col-lg-6">
+                            <pre class="form-control-static" ng-bind="user.user.userProfile.firstName"></pre>
+                        </div>
+                    </div>
+                    <div class="form-group required">
+                        <label class="col-lg-3 control-label" translate="user.label.lastName"></label>
+                        <div class="col-lg-6">
+                            <pre class="form-control-static" ng-bind="user.user.userProfile.lastName"></pre>
+                        </div>
+                    </div>
+                    <div class="form-group required">
+                        <label class="col-lg-3 control-label" translate="user.label.email"></label>
+                        <div class="col-lg-6">
+                            <pre class="form-control-static" ng-bind="user.user.email"></pre>
+                        </div>
+                    </div>
+                    <div class="form-group required">
+                        <label class="col-lg-3 control-label" translate="user.label.jobTitle"></label>
+                        <div class="col-lg-6">
+                            <pre class="form-control-static" ng-bind="user.user.userProfile.jobTitle"></pre>
+                        </div>
+                    </div>
+                    <div class="form-group required">
+                        <label class="col-lg-3 control-label" translate="user.label.department"></label>
+                        <div class="col-lg-6">
+                            <pre class="form-control-static" ng-bind="user.user.department.name"></pre>
+                        </div>
+                    </div>
+                    <div class="form-group required">
+                        <label class="col-lg-3 control-label" translate="user.label.role"></label>
+                        <div class="col-lg-6">
+                            <pre class="form-control-static" ng-bind="user.user.roles[0].description"></pre>
+                        </div>
+                    </div>
+                    <div class="form-group required">
+                        <label class="col-lg-3 control-label" translate="user.label.active"></label>
+                        <div class="col-lg-6">
+                            <pre class="form-control-static" ng-bind="user.user.active.name | translate"></pre>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label" translate="user.label.profileImage"></label>
+                        <div class="col-lg-6">
+                            <img class="img-responsive" ng-show="user.user.userProfile.profileImage" ng-src="{{backendImageURL}}/{{user.user.userProfile.profileImage.id}}">
+                        </div>
+                    </div>
+                    <br/>
+                    <fieldset>
+                        <div class="form-group">
+                            <div class="col-lg-8 col-lg-offset-3">
+                                <a ui-sref="root.main.userListing" class="btn btn-default" role="button" translate="user.button.btnBack"></a>
+                                <a ui-sref="root.main.userEdit({id:user.user.id})" class="btn btn-primary" role="button" translate="user.button.btnEdit"></a>
+                                <button type="submit" class="btn btn-warning" translate="user.button.btnDelete"></button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+</div>

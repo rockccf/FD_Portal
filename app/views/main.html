@@ -1,0 +1,21 @@
+<!-- header start -->
+<header class="topnavbar-wrapper" ng-include="'views/common/header.html'"></header>
+<aside class="aside" ng-include="'views/common/sidebar.html'" ng-controller="SidebarController"></aside>
+<aside class="offsidebar" ng-include="'views/common/offsidebar.html'"></aside>
+<!-- header end -->
+
+<!-- Main section-->
+<section>
+    <div autoscroll="true" class="content-wrapper">
+        <h3 id="mainDiv">
+            <div ncy-breadcrumb></div>
+        </h3>
+        <div ui-view ng-class="app.viewAnimation"></div>
+    </div>
+</section>
+
+
+
+<!-- footer start -->
+<footer ng-include="'views/common/footer.html'"></footer>
+<!-- footer end -->

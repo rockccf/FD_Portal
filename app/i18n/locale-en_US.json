@@ -1,0 +1,71 @@
+{
+    "title" : {
+        "login" : "Login",
+        "accessDenied" : "Access Denied"
+    },
+    "bcLabel" : {
+        "home" : "Home",
+        "profileView" : "View Company Profile"
+    },
+    "heading" : {
+        "profile" : "Company Profile",
+        "profileView" : "View Company Profile",
+        "profileEdit" : "Edit Company Profile",
+        "images" : "Images",
+        "contactPerson" : "Contact Person"
+    },
+    "text" : {
+        "loginIdentity" : "Login Identity",
+        "name" : "Name",
+        "address1" : "Address 1",
+        "address2" : "Address 2",
+        "address3" : "Address 3"
+    },
+    "placeholder" : {
+        "loginIdentity" : "Login Identity",
+        "name" : "Name",
+        "address1" : "Address 1",
+        "address2" : "Address 2",
+        "address3" : "Address 3"
+    },
+    "button" : {
+        "create": "Create",
+        "view": "View",
+        "edit": "Edit",
+        "back": "Back",
+        "delete": "Delete",
+        "update": "Update",
+        "save" : "Save"
+    },
+    "message" : {
+        "required": "This field is required",
+        "minlength": "This field is too short",
+        "maxlength": "This field is too long",
+        "email": "This needs to be a valid email",
+        "unique": "This value have been taken, please choose another",
+        "pattern": "Special character and space are not allowed",
+        "matching": "Password mismatch",
+        "taMaxText": "Character limit is",
+        "min": "Minimum value have to be at least 0.",
+        "date": "Invalid date entered."
+    },
+    "global" : {
+        "text" : {
+            "all" : "All",
+            "yes" : "Yes",
+            "no" : "No"
+        },
+        "error" : {
+            "401" : "Authentication failed.",
+            "403" : "You're not allowed to access the specified action.",
+            "404" : "The requested resource does not exist.",
+            "405" : "Method not allowed. Please contact system admninistrator.",
+            "415" : "Unsupported media type. The requested content type or version number is invalid.",
+            "429" : "Server busy. Please try again later.",
+            "500" : "Server error. Please contact system administrator."
+        },
+        "dbError" : {
+            "1451" : "Failed to update/delete the object as the object contains reference(s) to other object(s)."
+        }
+    }
+}

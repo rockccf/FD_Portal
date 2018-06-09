@@ -1,0 +1,10 @@
+/node_modules
+/dist
+/.tmp
+/.sass-cache
+/bower_components
+/.idea
+/app/scripts/sysconstant.js
+/env/development.json
+/.DS_Store
+/app/.DS_Store

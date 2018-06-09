@@ -1,0 +1,8 @@
+<div class="input-group">
+    <input type="text" class="form-control" name="datePopUp" id="datePopUp" uib-datepicker-popup="dd-MMM-yyyy"
+           ng-change="change()" ng-model="value" is-open="isOpen" alt-input-formats="['d!-M!-yyyy','d!/M!/yyyy']"
+           close-text="Close" datepicker-append-to-body="true"/>
+    <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="fa fa-calendar"></i></button>
+    </span>
+</div>
