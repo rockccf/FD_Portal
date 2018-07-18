@@ -319,7 +319,7 @@
         .constant('APP_REQUIRES', {
             // jQuery based and standalone scripts
             scripts: {
-                'icons' : {files: ['assets/vendor/font-awesome/css/font-awesome.min.css','assets/vendor/simple-line-icons/css/simple-line-icons.css'], cache: true},
+                'icons' : {files: ['assets/vendor/font-awesome/css/fontawesome-all.min.css','assets/vendor/simple-line-icons/css/simple-line-icons.css'], cache: true},
                 'spinkit':  {files: ['assets/vendor/spinkit.css'], cache: true},
                 'loaders.css': {files: ['assets/vendor/loaders.min.css'], cache: true},
                 'filestyle': {files: ['assets/vendor/bootstrap-filestyle/src/bootstrap-filestyle.js'], cache: true},
@@ -334,6 +334,8 @@
                 {name: 'profile', files: ['scripts/controllers/profile.js'], cache: true},
                 {name: 'user', files: ['scripts/controllers/user.js'], cache: true},
                 {name: 'role', files: ['scripts/controllers/role.js'], cache: true},
+                {name: 'master', files: ['scripts/controllers/master.js'], cache: true},
+                {name: 'package', files: ['scripts/controllers/package.js'], cache: true},
                 {name: 'report', files: ['scripts/controllers/report.js'], cache: true}
             ]
         })
@@ -764,8 +766,8 @@
         // Global Settings
         // -----------------------------------
         $rootScope.app = {
-            name: 'HorecaBid Admin Portal',
-            company: 'Horecabid Sdn. Bhd.',
+            name: 'TBT88 Portal',
+            company: 'TBT88',
             description: 'Home',
             year: ((new Date()).getFullYear()),
             layout: {
@@ -776,7 +778,7 @@
                 horizontal: false,
                 isFloat: false,
                 asideHover: true,
-                theme: '/assets/css/theme-hrcb.css',
+                theme: '/assets/css/theme-a.css',
           		asideScrollbar: true,
           		isCollapsedText: false
             },
@@ -1118,12 +1120,17 @@
 
                             //looping first level submenu
                             while (j--) {
+                                if (items[i].submenu[j].bypassPermission) {
+                                    //Skip the checking and continue the loop
+                                    continue;
+                                }
+
                                 //if dont have permission/valid permission at all
                                 if (items[i].submenu[j].permission == null && items[i].submenu[j].submenu == null) {
                                     //delete submenu item because don't have both permissions and submenu
                                     items[i].submenu.splice(j,1);
                                 } else if (items[i].submenu[j].permission != null){
-                                    if (userPermissions.indexOf($rootScope.APPCONSTANT.AUTH_ITEM.PERMISSION_PREFIX.TENANT+items[i].submenu[j].permission) < 0) {
+                                    if (userPermissions.indexOf(items[i].submenu[j].permission) < 0) {
                                         //delete submenu item because don't have valid permissions
                                         items[i].submenu.splice(j,1);
                                     } else {
@@ -1139,7 +1146,7 @@
                                             //delete inner submenu item because don't have permissions
                                             items[i].submenu[j].submenu.splice(k,1);
                                         } else if (items[i].submenu[j].submenu[k].permission != null) {
-                                            if (userPermissions.indexOf($rootScope.APPCONSTANT.AUTH_ITEM.PERMISSION_PREFIX.TENANT+items[i].submenu[j].submenu[k].permission) < 0) {
+                                            if (userPermissions.indexOf(items[i].submenu[j].submenu[k].permission) < 0) {
                                                 //delete inner submenu item because don't have valid permissions
                                                 items[i].submenu[j].submenu.splice(k,1);
                                             } else {
@@ -1162,7 +1169,7 @@
                             }
                         } else {
                             //No sub-menu defined, check the parent menu permission
-                            if (userPermissions.indexOf($rootScope.APPCONSTANT.AUTH_ITEM.PERMISSION_PREFIX.TENANT+items[i].permission) < 0) {
+                            if (userPermissions.indexOf(items[i].permission) < 0) {
                                 //No valid permissions found
                                 items.splice(i,1);
                             }

@@ -187,33 +187,33 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'RouteH
             controller: 'DashboardController',
             controllerAs: 'dashboard'
         })
-        .state('root.main.profileView', {
-            url: "/profileView",
-            title: "title.profileView",
+        .state('root.main.myAccount', {
+            url: "/myAccount",
+            title: "title.myAccount",
             data: {
                 permissions: []
             },
             ncyBreadcrumb: {
-                label: 'bcLabel.profileView'
+                label: 'bcLabel.myAccount'
             },
-            templateUrl: "views/profile_view.html",
-            resolve: helper.resolveFor('profile'),
-            controller: "ProfileController",
-            controllerAs: 'profile'
+            templateUrl: "views/user_view.html",
+            resolve: helper.resolveFor('user'),
+            controller: "UserController",
+            controllerAs: 'user'
         })
-        .state('root.main.profileEdit', {
-            url: "/profileEdit",
-            title: "title.profileEdit",
+        .state('root.main.myAccountEdit', {
+            url: "/myAccountEdit",
+            title: "title.myAccountEdit",
             data: {
                 permissions: []
             },
             ncyBreadcrumb: {
-                label: 'bcLabel.profileEdit'
+                label: 'bcLabel.myAccountEdit'
             },
-            templateUrl: "views/profile_edit.html",
-            resolve: helper.resolveFor('profile'),
-            controller: "ProfileController",
-            controllerAs: 'profile'
+            templateUrl: "views/user_edit.html",
+            resolve: helper.resolveFor('user'),
+            controller: "UserController",
+            controllerAs: 'user'
         })
         .state('root.main.userCreate', {
             url: "/userCreate/:hotelId",
@@ -221,8 +221,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'RouteH
             data: {
                 permissions: [],
                 menu: [
-                    {"class":"btn-primary","active":true,"state":"root.main.userCreate","translate":"user.menu.userCreate"},
-                    {"class":"btn-info","active":false,"state":"root.main.userListing","translate":"user.menu.userListing"}
+                    {"class":"btn-primary","active":true,"state":"root.main.userCreate","translate":"text.userCreate"},
+                    {"class":"btn-info","active":false,"state":"root.main.userListing","translate":"text.userListing"}
                 ]
             },
             ncyBreadcrumb: {
@@ -239,8 +239,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'RouteH
             data: {
                 permissions: [],
                 menu: [
-                    {"class":"btn-primary","active":false,"state":"root.main.userCreate","translate":"user.menu.userCreate"},
-                    {"class":"btn-info","active":true,"state":"root.main.userListing","translate":"user.menu.userListing"}
+                    {"class":"btn-primary","active":false,"state":"root.main.userCreate","translate":"text.userCreate"},
+                    {"class":"btn-info","active":true,"state":"root.main.userListing","translate":"text.userListing"}
                 ]
             },
             ncyBreadcrumb: {
@@ -346,6 +346,138 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'RouteH
             resolve: helper.resolveFor('role'),
             controller: "RoleController",
             controllerAs: 'role'
+        })
+        .state('root.main.masterCreate', {
+            url: "/masterCreate",
+            title: "title.masterCreate",
+            data: {
+                permissions: [],
+                menu: [
+                    {"class":"btn-primary","active":true,"state":"root.main.masterCreate","translate":"text.masterCreate"},
+                    {"class":"btn-info","active":false,"state":"root.main.masterListing","translate":"text.masterListing"}
+                ]
+            },
+            ncyBreadcrumb: {
+                label: 'bcLabel.masterCreate'
+            },
+            templateUrl: "views/master_create.html",
+            resolve: helper.resolveFor('master'),
+            controller: "MasterController",
+            controllerAs: 'master'
+        })
+        .state('root.main.masterListing', {
+            url: "/masterListing",
+            title: "title.masterListing",
+            data: {
+                permissions: [],
+                menu: [
+                    {"class":"btn-primary","active":false,"state":"root.main.masterCreate","translate":"text.masterCreate"},
+                    {"class":"btn-info","active":true,"state":"root.main.masterListing","translate":"text.masterListing"}
+                ]
+            },
+            ncyBreadcrumb: {
+                label: 'bcLabel.masterListing'
+            },
+            templateUrl: "views/master_listing.html",
+            resolve: helper.resolveFor('master'),
+            controller: "MasterController",
+            controllerAs: 'master'
+        })
+        .state('root.main.masterEdit', {
+            url: "/masterEdit/:id",
+            title: "title.masterEdit",
+            data: {
+                permissions: []
+            },
+            ncyBreadcrumb: {
+                label: 'bcLabel.masterEdit',
+                parent: 'root.main.masterListing'
+            },
+            templateUrl: "views/master_edit.html",
+            resolve: helper.resolveFor('master'),
+            controller: "MasterController",
+            controllerAs: 'master'
+        })
+        .state('root.main.masterView', {
+            url: "/masterView/:id",
+            title: "title.masterView",
+            data: {
+                permissions: []
+            },
+            ncyBreadcrumb: {
+                label: 'bcLabel.masterView',
+                parent: 'root.main.masterListing'
+            },
+            templateUrl: "views/master_view.html",
+            resolve: helper.resolveFor('master'),
+            controller: "MasterController",
+            controllerAs: 'master'
+        })
+        .state('root.main.packageCreate', {
+            url: "/packageCreate",
+            title: "title.packageCreate",
+            data: {
+                permissions: [],
+                menu: [
+                    {"class":"btn-primary","active":true,"state":"root.main.packageCreate","translate":"text.packageCreate"},
+                    {"class":"btn-info","active":false,"state":"root.main.packageListing","translate":"text.packageListing"}
+                ]
+            },
+            ncyBreadcrumb: {
+                label: 'bcLabel.packageCreate'
+            },
+            templateUrl: "views/package_create.html",
+            resolve: helper.resolveFor('package'),
+            controller: "PackageController",
+            controllerAs: 'package'
+        })
+        .state('root.main.packageListing', {
+            url: "/packageListing",
+            title: "title.packageListing",
+            data: {
+                permissions: [],
+                menu: [
+                    {"class":"btn-primary","active":false,"state":"root.main.packageCreate","translate":"text.packageCreate"},
+                    {"class":"btn-info","active":true,"state":"root.main.packageListing","translate":"text.packageListing"}
+                ]
+            },
+            ncyBreadcrumb: {
+                label: 'bcLabel.packageListing'
+            },
+            templateUrl: "views/package_listing.html",
+            resolve: helper.resolveFor('package'),
+            controller: "PackageController",
+            controllerAs: 'package'
+        })
+        .state('root.main.packageEdit', {
+            url: "/packageEdit/:id",
+            title: "title.packageEdit",
+            data: {
+                permissions: []
+            },
+            ncyBreadcrumb: {
+                label: 'bcLabel.packageEdit',
+                parent: 'root.main.packageListing'
+            },
+            templateUrl: "views/package_edit.html",
+            resolve: helper.resolveFor('package'),
+            controller: "PackageController",
+            controllerAs: 'package'
+        })
+        .state('root.main.packageView', {
+            url: "/packageView/:id",
+            title: "title.packageView",
+            data: {
+                permissions: []
+            },
+            ncyBreadcrumb: {
+                label: 'bcLabel.packageView',
+                parent: 'root.main.packageListing'
+            },
+            templateUrl: "views/package_view.html",
+            resolve: helper.resolveFor('package'),
+            controller: "PackageController",
+            controllerAs: 'package'
         })
         .state('root.main.report', {
             url: "/report",

@@ -4,7 +4,7 @@
     <span ng-if="item && item.heading">{{(item.translate | translate) || item.text}}</span>
     <a ng-if="item && !item.heading" ng-href="{{$state.href(item.sref, item.params)}}" title="{{item.text}}">
         <div ng-if="item.alert" ng-class="item.label || 'label label-success'" class="pull-right">{{item.alert}}</div>
-        <em ng-if="item.icon" class="{{item.icon}}"></em>
+        <em ng-if="item.icon"><i class="{{item.icon}}"></i></em>
         <span>{{(item.translate | translate) || item.text}}</span>
     </a>
     <ul ng-if="item && item.submenu" uib-collapse="isCollapse(pIndex)" ng-init="addCollapse(pIndex, item)" class="nav sidebar-subnav">
@@ -31,7 +31,7 @@
                         <!-- Name and Job-->
                         <div class="user-block-info">
                             <span class="user-block-name">
-                                {{ 'sidebar.welcome' | translate }}
+                                {{ 'text.welcome' | translate }}
                                 <a ui-sref="root.main.userView({id:$root.userIdentity.id})">{{$root.userIdentity.userProfile.fullName}}</a>
                             </span>
                             <span class="user-block-role">{{$root.userIdentity.userProfile.jobTitle}}</span>

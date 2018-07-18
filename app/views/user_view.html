@@ -1,76 +1,360 @@
 <div class="panel panel-info">
-    <div class="panel-heading" translate="user.heading.userView"></div>
+    <div class="panel-heading" translate="text.userView"></div>
     <div class="panel-body">
         <alert-message-div/>
-        <uib-tabset>
-            <uib-tab heading="{{'user.heading.userInformation'|translate}}">
-                <form name="userForm" class="form-horizontal" ng-submit="user.deleteUser()" novalidate>
-                    <div class="form-group required">
-                        <label class="col-lg-3 control-label" translate="user.label.username"></label>
-                        <div class="col-lg-6">
-                            <pre class="form-control-static" ng-bind="user.user.username"></pre>
+        <form name="userForm" class="form-horizontal" ng-submit="user.deleteUser()" novalidate>
+            <div class="form-group required">
+                <label class="col-lg-3 control-label" translate="text.username"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static" ng-bind="user.user.username"></pre>
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="col-lg-3 control-label" translate="text.name"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static" ng-bind="user.user.name"></pre>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" translate="text.mobileNo"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static" ng-bind="user.user.mobileNo"></pre>
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="col-lg-3 control-label" translate="text.active"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static"><common-get-text ng-if="user.user.active != void(0)" value="user.user.active" object="user.yesNoOptions"></common-get-text></pre>
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="col-lg-3 control-label" translate="text.locked"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static"><common-get-text ng-if="user.user.locked != void(0)" value="user.user.locked" object="user.yesNoOptions"></common-get-text></pre>
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="col-lg-3 control-label" translate="text.userType"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static"><common-get-text ng-if="user.user.userType != void(0)" value="user.user.userType" object="user.userTypeOptions"></common-get-text></pre>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" translate="text.lastLoginAt"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static" ng-bind="user.user.lastLoginAt"></pre>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" translate="text.master"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static" ng-bind="user.user.master.name"></pre>
+                </div>
+            </div>
+            <div class="form-group" ng-if="user.user.userType == APPCONSTANT.USER.TYPE.AGENT || user.user.userType == APPCONSTANT.USER.TYPE.PLAYER">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="panel panel-primary" id="fourdMainPanel">
+                        <div class="panel-heading" ng-class="{'panel-heading-collapsed':'fourdMainPanel'}">3D/4D Prize Packages
+                            <paneltool tool-collapse="tool-collapse"></paneltool>
                         </div>
-                    </div>
-                    <div class="form-group required">
-                        <label class="col-lg-3 control-label" translate="user.label.firstName"></label>
-                        <div class="col-lg-6">
-                            <pre class="form-control-static" ng-bind="user.user.userProfile.firstName"></pre>
-                        </div>
-                    </div>
-                    <div class="form-group required">
-                        <label class="col-lg-3 control-label" translate="user.label.lastName"></label>
-                        <div class="col-lg-6">
-                            <pre class="form-control-static" ng-bind="user.user.userProfile.lastName"></pre>
-                        </div>
-                    </div>
-                    <div class="form-group required">
-                        <label class="col-lg-3 control-label" translate="user.label.email"></label>
-                        <div class="col-lg-6">
-                            <pre class="form-control-static" ng-bind="user.user.email"></pre>
-                        </div>
-                    </div>
-                    <div class="form-group required">
-                        <label class="col-lg-3 control-label" translate="user.label.jobTitle"></label>
-                        <div class="col-lg-6">
-                            <pre class="form-control-static" ng-bind="user.user.userProfile.jobTitle"></pre>
-                        </div>
-                    </div>
-                    <div class="form-group required">
-                        <label class="col-lg-3 control-label" translate="user.label.department"></label>
-                        <div class="col-lg-6">
-                            <pre class="form-control-static" ng-bind="user.user.department.name"></pre>
-                        </div>
-                    </div>
-                    <div class="form-group required">
-                        <label class="col-lg-3 control-label" translate="user.label.role"></label>
-                        <div class="col-lg-6">
-                            <pre class="form-control-static" ng-bind="user.user.roles[0].description"></pre>
-                        </div>
-                    </div>
-                    <div class="form-group required">
-                        <label class="col-lg-3 control-label" translate="user.label.active"></label>
-                        <div class="col-lg-6">
-                            <pre class="form-control-static" ng-bind="user.user.active.name | translate"></pre>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label" translate="user.label.profileImage"></label>
-                        <div class="col-lg-6">
-                            <img class="img-responsive" ng-show="user.user.userProfile.profileImage" ng-src="{{backendImageURL}}/{{user.user.userProfile.profileImage.id}}">
-                        </div>
-                    </div>
-                    <br/>
-                    <fieldset>
-                        <div class="form-group">
-                            <div class="col-lg-8 col-lg-offset-3">
-                                <a ui-sref="root.main.userListing" class="btn btn-default" role="button" translate="user.button.btnBack"></a>
-                                <a ui-sref="root.main.userEdit({id:user.user.id})" class="btn btn-primary" role="button" translate="user.button.btnEdit"></a>
-                                <button type="submit" class="btn btn-warning" translate="user.button.btnDelete"></button>
+                        <div class="panel-wrapper" uib-collapse="fourdMainPanel">
+                            <div class="panel-body">
+                                <div class="panel panel-default" id="fourdPanel">
+                                    <div class="panel-heading" ng-class="{'panel-heading-collapsed':'fourdPanel'}">4D
+                                    </div>
+                                    <div class="panel-wrapper" uib-collapse="fourdPanel">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">Big</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>Price</td>
+                                                                    <td>:</td>
+                                                                    <td>1.00</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Commission</td>
+                                                                    <td>:</td>
+                                                                    <td>30.00%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Prize 1</td>
+                                                                    <td>:</td>
+                                                                    <td>2500.00</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Prize 2</td>
+                                                                    <td>:</td>
+                                                                    <td>1000.00</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Prize 3</td>
+                                                                    <td>:</td>
+                                                                    <td>500.00%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Starters</td>
+                                                                    <td>:</td>
+                                                                    <td>220.00%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Consolation</td>
+                                                                    <td>:</td>
+                                                                    <td>66.00%</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">Small</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>Price</td>
+                                                                    <td>:</td>
+                                                                    <td>1.00</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Commission</td>
+                                                                    <td>:</td>
+                                                                    <td>30.00%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Prize 1</td>
+                                                                    <td>:</td>
+                                                                    <td>3500.00</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Prize 2</td>
+                                                                    <td>:</td>
+                                                                    <td>2000.00</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Prize 3</td>
+                                                                    <td>:</td>
+                                                                    <td>1000.00%</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4A</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>Price</td>
+                                                                    <td>:</td>
+                                                                    <td>1.00</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Commission</td>
+                                                                    <td>:</td>
+                                                                    <td>30.00%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Prize</td>
+                                                                    <td>:</td>
+                                                                    <td>6000.00</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="panel panel-warning">
+                                                        <div class="panel-heading">IBOX</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>{{'text.big'|translate}}</td>
+                                                                    <td>IBOX 24</td>
+                                                                    <td>IBOX 12</td>
+                                                                    <td>IBOX 6</td>
+                                                                    <td>IBOX 4</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 1</td>
+                                                                    <td>{{user.userDetail.package["4dBigPrize1"]/24 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dBigPrize1"]/12 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dBigPrize1"]/6 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dBigPrize1"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 2</td>
+                                                                    <td>{{user.userDetail.package["4dBigPrize2"]/24 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dBigPrize2"]/12 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dBigPrize2"]/6 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dBigPrize2"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 3</td>
+                                                                    <td>{{user.userDetail.package["4dBigPrize3"]/24 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dBigPrize3"]/12 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dBigPrize3"]/6 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dBigPrize3"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.starters'|translate}}</td>
+                                                                    <td>{{user.userDetail.package["4dBigStarters"]/24 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dBigStarters"]/12 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dBigStarters"]/6 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dBigStarters"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.consolation'|translate}}</td>
+                                                                    <td>{{user.userDetail.package["4dBigConsolation"]/24 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dBigConsolation"]/12 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dBigConsolation"]/6 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dBigConsolation"]/4 | number:2}}</td>
+                                                                </tr>
+                                                            </table>
+                                                            <br/>
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>{{'text.small'|translate}}</td>
+                                                                    <td>IBOX 24</td>
+                                                                    <td>IBOX 12</td>
+                                                                    <td>IBOX 6</td>
+                                                                    <td>IBOX 4</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 1</td>
+                                                                    <td>{{user.userDetail.package["4dSmallPrize1"]/24 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dSmallPrize1"]/12 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dSmallPrize1"]/6 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dSmallPrize1"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 2</td>
+                                                                    <td>{{user.userDetail.package["4dSmallPrize2"]/24 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dSmallPrize2"]/12 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dSmallPrize2"]/6 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dSmallPrize2"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 3</td>
+                                                                    <td>{{user.userDetail.package["4dSmallPrize3"]/24 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dSmallPrize3"]/12 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dSmallPrize3"]/6 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4dSmallPrize3"]/4 | number:2}}</td>
+                                                                </tr>
+                                                            </table>
+                                                            <br/>
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>4A</td>
+                                                                    <td>IBOX 24</td>
+                                                                    <td>IBOX 12</td>
+                                                                    <td>IBOX 6</td>
+                                                                    <td>IBOX 4</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>{{user.userDetail.package["4d4aPrize"]/24 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4d4aPrize"]/12 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4d4aPrize"]/6 | number:2}}</td>
+                                                                    <td>{{user.userDetail.package["4d4aPrize"]/4 | number:2}}</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="panel panel-dark">
+                                                        <div class="panel-heading">3D</div>
+                                                        <div class="panel-body">
+                                                            <div class="col-lg-6">
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">3ABC</div>
+                                                                    <div class="panel-body">
+                                                                        <table class="table">
+                                                                            <tr>
+                                                                                <td>Price</td>
+                                                                                <td>:</td>
+                                                                                <td>1.00</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Commission</td>
+                                                                                <td>:</td>
+                                                                                <td>30.00%</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Prize 1</td>
+                                                                                <td>:</td>
+                                                                                <td>220.00</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Prize 2</td>
+                                                                                <td>:</td>
+                                                                                <td>220.00</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Prize 3</td>
+                                                                                <td>:</td>
+                                                                                <td>220.00</td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">3A</div>
+                                                                    <div class="panel-body">
+                                                                        <table class="table">
+                                                                            <tr>
+                                                                                <td>Price</td>
+                                                                                <td>:</td>
+                                                                                <td>1.00</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Commission</td>
+                                                                                <td>:</td>
+                                                                                <td>30.00%</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Prize</td>
+                                                                                <td>:</td>
+                                                                                <td>660.00</td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </fieldset>
-                </form>
-            </uib-tab>
-        </uib-tabset>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <fieldset>
+                <div class="form-group">
+                    <div class="col-lg-8 col-lg-offset-3">
+                        <a ui-sref="root.main.userListing" class="btn btn-default" role="button" translate="button.back"></a>
+                        <a ng-if="$state.current.name != 'root.main.myAccount'" ui-sref="root.main.userEdit({id:user.user.id})" class="btn btn-primary" role="button" translate="button.edit"></a>
+                        <a ng-if="$state.current.name == 'root.main.myAccount'" ui-sref="root.main.myAccountEdit({id:user.user.id})" class="btn btn-primary" role="button" translate="button.edit"></a>
+                        <button ng-if="$state.current.name != 'root.main.myAccount'" type="submit" class="btn btn-warning" translate="button.delete"></button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
     </div>
 </div>

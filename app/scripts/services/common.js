@@ -363,272 +363,40 @@ app.factory('CommonService', ['$rootScope', '$state', '$translate', '$http', 'Up
             });
         };
 
-        CommonService.getRoles = function(type) {
-            var result = [];
-            var dataJsonParams = {"where":{"type":type}};
-            //Get all records back from the backend, otherwise it will be default to 10 records.
-            dataJsonParams["pagination"] = {"page":1,"per-page":APPCONSTANT.GLOBAL.PAGING.MAX_RECORD_SIZE};
-            var sortObject = {"attribute": "description", "order": "SORT_ASC", "model":"auth_item", "isChild":false};
-            dataJsonParams["sort"] = {};
-            dataJsonParams["sort"][0] = sortObject;
-            //get User Role Data
-            return $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/auth-item",{
-                params: dataJsonParams
-            }).then(function (response) {
-                if (response.data && response.data.items && response.data.items.length > 0) {
-                    angular.forEach(response.data.items, function (value, key) {
-                        result.push({"id": value.id, "name": value.description});
-                    });
-                }
-                return result;
-            });
-        };
-
-        CommonService.getDepartments = function (active) {
+        CommonService.getMasters = function(active) {
             var result = [];
             var dataJsonParams = {};
-            if (active != null) {
+            if (active) {
                 dataJsonParams = {"where":{"active":active}};
             }
             //Get all records back from the backend, otherwise it will be default to 10 records.
             dataJsonParams["pagination"] = {"page":1,"per-page":APPCONSTANT.GLOBAL.PAGING.MAX_RECORD_SIZE};
-            var sortObject = {"attribute": "name", "order": "SORT_ASC", "model":"department", "isChild":false};
-            dataJsonParams["sort"] = {};
-            dataJsonParams["sort"][0] = sortObject;
-            //get User Department Data
-            return $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/department",{
+            return $http.get(SYSCONSTANT.BACKEND_SERVER_URL + "/master",{
+                params: dataJsonParams
+            }).then(function (response) {
+                if (response.data && response.data.items && response.data.items.length > 0) {
+                    angular.forEach(response.data.items, function (value, key) {
+                        result.push({"id": value.id, "name": value.name, "prefix": value.prefix});
+                    });
+                }
+                return result;
+            });
+        };
+
+        CommonService.getPackages = function(masterId) {
+            var result = [];
+            var dataJsonParams = {};
+            if (masterId) {
+                dataJsonParams = {"where":{"masterId":masterId}};
+            }
+            //Get all records back from the backend, otherwise it will be default to 10 records.
+            dataJsonParams["pagination"] = {"page":1,"per-page":APPCONSTANT.GLOBAL.PAGING.MAX_RECORD_SIZE};
+            return $http.get(SYSCONSTANT.BACKEND_SERVER_URL + "/package",{
                 params: dataJsonParams
             }).then(function (response) {
                 if (response.data && response.data.items && response.data.items.length > 0) {
                     angular.forEach(response.data.items, function (value, key) {
                         result.push({"id": value.id, "name": value.name});
-                    });
-                }
-                return result;
-            });
-        };
-
-        CommonService.getTaxes = function(countryId) {
-            var result = [];
-            if (!countryId) {
-                countryId = $rootScope.userIdentity.countryId;
-            }
-            var dataJsonParams = {"where":{"countryId":countryId}};
-            //Get all records back from the backend, otherwise it will be default to 10 records.
-            dataJsonParams["pagination"] = {"page":1,"per-page":APPCONSTANT.GLOBAL.PAGING.MAX_RECORD_SIZE};
-            return $http.get(SYSCONSTANT.BACKEND_SERVER_URL + "/tax",{
-                params: dataJsonParams
-            }).then(function (response) {
-                if (response.data && response.data.items && response.data.items.length > 0) {
-                    angular.forEach(response.data.items, function (value, key) {
-                        result.push({"id": value.id, "name": value.name, "code": value.code, "rate": value.rate});
-                    });
-                }
-                return result;
-            });
-        };
-
-        CommonService.getCurrencies = function() {
-            var result = [];
-            var dataJsonParams = {};
-            //Get all records back from the backend, otherwise it will be default to 10 records.
-            dataJsonParams["pagination"] = {"page":1,"per-page":APPCONSTANT.GLOBAL.PAGING.MAX_RECORD_SIZE};
-            return $http.get(SYSCONSTANT.BACKEND_SERVER_URL + "/currency", {
-                params: dataJsonParams
-            }).then(function (response) {
-                    if (response.data && response.data.items && response.data.items.length > 0) {
-                        angular.forEach(response.data.items, function (value, key) {
-                            result.push({"id": value.id, "name": value.code});
-                        });
-                    }
-                    return result;
-                });
-        };
-
-        CommonService.getIndustries = function() {
-            var result = [];
-            var dataJsonParams = {};
-            //Get all records back from the backend, otherwise it will be default to 10 records.
-            dataJsonParams["pagination"] = {"page":1,"per-page":APPCONSTANT.GLOBAL.PAGING.MAX_RECORD_SIZE};
-            return $http.get(SYSCONSTANT.BACKEND_SERVER_URL + "/industry", {
-                params: dataJsonParams
-            }).then(function (response) {
-                if (response.data && response.data.items && response.data.items.length > 0) {
-                    angular.forEach(response.data.items, function (value, key) {
-                        result.push({"id": value.id, "name": value.name});
-                    });
-                }
-                return result;
-            });
-        };
-
-        CommonService.getCities = function(stateId) {
-            var result = [];
-            var dataJsonParams = {"where":{"stateId":stateId}};
-            //Get all records back from the backend, otherwise it will be default to 10 records.
-            dataJsonParams["pagination"] = {"page":1,"per-page":APPCONSTANT.GLOBAL.PAGING.MAX_RECORD_SIZE};
-            var sortObject = {"attribute": "name", "order": "SORT_ASC", "model":"city", "isChild":false};
-            dataJsonParams["sort"] = {};
-            dataJsonParams["sort"][0] = sortObject;
-            return $http.get(SYSCONSTANT.BACKEND_SERVER_URL + "/city",{
-                params: dataJsonParams
-            }).then(function (response) {
-                if (response.data && response.data.items && response.data.items.length > 0) {
-                    angular.forEach(response.data.items, function (value, key) {
-                        result.push({"id": value.id, "name": value.name});
-                    });
-                }
-                return result;
-            });
-        };
-
-        CommonService.getStates = function(countryId) {
-            var result = [];
-            var dataJsonParams = {"where":{"countryId":countryId}};
-            //Get all records back from the backend, otherwise it will be default to 10 records.
-            dataJsonParams["pagination"] = {"page":1,"per-page":APPCONSTANT.GLOBAL.PAGING.MAX_RECORD_SIZE};
-            var sortObject = {"attribute": "name", "order": "SORT_ASC", "model":"state", "isChild":false};
-            dataJsonParams["sort"] = {};
-            dataJsonParams["sort"][0] = sortObject;
-            return $http.get(SYSCONSTANT.BACKEND_SERVER_URL + "/state",{
-                params: dataJsonParams
-            }).then(function (response) {
-                if (response.data && response.data.items && response.data.items.length > 0) {
-                    angular.forEach(response.data.items, function (value, key) {
-                        result.push({"id": value.id, "name": value.name});
-                    });
-                }
-                return result;
-            });
-        };
-
-        CommonService.getCountries = function() {
-            var result = [];
-            var dataJsonParams = {};
-            //Get all records back from the backend, otherwise it will be default to 10 records.
-            dataJsonParams["pagination"] = {"page":1,"per-page":APPCONSTANT.GLOBAL.PAGING.MAX_RECORD_SIZE};
-            var sortObject = {"attribute": "name", "order": "SORT_ASC", "model":"country", "isChild":false};
-            dataJsonParams["sort"] = {};
-            dataJsonParams["sort"][0] = sortObject;
-            return $http.get(SYSCONSTANT.BACKEND_SERVER_URL + "/country", {
-                params: dataJsonParams
-            }).then(function (response) {
-                    if (response.data && response.data.items && response.data.items.length > 0) {
-                        angular.forEach(response.data.items, function (value, key) {
-                            result.push({"id": value.id, "name": value.name});
-                        });
-                    }
-                    return result;
-                });
-        };
-
-        CommonService.getUoms = function(type) {
-            var result = [];
-            var dataJsonParams = {};
-            if (type) {
-                dataJsonParams = {"where":{"type":type}};
-            }
-            //Get all records back from the backend, otherwise it will be default to 10 records.
-            dataJsonParams["pagination"] = {"page":1,"per-page":APPCONSTANT.GLOBAL.PAGING.MAX_RECORD_SIZE};
-            var sortObject = {"attribute": "name", "order": "SORT_ASC", "model":"uom", "isChild":false};
-            dataJsonParams["sort"] = {};
-            dataJsonParams["sort"][0] = sortObject;
-            return $http.get(SYSCONSTANT.BACKEND_SERVER_URL + "/uom",{
-                params: dataJsonParams
-            }).then(function (response) {
-                if (response.data && response.data.items && response.data.items.length > 0) {
-                    angular.forEach(response.data.items, function (value, key) {
-                        result.push({"id": value.id, "name": value.symbol, "visible":true, "type":value.type});
-                    });
-                }
-                return result;
-            });
-        };
-
-        CommonService.getUomFormulas = function(uomId) {
-            var result = [];
-            var dataJsonParams = {};
-            if (uomId) {
-                dataJsonParams = {"where":{"uomId":uomId}};
-            }
-            //Get all records back from the backend, otherwise it will be default to 10 records.
-            dataJsonParams["pagination"] = {"page":1,"per-page":APPCONSTANT.GLOBAL.PAGING.MAX_RECORD_SIZE};
-            return $http.get(SYSCONSTANT.BACKEND_SERVER_URL + "/uom-formula",{
-                params: dataJsonParams
-            }).then(function (response) {
-                if (response.data && response.data.items && response.data.items.length > 0) {
-                    angular.forEach(response.data.items, function (value, key) {
-                        result.push({"id": value.id, "name": value.name, "formula":value.formula, "formulaText":value.formulaText});
-                    });
-                }
-                return result;
-            });
-        };
-
-        CommonService.getCategories = function() {
-            var result = [];
-            var dataJsonParams = {};
-            //Get all records back from the backend, otherwise it will be default to 10 records.
-            dataJsonParams["pagination"] = {"page":1,"per-page":APPCONSTANT.GLOBAL.PAGING.MAX_RECORD_SIZE};
-            var sortObject = {"attribute": "name", "order": "SORT_ASC", "model":"category", "isChild":false};
-            dataJsonParams["sort"] = {};
-            dataJsonParams["sort"][0] = sortObject;
-            return $http.get(SYSCONSTANT.BACKEND_SERVER_URL + "/category", {
-                params: dataJsonParams
-            }).then(function (response) {
-                    if (response.data && response.data.items && response.data.items.length > 0) {
-                        angular.forEach(response.data.items, function (value, key) {
-                            result.push({"id": value.id, "name": value.name, "tenderType" : value.tenderType, "disabled" : false});
-                        });
-                    }
-                    return result;
-                });
-        };
-
-        CommonService.getSubcategories = function(categoryId) {
-            var result = [];
-            var dataJsonParams = {};
-            if (categoryId) {
-                dataJsonParams = {"where":{"categoryId":categoryId}};
-            }
-            //Get all records back from the backend, otherwise it will be default to 10 records.
-            dataJsonParams["pagination"] = {"page":1,"per-page":APPCONSTANT.GLOBAL.PAGING.MAX_RECORD_SIZE};
-            var sortObject = {"attribute": "name", "order": "SORT_ASC", "model":"subcategory", "isChild":false};
-            dataJsonParams["sort"] = {};
-            dataJsonParams["sort"][0] = sortObject;
-            return $http.get(SYSCONSTANT.BACKEND_SERVER_URL + "/subcategory",{
-                params: dataJsonParams
-            }).then(function (response) {
-                if (response.data && response.data.items && response.data.items.length > 0) {
-                    angular.forEach(response.data.items, function (value, key) {
-                        result.push({"id": value.id, "name": value.name});
-                    });
-                }
-                return result;
-            });
-        };
-
-        CommonService.getDocuments = function(type,ownerType,ownerId) {
-            var result = [];
-            var dataJsonParams = {};
-            dataJsonParams["where"] = {};
-            if (type) {
-                dataJsonParams["where"]["type"] = type;
-            }
-            if (ownerType) {
-                dataJsonParams["where"]["ownerType"] = ownerType;
-            }
-            if (ownerId) {
-                dataJsonParams["where"]["ownerId"] = ownerId;
-            }
-            //Get all records back from the backend, otherwise it will be default to 10 records.
-            dataJsonParams["pagination"] = {"page":1,"per-page":APPCONSTANT.GLOBAL.PAGING.MAX_RECORD_SIZE};
-            return $http.get(SYSCONSTANT.BACKEND_SERVER_URL + "/document",{
-                params: dataJsonParams
-            }).then(function (response) {
-                if (response.data && response.data.items && response.data.items.length > 0) {
-                    angular.forEach(response.data.items, function (value, key) {
-                        result.push({"id": value.id, "name": value.title, "fileName": value.fileName});
                     });
                 }
                 return result;

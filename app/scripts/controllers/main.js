@@ -14,8 +14,6 @@
             // check to make sure the form is completely valid
             if (isValid) {
                 _this.isSaving = true;
-                //Proceed to login to see if the loginId and password are correct
-                _this.login.userType = 1; //1 - Admin Portal ; 2 - Tenant Portal ; 3 - Supplier Portal
                 $http.post($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/user/login", _this.login).
                     then(function (response) {
                         // this callback will be called asynchronously
@@ -42,7 +40,7 @@
                         // or server returns response with an error status.
                         PrincipalService.authenticate(null); //Set it to null
                         if (response.status == 401) {
-                            _this.authMsg = "main.login.invalidUserPass";
+                            _this.authMsg = "text.invalidUsernamePassword";
                         }
                         $state.go('root.login');
                         _this.isSaving = false;

@@ -4,7 +4,7 @@
 
     var app = angular.module('fdPortal');
 
-    var Ctrl = function ($rootScope, $state, $stateParams, $http, $window, PrincipalService) {
+    var Ctrl = function ($rootScope, $state, $stateParams, $http, $window, PrincipalService, CommonService) {
         var stateName = $state.current.name;
         var _this = this; //Declare local variable _this to refer to "this" controller
 
@@ -22,5 +22,5 @@
         };
     }; // End var Ctrl
 
-    app.controller('HomeController', ['$rootScope', '$state', '$stateParams', '$http',  '$window', 'PrincipalService', Ctrl]);
+    app.controller('HomeController', ['$rootScope', '$state', '$stateParams', '$http',  '$window', 'PrincipalService', 'CommonService', Ctrl]);
 }());

@@ -1,0 +1,148 @@
+<div class="panel panel-info">
+    <div class="panel-heading" translate="text.masterView"></div>
+    <div class="panel-body">
+        <alert-message-div/>
+        <form name="masterForm" class="form-horizontal form-validate" ng-submit="master.deleteMaster(masterForm.$valid)" novalidate>
+            <div class="form-group required">
+                <label class="col-lg-3 control-label" translate="text.name"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static" ng-bind="master.master.name"></pre>
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="col-lg-3 control-label" translate="text.prefix"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static" ng-bind="master.master.prefix"></pre>
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="col-lg-3 control-label" translate="text.active"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static" ng-bind="master.master.active.name | translate"></pre>
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="col-lg-3 control-label" translate="text.locked"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static" ng-bind="master.master.locked.name | translate"></pre>
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="col-lg-3 control-label" translate="text.voidBetMinutes"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static" ng-bind="master.master.voidBetMinutes"></pre>
+                </div>
+            </div>
+            <div class="form-group required">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="panel panel-primary" id="betMaxLimitPanel">
+                        <div class="panel-heading" translate="text.betMaxLimit"></div>
+                        <div class="panel-wrapper">
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td translate="text.big"></td>
+                                        <td>
+                                            <pre class="form-control-static" ng-bind="master.master.betMaxLimitBig"></pre>
+                                        </td>
+                                        <td translate="text.small"></td>
+                                        <td>
+                                            <pre class="form-control-static" ng-bind="master.master.betMaxLimitSmall"></pre>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4A</td>
+                                        <td>
+                                            <pre class="form-control-static" ng-bind="master.master.betMaxLimit4a"></pre>
+                                        </td>
+                                        <td>4B</td>
+                                        <td>
+                                            <pre class="form-control-static" ng-bind="master.master.betMaxLimit4b"></pre>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4C</td>
+                                        <td>
+                                            <pre class="form-control-static" ng-bind="master.master.betMaxLimit4c"></pre>
+                                        </td>
+                                        <td>4D</td>
+                                        <td>
+                                            <pre class="form-control-static" ng-bind="master.master.betMaxLimit4d"></pre>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4E</td>
+                                        <td>
+                                            <pre class="form-control-static" ng-bind="master.master.betMaxLimit4e"></pre>
+                                        </td>
+                                        <td>4F</td>
+                                        <td>
+                                            <pre class="form-control-static" ng-bind="master.master.betMaxLimit4f"></pre>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3ABC</td>
+                                        <td>
+                                            <pre class="form-control-static" ng-bind="master.master.betMaxLimit3abc"></pre>
+                                        </td>
+                                        <td>3A</td>
+                                        <td>
+                                            <pre class="form-control-static" ng-bind="master.master.betMaxLimit3a"></pre>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3B</td>
+                                        <td>
+                                            <pre class="form-control-static" ng-bind="master.master.betMaxLimit3b"></pre>
+                                        </td>
+                                        <td>3C</td>
+                                        <td>
+                                            <pre class="form-control-static" ng-bind="master.master.betMaxLimit3c"></pre>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3D</td>
+                                        <td>
+                                            <pre class="form-control-static" ng-bind="master.master.betMaxLimit3d"></pre>
+                                        </td>
+                                        <td>3E</td>
+                                        <td>
+                                            <pre class="form-control-static" ng-bind="master.master.betMaxLimit3e"></pre>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5D</td>
+                                        <td>
+                                            <pre class="form-control-static" ng-bind="master.master.betMaxLimit5d"></pre>
+                                        </td>
+                                        <td>6D</td>
+                                        <td>
+                                            <pre class="form-control-static" ng-bind="master.master.betMaxLimit6d"></pre>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" translate="text.remarks"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static" rows="4" cols="50" ng-bind="master.master.remarks"></pre>
+                </div>
+            </div>
+            <fieldset>
+                <div class="form-group">
+                    <div class="col-lg-8 col-lg-offset-3">
+                        <a ui-sref="root.main.masterListing" class="btn btn-default" translate="button.back"></a>
+                        <a ui-sref="root.main.masterEdit({id:master.master.id})" class="btn btn-primary" role="button" translate="button.edit"></a>
+                        <button type="submit" class="btn btn-warning" translate="button.delete"></button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

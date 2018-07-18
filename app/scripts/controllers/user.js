@@ -10,7 +10,14 @@
         var trueValue = $rootScope.APPCONSTANT.GLOBAL.TRUE;
         var falseValue = $rootScope.APPCONSTANT.GLOBAL.FALSE;
         _this.isSaving = false; //Default to false
-        var tenantId = $rootScope.userIdentity.tenantId;
+        var masterId = $rootScope.userIdentity.masterId;
+        _this.userType = $rootScope.userIdentity.userType;
+        _this.canCreateUserType = null;
+        if (masterId) {
+            _this.masterPrefix = $rootScope.userIdentity.master.prefix;
+        } else {
+            _this.masterPrefix = null;
+        }
 
         //Pagination Parameters
         _this.recordsPerPage = $rootScope.recordsPerPage; //Default to the setting in constant
@@ -29,63 +36,16 @@
             {"item_name": {"attribute" : "item_name", "operator" : "equals", "model" : "authAssignments", "isChild" : true}}
         ];
 
-        _this.roleFilters = [{id: "", name: "global.label.all"}]; //declare role filters array
-        _this.roleOptions = []; //declare role options array
-        _this.departmentFilters = [{id: "", name: "global.label.all"}]; //declare department filters array
-        _this.departmentOptions = []; //declare department options array
-        _this.activeFilters = [{id: "", name: "global.label.all"}, {id: trueValue, name: "global.label.yes"}, {id: falseValue, name: "global.label.no"}];
-        _this.activeOptions = [{id:trueValue, "name":"global.label.yes"}, {id:falseValue, "name":"global.label.no"}];
-
-        _this.getRoles = function() {
-            //get User Role Data
-            var dataJsonParams = {"where":{"type":$rootScope.APPCONSTANT.AUTH_ITEM.TYPE.ROLE}}
-            dataJsonParams["pagination"] = {"page":1,"per-page":$rootScope.APPCONSTANT.GLOBAL.PAGING.MAX_RECORD_SIZE};
-            return $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/auth-item",{
-                params: dataJsonParams
-            }).then(function (response) {
-                    _this.roles = response.data.items;
-
-                    //set user role options
-                    angular.forEach(_this.roles, function (value, key) {
-                        _this.roleFilters.push({"id": value.name, "name": value.description});
-                        _this.roleOptions.push({"id": value.name, "name": value.description});
-                    });
-                }, function (response) {
-                    CommonService.SweetAlert({
-                        title: "Failed",
-                        text: "Role List Fail",
-                        type: "warning"
-                    });
-                }
-            );
-        };
-
-        _this.getDepartments = function (active) {
-            var dataJsonParams = {};
-            if (active != null) {
-                dataJsonParams = {"where":{"active":active}};
-            }
-            dataJsonParams["pagination"] = {"page":1,"per-page":$rootScope.APPCONSTANT.GLOBAL.PAGING.MAX_RECORD_SIZE};
-            //get User Department Data
-            return $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/department",{
-                params: dataJsonParams
-            }).then(function (response) {
-                    _this.departments = response.data.items;
-
-                    //set user department options
-                    angular.forEach(_this.departments, function (value, key) {
-                        _this.departmentFilters.push({"id": value.id, "name": value.name});
-                        _this.departmentOptions.push({"id": value.id, "name": value.name});
-                    });
-                }, function (response) {
-                    CommonService.SweetAlert({
-                        title: "Failed",
-                        text: "Department List Fail",
-                        type: "warning"
-                    });
-                }
-            );
-        };
+        _this.masterOptions = null;
+        _this.packageOptions = null;
+        _this.userTypeOptions = [
+            {id:$rootScope.APPCONSTANT.USER.TYPE.ADMIN, "name":"text.admin"},
+            {id:$rootScope.APPCONSTANT.USER.TYPE.MASTER, "name":"text.master"},
+            {id:$rootScope.APPCONSTANT.USER.TYPE.AGENT, "name":"text.agent"},
+            {id:$rootScope.APPCONSTANT.USER.TYPE.PLAYER, "name":"text.player"}
+        ];
+        _this.betMethodOptions = [{id:$rootScope.APPCONSTANT.USER.DETAIL.BET_METHOD.MULTIPLY, "name":"text.multiply"}, {id:$rootScope.APPCONSTANT.USER.DETAIL.BET_METHOD.DIVIDE, "name":"text.divide"}];
+        _this.yesNoOptions = [{id:trueValue, "name":"text.yes"}, {id:falseValue, "name":"text.no"}];
 
         _this.viewUser = function (userId) {
             $state.go("root.main.userView",{"id":userId});
@@ -125,29 +85,10 @@
             }
         };
 
-        _this.checkProfileUpload = function(boxElement){
-            _this.showProfileUploadBoxFlag = !jQuery.isEmptyObject(boxElement.$error);
-            _this.profileImageDirtyFlag = true;
-        };
-
-        //Delete Profile Image
-        //Bind in profile_edit.html
-        _this.deleteProfileImage = function() {
-            CommonService.SweetAlert({
-                title: "Are you sure?",
-                //text: "You will not be able to recover the image file once you hit the update button.",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Confirm",
-            }).then(function (isConfirm) {
-                if (isConfirm.value) {
-                    _this.profileImageDirtyFlag = true;
-                    _this.user.userProfile.profileImageFile = null;
-                    _this.showProfileUploadBoxFlag = true;
-                    $scope.$apply();
-                }
-            });
+        _this.changeMaster = function() {
+            if (_this.user.master) {
+                _this.masterPrefix = _this.user.master.prefix;
+            }
         };
 
         //Function to create the user
@@ -157,38 +98,45 @@
                 CommonService.clearAlertMessage();
                 _this.isSaving = true;
                 _this.user.username = angular.lowercase(_this.user.username);
+                var packageId = null, creditLimit = null, betMethod = null, betGdLotto = null, bet6d = null;
+                var autoTransfer = null, autoTransferMode = null, autoTransferDays = {};
+
+                if (_this.userType == $rootScope.APPCONSTANT.USER.TYPE.ADMIN) {
+                    masterId = _this.user.master.id; //Creating Master User
+                } else {
+                    //Creating Agent/Player User
+                    packageId = _this.user.package.id;
+                    creditLimit = _this.user.creditLimit;
+                    autoTransfer = _this.user.autoTransfer;
+                    autoTransferMode = _this.user.autoTransferMode;
+                    betMethod = _this.user.betMethod;
+                    betGdLotto = _this.user.betGdLotto;
+                    bet6d = _this.user.bet6d;
+                }
+
+                console.log(bet6d);
 
                 _this.saveObj = {
                     "username" : _this.user.username,
-                    "firstName" : _this.user.firstName,
-                    "lastName" : _this.user.lastName,
-                    "email" : _this.user.email,
+                    "name" : _this.user.name,
                     "password" : _this.user.password,
                     "confirmPassword" : _this.user.confirmPassword,
+                    "mobileNo" : _this.user.mobileNo,
                     "active" : _this.user.active,
-                    "role" : _this.user.role,
-                    "jobTitle" : _this.user.jobTitle,
-                    "departmentId" : _this.user.department,
-                    "userType" : $rootScope.APPCONSTANT.USER.TYPE.TENANT
+                    "packageId" : packageId,
+                    "creditLimit" : creditLimit,
+                    "autoTransfer" : autoTransfer,
+                    "autoTransferMode" : autoTransferMode,
+                    "autoTransferDays" : autoTransferDays,
+                    "betMethod" : betMethod,
+                    "betGdLotto" : betGdLotto,
+                    "bet6d" : bet6d,
+                    "masterId" : masterId
                 };
 
                 $http.post($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/user", _this.saveObj).
                 then(function (response) {
                     //Success Callback
-                    if (_this.profileImageDirtyFlag) { //Logo image touched
-                        //Insert the new logo image
-                        CommonService.uploadImage(_this.user.userProfile.profileImageFile,'User Profile Image',null,$rootScope.APPCONSTANT.IMAGE.TYPE.PRIMARY,1,$rootScope.APPCONSTANT.IMAGE.OWNER_TYPE.TENANT_USER,_this.user.id)
-                            .progress(function (evt) {
-                                //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                            })
-                            .success(function (data, status, headers, config) {
-                                //New logo uploaded
-                            })
-                            .error(function (data, status, headers, config) {
-
-                            });
-                    }
-
                     var successMessage = "User " + _this.user.username + " Created.";
                     CommonService.handleSuccessResponse(successMessage,"root.main.userListing",null);
                     _this.isSaving = false;
@@ -209,45 +157,20 @@
                 _this.isSaving = true;
 
                 _this.saveObj = {
-                    "firstName" : _this.user.userProfile.firstName,
-                    "lastName" : _this.user.userProfile.lastName,
-                    "email" : _this.user.email,
-                    "active" : _this.user.active.id,
-                    "jobTitle" : _this.user.userProfile.jobTitle,
-                    "role" : _this.user.role.id,
-                    "departmentId" : _this.user.department.id,
-                    "userType" : $rootScope.APPCONSTANT.USER.TYPE.TENANT
+                    "name" : _this.user.name,
+                    "mobileNo" : _this.user.mobileNo,
+                    "active" : _this.user.active.id
                 };
 
                 $http.put($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/user/" + _this.user.id, _this.saveObj).
                 then(function (response) {
                     //Success Callback
-                    //Success Callback
-                    if (_this.profileImageDirtyFlag) { //Logo image touched
-                        //Insert the new logo image
-                        CommonService.uploadImage(_this.user.userProfile.profileImageFile,'User Profile Image',null,$rootScope.APPCONSTANT.IMAGE.TYPE.PRIMARY,1,$rootScope.APPCONSTANT.IMAGE.OWNER_TYPE.TENANT_USER,_this.user.id)
-                            .progress(function (evt) {
-                                //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                            })
-                            .success(function (data, status, headers, config) {
-                                //New logo uploaded
-                                if (_this.oldProfileImageExists) { //Old image exists, proceed to delete
-                                    $http.delete($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/image/" +  _this.user.userProfile.profileImage.id)
-                                        .then(function (response) {
-                                            //Success callback
-                                            _this.isSaving = false;
-                                        }, function (response) {
-                                            //Error callback
-                                            _this.isSaving = false;
-                                        });
-                                }
-                            })
-                            .error(function (data, status, headers, config) {
-
-                            });
+                    var successMessage = "User " + _this.user.name + " updated.";
+                    var goToState = "root.main.userView";
+                    if (stateName == "root.main.myAccountEdit") {
+                        goToState = "root.main.myAccount";
                     }
-                    var successMessage = "User " + _this.user.username + " updated.";
-                    CommonService.handleSuccessResponse(successMessage,"root.main.userView",{"id":response.data.id});
+                    CommonService.handleSuccessResponse(successMessage,goToState,{"id":response.data.id});
                     _this.isSaving = false;
                 }, function (response) {
                     //Error Callback
@@ -266,13 +189,20 @@
                 _this.isSaving = true;
                 var dataJsonParams = {};
                 dataJsonParams.id = _this.user.id;
+                if (stateName == "root.main.myAccountEdit") {
+                    dataJsonParams.currentPassword = _this.user.currentPassword;
+                }
                 dataJsonParams.password = _this.user.password;
                 dataJsonParams.confirmPassword = _this.user.confirmPassword;
                 $http.put($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/user/change-password", dataJsonParams).
                 then(function (response) {
                     //Success callback
                     var successMessage = "User " + _this.user.username + "'s password updated.";
-                    CommonService.handleSuccessResponse(successMessage,"root.main.userView",{"id":response.data.id});
+                    var goToState = "root.main.userView";
+                    if (stateName == "root.main.myAccountEdit") {
+                        goToState = "root.main.myAccount";
+                    }
+                    CommonService.handleSuccessResponse(successMessage,goToState,{"id":response.data.id});
                     _this.isSaving = false;
                 }, function (response) {
                     //Error callback
@@ -339,15 +269,6 @@
                 _this.users = response.data.items;
                 _this.tableData = _this.users;
 
-                //change status from boolean to text
-                angular.forEach(_this.tableData, function (value, key) {
-                    if (value.active == true) {
-                        value.active = "Yes";
-                    } else if (value.active == false) {
-                        value.active = "No";
-                    }
-                });
-
                 pagination.numberOfPages = Math.ceil(pagination.totalItemCount / _this.recordsPerPage);
                 _this.isLoading = false;
             }, function (response) {
@@ -362,42 +283,57 @@
             });
         };
 
-        if (stateName == "root.main.userEdit" || stateName == "root.main.userView") {
-            _this.profileImageDirtyFlag = false;
-
+        if (stateName == "root.main.userEdit" || stateName == "root.main.userView"
+            || stateName == "root.main.myAccount" || stateName == "root.main.myAccountEdit") {
             var deferred = $q.defer();
             var promises = [];
-            promises.push(_this.getRoles());
-            promises.push(_this.getDepartments());
             $q.all(promises).then(function () {
-                $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/user/" + $stateParams.id).
+                var userId = $stateParams.id;
+                if (stateName == "root.main.myAccount" || stateName == "root.main.myAccountEdit") {
+                    userId = $rootScope.userIdentity.id;
+                }
+                $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/user/" + userId).
                 then(function (response) {
                     _this.user = response.data;
 
-                    if (_this.user.userProfile.profileImage) {
-                        _this.oldProfileImageExists = true;
-                        _this.showProfileUploadBoxFlag = false;
-                    } else {
-                        _this.showProfileUploadBoxFlag = true;
-                    }
-
-                    for (var o in _this.activeOptions){
-                        if(_this.user.active == _this.activeOptions[o].id){
-                            _this.user.active = _this.activeOptions[o];
+                    if (stateName == "root.main.userEdit" || stateName == "root.main.myAccountEdit") {
+                        for (var o in _this.yesNoOptions) {
+                            if (_this.user.active == _this.yesNoOptions[o].id) {
+                                _this.user.active = _this.yesNoOptions[o];
+                            }
                         }
-                    }
 
-                    for (var r in _this.roleOptions){
-                        if(_this.user.roles[0].name == _this.roleOptions[r].id) {
-                            _this.user.role = _this.roleOptions[r];
-                            break;
+                        for (var o in _this.yesNoOptions) {
+                            if (_this.user.locked == _this.yesNoOptions[o].id) {
+                                _this.user.locked = _this.yesNoOptions[o];
+                            }
                         }
-                    }
 
-                    for (var d in _this.departmentOptions){
-                        if(_this.user.department.id == _this.departmentOptions[d].id) {
-                            _this.user.department = _this.departmentOptions[d];
-                            break;
+                        //Limit user to create certain type of users only
+                        //Admin can create master
+                        //Master can create agent
+                        //Agent can create player
+                        //Player cannot create any user
+                        switch (_this.userType) {
+                            case $rootScope.APPCONSTANT.USER.TYPE.ADMIN:
+                                _this.canCreateUserType = $rootScope.APPCONSTANT.USER.TYPE.MASTER;
+                                break;
+                            case $rootScope.APPCONSTANT.USER.TYPE.MASTER:
+                                _this.canCreateUserType = $rootScope.APPCONSTANT.USER.TYPE.AGENT;
+                                break;
+                            case $rootScope.APPCONSTANT.USER.TYPE.AGENT:
+                                _this.canCreateUserType = $rootScope.APPCONSTANT.USER.TYPE.PLAYER;
+                                break;
+                            case $rootScope.APPCONSTANT.USER.TYPE.PLAYER:
+                                _this.canCreateUserType = false;
+                                break;
+                        }
+
+                        for (var u in _this.userTypeOptions){
+                            if(_this.canCreateUserType == _this.userTypeOptions[u].id){
+                                _this.user.userType = _this.userTypeOptions[u];
+                                break;
+                            }
                         }
                     }
 
@@ -411,9 +347,39 @@
                     });
                 })
             });
-        } else if (stateName == "root.main.userCreate" || stateName == "root.main.userListing") {
-            _this.getRoles();
-            _this.getDepartments(true);
+        } else if (stateName == "root.main.userCreate") {
+            CommonService.getMasters(true).then(function (result) {
+                _this.masterOptions = result;
+            });
+
+            _this.user = {};
+            switch (_this.userType) {
+                case $rootScope.APPCONSTANT.USER.TYPE.ADMIN:
+                    _this.canCreateUserType = $rootScope.APPCONSTANT.USER.TYPE.MASTER;
+                    break;
+                case $rootScope.APPCONSTANT.USER.TYPE.MASTER:
+                    _this.canCreateUserType = $rootScope.APPCONSTANT.USER.TYPE.AGENT;
+                    CommonService.getPackages(masterId).then(function (result) {
+                        _this.packageOptions = result;
+                    });
+                    break;
+                case $rootScope.APPCONSTANT.USER.TYPE.AGENT:
+                    _this.canCreateUserType = $rootScope.APPCONSTANT.USER.TYPE.PLAYER;
+                    CommonService.getPackages(masterId).then(function (result) {
+                        _this.packageOptions = result;
+                    });
+                    break;
+                case $rootScope.APPCONSTANT.USER.TYPE.PLAYER:
+                    _this.canCreateUserType = false;
+                    break;
+            }
+
+            for (var u in _this.userTypeOptions){
+                if(_this.canCreateUserType == _this.userTypeOptions[u].id){
+                    _this.user.userType = _this.userTypeOptions[u];
+                    break;
+                }
+            }
         }
     }; // End var Ctrl
 

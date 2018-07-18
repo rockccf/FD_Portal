@@ -1,0 +1,17 @@
+<div class="panel panel-primary">
+    <div class="panel-heading" translate="text.masterEdit"></div>
+    <div class="panel-body">
+        <alert-message-div/>
+        <form name="masterForm" class="form-horizontal form-validate" ng-submit="master.updateMaster(masterForm.$valid)" novalidate>
+            <div ng-include src="'views/master_form.html'"></div>
+            <fieldset ng-disabled="master.isSaving">
+                <div class="form-group">
+                    <div class="col-lg-8 col-lg-offset-3">
+                        <a ui-sref="root.main.masterListing" class="btn btn-default" translate="button.back"></a>
+                        <button type="submit" class="btn btn-primary" ng-disabled="masterForm.$invalid" translate="button.update"></button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
