@@ -1,0 +1,22 @@
+<div class="panel panel-info">
+    <div class="panel-heading" translate="text.betView"></div>
+    <div class="panel-body">
+        <alert-message-div/>
+        <form name="betForm" class="form-horizontal" ng-submit="bet.voidBet()" novalidate>
+            <div class="form-group required">
+                <label class="col-lg-3 control-label" translate="text.username"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static" ng-bind="bet.bet.username"></pre>
+                </div>
+            </div>
+            <fieldset>
+                <div class="form-group">
+                    <div class="col-lg-8 col-lg-offset-3">
+                        <a ui-sref="root.main.userListing" class="btn btn-default" role="button" translate="button.back"></a>
+                        <button type="submit" class="btn btn-warning" translate="button.void"></button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

@@ -363,6 +363,26 @@ app.factory('CommonService', ['$rootScope', '$state', '$translate', '$http', 'Up
             });
         };
 
+        CommonService.getCompanies = function(getCompanyDraws) {
+            var result = [];
+            var dataJsonParams = {};
+            //Get all records back from the backend, otherwise it will be default to 10 records.
+            dataJsonParams["pagination"] = {"page":1,"per-page":APPCONSTANT.GLOBAL.PAGING.MAX_RECORD_SIZE};
+            var url = SYSCONSTANT.BACKEND_SERVER_URL + "/company";
+            if (getCompanyDraws) {
+                url += "?expand=companyDraws";
+            }
+            return $http.get(url,{params: dataJsonParams}).then(function (response) {
+                if (response.data && response.data.items && response.data.items.length > 0) {
+                    angular.forEach(response.data.items, function (value, key) {
+                        result.push({"id": value.id, "name": value.name, "code": value.code,
+                            "bgColor": value.bgColor, "fontColor" : value.fontColor, "companyDraws": value.companyDraws});
+                    });
+                }
+                return result;
+            });
+        };
+
         CommonService.getMasters = function(active) {
             var result = [];
             var dataJsonParams = {};

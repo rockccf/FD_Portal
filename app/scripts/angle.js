@@ -335,7 +335,9 @@
                 {name: 'user', files: ['scripts/controllers/user.js'], cache: true},
                 {name: 'role', files: ['scripts/controllers/role.js'], cache: true},
                 {name: 'master', files: ['scripts/controllers/master.js'], cache: true},
+                {name: 'company', files: ['scripts/controllers/company.js'], cache: true},
                 {name: 'package', files: ['scripts/controllers/package.js'], cache: true},
+                {name: 'bet', files: ['scripts/controllers/bet.js'], cache: true},
                 {name: 'report', files: ['scripts/controllers/report.js'], cache: true}
             ]
         })

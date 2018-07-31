@@ -1,0 +1,186 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th class="text-center" ng-repeat="companyObj in bet.drawCompanyArray" style="background-color:{{companyObj.bgColor}};color:{{companyObj.fontColor}}">
+                {{companyObj.name | translate}}
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="drawDateObj in bet.sevenDaysDrawDateArray">
+            <td>{{drawDateObj | date:'EEE'}}</td>
+            <td class="text-center" ng-repeat="companyObj in drawDateObj.companyArray track by $index" style="background-color:{{companyObj.bgColor}};color:{{companyObj.fontColor}}">
+                <span>{{companyObj.drawDate | date:'dd-MM-yyyy'}}</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <table class="table table-condensed">
+        <thead>
+        <tr class="active">
+            <th rowspan="3">#</th>
+            <th rowspan="3" class="text-center" translate="text.number"></th>
+            <th class="text-center" colspan="{{bet.amountColspan}}" translate="text.amount"></th>
+            <th class="text-center" colspan="{{bet.activeDrawDateArray.length}}" translate="text.drawDate"></th>
+            <th class="text-center" colspan="8" translate="text.drawCompany"></th>
+            <th class="text-center" rowspan="2" translate="text.option"></th>
+            <th rowspan="3" translate="text.remarks"></th>
+        </tr>
+        <tr class="active">
+            <th class="text-center">-{{'text.big' | translate}}-</th>
+            <th class="text-center">-{{'text.small' | translate}}-</th>
+            <th class="text-center">-4D 4A-</th>
+            <th class="text-center">-3D 3A-</th>
+            <th class="text-center">-3D 3ABC-</th>
+            <th ng-if="userIdentity.userDetail.bet6d" class="text-center">-  5D  -</th>
+            <th ng-if="userIdentity.userDetail.bet6d" class="text-center">-  6D  -</th>
+            <th class="text-center" ng-repeat="dateObj in bet.activeDrawDateArray">{{dateObj | date:'EEE'}}<br/>{{dateObj | date:'dd-MM'}}</th>
+            <th class="text-center" ng-repeat="companyObj in bet.drawCompanyArray" style="background-color:{{companyObj.bgColor}};color:{{companyObj.fontColor}}">
+                {{companyObj.code}}
+            </th>
+        </tr>
+        <tr class="active">
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th ng-if="userIdentity.userDetail.bet6d" class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th ng-if="userIdentity.userDetail.bet6d" class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center" ng-repeat="dateObj in bet.activeDrawDateArray">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center" ng-repeat="companyObj in bet.drawCompanyArray" style="background-color:{{companyObj.bgColor}};color:{{companyObj.color}}">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-class="{'success' : rowObj.selected, '' : !rowObj.selected}" ng-click="bet.selectRow($index)" ng-repeat="rowObj in bet.betFormRowsArray">
+            <td>{{$index+1}}</td>
+            <td>
+                <input type="text" class="form-control input-xs" pattern="\d*" minlength="3" maxlength="6" id="number_{{$index}}" name="number_{{$index}}" ng-model="rowObj.number"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="4" id="big_{{$index}}" name="number_{{$index}}" ng-model="rowObj.big" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="4"  id="small_{{$index}}" name="number_{{$index}}" ng-model="rowObj.small" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="4"  id="4a_{{$index}}" name="number_{{$index}}" ng-model="rowObj['4a']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="4"  id="3a_{{$index}}" name="number_{{$index}}" ng-model="rowObj['3d']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="4"  id="3abc_{{$index}}" name="number_{{$index}}" ng-model="rowObj['3abc']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td ng-if="userIdentity.userDetail.bet6d">
+                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="4"  id="5d_{{$index}}" name="number_{{$index}}" ng-model="rowObj['5d']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td ng-if="userIdentity.userDetail.bet6d">
+                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="4"  id="6d_{{$index}}" name="number_{{$index}}" ng-model="rowObj['6d']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td class="text-center" ng-repeat="dateObj in bet.activeDrawDateArray">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" ng-model="rowObj[dateObj]"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </td>
+            <td class="text-center" ng-repeat="companyObj in bet.drawCompanyArray" style="background-color:{{companyObj.bgColor}};color:{{companyObj.color}}">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" ng-model="rowObj[companyObj.code]"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </td>
+            <td class="text-center">
+                <div class="col-lg-6">
+                    <select id="betOption_{{$index}}" name="betOption_{{$index}}" ng-options="option.name | translate for option in bet.betOptions track by option.id"
+                            ng-model="rowObj.betOption" ng-change="bet.changeBet($index)"></select>
+                    <div class="help-block" ng-messages="masterForm.active.$error" ng-show="masterForm.active.$touched">
+                        <div ng-messages-include="views/common/messages.html"></div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" id="remarks_{{$index}}" name="remarks_{{$index}}" ng-model="rowObj.remarks"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

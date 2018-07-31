@@ -20,6 +20,16 @@
         </div>
     </div>
 </div>
+<div class="form-group required" ng-class="{ 'has-error' : masterForm.commissionRate.$invalid && masterForm.commissionRate.$touched}">
+    <label for="prefix" class="col-lg-3 control-label" translate="text.commissionRate"></label>
+    <div class="col-lg-6">
+        <input type="number" class="form-control" id="commissionRate" name="commissionRate" placeholder="{{'placeholder.commissionRate'|translate}}"
+               ng-model="master.master.commissionRate" required/>
+        <div class="help-block" ng-messages="masterForm.commissionRate.$error" ng-show="masterForm.commissionRate.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
 <div class="form-group required" ng-class="{ 'has-error' : masterForm.active.$invalid && masterForm.active.$touched}">
     <label for="active" class="col-lg-3 control-label" translate="text.active"></label>
     <div class="col-lg-6">

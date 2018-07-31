@@ -36,6 +36,13 @@
                 "permission" : "VIEW_MASTER"
             },
             {
+                "text": "Company Draw",
+                "sref": "root.main.companyDrawListing",
+                "icon": "fas fa-dice",
+                "translate": "text.companyDraw",
+                "permission": "VIEW_USER"
+            },
+            {
                 "text": "Package",
                 "sref": "root.main.packageListing",
                 "icon": "fa fa-briefcase",
@@ -91,7 +98,7 @@
             {
                 "text": "Void Bet",
                 "sref": "root.main.voidBet",
-                "icon": "fas fa-dice-three",
+                "icon": "fas fa-ban",
                 "translate": "text.voidBet",
                 "permission" : "BET"
             }

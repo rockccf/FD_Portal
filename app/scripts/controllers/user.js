@@ -114,8 +114,6 @@
                     bet6d = _this.user.bet6d;
                 }
 
-                console.log(bet6d);
-
                 _this.saveObj = {
                     "username" : _this.user.username,
                     "name" : _this.user.name,

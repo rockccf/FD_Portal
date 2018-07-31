@@ -11,7 +11,8 @@ app.constant("APPCONSTANT", {
             "MAX_RECORD_SIZE" : 99999
         },
         "TRUE" : 1,
-        "FALSE" : 0
+        "FALSE" : 0,
+        "CUT_OFF_TIME" : "19:00:00"
     },
     "USER" : {
         "TYPE" : {
@@ -31,6 +32,17 @@ app.constant("APPCONSTANT", {
             }
         }
     },
+    "BET" : {
+        "NUMBER" : {
+            "OPTION": {
+                "SINGLE": 1,
+                "RETURN": 2,
+                "BOX": 3,
+                "IBOX": 4,
+                "PH": 5
+            }
+        }
+    },
     "AUTH_ITEM" : {
         "TYPE" : {
             "ROLE" : 1,
@@ -47,6 +59,18 @@ app.constant("APPCONSTANT", {
                     "PO" : 1100
                 }
             }
+        }
+    },
+    "COMPANY" : {
+        "CODE" : {
+            "MAGNUM" : "M",
+            "PMP" : "P",
+            "TOTO" : "T",
+            "SINGAPORE" : "S",
+            "SABAH" : "B",
+            "SANDAKAN" : "K",
+            "SARAWAK" : "W",
+            "GD" : "H",
         }
     },
     "PACKAGE" : {

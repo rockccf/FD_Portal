@@ -29,7 +29,7 @@
         };
 
         //function to create the master & bind in master_create.html
-        _this.createMaster = function createMaster(isValid){
+        _this.createMaster = function (isValid){
             if (isValid) {
                 CommonService.clearAlertMessage();
                 _this.isSaving = true;
