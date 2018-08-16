@@ -12,7 +12,7 @@ app.constant("APPCONSTANT", {
         },
         "TRUE" : 1,
         "FALSE" : 0,
-        "CUT_OFF_TIME" : "19:00:00"
+        "CUT_OFF_TIME" : "22:00:00"
     },
     "USER" : {
         "TYPE" : {
@@ -23,7 +23,7 @@ app.constant("APPCONSTANT", {
         },
         "DETAIL" : {
             "BET_METHOD" : {
-                "MULTIPLY" : 1,
+                "MULTIPLE" : 1,
                 "DIVIDE" : 2
             },
             "AUTO_TRANSFER_MODE" : {
@@ -51,13 +51,12 @@ app.constant("APPCONSTANT", {
     },
     "FILE_TEMPLATE" : {
         "REPORT" : {
-            "TENANT" : {
-                "LAYOUT" : {
-                    "GENERAL" : 1000
-                },
-                "PO" : {
-                    "PO" : 1100
-                }
+            "WIN_LOSS_DETAILS" : 1000,
+            "MASTER" : {
+
+            },
+            "ADMIN" : {
+
             }
         }
     },

@@ -79,7 +79,7 @@
         "5d6dLottoPrizePackages" : "5D/6D Prize Packages",
         "6dAgentCommRate" : "6D Agent Commission Rate",
         "6dPlayerCommRate" : "6D Player Commission Rate",
-        "multiply" : "Multiply",
+        "multiple" : "Multiple",
         "divide" : "Divide",
         "betMethod" : "Bet Method",
         "betGdLotto" : "Bet Gd Lotto",
@@ -121,7 +121,23 @@
         "box" : "Box",
         "ibox" : "IBox",
         "ph" : "PH",
-        "betView" : "Bet View"
+        "betView" : "Bet View",
+        "reportListing" : "Report Listing",
+        "winLossDetails" : "Win Loss Details",
+        "sales" : "Sales",
+        "payout" : "Payout",
+        "balance" : "Balance",
+        "history" : "History",
+        "betSlipHistory" : "Bet Slip History",
+        "betNumberHistory" : "Bet Number History",
+        "voidBetHistory" : "Void Bet History",
+        "drawDateStart" : "Draw Date Start",
+        "drawDateEnd" : "Draw Date End",
+        "betDateStart" : "Bet Date Start",
+        "betDateEnd" : "Bet Date End",
+        "betDate" : "Bet Date",
+        "slip" : "Slip",
+        "totalSales" : "Total Sales"
     },
     "placeholder" : {
         "selectOneOrMore" : "--- Please select one or more ---",
@@ -150,7 +166,11 @@
         "6dPlayerCommRate" : "6D Player Commission Rate",
         "creditLimit" : "Credit Limit",
         "startDate" : "Start Date",
-        "endDate" : "End Date"
+        "endDate" : "End Date",
+        "drawDateStart" : "Draw Date Start",
+        "drawDateEnd" : "Draw Date End",
+        "betDateStart" : "Bet Date Start",
+        "betDateEnd" : "Bet Date End"
     },
     "button" : {
         "create": "Create",
@@ -163,7 +183,8 @@
         "loadRecommendedPrizes" : "Load Recommended Prizes",
         "populate" : "Populate",
         "submit" : "Submit",
-        "void" : "Void"
+        "void" : "Void",
+        "search" : "Search"
     },
     "message" : {
         "required": "This field is required",

@@ -25,7 +25,7 @@
             <th rowspan="3" class="text-center" translate="text.number"></th>
             <th class="text-center" colspan="{{bet.amountColspan}}" translate="text.amount"></th>
             <th class="text-center" colspan="{{bet.activeDrawDateArray.length}}" translate="text.drawDate"></th>
-            <th class="text-center" colspan="8" translate="text.drawCompany"></th>
+            <th class="text-center" colspan="{{bet.drawCompanyArray.length}}" translate="text.drawCompany"></th>
             <th class="text-center" rowspan="2" translate="text.option"></th>
             <th rowspan="3" translate="text.remarks"></th>
         </tr>
@@ -132,25 +132,25 @@
                 <input type="text" class="form-control input-xs" pattern="\d*" minlength="3" maxlength="6" id="number_{{$index}}" name="number_{{$index}}" ng-model="rowObj.number"/>
             </td>
             <td>
-                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="4" id="big_{{$index}}" name="number_{{$index}}" ng-model="rowObj.big" ng-change="bet.changeBet($index)"/>
+                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="5" id="big_{{$index}}" name="number_{{$index}}" ng-model="rowObj.big" ng-change="bet.changeBet($index)"/>
             </td>
             <td>
-                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="4"  id="small_{{$index}}" name="number_{{$index}}" ng-model="rowObj.small" ng-change="bet.changeBet($index)"/>
+                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="5"  id="small_{{$index}}" name="number_{{$index}}" ng-model="rowObj.small" ng-change="bet.changeBet($index)"/>
             </td>
             <td>
-                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="4"  id="4a_{{$index}}" name="number_{{$index}}" ng-model="rowObj['4a']" ng-change="bet.changeBet($index)"/>
+                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="5"  id="4a_{{$index}}" name="number_{{$index}}" ng-model="rowObj['4a']" ng-change="bet.changeBet($index)"/>
             </td>
             <td>
-                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="4"  id="3a_{{$index}}" name="number_{{$index}}" ng-model="rowObj['3d']" ng-change="bet.changeBet($index)"/>
+                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="5"  id="3a_{{$index}}" name="number_{{$index}}" ng-model="rowObj['3a']" ng-change="bet.changeBet($index)"/>
             </td>
             <td>
-                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="4"  id="3abc_{{$index}}" name="number_{{$index}}" ng-model="rowObj['3abc']" ng-change="bet.changeBet($index)"/>
+                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="5"  id="3abc_{{$index}}" name="number_{{$index}}" ng-model="rowObj['3abc']" ng-change="bet.changeBet($index)"/>
             </td>
             <td ng-if="userIdentity.userDetail.bet6d">
-                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="4"  id="5d_{{$index}}" name="number_{{$index}}" ng-model="rowObj['5d']" ng-change="bet.changeBet($index)"/>
+                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="5"  id="5d_{{$index}}" name="number_{{$index}}" ng-model="rowObj['5d']" ng-change="bet.changeBet($index)"/>
             </td>
             <td ng-if="userIdentity.userDetail.bet6d">
-                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="4"  id="6d_{{$index}}" name="number_{{$index}}" ng-model="rowObj['6d']" ng-change="bet.changeBet($index)"/>
+                <input type="text" class="form-control input-xs" pattern="\d*" minlength="1" maxlength="5"  id="6d_{{$index}}" name="number_{{$index}}" ng-model="rowObj['6d']" ng-change="bet.changeBet($index)"/>
             </td>
             <td class="text-center" ng-repeat="dateObj in bet.activeDrawDateArray">
                 <div class="checkbox c-checkbox needsclick">

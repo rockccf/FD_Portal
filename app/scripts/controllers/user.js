@@ -44,7 +44,7 @@
             {id:$rootScope.APPCONSTANT.USER.TYPE.AGENT, "name":"text.agent"},
             {id:$rootScope.APPCONSTANT.USER.TYPE.PLAYER, "name":"text.player"}
         ];
-        _this.betMethodOptions = [{id:$rootScope.APPCONSTANT.USER.DETAIL.BET_METHOD.MULTIPLY, "name":"text.multiply"}, {id:$rootScope.APPCONSTANT.USER.DETAIL.BET_METHOD.DIVIDE, "name":"text.divide"}];
+        _this.betMethodOptions = [{id:$rootScope.APPCONSTANT.USER.DETAIL.BET_METHOD.MULTIPLE, "name":"text.multiple"}, {id:$rootScope.APPCONSTANT.USER.DETAIL.BET_METHOD.DIVIDE, "name":"text.divide"}];
         _this.yesNoOptions = [{id:trueValue, "name":"text.yes"}, {id:falseValue, "name":"text.no"}];
 
         _this.viewUser = function (userId) {

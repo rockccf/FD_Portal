@@ -106,6 +106,35 @@
         "translate": "text.bet"
     },
     {
+        "text" : "History",
+        "sref": "#",
+        "icon": "fas fa-history",
+        "submenu": [
+            {
+                "text": "Bet Slip History",
+                "sref": "root.main.betSlipHistory",
+                "icon": "fas fa-clipboard-list",
+                "translate": "text.betSlipHistory",
+                "permission" : "BET"
+            },
+            {
+                "text": "Bet Number History",
+                "sref": "root.main.betNumberHistory",
+                "icon": "fas fa-list-ol",
+                "translate": "text.betNumberHistory",
+                "permission" : "BET"
+            },
+            {
+                "text": "Void Bet History",
+                "sref": "root.main.voidBetHistory",
+                "icon": "fas fa-ban",
+                "translate": "text.voidBetHistory",
+                "permission" : "BET"
+            }
+        ],
+        "translate": "text.history"
+    },
+    {
         "text": "Report",
         "sref": "root.main.report",
         "icon": "fas fa-chart-line",

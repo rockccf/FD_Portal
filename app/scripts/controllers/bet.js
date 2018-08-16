@@ -8,6 +8,7 @@
         var stateName = $state.current.name;
         var _this = this; //Declare local variable _this to refer to "this" controller
         _this.isSaving = false; //Default to false
+        _this.betMethod = $rootScope.userIdentity.userDetail.betMethod;
 
         if ($rootScope.userIdentity.userDetail.bet6d) {
             _this.amountColspan = 7;
@@ -15,11 +16,18 @@
             _this.amountColspan = 5;
         }
 
+        _this.indexFilterColumns = [
+            {"drawDateStart": {"attribute" : "drawDate", "operator" : "gte", "model" : "user", "isChild" : false}},
+            {"drawDateEnd": {"attribute" : "drawDate", "operator" : "lte", "model" : "userProfile", "isChild" : false}},
+            {"betDateStart": {"attribute" : "lastName", "operator" : "like", "model" : "userProfile", "isChild" : false}},
+            {"betDateEnd": {"attribute" : "email", "operator" : "like", "model" : "user", "isChild" : false}}
+        ];
+
         _this.betFormRowsCount = 20; //Default to 20 rows
         _this.betFormRowsArray = [];
         for(var i=0;i<_this.betFormRowsCount;i++) {
             var rowObj = {};
-            rowObj.betOption = {"id":$rootScope.APPCONSTANT.BET.OPTION.SINGLE,"name":"text.single"}; //Default option
+            rowObj.betOption = {"id":$rootScope.APPCONSTANT.BET.NUMBER.OPTION.SINGLE,"name":"text.single"}; //Default option
             _this.betFormRowsArray.push(rowObj);
         }
 
@@ -31,22 +39,57 @@
                 {"id":$rootScope.APPCONSTANT.BET.NUMBER.OPTION.IBOX,"name":"text.ibox"},
                 {"id":$rootScope.APPCONSTANT.BET.NUMBER.OPTION.PH,"name":"text.ph"},
             ];
+        _this.betMethodOptions = [{id:$rootScope.APPCONSTANT.USER.DETAIL.BET_METHOD.MULTIPLE, "name":"text.multiple"}, {id:$rootScope.APPCONSTANT.USER.DETAIL.BET_METHOD.DIVIDE, "name":"text.divide"}];
+
+        //Datepicker options
+        _this.datepicker = {};
+        _this.datepicker.format = 'dd-MMM-yyyy';
+        _this.datepicker.drawStartDate = {
+            "opened": false,
+            "dateOptions": {
+                "showWeeks": false
+            }
+        };
+        _this.datepicker.drawEndDate = {
+            "opened": false,
+            "dateOptions": {
+                "showWeeks": false
+            }
+        };
+        _this.datepicker.betStartDate = {
+            "opened": false,
+            "dateOptions": {
+                "showWeeks": false
+            }
+        };
+        _this.datepicker.betEndDate = {
+            "opened": false,
+            "dateOptions": {
+                "showWeeks": false
+            }
+        };
+
+        _this.openDatepicker = function(which) {
+            if (which == 1) {
+                _this.datepicker.drawDateStart.opened = true;
+            } else if (which == 2) {
+                if (_this.drawDateStart) {
+                    _this.datepicker.drawDateEnd.dateOptions.minDate = _this.drawDateStart;
+                }
+                _this.datepicker.drawDateEnd.opened = true;
+            } else if (which == 3) {
+                _this.datepicker.betDateStart.opened = true;
+            } else if (which == 4) {
+                if (_this.betDateStart) {
+                    _this.datepicker.betDateEnd.dateOptions.minDate = _this.betDateEnd;
+                }
+                _this.datepicker.betDateEnd.opened = true;
+            }
+        };
 
         //Populate this week of draw dates (excluding past dates)
         _this.drawDateArray = [];
         _this.activeDrawDateArray = [];
-        /*_this.drawCompanyArray =
-            [
-                {"id":$rootScope.APPCONSTANT.COMPANY.CODE.MAGNUM,"name":"text.magnum","bgColor":"yellow","color":"black"},
-                {"id":$rootScope.APPCONSTANT.COMPANY.CODE.PMP,"name":"text.pmp","bgColor":"blue","color":"white"},
-                {"id":$rootScope.APPCONSTANT.COMPANY.CODE.TOTO,"name":"text.toto","bgColor":"#CC0000","color":"white"},
-                {"id":$rootScope.APPCONSTANT.COMPANY.CODE.SINGAPORE,"name":"text.singapore","bgColor":"#4C8ED1","color":"white"},
-                {"id":$rootScope.APPCONSTANT.COMPANY.CODE.SABAH,"name":"text.sabah","bgColor":"#E51D20","color":"white"},
-                {"id":$rootScope.APPCONSTANT.COMPANY.CODE.SANDAKAN,"name":"text.sandakan","bgColor":"#008835","color":"white"},
-                {"id":$rootScope.APPCONSTANT.COMPANY.CODE.SARAWAK,"name":"text.sarawak","bgColor":"#00540E","color":"white"},
-                {"id":$rootScope.APPCONSTANT.COMPANY.CODE.GD,"name":"text.gdLotto","bgColor":"gold","color":"black"},
-            ];*/
-
 
         var startOfWeek = moment().startOf('isoWeek');
         var endOfWeek = moment().endOf('isoWeek');
@@ -71,44 +114,62 @@
         var sixDaysAfter = moment().add(6,'d');
         var day = moment();
         while (day <= sixDaysAfter) {
-            _this.sevenDaysDrawDateArray.push(day.toDate());
+            if (moment(day).isSameOrAfter(moment(), 'day')) {
+                if (moment(day).isSame(moment(), 'day')) {
+                    //Same day as today, check the cutoff date
+                    var cutOffTime = moment($rootScope.APPCONSTANT.GLOBAL.CUT_OFF_TIME, 'hh:mm:ss');
+                    if (moment().isSameOrAfter(cutOffTime)) { //Cutoff Time Reached
+                        day = day.clone().add(1, 'd');
+                        sixDaysAfter = moment().add(7,'d'); //Add 1 more day to become 7 days because today is passed the cut off time
+                        continue;
+                    }
+                }
+                _this.sevenDaysDrawDateArray.push(day.toDate());
+            }
             day = day.clone().add(1, 'd');
         }
 
         CommonService.getCompanies(true).then(function (result) {
-            _this.drawCompanyArray = result;
-            angular.forEach(_this.drawCompanyArray, function(value, key) {
+            _this.drawCompanyArray = [];
+            angular.forEach(result, function(value, key) {
                 switch (value.code) {
                     case $rootScope.APPCONSTANT.COMPANY.CODE.MAGNUM:
                         value.name = "text.magnum";
+                        _this.drawCompanyArray.push(value);
                         break;
                     case $rootScope.APPCONSTANT.COMPANY.CODE.PMP:
                         value.name = "text.pmp";
+                        _this.drawCompanyArray.push(value);
                         break;
                     case $rootScope.APPCONSTANT.COMPANY.CODE.TOTO:
                         value.name = "text.toto";
+                        _this.drawCompanyArray.push(value);
                         break;
                     case $rootScope.APPCONSTANT.COMPANY.CODE.SINGAPORE:
                         value.name = "text.singapore";
+                        _this.drawCompanyArray.push(value);
                         break;
                     case $rootScope.APPCONSTANT.COMPANY.CODE.SABAH:
                         value.name = "text.sabah";
+                        _this.drawCompanyArray.push(value);
                         break;
                     case $rootScope.APPCONSTANT.COMPANY.CODE.SANDAKAN:
                         value.name = "text.sandakan";
+                        _this.drawCompanyArray.push(value);
                         break;
                     case $rootScope.APPCONSTANT.COMPANY.CODE.SARAWAK:
                         value.name = "text.sarawak";
+                        _this.drawCompanyArray.push(value);
                         break;
                     case $rootScope.APPCONSTANT.COMPANY.CODE.GD:
                         value.name = "text.gdLotto";
+                        if ($rootScope.userIdentity.userDetail.betGdLotto) {
+                            _this.drawCompanyArray.push(value);
+                        }
                         break;
                 }
-
-                //Populate 7 days for display for each company
-
             });
-            //console.log(_this.drawCompanyArray);
+
             angular.forEach(_this.sevenDaysDrawDateArray, function (value,key) {
                 var companyArray = [];
                 angular.forEach(_this.drawCompanyArray, function (value2,key2) {
@@ -125,6 +186,39 @@
             });
         });
 
+        _this.getBetSlipHistory = function() {
+            CommonService.clearAlertMessage();
+            _this.isSaving = true;
+            var dataJsonParams = {
+                "drawDateStart": _this.drawDateStart ?  moment(_this.drawDateStart).format() : null,
+                "drawDateEnd": _this.drawDateEnd ? moment(_this.drawDateEnd).format() : null,
+                "betDateStart": _this.betDateStart ? moment(_this.betDateStart).format() : null,
+                "betDateEnd": _this.betDateEnd ? moment(_this.betDateEnd).format() : null,
+            };
+
+            //Proceed to retrieve the data with pagination settings
+            $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/bet/get-bet-slip-history", {
+                params: dataJsonParams
+            }).then(function (response) {
+                // this callback will be called asynchronously
+                // when the response is available
+                _this.betData = response.data;
+
+                console.log(_this.betData);
+
+                _this.isSaving = false;
+            }, function (response) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+                CommonService.SweetAlert({
+                    title: "Error",
+                    text: "Failed to retrieve bet slip history.",
+                    type: "error"
+                });
+                _this.isSaving = false;
+            });
+        };
+
         _this.selectRow = function(index) {
             _this.betFormRowsArray.map(function(a) {
                 a.selected = false;
@@ -134,68 +228,288 @@
 
         _this.populateBetArray = function() {
             var result = [];
+            var rowIndex = 0;
 
-            for (var b in _this.betFormRowsArray) {
+            for (var b = 0;b <  _this.betFormRowsArray.length;b++) {
                 var row = _this.betFormRowsArray[b];
+                row.drawDateArray = [];
                 var betObj = {};
                 if (row.number) {
                     if (row.big > 0 || row.small > 0 || row['4a'] > 0 || row['3d'] > 0 || row['3abc'] || row['5d'] > 0 || row['6d'] > 0) {
                         for (var d in _this.activeDrawDateArray) {
                             var activeDrawDate = _this.activeDrawDateArray[d];
                             if (row[activeDrawDate] == true) {
-                                betObj.number = row.number;
-                                betObj.betOption = row.betOption.id;
-                                betObj.big = row.big;
-                                betObj.small = row.small;
-                                betObj['4a'] = row['4a'];
-                                betObj['3d'] = row['3d'];
-                                betObj['3abc'] = row['3abc'];
-                                betObj['5d'] = row['5d'];
-                                betObj['6d'] = row['6d'];
-                                betObj['drawDate'] = moment(activeDrawDate).format();
+                                row.drawDateArray.push(moment(activeDrawDate).format("YYYY-MM-DD"));
+                                //Check betMethod
+                                var big = row.big ? row.big : null;
+                                var small = row.small ? row.small : null;
+                                var amount4a = row['4a'] ? row['4a'] : null;
+                                var amount4b = row['4b'] ? row['4b'] : null;
+                                var amount4c = row['4c'] ? row['4c'] : null;
+                                var amount4d = row['4d'] ? row['4d'] : null;
+                                var amount4e = row['4e'] ? row['4e'] : null;
+                                var amount4f = row['4f'] ? row['4f'] : null;
+                                var amount3abc = row['3abc'] ? row['3abc'] : null;
+                                var amount3a = row['3a'] ? row['3a'] : null;
+                                var amount3b = row['3b'] ? row['3b'] : null;
+                                var amount3c = row['3c'] ? row['3c'] : null;
+                                var amount3d = row['3d'] ? row['3d'] : null;
+                                var amount3e = row['3e'] ? row['3e'] : null;
+                                var amount5d = row['5d'] ? row['5d'] : null;
+                                var amount6d = row['6d'] ? row['6d'] : null;
+
+                                if (_this.betMethod == $rootScope.APPCONSTANT.USER.DETAIL.BET_METHOD.DIVIDE) {
+                                    var betCompaniesCount = 0;
+                                    //Need to divide the amount by the number of companies that the user has placed bets for
+                                    if (row[$rootScope.APPCONSTANT.COMPANY.CODE.MAGNUM]) {
+                                        betCompaniesCount++;
+                                    }
+                                    if (row[$rootScope.APPCONSTANT.COMPANY.CODE.PMP]) {
+                                        betCompaniesCount++;
+                                    }
+                                    if (row[$rootScope.APPCONSTANT.COMPANY.CODE.TOTO]) {
+                                        betCompaniesCount++;
+                                    }
+                                    if (row[$rootScope.APPCONSTANT.COMPANY.CODE.SINGAPORE]) {
+                                        betCompaniesCount++;
+                                    }
+                                    if (row[$rootScope.APPCONSTANT.COMPANY.CODE.SABAH]) {
+                                        betCompaniesCount++;
+                                    }
+                                    if (row[$rootScope.APPCONSTANT.COMPANY.CODE.SANDAKAN]) {
+                                        betCompaniesCount++;
+                                    }
+                                    if (row[$rootScope.APPCONSTANT.COMPANY.CODE.SARAWAK]) {
+                                        betCompaniesCount++;
+                                    }
+                                    if (row[$rootScope.APPCONSTANT.COMPANY.CODE.GD]) {
+                                        betCompaniesCount++;
+                                    }
+
+                                    if (betCompaniesCount > 0) {
+                                        big = big ? (big/betCompaniesCount).toFixed(3) : null;
+                                        small = small ? (small/betCompaniesCount).toFixed(3) : null;
+                                        amount4a = amount4a ? (amount4a/betCompaniesCount).toFixed(3) : null;
+                                        amount4b = amount4b ? (amount4b/betCompaniesCount).toFixed(3) : null;
+                                        amount4c = amount4c ? (amount4c/betCompaniesCount).toFixed(3) : null;
+                                        amount4d = amount4d ? (amount4d/betCompaniesCount).toFixed(3) : null;
+                                        amount4e = amount4e ? (amount4e/betCompaniesCount).toFixed(3) : null;
+                                        amount4f = amount4f ? (amount4f/betCompaniesCount).toFixed(3) : null;
+                                        amount3abc = amount3abc ? (amount3abc/betCompaniesCount).toFixed(3) : null;
+                                        amount3a = amount3a ? (amount3a/betCompaniesCount).toFixed(3) : null;
+                                        amount3b = amount3b ? (amount3b/betCompaniesCount).toFixed(3) : null;
+                                        amount3c = amount3c ? (amount3c/betCompaniesCount).toFixed(3) : null;
+                                        amount3d = amount3d ? (amount3d/betCompaniesCount).toFixed(3) : null;
+                                        amount3e = amount3e ? (amount3e/betCompaniesCount).toFixed(3) : null;
+                                        amount5d = amount5d ? (amount5d/betCompaniesCount).toFixed(3) : null;
+                                        amount6d = amount6d ? (amount6d/betCompaniesCount).toFixed(3) : null;
+                                    }
+                                }
 
                                 if (row[$rootScope.APPCONSTANT.COMPANY.CODE.MAGNUM]) {
+                                    betObj = {};
+                                    betObj.rowIndex = rowIndex;
+                                    betObj.number = row.number;
+                                    betObj.betOption = row.betOption.id;
+                                    betObj.big = big;
+                                    betObj.small = small;
+                                    betObj['4a'] = amount4a;
+                                    betObj['4b'] = amount4b;
+                                    betObj['4c'] = amount4c;
+                                    betObj['4d'] = amount4d;
+                                    betObj['4e'] = amount4e;
+                                    betObj['4f'] = amount4f;
+                                    betObj['3abc'] = amount3abc;
+                                    betObj['3a'] = amount3a;
+                                    betObj['3b'] = amount3b;
+                                    betObj['3c'] = amount3c;
+                                    betObj['3d'] = amount3d;
+                                    betObj['3e'] = amount3e;
+                                    betObj['drawDate'] = moment(activeDrawDate).format();
                                     betObj['companyCode'] = $rootScope.APPCONSTANT.COMPANY.CODE.MAGNUM;
+                                    betObj['remarks'] = row['remarks'];
                                     delete betObj['5d'];
                                     delete betObj['6d'];
                                     result.push(betObj);
                                 }
                                 if (row[$rootScope.APPCONSTANT.COMPANY.CODE.PMP]) {
+                                    betObj = {};
+                                    betObj.rowIndex = rowIndex;
+                                    betObj.number = row.number;
+                                    betObj.betOption = row.betOption.id;
+                                    betObj.big = big;
+                                    betObj.small = small;
+                                    betObj['4a'] = amount4a;
+                                    betObj['4b'] = amount4b;
+                                    betObj['4c'] = amount4c;
+                                    betObj['4d'] = amount4d;
+                                    betObj['4e'] = amount4e;
+                                    betObj['4f'] = amount4f;
+                                    betObj['3abc'] = amount3abc;
+                                    betObj['3a'] = amount3a;
+                                    betObj['3b'] = amount3b;
+                                    betObj['3c'] = amount3c;
+                                    betObj['3d'] = amount3d;
+                                    betObj['3e'] = amount3e;
+                                    betObj['drawDate'] = moment(activeDrawDate).format();
                                     betObj['companyCode'] = $rootScope.APPCONSTANT.COMPANY.CODE.PMP;
+                                    betObj['remarks'] = row['remarks'];
                                     delete betObj['5d'];
                                     delete betObj['6d'];
                                     result.push(betObj);
                                 }
                                 if (row[$rootScope.APPCONSTANT.COMPANY.CODE.TOTO]) {
+                                    betObj = {};
+                                    betObj.rowIndex = rowIndex;
+                                    betObj.number = row.number;
+                                    betObj.betOption = row.betOption.id;
+                                    betObj.big = big;
+                                    betObj.small = small;
+                                    betObj['4a'] = amount4a;
+                                    betObj['4b'] = amount4b;
+                                    betObj['4c'] = amount4c;
+                                    betObj['4d'] = amount4d;
+                                    betObj['4e'] = amount4e;
+                                    betObj['4f'] = amount4f;
+                                    betObj['3abc'] = amount3abc;
+                                    betObj['3a'] = amount3a;
+                                    betObj['3b'] = amount3b;
+                                    betObj['3c'] = amount3c;
+                                    betObj['3d'] = amount3d;
+                                    betObj['3e'] = amount3e;
+                                    betObj['5d'] = amount5d;
+                                    betObj['6d'] = amount6d;
+                                    betObj['drawDate'] = moment(activeDrawDate).format();
                                     betObj['companyCode'] = $rootScope.APPCONSTANT.COMPANY.CODE.TOTO;
+                                    betObj['remarks'] = row['remarks'];
                                     result.push(betObj);
                                 }
                                 if (row[$rootScope.APPCONSTANT.COMPANY.CODE.SINGAPORE]) {
+                                    betObj = {};
+                                    betObj.rowIndex = rowIndex;
+                                    betObj.number = row.number;
+                                    betObj.betOption = row.betOption.id;
+                                    betObj.big = big;
+                                    betObj.small = small;
+                                    betObj['4a'] = amount4a;
+                                    betObj['4b'] = amount4b;
+                                    betObj['4c'] = amount4c;
+                                    betObj['4d'] = amount4d;
+                                    betObj['4e'] = amount4e;
+                                    betObj['4f'] = amount4f;
+                                    betObj['3abc'] = amount3abc;
+                                    betObj['3a'] = amount3a;
+                                    betObj['3b'] = amount3b;
+                                    betObj['3c'] = amount3c;
+                                    betObj['3d'] = amount3d;
+                                    betObj['3e'] = amount3e;
+                                    betObj['drawDate'] = moment(activeDrawDate).format();
                                     betObj['companyCode'] = $rootScope.APPCONSTANT.COMPANY.CODE.SINGAPORE;
+                                    betObj['remarks'] = row['remarks'];
                                     delete betObj['5d'];
                                     delete betObj['6d'];
                                     result.push(betObj);
                                 }
                                 if (row[$rootScope.APPCONSTANT.COMPANY.CODE.SABAH]) {
+                                    betObj = {};
+                                    betObj.rowIndex = rowIndex;
+                                    betObj.number = row.number;
+                                    betObj.betOption = row.betOption.id;
+                                    betObj.big = big;
+                                    betObj.small = small;
+                                    betObj['4a'] = amount4a;
+                                    betObj['4b'] = amount4b;
+                                    betObj['4c'] = amount4c;
+                                    betObj['4d'] = amount4d;
+                                    betObj['4e'] = amount4e;
+                                    betObj['4f'] = amount4f;
+                                    betObj['3abc'] = amount3abc;
+                                    betObj['3a'] = amount3a;
+                                    betObj['3b'] = amount3b;
+                                    betObj['3c'] = amount3c;
+                                    betObj['3d'] = amount3d;
+                                    betObj['3e'] = amount3e;
+                                    betObj['drawDate'] = moment(activeDrawDate).format();
                                     betObj['companyCode'] = $rootScope.APPCONSTANT.COMPANY.CODE.SABAH;
+                                    betObj['remarks'] = row['remarks'];
                                     delete betObj['5d'];
                                     delete betObj['6d'];
                                     result.push(betObj);
                                 }
                                 if (row[$rootScope.APPCONSTANT.COMPANY.CODE.SANDAKAN]) {
+                                    betObj = {};
+                                    betObj.rowIndex = rowIndex;
+                                    betObj.number = row.number;
+                                    betObj.betOption = row.betOption.id;
+                                    betObj.big = big;
+                                    betObj.small = small;
+                                    betObj['4a'] = amount4a;
+                                    betObj['4b'] = amount4b;
+                                    betObj['4c'] = amount4c;
+                                    betObj['4d'] = amount4d;
+                                    betObj['4e'] = amount4e;
+                                    betObj['4f'] = amount4f;
+                                    betObj['3abc'] = amount3abc;
+                                    betObj['3a'] = amount3a;
+                                    betObj['3b'] = amount3b;
+                                    betObj['3c'] = amount3c;
+                                    betObj['3d'] = amount3d;
+                                    betObj['3e'] = amount3e;
+                                    betObj['drawDate'] = moment(activeDrawDate).format();
                                     betObj['companyCode'] = $rootScope.APPCONSTANT.COMPANY.CODE.SANDAKAN;
+                                    betObj['remarks'] = row['remarks'];
                                     delete betObj['5d'];
                                     delete betObj['6d'];
                                     result.push(betObj);
                                 }
                                 if (row[$rootScope.APPCONSTANT.COMPANY.CODE.SARAWAK]) {
+                                    betObj = {};
+                                    betObj.rowIndex = rowIndex;
+                                    betObj.number = row.number;
+                                    betObj.betOption = row.betOption.id;
+                                    betObj.big = big;
+                                    betObj.small = small;
+                                    betObj['4a'] = amount4a;
+                                    betObj['4b'] = amount4b;
+                                    betObj['4c'] = amount4c;
+                                    betObj['4d'] = amount4d;
+                                    betObj['4e'] = amount4e;
+                                    betObj['4f'] = amount4f;
+                                    betObj['3abc'] = amount3abc;
+                                    betObj['3a'] = amount3a;
+                                    betObj['3b'] = amount3b;
+                                    betObj['3c'] = amount3c;
+                                    betObj['3d'] = amount3d;
+                                    betObj['3e'] = amount3e;
+                                    betObj['drawDate'] = moment(activeDrawDate).format();
                                     betObj['companyCode'] = $rootScope.APPCONSTANT.COMPANY.CODE.SARAWAK;
+                                    betObj['remarks'] = row['remarks'];
                                     delete betObj['5d'];
                                     delete betObj['6d'];
                                     result.push(betObj);
                                 }
                                 if (row[$rootScope.APPCONSTANT.COMPANY.CODE.GD]) {
+                                    betObj = {};
+                                    betObj.rowIndex = rowIndex;
+                                    betObj.number = row.number;
+                                    betObj.betOption = row.betOption.id;
+                                    betObj.big = big;
+                                    betObj.small = small;
+                                    betObj['4a'] = amount4a;
+                                    betObj['4b'] = amount4b;
+                                    betObj['4c'] = amount4c;
+                                    betObj['4d'] = amount4d;
+                                    betObj['4e'] = amount4e;
+                                    betObj['4f'] = amount4f;
+                                    betObj['3abc'] = amount3abc;
+                                    betObj['3a'] = amount3a;
+                                    betObj['3b'] = amount3b;
+                                    betObj['3c'] = amount3c;
+                                    betObj['3d'] = amount3d;
+                                    betObj['3e'] = amount3e;
+                                    betObj['drawDate'] = moment(activeDrawDate).format();
                                     betObj['companyCode'] = $rootScope.APPCONSTANT.COMPANY.CODE.GD;
+                                    betObj['remarks'] = row['remarks'];
                                     delete betObj['5d'];
                                     delete betObj['6d'];
                                     result.push(betObj);
@@ -203,8 +517,8 @@
                             }
                         }
                     }
+                    rowIndex++;
                 }
-
             }
 
             return result;
@@ -245,14 +559,16 @@
                 }
 
                 _this.saveObj = {
-                    "betArray" : betArray
+                    "betArray" : betArray,
+                    "betFormRowsArray" : _this.betFormRowsArray
                 };
 
                 $http.post($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/bet", _this.saveObj).
                 then(function (response) {
                     //Success Callback
                     var successMessage = "Bet submitted successfully.";
-                    CommonService.handleSuccessResponse(successMessage,"root.main.betView",{"id":response.data.id});
+                    //CommonService.handleSuccessResponse(successMessage,"root.main.betView",{"id":response.data.id});
+                    CommonService.handleSuccessResponse(successMessage,null,null);
                     _this.isSaving = false;
                 }, function (response) {
                     //Error Callback

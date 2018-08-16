@@ -616,6 +616,20 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'RouteH
             controller: "BetController",
             controllerAs: 'bet'
         })
+        .state('root.main.betSlipHistory', {
+            url: "/betSlipHistory",
+            title: "text.betSlipHistory",
+            data: {
+                permissions: [],
+            },
+            ncyBreadcrumb: {
+                label: 'text.betSlipHistory'
+            },
+            templateUrl: "views/bet_slip_history.html",
+            resolve: helper.resolveFor('bet'),
+            controller: "BetController",
+            controllerAs: 'bet'
+        })
         .state('root.main.report', {
             url: "/report",
             title: "text.report",
@@ -626,6 +640,21 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'RouteH
                 label: 'text.report'
             },
             templateUrl: "views/report.html",
+            resolve: helper.resolveFor('report'),
+            controller: "ReportController",
+            controllerAs: 'report'
+        })
+        .state('root.main.winLossDetailsReport', {
+            url: "/winLossDetailsReport",
+            title: "text.winLossDetails",
+            data: {
+                permissions: []
+            },
+            ncyBreadcrumb: {
+                label: 'text.winLossDetails',
+                parent: 'root.main.report'
+            },
+            templateUrl: "views/reports/win_loss_details_report.html",
             resolve: helper.resolveFor('report'),
             controller: "ReportController",
             controllerAs: 'report'
