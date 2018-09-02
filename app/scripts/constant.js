@@ -7,12 +7,12 @@ app.constant("APPCONSTANT", {
         "PAGING" : {
             "RECORDS_PER_PAGE" : 10, //Default number of records per page
             "MAX_PAGE_SIZE" : 5, //Limit the number of pages in the pagination bar
-            "PAGING_BUTTONS" : [10, 15, 20, 25], //pagination perpage button
+            "PAGING_BUTTONS" : [20, 30, 40, 50], //pagination perpage button
             "MAX_RECORD_SIZE" : 99999
         },
         "TRUE" : 1,
         "FALSE" : 0,
-        "CUT_OFF_TIME" : "22:00:00"
+        "CUT_OFF_TIME" : "19:00:00"
     },
     "USER" : {
         "TYPE" : {
@@ -40,7 +40,20 @@ app.constant("APPCONSTANT", {
                 "BOX": 3,
                 "IBOX": 4,
                 "PH": 5
+            },
+            "STATUS" : {
+                "ACCEPTED" : 1,
+                "LIMITED" : 2,
+                "REJECTED" : 3
             }
+        },
+        "DETAIL" : {
+            "STATUS": {
+                "ACCEPTED": 1,
+                "LIMITED": 2,
+                "REJECTED": 3,
+                "VOIDED": 4
+            },
         }
     },
     "AUTH_ITEM" : {
@@ -52,6 +65,8 @@ app.constant("APPCONSTANT", {
     "FILE_TEMPLATE" : {
         "REPORT" : {
             "WIN_LOSS_DETAILS" : 1000,
+            "DRAW_WINNING_NUMBER" : 1001,
+            "COMPANY_DRAW_RESULTS" : 1002,
             "MASTER" : {
 
             },

@@ -12,13 +12,19 @@
         //Datepicker options
         _this.datepicker = {};
         _this.datepicker.format = 'dd-MMM-yyyy';
-        _this.datepicker.startDate = {
+        _this.datepicker.drawDateStart = {
             "opened": false,
             "dateOptions": {
                 "showWeeks": false
             }
         };
-        _this.datepicker.endDate = {
+        _this.datepicker.drawDateEnd = {
+            "opened": false,
+            "dateOptions": {
+                "showWeeks": false
+            }
+        };
+        _this.datepicker.drawDate = {
             "opened": false,
             "dateOptions": {
                 "showWeeks": false
@@ -27,12 +33,14 @@
 
         _this.openDatepicker = function(which) {
             if (which == 1) {
-                _this.datepicker.startDate.opened = true;
+                _this.datepicker.drawDateStart.opened = true;
             } else if (which == 2) {
-                if (_this.startDate) {
-                    _this.datepicker.endDate.dateOptions.minDate = _this.startDate;
+                if (_this.drawDateStart) {
+                    _this.datepicker.drawDateEnd.dateOptions.minDate = _this.drawDateStart;
                 }
-                _this.datepicker.endDate.opened = true;
+                _this.datepicker.drawDateEnd.opened = true;
+            } else if (which == 3) {
+                _this.datepicker.drawDate.opened = true;
             }
         };
 
@@ -42,8 +50,9 @@
 
             reportParams.fileTemplateId = fileTemplateId;
             reportParams.extraParams = {
-                "startDate": moment(_this.startDate).format(),
-                "endDate": moment(_this.endDate).format()
+                "drawDateStart": moment(_this.drawDateStart).format(),
+                "drawDateEnd": moment(_this.drawDateEnd).format(),
+                "drawDate": moment(_this.drawDate).format()
             };
 
             $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL+"/report/get-report",{
@@ -52,7 +61,6 @@
                 // this callback will be called asynchronously
                 // when the response is available
                 _this.reportData = response.data;
-                console.log(_this.reportData);
 
                 _this.isSaving = false;
             }, function (response) {

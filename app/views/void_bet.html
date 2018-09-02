@@ -1,0 +1,90 @@
+<menu-button-div/>
+<div class="panel panel-info">
+    <div class="panel-heading" translate="text.voidBet"></div>
+    <div class="panel-body">
+        <!-- START table-responsive-->
+        <div class="table-responsive">
+            <form name="betForm" class="form-horizontal" ng-submit="bet.voidBet()" novalidate>
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th translate="text.number"></th>
+                        <th translate="text.drawDate"></th>
+                        <th class="text-center" translate="text.company"></th>
+                        <th class="text-right" translate="text.big"></th>
+                        <th class="text-right" translate="text.small"></th>
+                        <th class="text-right">4A</th>
+                        <th class="text-right">4B</th>
+                        <th class="text-right">4C</th>
+                        <th class="text-right">4D</th>
+                        <th class="text-right">4E</th>
+                        <th class="text-right">4F</th>
+                        <th class="text-right">3ABC</th>
+                        <th class="text-right">3A</th>
+                        <th class="text-right">3B</th>
+                        <th class="text-right">3C</th>
+                        <th class="text-right">3D</th>
+                        <th class="text-right">3E</th>
+                        <th class="text-right">5D</th>
+                        <th class="text-right">6D</th>
+                        <th translate="text.status"></th>
+                        <th>
+                            {{'text.void' | translate}}
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input class="needsclick" type="checkbox" id="betVoidAllCheckbox" name="betVoidAllCheckbox"
+                                           ng-model="bet.betVoidCheckAll" ng-click="bet.checkAllBetVoid()" ng-disabled="$state.current.name == 'root.main.voidBetView'"/>
+                                    <span class="fa fa-check"></span>
+                                </label>
+                            </div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="betObj in bet.voidBets track by $index">
+                        <td>{{$index+1}}</td>
+                        <td>{{betObj.number}}</td>
+                        <td>{{betObj.drawDate}}</td>
+                        <td class="text-center">{{betObj.companyDraw.company.code}}</td>
+                        <td class="text-right">{{betObj.big}}</td>
+                        <td class="text-right">{{betObj.small}}</td>
+                        <td class="text-right">{{betObj["4a"]}}</td>
+                        <td class="text-right">{{betObj["4b"]}}</td>
+                        <td class="text-right">{{betObj["4c"]}}</td>
+                        <td class="text-right">{{betObj["4d"]}}</td>
+                        <td class="text-right">{{betObj["4e"]}}</td>
+                        <td class="text-right">{{betObj["4f"]}}</td>
+                        <td class="text-right">{{betObj["3abc"]}}</td>
+                        <td class="text-right">{{betObj["3a"]}}</td>
+                        <td class="text-right">{{betObj["3b"]}}</td>
+                        <td class="text-right">{{betObj["3c"]}}</td>
+                        <td class="text-right">{{betObj["3d"]}}</td>
+                        <td class="text-right">{{betObj["3e"]}}</td>
+                        <td class="text-right">{{betObj["5d"]}}</td>
+                        <td class="text-right">{{betObj["6d"]}}</td>
+                        <td><common-get-text ng-if="betObj.status != void(0)" value="betObj.status" object="bet.betDetailStatusOptions"></common-get-text></td>
+                        <td>
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input class="needsclick" type="checkbox" id="betVoidCheckbox_{{$index}}" name="betVoidCheckbox_{{$index}}"
+                                           ng-change="bet.changeBetVoid(betObj)" ng-model="betObj.void" ng-disabled="$state.current.name == 'root.main.voidBetView'"/>
+                                    <span class="fa fa-check"></span>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-lg-8 col-lg-offset-3">
+                            <button ng-if="$state.current.name == 'root.main.voidBet'" type="submit" class="btn btn-warning" ng-disabled="!bet.voidArray || bet.voidArray.length == 0" translate="button.void"></button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

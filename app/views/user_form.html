@@ -66,10 +66,16 @@
         </div>
     </div>
 </div>
-<div class="form-group required" ng-class="{ 'has-error' : userForm.creditLimit.$invalid && userForm.creditLimit.$touched}">
+<div ng-if="$state.current.name != 'root.main.myAccountEdit'" class="form-group required" ng-class="{ 'has-error' : userForm.creditLimit.$invalid && userForm.creditLimit.$touched}">
     <label for="creditLimit" class="col-lg-3 control-label" translate="text.creditLimit"></label>
     <div class="col-lg-6">
-        <input type="number" class="form-control" id="creditLimit" name="creditLimit"
+        <div class="input-group" ng-if="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER">
+            <input type="number" class="form-control" id="creditLimit" name="creditLimit"
+                   placeholder="{{'placeholder.creditLimit'|translate}}" min="1" ng-max="user.creditLimitAvailableToGrant"
+                   ng-model="user.user.creditLimit" required>
+            <span class="input-group-addon">{{'text.max' | translate}} {{user.creditLimitAvailableToGrant | number:2}}</span>
+        </div>
+        <input ng-if="user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT" type="number" class="form-control" id="creditLimit" name="creditLimit"
                placeholder="{{'placeholder.creditLimit'|translate}}" min="1"
                ng-model="user.user.creditLimit" required>
         <div class="help-block" ng-messages="userForm.creditLimit.$error" ng-show="userForm.creditLimit.$touched">
@@ -99,13 +105,13 @@
     <label for="package" class="col-lg-3 control-label" translate="text.package"></label>
     <div class="col-lg-6">
         <select class="form-control" id="package" name="package" ng-options="option.name | translate for option in user.packageOptions track by option.id"
-                ng-model="user.user.package" required></select>
+                ng-model="user.user.package" ng-disabled="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER" required></select>
         <div class="help-block" ng-messages="userForm.package.$error" ng-show="userForm.package.$touched">
             <div ng-messages-include="views/common/messages.html"></div>
         </div>
     </div>
 </div>
-<div ng-if="$state.current.name != 'root.main.myAccountEdit' && (user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT || user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER)" class="form-group required" ng-class="{ 'has-error' : userForm.autoTransfer.$invalid && userForm.autoTransfer.$touched}">
+<!--div ng-if="$state.current.name != 'root.main.myAccountEdit' && (user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT || user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER)" class="form-group required" ng-class="{ 'has-error' : userForm.autoTransfer.$invalid && userForm.autoTransfer.$touched}">
     <label class="col-lg-3 control-label" translate="text.autoTransfer"></label>
     <div class="col-lg-6">
         <label class="radio-inline c-radio">
@@ -122,7 +128,7 @@
             <div ng-messages-include="views/common/messages.html"></div>
         </div>
     </div>
-</div>
+</div-->
 <div ng-if="$state.current.name != 'root.main.myAccountEdit' && user.user.autoTransfer == APPCONSTANT.GLOBAL.TRUE && (user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT || user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER)" class="form-group required" ng-class="{ 'has-error' : userForm.autoTransferMode.$invalid && userForm.autoTransferMode.$touched}">
     <label class="col-lg-3 control-label" translate="text.autoTransferMode"></label>
     <div class="col-lg-6">
@@ -186,7 +192,7 @@
         </div>
     </div>
 </div>
-<div ng-if="$state.current.name != 'root.main.myAccountEdit' && (user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT || user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER)" class="form-group required" ng-class="{ 'has-error' : userForm.betMethod.$invalid && userForm.betMethod.$touched}">
+<div ng-if="user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT || user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER" class="form-group required" ng-class="{ 'has-error' : userForm.betMethod.$invalid && userForm.betMethod.$touched}">
     <label class="col-lg-3 control-label" translate="text.betMethod"></label>
     <div class="col-lg-6">
         <label class="radio-inline c-radio">
@@ -208,12 +214,12 @@
     <label class="col-lg-3 control-label" translate="text.betGdLotto"></label>
     <div class="col-lg-6">
         <label class="radio-inline c-radio">
-            <input id="betGdLottoYes" type="radio" name="betGdLotto" ng-model="user.user.betGdLotto" value="{{APPCONSTANT.GLOBAL.TRUE}}"/>
+            <input id="betGdLottoYes" type="radio" name="betGdLotto" ng-model="user.user.betGdLotto" ng-disabled="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER" value="{{APPCONSTANT.GLOBAL.TRUE}}"/>
             <span class="fa fa-circle"></span>
             {{'text.yes' | translate}}
         </label>
         <label class="radio-inline c-radio">
-            <input id="betGdLottoNo" type="radio" name="betGdLotto" ng-model="user.user.betGdLotto" value="{{APPCONSTANT.GLOBAL.FALSE}}" />
+            <input id="betGdLottoNo" type="radio" name="betGdLotto" ng-model="user.user.betGdLotto" ng-disabled="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER" value="{{APPCONSTANT.GLOBAL.FALSE}}" />
             <span class="fa fa-circle"></span>
             {{'text.no' | translate}}
         </label>
@@ -226,12 +232,12 @@
     <label class="col-lg-3 control-label" translate="text.bet6d"></label>
     <div class="col-lg-6">
         <label class="radio-inline c-radio">
-            <input id="bet6dYes" type="radio" name="bet6d" ng-model="user.user.bet6d" value="{{APPCONSTANT.GLOBAL.TRUE}}"/>
+            <input id="bet6dYes" type="radio" name="bet6d" ng-model="user.user.bet6d" ng-disabled="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER" value="{{APPCONSTANT.GLOBAL.TRUE}}"/>
             <span class="fa fa-circle"></span>
             {{'text.yes' | translate}}
         </label>
         <label class="radio-inline c-radio">
-            <input id="bet6dNo" type="radio" name="bet6d" ng-model="user.user.bet6d" value="{{APPCONSTANT.GLOBAL.FALSE}}" />
+            <input id="bet6dNo" type="radio" name="bet6d" ng-model="user.user.bet6d" ng-disabled="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER" value="{{APPCONSTANT.GLOBAL.FALSE}}" />
             <span class="fa fa-circle"></span>
             {{'text.no' | translate}}
         </label>

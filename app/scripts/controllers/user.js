@@ -12,6 +12,7 @@
         _this.isSaving = false; //Default to false
         var masterId = $rootScope.userIdentity.masterId;
         _this.userType = $rootScope.userIdentity.userType;
+        console.log($rootScope.userIdentity);
         _this.canCreateUserType = null;
         if (masterId) {
             _this.masterPrefix = $rootScope.userIdentity.master.prefix;
@@ -157,7 +158,12 @@
                 _this.saveObj = {
                     "name" : _this.user.name,
                     "mobileNo" : _this.user.mobileNo,
-                    "active" : _this.user.active.id
+                    "active" : _this.user.active.id,
+                    "packageId" : _this.user.package.id,
+                    "betMethod" : _this.user.betMethod,
+                    "betGdLotto" : _this.user.betGdLotto,
+                    "bet6d" : _this.user.bet6d,
+                    "creditLimit" : _this.user.creditLimit
                 };
 
                 $http.put($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/user/" + _this.user.id, _this.saveObj).
@@ -290,23 +296,24 @@
                 if (stateName == "root.main.myAccount" || stateName == "root.main.myAccountEdit") {
                     userId = $rootScope.userIdentity.id;
                 }
-                $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/user/" + userId).
+                //Prevent user from viewing own user account via other states
+                if (userId == $rootScope.userIdentity.id) {
+                    if (stateName != "root.main.myAccount" && stateName != "root.main.myAccountEdit") {
+                        CommonService.SweetAlert({
+                            title: "Error",
+                            text: "Failed to retrieve user details.",
+                            type: "error"
+                        });
+                        return;
+                    }
+                }
+                $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/user/" + userId+"?expand=userDetail.package").
                 then(function (response) {
                     _this.user = response.data;
 
+                    console.log(_this.user);
+
                     if (stateName == "root.main.userEdit" || stateName == "root.main.myAccountEdit") {
-                        for (var o in _this.yesNoOptions) {
-                            if (_this.user.active == _this.yesNoOptions[o].id) {
-                                _this.user.active = _this.yesNoOptions[o];
-                            }
-                        }
-
-                        for (var o in _this.yesNoOptions) {
-                            if (_this.user.locked == _this.yesNoOptions[o].id) {
-                                _this.user.locked = _this.yesNoOptions[o];
-                            }
-                        }
-
                         //Limit user to create certain type of users only
                         //Admin can create master
                         //Master can create agent
@@ -318,9 +325,34 @@
                                 break;
                             case $rootScope.APPCONSTANT.USER.TYPE.MASTER:
                                 _this.canCreateUserType = $rootScope.APPCONSTANT.USER.TYPE.AGENT;
+                                CommonService.getPackages(masterId).then(function (result) {
+                                    _this.packageOptions = result;
+                                    for (var o in _this.packageOptions) {
+                                        if (_this.user.userDetail.packageId == _this.packageOptions[o].id) {
+                                            _this.user.package = _this.packageOptions[o];
+                                        }
+                                    }
+                                });
+                                _this.user.creditLimit = _this.user.userDetail.creditLimit;
+                                _this.user.betMethod = _this.user.userDetail.betMethod;
+                                _this.user.betGdLotto = _this.user.userDetail.betGdLotto;
+                                _this.user.bet6d = _this.user.userDetail.bet6d;
                                 break;
                             case $rootScope.APPCONSTANT.USER.TYPE.AGENT:
                                 _this.canCreateUserType = $rootScope.APPCONSTANT.USER.TYPE.PLAYER;
+                                CommonService.getPackages(masterId).then(function (result) {
+                                    _this.packageOptions = result;
+                                    for (var o in _this.packageOptions) {
+                                        if (_this.user.userDetail.packageId == _this.packageOptions[o].id) {
+                                            _this.user.package = _this.packageOptions[o];
+                                        }
+                                    }
+                                });
+                                _this.user.creditLimit = _this.user.userDetail.creditLimit;
+                                _this.user.betMethod = _this.user.userDetail.betMethod;
+                                _this.user.betGdLotto = _this.user.userDetail.betGdLotto;
+                                _this.user.bet6d = _this.user.userDetail.bet6d;
+                                _this.creditLimitAvailableToGrant = $rootScope.userIdentity.userDetail.creditLimitAvailableToGrant+_this.user.creditLimit;
                                 break;
                             case $rootScope.APPCONSTANT.USER.TYPE.PLAYER:
                                 _this.canCreateUserType = false;

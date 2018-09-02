@@ -4,7 +4,7 @@
 
     var app = angular.module('fdPortal');
 
-    var Ctrl = function ($rootScope, $state, $stateParams, $http, $window, PrincipalService, CommonService) {
+    var Ctrl = function ($rootScope, $state, $stateParams, $http, $window, $interval, PrincipalService, CommonService) {
         var stateName = $state.current.name;
         var _this = this; //Declare local variable _this to refer to "this" controller
 
@@ -17,10 +17,16 @@
             });
         };
 
+        _this.tick = function() {
+            _this.clock = Date.now();
+        }
+        _this.tick();
+        $interval(_this.tick, 1000);
+
         _this.toggleUserBlock = function() {
             $rootScope.userBlockVisible = !$rootScope.userBlockVisible;
         };
     }; // End var Ctrl
 
-    app.controller('HomeController', ['$rootScope', '$state', '$stateParams', '$http',  '$window', 'PrincipalService', 'CommonService', Ctrl]);
+    app.controller('HomeController', ['$rootScope', '$state', '$stateParams', '$http',  '$window', '$interval', 'PrincipalService', 'CommonService', Ctrl]);
 }());

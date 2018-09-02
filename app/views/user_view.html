@@ -51,59 +51,173 @@
                     <pre class="form-control-static" ng-bind="user.user.master.name"></pre>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" translate="text.package"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static" ng-bind="user.user.userDetail.package.name"></pre>
+                </div>
+            </div>
+            <div class="form-group" ng-if="user.user.userType == APPCONSTANT.USER.TYPE.AGENT || user.user.userType == APPCONSTANT.USER.TYPE.PLAYER">
+                <label class="col-lg-3 control-label" translate="text.creditLimit"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static" ng-bind="user.user.userDetail.creditLimit | number:2"></pre>
+                </div>
+            </div>
+            <div class="form-group" ng-if="user.user.userType == APPCONSTANT.USER.TYPE.AGENT || user.user.userType == APPCONSTANT.USER.TYPE.PLAYER">
+                <label class="col-lg-3 control-label" translate="text.creditAvailable"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static" ng-bind="user.user.userDetail.creditLimit-user.user.userDetail.creditGranted | number:2"></pre>
+                </div>
+            </div>
+            <div class="form-group" ng-if="user.user.userType == APPCONSTANT.USER.TYPE.AGENT">
+                <label class="col-lg-3 control-label">
+                    {{'text.outstanding' | translate}} {{'text.total' | translate}}/{{'text.personal' | translate}}/{{'text.downline' | translate}}
+                </label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static">{{user.user.userDetail.outstandingBet+user.user.userDetail.outstandingBetDownline | number:2}}/{{user.user.userDetail.outstandingBet | number:2}}/{{user.user.userDetail.outstandingBetDownline | number:2}}</pre>
+                </div>
+            </div>
+            <div class="form-group" ng-if="user.user.userType == APPCONSTANT.USER.TYPE.PLAYER">
+                <label class="col-lg-3 control-label">{{'text.outstanding' | translate}}</label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static">{{user.user.userDetail.outstandingBet | number:2}}</pre>
+                </div>
+            </div>
+            <div class="form-group" ng-if="user.user.userType == APPCONSTANT.USER.TYPE.AGENT || user.user.userType == APPCONSTANT.USER.TYPE.PLAYER">
+                <label class="col-lg-3 control-label" translate="text.balance"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static" ng-bind="user.user.userDetail.balance | number:2"></pre>
+                </div>
+            </div>
+            <div class="form-group" ng-if="user.user.userType == APPCONSTANT.USER.TYPE.AGENT || user.user.userType == APPCONSTANT.USER.TYPE.PLAYER">
+                <label class="col-lg-3 control-label" translate="text.grossBalance"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static">{{user.user.userDetail.balance-(user.user.userDetail.outstandingBet+user.user.userDetail.outstandingBetDownline) | number:2}}</pre>
+                </div>
+            </div>
+            <div class="form-group" ng-if="user.user.userType == APPCONSTANT.USER.TYPE.AGENT || user.user.userType == APPCONSTANT.USER.TYPE.PLAYER">
+                <label class="col-lg-3 control-label" translate="text.betMethod"></label>
+                <div class="col-lg-6">
+                    <pre class="form-control-static"><common-get-text ng-if="user.user.userDetail.betMethod != void(0)" value="user.user.userDetail.betMethod" object="user.betMethodOptions"></common-get-text></pre>
+                </div>
+            </div>
             <div class="form-group" ng-if="user.user.userType == APPCONSTANT.USER.TYPE.AGENT || user.user.userType == APPCONSTANT.USER.TYPE.PLAYER">
                 <div class="col-lg-10 col-lg-offset-1">
                     <div class="panel panel-primary" id="fourdMainPanel">
-                        <div class="panel-heading" ng-class="{'panel-heading-collapsed':'fourdMainPanel'}">3D/4D Prize Packages
+                        <div class="panel-heading" ng-class="{'panel-heading-collapsed':'fourdMainPanel'}">{{'text.3d4dPrizePackages'|translate}}
                             <paneltool tool-collapse="tool-collapse"></paneltool>
                         </div>
                         <div class="panel-wrapper" uib-collapse="fourdMainPanel">
                             <div class="panel-body">
                                 <div class="panel panel-default" id="fourdPanel">
-                                    <div class="panel-heading" ng-class="{'panel-heading-collapsed':'fourdPanel'}">4D
-                                    </div>
+                                    <div class="panel-heading" ng-class="{'panel-heading-collapsed':'fourdPanel'}">4D</div>
                                     <div class="panel-wrapper" uib-collapse="fourdPanel">
                                         <div class="panel-body">
                                             <div class="row">
+                                                <div class="col-lg-10 col-lg-offset-1">
+                                                    <div class="form-group" ng-if="user.user.userType == APPCONSTANT.USER.TYPE.AGENT">
+                                                        <label for="4dAgentCommRate" class="col-lg-4 control-label" translate="text.4dAgentCommRate"></label>
+                                                        <div class="col-lg-7">
+                                                            <div class="input-group">
+                                                                <input type="number" class="form-control" id="4dAgentCommRate" name="4dAgentCommRate"
+                                                                       placeholder="{{'placeholder.4dAgentCommRate'|translate}}" min="1"
+                                                                       ng-model="user.user.userDetail.package['4dAgentCommRate']" disabled required>
+                                                                <span class="input-group-addon">%</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" ng-class="{ 'has-error' : userForm['4dPlayerCommRate'].$invalid && userForm['4dPlayerCommRate'].$touched}">
+                                                        <label for="4dPlayerCommRate" class="col-lg-4 control-label" translate="text.4dPlayerCommRate"></label>
+                                                        <div class="col-lg-7">
+                                                            <div class="input-group">
+                                                                <input type="number" class="form-control" id="4dPlayerCommRate" name="4dPlayerCommRate"
+                                                                       placeholder="{{'placeholder.4dPlayerCommRate'|translate}}" min="1" ng-max="user.user.userDetail.package['4dAgentCommRate']-1"
+                                                                       ng-model="user.user.userDetail.package['4dPlayerCommRate']" disabled required>
+                                                                <span class="input-group-addon">%</span>
+                                                            </div>
+                                                            <div class="help-block" ng-messages="userForm['4dPlayerCommRate'].$error" ng-show="userForm['4dPlayerCommRate'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" ng-if="user.user.userType == APPCONSTANT.USER.TYPE.PLAYER">
+                                                        <label for="extra4dCommRate" class="col-lg-4 control-label" translate="text.extra4dCommRate"></label>
+                                                        <div class="col-lg-7">
+                                                            <div class="input-group">
+                                                                <input type="number" class="form-control" id="extra4dCommRate" name="extra4dCommRate"
+                                                                       placeholder="{{'placeholder.extra4dCommRate'|translate}}" min="1"
+                                                                       ng-model="user.user.userDetail.extra4dCommRate" disabled required>
+                                                                <span class="input-group-addon">%</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
                                                 <div class="col-lg-4">
                                                     <div class="panel panel-info">
-                                                        <div class="panel-heading">Big</div>
+                                                        <div class="panel-heading">{{'text.big'|translate}}</div>
                                                         <div class="panel-body">
                                                             <table class="table">
-                                                                <tr>
-                                                                    <td>Price</td>
+                                                                <tr ng-class="{ 'has-error danger' : userForm['4dBigPrize1'].$invalid && userForm['4dBigPrize1'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 1</td>
                                                                     <td>:</td>
-                                                                    <td>1.00</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="4dBigPrize1" name="4dBigPrize1"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['4dBigPrize1']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['4dBigPrize1'].$error" ng-show="userForm['4dBigPrize1'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>Commission</td>
+                                                                <tr ng-class="{ 'has-error danger' : userForm['4dBigPrize2'].$invalid && userForm['4dBigPrize2'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 2</td>
                                                                     <td>:</td>
-                                                                    <td>30.00%</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="4dBigPrize2" name="4dBigPrize2"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['4dBigPrize2']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['4dBigPrize2'].$error" ng-show="userForm['4dBigPrize2'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>Prize 1</td>
+                                                                <tr ng-class="{ 'has-error danger' : userForm['4dBigPrize3'].$invalid && userForm['4dBigPrize3'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 3</td>
                                                                     <td>:</td>
-                                                                    <td>2500.00</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="4dBigPrize3" name="4dBigPrize3"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['4dBigPrize3']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['4dBigPrize3'].$error" ng-show="userForm['4dBigPrize3'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>Prize 2</td>
+                                                                <tr ng-class="{ 'has-error danger' : userForm['4dBigStarters'].$invalid && userForm['4dBigStarters'].$touched}">
+                                                                    <td>{{'text.starters'|translate}}</td>
                                                                     <td>:</td>
-                                                                    <td>1000.00</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="4dBigStarters" name="4dBigStarters"
+                                                                               placeholder="{{'placeholder.starters'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['4dBigStarters']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['4dBigStarters'].$error" ng-show="userForm['4dBigStarters'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>Prize 3</td>
+                                                                <tr ng-class="{ 'has-error danger' : userForm['4dBigConsolation'].$invalid && userForm['4dBigConsolation'].$touched}">
+                                                                    <td>{{'text.consolation'|translate}}</td>
                                                                     <td>:</td>
-                                                                    <td>500.00%</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Starters</td>
-                                                                    <td>:</td>
-                                                                    <td>220.00%</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Consolation</td>
-                                                                    <td>:</td>
-                                                                    <td>66.00%</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="4dBigConsolation" name="4dBigConsolation"
+                                                                               placeholder="{{'placeholder.consolation'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['4dBigConsolation']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['4dBigConsolation'].$error" ng-show="userForm['4dBigConsolation'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
                                                             </table>
                                                         </div>
@@ -111,33 +225,44 @@
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <div class="panel panel-info">
-                                                        <div class="panel-heading">Small</div>
+                                                        <div class="panel-heading">{{'text.small'|translate}}</div>
                                                         <div class="panel-body">
                                                             <table class="table">
-                                                                <tr>
-                                                                    <td>Price</td>
+                                                                <tr ng-class="{ 'has-error danger' : userForm['4dSmallPrize1'].$invalid && userForm['4dSmallPrize1'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 1</td>
                                                                     <td>:</td>
-                                                                    <td>1.00</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="4dSmallPrize1" name="4dSmallPrize1"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['4dSmallPrize1']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['4dSmallPrize1'].$error" ng-show="userForm['4dSmallPrize1'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>Commission</td>
+                                                                <tr ng-class="{ 'has-error danger' : userForm['4dSmallPrize2'].$invalid && userForm['4dSmallPrize2'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 2</td>
                                                                     <td>:</td>
-                                                                    <td>30.00%</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="4dSmallPrize2" name="4dSmallPrize2"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['4dSmallPrize2']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['4dSmallPrize2'].$error" ng-show="userForm['4dSmallPrize2'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>Prize 1</td>
+                                                                <tr ng-class="{ 'has-error danger' : userForm['4dSmallPrize3'].$invalid && userForm['4dSmallPrize3'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 3</td>
                                                                     <td>:</td>
-                                                                    <td>3500.00</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Prize 2</td>
-                                                                    <td>:</td>
-                                                                    <td>2000.00</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Prize 3</td>
-                                                                    <td>:</td>
-                                                                    <td>1000.00%</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="4dSmallPrize3" name="4dSmallPrize3"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['4dSmallPrize3']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['4dSmallPrize3'].$error" ng-show="userForm['4dSmallPrize3'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
                                                             </table>
                                                         </div>
@@ -148,20 +273,126 @@
                                                         <div class="panel-heading">4A</div>
                                                         <div class="panel-body">
                                                             <table class="table">
-                                                                <tr>
-                                                                    <td>Price</td>
+                                                                <tr ng-class="{ 'has-error danger' : userForm['4d4aPrize'].$invalid && userForm['4d4aPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
                                                                     <td>:</td>
-                                                                    <td>1.00</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="4d4aPrize" name="4d4aPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['4d4aPrize']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['4d4aPrize'].$error" ng-show="userForm['4d4aPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>Commission</td>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4B</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : userForm['4d4bPrize'].$invalid && userForm['4d4bPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
                                                                     <td>:</td>
-                                                                    <td>30.00%</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="4d4bPrize" name="4d4bPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['4d4bPrize']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['4d4bPrize'].$error" ng-show="userForm['4d4bPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>Prize</td>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4C</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : userForm['4d4cPrize'].$invalid && userForm['4d4cPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
                                                                     <td>:</td>
-                                                                    <td>6000.00</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="4d4cPrize" name="4d4aPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['4d4cPrize']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['4d4cPrize'].$error" ng-show="userForm['4d4cPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4D</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : userForm['4d4dPrize'].$invalid && userForm['4d4dPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="4d4dPrize" name="4d4aPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['4d4dPrize']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['4d4dPrize'].$error" ng-show="userForm['4d4dPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4E</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : userForm['4d4ePrize'].$invalid && userForm['4d4ePrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="4d4ePrize" name="4d4ePrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['4d4ePrize']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['4d4ePrize'].$error" ng-show="userForm['4d4ePrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4F</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : userForm['4d4fPrize'].$invalid && userForm['4d4fPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="4d4fPrize" name="4d4fPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['4d4fPrize']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['4d4fPrize'].$error" ng-show="userForm['4d4fPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
                                                             </table>
                                                         </div>
@@ -172,7 +403,7 @@
                                                 <div class="col-lg-12">
                                                     <div class="panel panel-warning">
                                                         <div class="panel-heading">IBOX</div>
-                                                        <div class="panel-body">
+                                                        <div class="panel-body table-responsive">
                                                             <table class="table">
                                                                 <tr>
                                                                     <td>{{'text.big'|translate}}</td>
@@ -183,38 +414,38 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{'text.prize'|translate}} 1</td>
-                                                                    <td>{{user.userDetail.package["4dBigPrize1"]/24 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dBigPrize1"]/12 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dBigPrize1"]/6 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dBigPrize1"]/4 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigPrize1"]/24 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigPrize1"]/12 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigPrize1"]/6 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigPrize1"]/4 | number:2}}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{'text.prize'|translate}} 2</td>
-                                                                    <td>{{user.userDetail.package["4dBigPrize2"]/24 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dBigPrize2"]/12 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dBigPrize2"]/6 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dBigPrize2"]/4 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigPrize2"]/24 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigPrize2"]/12 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigPrize2"]/6 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigPrize2"]/4 | number:2}}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{'text.prize'|translate}} 3</td>
-                                                                    <td>{{user.userDetail.package["4dBigPrize3"]/24 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dBigPrize3"]/12 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dBigPrize3"]/6 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dBigPrize3"]/4 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigPrize3"]/24 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigPrize3"]/12 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigPrize3"]/6 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigPrize3"]/4 | number:2}}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{'text.starters'|translate}}</td>
-                                                                    <td>{{user.userDetail.package["4dBigStarters"]/24 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dBigStarters"]/12 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dBigStarters"]/6 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dBigStarters"]/4 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigStarters"]/24 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigStarters"]/12 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigStarters"]/6 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigStarters"]/4 | number:2}}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{'text.consolation'|translate}}</td>
-                                                                    <td>{{user.userDetail.package["4dBigConsolation"]/24 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dBigConsolation"]/12 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dBigConsolation"]/6 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dBigConsolation"]/4 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigConsolation"]/24 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigConsolation"]/12 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigConsolation"]/6 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dBigConsolation"]/4 | number:2}}</td>
                                                                 </tr>
                                                             </table>
                                                             <br/>
@@ -228,24 +459,24 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{'text.prize'|translate}} 1</td>
-                                                                    <td>{{user.userDetail.package["4dSmallPrize1"]/24 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dSmallPrize1"]/12 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dSmallPrize1"]/6 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dSmallPrize1"]/4 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dSmallPrize1"]/24 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dSmallPrize1"]/12 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dSmallPrize1"]/6 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dSmallPrize1"]/4 | number:2}}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{'text.prize'|translate}} 2</td>
-                                                                    <td>{{user.userDetail.package["4dSmallPrize2"]/24 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dSmallPrize2"]/12 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dSmallPrize2"]/6 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dSmallPrize2"]/4 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dSmallPrize2"]/24 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dSmallPrize2"]/12 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dSmallPrize2"]/6 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dSmallPrize2"]/4 | number:2}}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{'text.prize'|translate}} 3</td>
-                                                                    <td>{{user.userDetail.package["4dSmallPrize3"]/24 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dSmallPrize3"]/12 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dSmallPrize3"]/6 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4dSmallPrize3"]/4 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dSmallPrize3"]/24 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dSmallPrize3"]/12 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dSmallPrize3"]/6 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4dSmallPrize3"]/4 | number:2}}</td>
                                                                 </tr>
                                                             </table>
                                                             <br/>
@@ -259,10 +490,10 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td>{{'text.prize'|translate}}</td>
-                                                                    <td>{{user.userDetail.package["4d4aPrize"]/24 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4d4aPrize"]/12 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4d4aPrize"]/6 | number:2}}</td>
-                                                                    <td>{{user.userDetail.package["4d4aPrize"]/4 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4d4aPrize"]/24 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4d4aPrize"]/12 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4d4aPrize"]/6 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["4d4aPrize"]/4 | number:2}}</td>
                                                                 </tr>
                                                             </table>
                                                         </div>
@@ -274,67 +505,946 @@
                                                     <div class="panel panel-dark">
                                                         <div class="panel-heading">3D</div>
                                                         <div class="panel-body">
-                                                            <div class="col-lg-6">
-                                                                <div class="panel panel-default">
-                                                                    <div class="panel-heading">3ABC</div>
-                                                                    <div class="panel-body">
-                                                                        <table class="table">
-                                                                            <tr>
-                                                                                <td>Price</td>
-                                                                                <td>:</td>
-                                                                                <td>1.00</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Commission</td>
-                                                                                <td>:</td>
-                                                                                <td>30.00%</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Prize 1</td>
-                                                                                <td>:</td>
-                                                                                <td>220.00</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Prize 2</td>
-                                                                                <td>:</td>
-                                                                                <td>220.00</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Prize 3</td>
-                                                                                <td>:</td>
-                                                                                <td>220.00</td>
-                                                                            </tr>
-                                                                        </table>
+                                                            <div class="row">
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3ABC</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : userForm['3dAbcPrize1'].$invalid && userForm['3dAbcPrize1'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}} 1</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="3dAbcPrize1" name="3dAbcPrize1"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="user.user.userDetail.package['3dAbcPrize1']" disabled required>
+                                                                                        <div class="help-block" ng-messages="userForm['3dAbcPrize1'].$error" ng-show="userForm['3dAbcPrize1'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr ng-class="{ 'has-error danger' : userForm['3dAbcPrize2'].$invalid && userForm['3dAbcPrize2'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}} 2</td>
+                                                                                    <td>:</td>
+                                                                                    <td>
+                                                                                        <input type="number" class="form-control" id="3dAbcPrize2" name="3dAbcPrize2"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="user.user.userDetail.package['3dAbcPrize2']" disabled required>
+                                                                                        <div class="help-block" ng-messages="userForm['3dAbcPrize2'].$error" ng-show="userForm['3dAbcPrize2'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr ng-class="{ 'has-error danger' : userForm['3dAbcPrize3'].$invalid && userForm['3dAbcPrize3'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}} 3</td>
+                                                                                    <td>:</td>
+                                                                                    <td>
+                                                                                        <input type="number" class="form-control" id="3dAbcPrize3" name="3dAbcPrize3"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="user.user.userDetail.package['3dAbcPrize3']" disabled required>
+                                                                                        <div class="help-block" ng-messages="userForm['3dAbcPrize3'].$error" ng-show="userForm['3dAbcPrize3'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3A</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : userForm['3d3aPrize'].$invalid && userForm['3d3aPrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="3d3aPrize" name="3d3aPrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="user.user.userDetail.package['3d3aPrize']" disabled required>
+                                                                                        <div class="help-block" ng-messages="userForm['3d3aPrize'].$error" ng-show="userForm['3d3aPrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3B</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : userForm['3d3bPrize'].$invalid && userForm['3d3bPrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="3d3bPrize" name="3d3bPrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="user.user.userDetail.package['3d3bPrize']" disabled required>
+                                                                                        <div class="help-block" ng-messages="userForm['3d3bPrize'].$error" ng-show="userForm['3d3bPrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="panel panel-default">
-                                                                    <div class="panel-heading">3A</div>
-                                                                    <div class="panel-body">
-                                                                        <table class="table">
-                                                                            <tr>
-                                                                                <td>Price</td>
-                                                                                <td>:</td>
-                                                                                <td>1.00</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Commission</td>
-                                                                                <td>:</td>
-                                                                                <td>30.00%</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Prize</td>
-                                                                                <td>:</td>
-                                                                                <td>660.00</td>
-                                                                            </tr>
-                                                                        </table>
+                                                            <div class="row">
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3C</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : userForm['3d3cPrize'].$invalid && userForm['3d3cPrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="3d3cPrize" name="3d3cPrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="user.user.userDetail.package['3d3cPrize']" disabled required>
+                                                                                        <div class="help-block" ng-messages="userForm['3d3cPrize'].$error" ng-show="userForm['3d3cPrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3D</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : userForm['3d3dPrize'].$invalid && userForm['3d3dPrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="3d3dPrize" name="3d3dPrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="user.user.userDetail.package['3d3dPrize']" disabled required>
+                                                                                        <div class="help-block" ng-messages="userForm['3d3dPrize'].$error" ng-show="userForm['3d3dPrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3E</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : userForm['3d3ePrize'].$invalid && userForm['3d3ePrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="3d3ePrize" name="3d3ePrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="user.user.userDetail.package['3d3ePrize']" disabled required>
+                                                                                        <div class="help-block" ng-messages="userForm['3d3ePrize'].$error" ng-show="userForm['3d3ePrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-if="user.user.userType == APPCONSTANT.USER.TYPE.AGENT || user.user.userType == APPCONSTANT.USER.TYPE.PLAYER">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="panel panel-success" id="gdMainPanel">
+                        <div class="panel-heading" ng-class="{'panel-heading-collapsed':'gdMainPanel'}">{{'text.gdLottoPrizePackages'|translate}}
+                            <paneltool tool-collapse="tool-collapse"></paneltool>
+                        </div>
+                        <div class="panel-wrapper" uib-collapse="gdMainPanel">
+                            <div class="panel-body">
+                                <div class="panel panel-default" id="gdPanel">
+                                    <div class="panel-heading" ng-class="{'panel-heading-collapsed':'gdPanel'}">4D</div>
+                                    <div class="panel-wrapper" uib-collapse="gdPanel">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-10 col-lg-offset-1">
+                                                    <div class="form-group" ng-if="user.user.userType == APPCONSTANT.USER.TYPE.AGENT">
+                                                        <label for="gdAgentCommRate" class="col-lg-4 control-label" translate="text.gdAgentCommRate"></label>
+                                                        <div class="col-lg-7">
+                                                            <div class="input-group">
+                                                                <input type="number" class="form-control" id="gdAgentCommRate" name="gdAgentCommRate"
+                                                                       placeholder="{{'placeholder.gdAgentCommRate'|translate}}" min="1"
+                                                                       ng-model="user.user.userDetail.package['gdAgentCommRate']" disabled required>
+                                                                <span class="input-group-addon">%</span>
+                                                            </div>
+                                                            <div class="help-block" ng-messages="userForm['gdAgentCommRate'].$error" ng-show="userForm['gdAgentCommRate'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" ng-class="{ 'has-error' : userForm['gdPlayerCommRate'].$invalid && userForm['gdPlayerCommRate'].$touched}">
+                                                        <label for="gdPlayerCommRate" class="col-lg-4 control-label" translate="text.gdPlayerCommRate"></label>
+                                                        <div class="col-lg-7">
+                                                            <div class="input-group">
+                                                                <input type="number" class="form-control" id="gdPlayerCommRate" name="gdPlayerCommRate"
+                                                                       placeholder="{{'placeholder.gdPlayerCommRate'|translate}}" min="1" ng-max="user.user.userDetail.package['gdAgentCommRate']-1"
+                                                                       ng-model="user.user.userDetail.package['gdPlayerCommRate']" disabled required>
+                                                                <span class="input-group-addon">%</span>
+                                                            </div>
+                                                            <div class="help-block" ng-messages="userForm['gdPlayerCommRate'].$error" ng-show="userForm['gdPlayerCommRate'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" ng-if="user.user.userType == APPCONSTANT.USER.TYPE.PLAYER">
+                                                        <label for="extraGdCommRate" class="col-lg-4 control-label" translate="text.extraGdCommRate"></label>
+                                                        <div class="col-lg-7">
+                                                            <div class="input-group">
+                                                                <input type="number" class="form-control" id="extraGdCommRate" name="extraGdCommRate"
+                                                                       placeholder="{{'placeholder.extraGdCommRate'|translate}}" min="1"
+                                                                       ng-model="user.user.userDetail.extraGdCommRate" disabled required>
+                                                                <span class="input-group-addon">%</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">{{'text.big'|translate}}</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : userForm['gd4dBigPrize1'].$invalid && userForm['gd4dBigPrize1'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 1</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="gd4dBigPrize1" name="gd4dBigPrize1"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['gd4dBigPrize1']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['gd4dBigPrize1'].$error" ng-show="userForm['gd4dBigPrize1'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-class="{ 'has-error danger' : userForm['gd4dBigPrize2'].$invalid && userForm['gd4dBigPrize2'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 2</td>
+                                                                    <td>:</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="gd4dBigPrize2" name="gd4dBigPrize2"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['gd4dBigPrize2']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['gd4dBigPrize2'].$error" ng-show="userForm['gd4dBigPrize2'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-class="{ 'has-error danger' : userForm['gd4dBigPrize3'].$invalid && userForm['gd4dBigPrize3'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 3</td>
+                                                                    <td>:</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="gd4dBigPrize3" name="gd4dBigPrize3"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['gd4dBigPrize3']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['gd4dBigPrize3'].$error" ng-show="userForm['gd4dBigPrize3'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-class="{ 'has-error danger' : userForm['gd4dBigStarters'].$invalid && userForm['gd4dBigStarters'].$touched}">
+                                                                    <td>{{'text.starters'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="gd4dBigStarters" name="gd4dBigStarters"
+                                                                               placeholder="{{'placeholder.starters'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['gd4dBigStarters']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['gd4dBigStarters'].$error" ng-show="userForm['gd4dBigStarters'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-class="{ 'has-error danger' : userForm['gd4dBigConsolation'].$invalid && userForm['gd4dBigConsolation'].$touched}">
+                                                                    <td>{{'text.consolation'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="gd4dBigConsolation" name="gd4dBigConsolation"
+                                                                               placeholder="{{'placeholder.consolation'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['gd4dBigConsolation']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['gd4dBigConsolation'].$error" ng-show="userForm['gd4dBigConsolation'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">{{'text.small'|translate}}</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : userForm['gd4dSmallPrize1'].$invalid && userForm['gd4dSmallPrize1'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 1</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="gd4dSmallPrize1" name="gd4dSmallPrize1"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['gd4dSmallPrize1']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['gd4dSmallPrize1'].$error" ng-show="userForm['gd4dSmallPrize1'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-class="{ 'has-error danger' : userForm['gd4dSmallPrize2'].$invalid && userForm['gd4dSmallPrize2'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 2</td>
+                                                                    <td>:</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="gd4dSmallPrize2" name="gd4dSmallPrize2"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['gd4dSmallPrize2']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['gd4dSmallPrize2'].$error" ng-show="userForm['gd4dSmallPrize2'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-class="{ 'has-error danger' : userForm['gd4dSmallPrize3'].$invalid && userForm['gd4dSmallPrize3'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 3</td>
+                                                                    <td>:</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="gd4dSmallPrize3" name="gd4dSmallPrize3"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['gd4dSmallPrize3']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['gd4dSmallPrize3'].$error" ng-show="userForm['gd4dSmallPrize3'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4A</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : userForm['gd4d4aPrize'].$invalid && userForm['gd4d4aPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="gd4d4aPrize" name="gd4d4aPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['gd4d4aPrize']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['gd4d4aPrize'].$error" ng-show="userForm['gd4d4aPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4B</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : userForm['gd4d4bPrize'].$invalid && userForm['gd4d4bPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="gd4d4bPrize" name="gd4d4bPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['gd4d4bPrize']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['gd4d4bPrize'].$error" ng-show="userForm['gd4d4bPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4C</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : userForm['gd4d4cPrize'].$invalid && userForm['gd4d4cPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="gd4d4cPrize" name="4d4aPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['gd4d4cPrize']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['gd4d4cPrize'].$error" ng-show="userForm['gd4d4cPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4D</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : userForm['gd4d4dPrize'].$invalid && userForm['gd4d4dPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="gd4d4dPrize" name="4d4aPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['gd4d4dPrize']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['gd4d4dPrize'].$error" ng-show="userForm['gd4d4dPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4E</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : userForm['gd4d4ePrize'].$invalid && userForm['gd4d4ePrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="gd4d4ePrize" name="gd4d4ePrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['gd4d4ePrize']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['gd4d4ePrize'].$error" ng-show="userForm['gd4d4ePrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4F</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : userForm['gd4d4fPrize'].$invalid && userForm['gd4d4fPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="gd4d4fPrize" name="gd4d4fPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="user.user.userDetail.package['gd4d4fPrize']" disabled required>
+                                                                        <div class="help-block" ng-messages="userForm['gd4d4fPrize'].$error" ng-show="userForm['gd4d4fPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="panel panel-warning">
+                                                        <div class="panel-heading">IBOX</div>
+                                                        <div class="panel-body table-responsive">
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>{{'text.big'|translate}}</td>
+                                                                    <td>IBOX 24</td>
+                                                                    <td>IBOX 12</td>
+                                                                    <td>IBOX 6</td>
+                                                                    <td>IBOX 4</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 1</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigPrize1"]/24 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigPrize1"]/12 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigPrize1"]/6 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigPrize1"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 2</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigPrize2"]/24 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigPrize2"]/12 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigPrize2"]/6 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigPrize2"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 3</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigPrize3"]/24 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigPrize3"]/12 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigPrize3"]/6 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigPrize3"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.starters'|translate}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigStarters"]/24 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigStarters"]/12 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigStarters"]/6 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigStarters"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.consolation'|translate}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigConsolation"]/24 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigConsolation"]/12 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigConsolation"]/6 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dBigConsolation"]/4 | number:2}}</td>
+                                                                </tr>
+                                                            </table>
+                                                            <br/>
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>{{'text.small'|translate}}</td>
+                                                                    <td>IBOX 24</td>
+                                                                    <td>IBOX 12</td>
+                                                                    <td>IBOX 6</td>
+                                                                    <td>IBOX 4</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 1</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dSmallPrize1"]/24 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dSmallPrize1"]/12 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dSmallPrize1"]/6 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dSmallPrize1"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 2</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dSmallPrize2"]/24 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dSmallPrize2"]/12 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dSmallPrize2"]/6 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dSmallPrize2"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 3</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dSmallPrize3"]/24 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dSmallPrize3"]/12 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dSmallPrize3"]/6 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4dSmallPrize3"]/4 | number:2}}</td>
+                                                                </tr>
+                                                            </table>
+                                                            <br/>
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>4A</td>
+                                                                    <td>IBOX 24</td>
+                                                                    <td>IBOX 12</td>
+                                                                    <td>IBOX 6</td>
+                                                                    <td>IBOX 4</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4d4aPrize"]/24 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4d4aPrize"]/12 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4d4aPrize"]/6 | number:2}}</td>
+                                                                    <td>{{user.user.userDetail.package["gd4d4aPrize"]/4 | number:2}}</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="panel panel-dark">
+                                                        <div class="panel-heading">3D</div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3ABC</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : userForm['gd3dAbcPrize1'].$invalid && userForm['gd3dAbcPrize1'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}} 1</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="gd3dAbcPrize1" name="gd3dAbcPrize1"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="user.user.userDetail.package['gd3dAbcPrize1']" disabled required>
+                                                                                        <div class="help-block" ng-messages="userForm['gd3dAbcPrize1'].$error" ng-show="userForm['gd3dAbcPrize1'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr ng-class="{ 'has-error danger' : userForm['gd3dAbcPrize2'].$invalid && userForm['gd3dAbcPrize2'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}} 2</td>
+                                                                                    <td>:</td>
+                                                                                    <td>
+                                                                                        <input type="number" class="form-control" id="gd3dAbcPrize2" name="gd3dAbcPrize2"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="user.user.userDetail.package['gd3dAbcPrize2']" disabled required>
+                                                                                        <div class="help-block" ng-messages="userForm['gd3dAbcPrize2'].$error" ng-show="userForm['gd3dAbcPrize2'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr ng-class="{ 'has-error danger' : userForm['gd3dAbcPrize3'].$invalid && userForm['gd3dAbcPrize3'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}} 3</td>
+                                                                                    <td>:</td>
+                                                                                    <td>
+                                                                                        <input type="number" class="form-control" id="gd3dAbcPrize3" name="gd3dAbcPrize3"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="user.user.userDetail.package['gd3dAbcPrize3']" disabled required>
+                                                                                        <div class="help-block" ng-messages="userForm['gd3dAbcPrize3'].$error" ng-show="userForm['gd3dAbcPrize3'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3A</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : userForm['gd3d3aPrize'].$invalid && userForm['gd3d3aPrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="gd3d3aPrize" name="gd3d3aPrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="user.user.userDetail.package['gd3d3aPrize']" disabled required>
+                                                                                        <div class="help-block" ng-messages="userForm['gd3d3aPrize'].$error" ng-show="userForm['gd3d3aPrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3B</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : userForm['gd3d3bPrize'].$invalid && userForm['gd3d3bPrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="gd3d3bPrize" name="gd3d3bPrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="user.user.userDetail.package['gd3d3bPrize']" disabled required>
+                                                                                        <div class="help-block" ng-messages="userForm['gd3d3bPrize'].$error" ng-show="userForm['gd3d3bPrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3C</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : userForm['gd3d3cPrize'].$invalid && userForm['gd3d3cPrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="gd3d3cPrize" name="gd3d3cPrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="user.user.userDetail.package['gd3d3cPrize']" disabled required>
+                                                                                        <div class="help-block" ng-messages="userForm['gd3d3cPrize'].$error" ng-show="userForm['gd3d3cPrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3D</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : userForm['gd3d3dPrize'].$invalid && userForm['gd3d3dPrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="gd3d3dPrize" name="gd3d3dPrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="user.user.userDetail.package['gd3d3dPrize']" disabled required>
+                                                                                        <div class="help-block" ng-messages="userForm['gd3d3dPrize'].$error" ng-show="userForm['gd3d3dPrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3E</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : userForm['gd3d3ePrize'].$invalid && userForm['gd3d3ePrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="gd3d3ePrize" name="gd3d3ePrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="user.user.userDetail.package['gd3d3ePrize']" disabled required>
+                                                                                        <div class="help-block" ng-messages="userForm['gd3d3ePrize'].$error" ng-show="userForm['gd3d3ePrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-if="user.user.userType == APPCONSTANT.USER.TYPE.AGENT || user.user.userType == APPCONSTANT.USER.TYPE.PLAYER">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="panel panel-danger" id="sixdMainPanel">
+                        <div class="panel-heading" ng-class="{'panel-heading-collapsed':'sixdMainPanel'}">{{'text.5d6dLottoPrizePackages'|translate}}
+                            <paneltool tool-collapse="tool-collapse"></paneltool>
+                        </div>
+                        <div class="panel-wrapper" uib-collapse="sixdMainPanel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-10 col-lg-offset-1">
+                                        <div class="form-group" ng-if="user.user.userType == APPCONSTANT.USER.TYPE.AGENT">
+                                            <label for="6dAgentCommRate" class="col-lg-4 control-label" translate="text.6dAgentCommRate"></label>
+                                            <div class="col-lg-7">
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control" id="6dAgentCommRate" name="6dAgentCommRate"
+                                                           placeholder="{{'placeholder.6dAgentCommRate'|translate}}" min="1"
+                                                           ng-model="user.user.userDetail.package['6dAgentCommRate']" disabled required>
+                                                    <span class="input-group-addon">%</span>
+                                                </div>
+                                                <div class="help-block" ng-messages="userForm['6dAgentCommRate'].$error" ng-show="userForm['6dAgentCommRate'].$touched">
+                                                    <div ng-messages-include="views/common/messages.html"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-class="{ 'has-error' : userForm['6dPlayerCommRate'].$invalid && userForm['6dPlayerCommRate'].$touched}">
+                                            <label for="6dPlayerCommRate" class="col-lg-4 control-label" translate="text.6dPlayerCommRate"></label>
+                                            <div class="col-lg-7">
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control" id="6dPlayerCommRate" name="6dPlayerCommRate"
+                                                           placeholder="{{'placeholder.6dPlayerCommRate'|translate}}" min="1" ng-max="user.user.userDetail.package['6dAgentCommRate']-1"
+                                                           ng-model="user.user.userDetail.package['6dPlayerCommRate']" disabled required>
+                                                    <span class="input-group-addon">%</span>
+                                                </div>
+                                                <div class="help-block" ng-messages="userForm['6dPlayerCommRate'].$error" ng-show="userForm['6dPlayerCommRate'].$touched">
+                                                    <div ng-messages-include="views/common/messages.html"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="user.user.userType == APPCONSTANT.USER.TYPE.PLAYER">
+                                            <label for="extra6dCommRate" class="col-lg-4 control-label" translate="text.extra6dCommRate"></label>
+                                            <div class="col-lg-7">
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control" id="extra6dCommRate" name="extra6dCommRate"
+                                                           placeholder="{{'placeholder.extra6dCommRate'|translate}}" min="1"
+                                                           ng-model="user.user.userDetail.extra6dCommRate" disabled required>
+                                                    <span class="input-group-addon">%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">5D</div>
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <tr ng-class="{ 'has-error danger' : userForm['5dPrize1'].$invalid && userForm['5dPrize1'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 1</td>
+                                                        <td>:</td>
+                                                        <td class="col-xs-7">
+                                                            <input type="number" class="form-control" id="5dPrize1" name="5dPrize1"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                   ng-model="user.user.userDetail.package['5dPrize1']" disabled required>
+                                                            <div class="help-block" ng-messages="userForm['5dPrize1'].$error" ng-show="userForm['5dPrize1'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['5dPrize2'].$invalid && userForm['5dPrize2'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 2</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="5dPrize2" name="5dPrize2"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                   ng-model="user.user.userDetail.package['5dPrize2']" disabled required>
+                                                            <div class="help-block" ng-messages="userForm['5dPrize2'].$error" ng-show="userForm['5dPrize2'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['5dPrize3'].$invalid && userForm['5dPrize3'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 3</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="5dPrize3" name="5dPrize3"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                   ng-model="user.user.userDetail.package['5dPrize3']" disabled required>
+                                                            <div class="help-block" ng-messages="userForm['5dPrize3'].$error" ng-show="userForm['5dPrize3'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['5dPrize4'].$invalid && userForm['5dPrize4'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 4</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="5dPrize4" name="5dPrize4"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                   ng-model="user.user.userDetail.package['5dPrize4']" disabled required>
+                                                            <div class="help-block" ng-messages="userForm['5dPrize4'].$error" ng-show="userForm['5dPrize4'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['5dPrize5'].$invalid && userForm['5dPrize5'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 5</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="5dPrize5" name="5dPrize5"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                   ng-model="user.user.userDetail.package['5dPrize5']" disabled required>
+                                                            <div class="help-block" ng-messages="userForm['5dPrize5'].$error" ng-show="userForm['5dPrize5'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['5dPrize6'].$invalid && userForm['5dPrize6'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 6</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="5dPrize6" name="5dPrize6"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                   ng-model="user.user.userDetail.package['5dPrize6']" disabled required>
+                                                            <div class="help-block" ng-messages="userForm['5dPrize6'].$error" ng-show="userForm['5dPrize6'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">6D</div>
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <tr ng-class="{ 'has-error danger' : userForm['6dPrize1'].$invalid && userForm['6dPrize1'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 1</td>
+                                                        <td>:</td>
+                                                        <td class="col-xs-7">
+                                                            <input type="number" class="form-control" id="6dPrize1" name="6dPrize1"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                   ng-model="user.user.userDetail.package['6dPrize1']" disabled required>
+                                                            <div class="help-block" ng-messages="userForm['6dPrize1'].$error" ng-show="userForm['6dPrize1'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['6dPrize2'].$invalid && userForm['6dPrize2'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 2</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="6dPrize2" name="6dPrize2"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                   ng-model="user.user.userDetail.package['6dPrize2']" disabled required>
+                                                            <div class="help-block" ng-messages="userForm['6dPrize2'].$error" ng-show="userForm['6dPrize2'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['6dPrize3'].$invalid && userForm['6dPrize3'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 3</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="6dPrize3" name="6dPrize3"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                   ng-model="user.user.userDetail.package['6dPrize3']" disabled required>
+                                                            <div class="help-block" ng-messages="userForm['6dPrize3'].$error" ng-show="userForm['6dPrize3'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['6dPrize4'].$invalid && userForm['6dPrize4'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 4</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="6dPrize4" name="6dPrize4"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                   ng-model="user.user.userDetail.package['6dPrize4']" disabled required>
+                                                            <div class="help-block" ng-messages="userForm['6dPrize4'].$error" ng-show="userForm['6dPrize4'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['6dPrize5'].$invalid && userForm['6dPrize5'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 5</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="6dPrize5" name="6dPrize5"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                   ng-model="user.user.userDetail.package['6dPrize5']" disabled required>
+                                                            <div class="help-block" ng-messages="userForm['6dPrize5'].$error" ng-show="userForm['6dPrize5'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>

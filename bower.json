@@ -53,7 +53,8 @@
     "moment": "^2.18.1",
     "underscore": "^1.8.3",
     "sweetalert2": "^7.4.1",
-    "angular-multiple-date-picker": "multiple-date-picker#^2.1.6"
+    "angular-multiple-date-picker": "multiple-date-picker#^2.1.6",
+    "angular-clipboard": "^1.6.2"
   },
   "resolutions": {
     "angular": "1.5.11"

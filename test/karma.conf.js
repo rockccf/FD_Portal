@@ -70,6 +70,7 @@ module.exports = function(config) {
       'bower_components/underscore/underscore.js',
       'bower_components/sweetalert2/dist/sweetalert2.js',
       'bower_components/angular-multiple-date-picker/dist/multipleDatePicker.js',
+      'bower_components/angular-clipboard/angular-clipboard.js',
       // endbower
       "app/scripts/**/*.js",
       "test/mock/**/*.js",

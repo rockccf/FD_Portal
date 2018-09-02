@@ -2,38 +2,38 @@
         <div class="panel-heading" translate="text.winLossDetails"></div>
         <div class="panel-body">
             <form name="reportForm" class="form-horizontal form-validate" ng-submit="report.getReport(APPCONSTANT.FILE_TEMPLATE.REPORT.WIN_LOSS_DETAILS)" novalidate>
-                <div class="form-group required" ng-class="{ 'has-error' : reportForm.startDate.$invalid && reportForm.startDate.$touched}">
-                    <label for="startDate" class="col-lg-3 control-label" translate="text.startDate"></label>
+                <div class="form-group required" ng-class="{ 'has-error' : reportForm.drawDateStart.$invalid && reportForm.drawDateStart.$touched}">
+                    <label for="drawDateStart" class="col-lg-3 control-label" translate="text.drawDateStart"></label>
                     <div class="col-lg-6">
                         <div class="input-group">
-                            <input class="form-control" type="text" id="startDate" name="startDate" placeholder="{{'placeholder.startDate'|translate}}"
-                                   uib-datepicker-popup="{{report.datepicker.format}}" is-open="report.datepicker.startDate.opened" datepicker-options="report.datepicker.startDate.dateOptions"
-                                   ng-model="report.startDate" required
+                            <input class="form-control" type="text" id="drawDateStart" name="drawDateStart" placeholder="{{'placeholder.drawDateStart'|translate}}"
+                                   uib-datepicker-popup="{{report.datepicker.format}}" is-open="report.datepicker.drawDateStart.opened" datepicker-options="report.datepicker.drawDateStart.dateOptions"
+                                   ng-model="report.drawDateStart" required
                                    close-text="{{'button.close'|translate}}"/>
                             <span class="input-group-btn">
                                     <button class="btn btn-default" type="button" ng-click="report.openDatepicker(1)"><em class="fa fa-calendar"></em></button>
                                 </span>
                             <span class="input-group-addon">DD-MMM-YYYY</span>
                         </div>
-                        <div class="help-block" ng-messages="reportForm.startDate.$error" ng-show="reportForm.startDate.$touched">
+                        <div class="help-block" ng-messages="reportForm.drawDateStart.$error" ng-show="reportForm.drawDateStart.$touched">
                             <div ng-messages-include="views/common/messages.html"></div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group required" ng-class="{ 'has-error' : reportForm.endDate.$invalid && reportForm.endDate.$touched}">
-                    <label for="endDate" class="col-lg-3 control-label" translate="text.endDate"></label>
+                <div class="form-group required" ng-class="{ 'has-error' : reportForm.drawDateEnd.$invalid && reportForm.drawDateEnd.$touched}">
+                    <label for="drawDateEnd" class="col-lg-3 control-label" translate="text.drawDateEnd"></label>
                     <div class="col-lg-6">
                         <div class="input-group">
-                            <input class="form-control" type="text" id="endDate" name="endDate" placeholder="{{'placeholder.endDate'|translate}}"
-                                   uib-datepicker-popup="{{report.datepicker.format}}" is-open="report.datepicker.endDate.opened" datepicker-options="report.datepicker.endDate.dateOptions"
-                                   ng-model="report.endDate" required
+                            <input class="form-control" type="text" id="drawDateEnd" name="drawDateEnd" placeholder="{{'placeholder.drawDateEnd'|translate}}"
+                                   uib-datepicker-popup="{{report.datepicker.format}}" is-open="report.datepicker.drawDateEnd.opened" datepicker-options="report.datepicker.drawDateEnd.dateOptions"
+                                   ng-model="report.drawDateEnd" required
                                    close-text="{{'button.close'|translate}}"/>
                             <span class="input-group-btn">
                                     <button class="btn btn-default" type="button" ng-click="report.openDatepicker(2)"><em class="fa fa-calendar"></em></button>
                                 </span>
                             <span class="input-group-addon">DD-MMM-YYYY</span>
                         </div>
-                        <div class="help-block" ng-messages="reportForm.endDate.$error" ng-show="reportForm.endDate.$touched">
+                        <div class="help-block" ng-messages="reportForm.drawDateEnd.$error" ng-show="reportForm.drawDateEnd.$touched">
                             <div ng-messages-include="views/common/messages.html"></div>
                         </div>
                     </div>
@@ -48,7 +48,59 @@
             </form>
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 table-responsive">
-                    <table class="table">
+                    <table class="table table-bordered table-striped table-condensed" ng-if="userIdentity.userType != APPCONSTANT.USER.TYPE.PLAYER">
+                        <thead>
+                        <tr class="info">
+                            <th rowspan="2">#</th>
+                            <th rowspan="2" translate="text.name"></th>
+                            <th rowspan="2" translate="text.username"></th>
+                            <th colspan="5" class="text-center">{{userIdentity.username}}</th>
+                            <th colspan="4" class="text-center" translate="text.company"></th>
+                        </tr>
+                        <tr class="info">
+                            <th class="text-right" translate="text.sales"></th>
+                            <th class="text-right" translate="text.commission"></th>
+                            <th class="text-right" translate="text.payout"></th>
+                            <th class="text-right" translate="text.collect"></th>
+                            <th class="text-right" translate="text.extraCommission"></th>
+                            <th class="text-right" translate="text.sales"></th>
+                            <th class="text-right" translate="text.commission"></th>
+                            <th class="text-right" translate="text.payout"></th>
+                            <th class="text-right" translate="text.balance"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="dataObj in report.reportData.rowArray track by $index">
+                            <td>{{$index+1}}</td>
+                            <td>{{dataObj.name}}</td>
+                            <td>{{dataObj.username}}</td>
+                            <td class="text-right">{{dataObj.sales | number:2}}</td>
+                            <td class="text-right">{{dataObj.commission | number:2}}</td>
+                            <td class="text-right">{{dataObj.payout | number:2}}</td>
+                            <td class="text-right" ng-class="{'text-danger' : dataObj.collect < 0}">{{dataObj.collect | number:2}}</td>
+                            <td class="text-right">{{dataObj.extraCommission | number:2}}</td>
+                            <td class="text-right">{{dataObj.companySales | number:2}}</td>
+                            <td class="text-right">{{dataObj.companyCommission | number:2}}</td>
+                            <td class="text-right">{{dataObj.companyPayout | number:2}}</td>
+                            <td class="text-right" ng-class="{'text-danger' : dataObj.balance < 0}">{{dataObj.balance | number:2}}</td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="3"><strong translate="text.total"></strong></td>
+                            <td class="text-right"><strong>{{report.reportData.grandTotalUserSales | number:2}}</strong></td>
+                            <td class="text-right"><strong>{{report.reportData.grandTotalUserCommission | number:2}}</strong></td>
+                            <td class="text-right"><strong>{{report.reportData.grandTotalUserPayout | number:2}}</strong></td>
+                            <td class="text-right" ng-class="{'text-danger' : report.reportData.grandTotalCollect < 0}"><strong>{{report.reportData.grandTotalCollect | number:2}}</strong></td>
+                            <td class="text-right"><strong>{{report.reportData.grandTotalExtraCommission | number:2}}</strong></td>
+                            <td class="text-right"><strong>{{report.reportData.grandTotalCompanySales | number:2}}</strong></td>
+                            <td class="text-right"><strong>{{report.reportData.grandTotalCompanyCommission | number:2}}</strong></td>
+                            <td class="text-right"><strong>{{report.reportData.grandTotalCompanyPayout | number:2}}</strong></td>
+                            <td class="text-right" ng-class="{'text-danger' : report.reportData.grandTotalCompanyBalance < 0}"><strong>{{report.reportData.grandTotalCompanyBalance | number:2}}</strong></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <table class="table" ng-if="userIdentity.userType == APPCONSTANT.USER.TYPE.PLAYER">
                         <thead>
                         <tr class="info">
                             <th>#</th>

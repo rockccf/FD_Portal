@@ -31,7 +31,8 @@ var app = angular.module('fdPortal', [
     'duScroll',
     'underscore',
     'sweetalert2',
-    'multipleDatePicker'
+    'multipleDatePicker',
+    'angular-clipboard'
 ]);
 
 // register the interceptor as a service
@@ -551,7 +552,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'RouteH
             ncyBreadcrumb: {
                 label: 'text.4dSpecial'
             },
-            templateUrl: "views/4d_special.html",
+            templateUrl: "views/bet.html",
             resolve: helper.resolveFor('bet'),
             controller: "BetController",
             controllerAs: 'bet'
@@ -571,7 +572,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'RouteH
             ncyBreadcrumb: {
                 label: 'text.3dSpecial'
             },
-            templateUrl: "views/3d_special.html",
+            templateUrl: "views/bet.html",
             resolve: helper.resolveFor('bet'),
             controller: "BetController",
             controllerAs: 'bet'
@@ -616,6 +617,23 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'RouteH
             controller: "BetController",
             controllerAs: 'bet'
         })
+        .state('root.main.voidBetView', {
+            url: "/voidBetView",
+            title: "text.voidBetView",
+            data: {
+                permissions: []
+            },
+            ncyBreadcrumb: {
+                label: 'text.voidBetView'
+            },
+            params: {
+                "betDetailIdArray" : null
+            },
+            templateUrl: "views/void_bet.html",
+            resolve: helper.resolveFor('bet'),
+            controller: "BetController",
+            controllerAs: 'bet'
+        })
         .state('root.main.betSlipHistory', {
             url: "/betSlipHistory",
             title: "text.betSlipHistory",
@@ -626,6 +644,34 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'RouteH
                 label: 'text.betSlipHistory'
             },
             templateUrl: "views/bet_slip_history.html",
+            resolve: helper.resolveFor('bet'),
+            controller: "BetController",
+            controllerAs: 'bet'
+        })
+        .state('root.main.betNumberHistory', {
+            url: "/betNumberHistory",
+            title: "text.betNumberHistory",
+            data: {
+                permissions: []
+            },
+            ncyBreadcrumb: {
+                label: 'text.betNumberHistory'
+            },
+            templateUrl: "views/bet_number_history.html",
+            resolve: helper.resolveFor('bet'),
+            controller: "BetController",
+            controllerAs: 'bet'
+        })
+        .state('root.main.voidBetHistory', {
+            url: "/voidBetHistory",
+            title: "text.voidBetHistory",
+            data: {
+                permissions: []
+            },
+            ncyBreadcrumb: {
+                label: 'text.voidBetHistory'
+            },
+            templateUrl: "views/void_bet_history.html",
             resolve: helper.resolveFor('bet'),
             controller: "BetController",
             controllerAs: 'bet'
@@ -655,6 +701,36 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'RouteH
                 parent: 'root.main.report'
             },
             templateUrl: "views/reports/win_loss_details_report.html",
+            resolve: helper.resolveFor('report'),
+            controller: "ReportController",
+            controllerAs: 'report'
+        })
+        .state('root.main.drawWinningNumberReport', {
+            url: "/drawWinningNumberReport",
+            title: "text.drawWinningNumber",
+            data: {
+                permissions: []
+            },
+            ncyBreadcrumb: {
+                label: 'text.drawWinningNumber',
+                parent: 'root.main.report'
+            },
+            templateUrl: "views/reports/draw_winning_number_report.html",
+            resolve: helper.resolveFor('report'),
+            controller: "ReportController",
+            controllerAs: 'report'
+        })
+        .state('root.main.companyDrawResultsReport', {
+            url: "/companyDrawResultsReport",
+            title: "text.companyDrawResults",
+            data: {
+                permissions: []
+            },
+            ncyBreadcrumb: {
+                label: 'text.companyDrawResults',
+                parent: 'root.main.report'
+            },
+            templateUrl: "views/reports/company_draw_results_report.html",
             resolve: helper.resolveFor('report'),
             controller: "ReportController",
             controllerAs: 'report'

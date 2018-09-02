@@ -1,7 +1,7 @@
 <div class="panel panel-info">
-        <div class="panel-heading" translate="text.betSlipHistory"></div>
+        <div class="panel-heading" translate="text.betNumberHistory"></div>
         <div class="panel-body">
-            <form name="betForm" class="form-horizontal form-validate" ng-submit="bet.getBetSlipHistory()" novalidate>
+            <form name="betForm" class="form-horizontal form-validate" ng-submit="bet.getBetNumberHistory()" novalidate>
                 <div class="form-group" ng-class="{ 'has-error' : betForm.drawDateStart.$invalid && betForm.drawDateStart.$touched}">
                     <label for="drawDateStart" class="col-lg-3 control-label" translate="text.drawDateStart"></label>
                     <div class="col-lg-6">
@@ -74,6 +74,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group" ng-class="{ 'has-error' : betForm.number.$invalid && betForm.number.$touched}">
+                    <label for="number" class="col-lg-3 control-label" translate="text.number"></label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" id="number" name="number" placeholder="{{'placeholder.number'|translate}}"
+                               ng-model="bet.number" ng-pattern="/^\d+$/" ng-minlength="3" ng-maxlength="6">
+                        <div class="help-block" ng-messages="betForm.number.$error" ng-show="betForm.number.$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
                 <fieldset ng-disabled="bet.isSaving">
                     <div class="form-group">
                         <div class="col-lg-8 col-lg-offset-4">
@@ -83,33 +93,60 @@
                 </fieldset>
             </form>
             <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 table-responsive">
+                <div class="col-lg-12 table-responsive">
                     <table class="table">
                         <thead>
                         <tr class="info">
                             <th>#</th>
                             <th translate="text.username"></th>
-                            <th translate="text.betDate"></th>
-                            <th translate="text.betMethod"></th>
-                            <th class="text-right" translate="text.totalSales"></th>
-                            <th translate="text.slip"></th>
-                            <th></th>
+                            <th class="text-center" translate="text.betDate"></th>
+                            <th class="text-center" translate="text.drawDate"></th>
+                            <th class="text-center" translate="text.company"></th>
+                            <th class="text-center" translate="text.number"></th>
+                            <th class="text-right" translate="text.big"></th>
+                            <th class="text-right" translate="text.small"></th>
+                            <th class="text-right">4A</th>
+                            <th class="text-right">4B</th>
+                            <th class="text-right">4C</th>
+                            <th class="text-right">4D</th>
+                            <th class="text-right">4E</th>
+                            <th class="text-right">4F</th>
+                            <th class="text-right">3ABC</th>
+                            <th class="text-right">3A</th>
+                            <th class="text-right">3B</th>
+                            <th class="text-right">3C</th>
+                            <th class="text-right">3D</th>
+                            <th class="text-right">3E</th>
+                            <th class="text-right">5D</th>
+                            <th class="text-right">6D</th>
+                            <th translate="text.remarks"></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="dataObj in bet.betData track by $index">
                             <td>{{$index+1}}</td>
-                            <td>{{dataObj.creator.username}}</td>
-                            <td>{{dataObj.createdAt}}</td>
-                            <td><common-get-text ng-if="dataObj.betMethod != void(0)" value="dataObj.betMethod" object="bet.betMethodOptions"></common-get-text></td>
-                            <td class="text-right">{{dataObj.totalSales | number:2}}</td>
-                            <td>
-                                <pre class="form-control-static pre-scrollable" style="max-height: 200px" ng-bind="dataObj.slipText"></pre>
-                                <button type="button" clipboard text="dataObj.slipText" on-copied="bet.copySuccess()" class="btn btn-circle btn-green">{{'text.copy' | translate}}</button>
-                            </td>
-                            <td class="text-center">
-                                <a ui-sref="root.main.betView({id:dataObj.id})" class="btn btn-oval btn-lg btn-info" role="button" translate="button.view"></a>
-                            </td>
+                            <td class="text-center">{{dataObj.creator.username}}</td>
+                            <td class="text-center">{{dataObj.betDate}}</td>
+                            <td class="text-center">{{dataObj.drawDate}}</td>
+                            <td class="text-center">{{dataObj.companyDraw.company.code}}</td>
+                            <td class="text-center">{{dataObj.number}}</td>
+                            <td class="text-right">{{dataObj.big}}</td>
+                            <td class="text-right">{{dataObj.small}}</td>
+                            <td class="text-right">{{dataObj['4a']}}</td>
+                            <td class="text-right">{{dataObj['4b']}}</td>
+                            <td class="text-right">{{dataObj['4c']}}</td>
+                            <td class="text-right">{{dataObj['4d']}}</td>
+                            <td class="text-right">{{dataObj['4e']}}</td>
+                            <td class="text-right">{{dataObj['4f']}}</td>
+                            <td class="text-right">{{dataObj['3abc']}}</td>
+                            <td class="text-right">{{dataObj['3a']}}</td>
+                            <td class="text-right">{{dataObj['3b']}}</td>
+                            <td class="text-right">{{dataObj['3c']}}</td>
+                            <td class="text-right">{{dataObj['3d']}}</td>
+                            <td class="text-right">{{dataObj['3e']}}</td>
+                            <td class="text-right">{{dataObj['5d']}}</td>
+                            <td class="text-right">{{dataObj['6d']}}</td>
+                            <td>{{dataObj.remarks}}</td>
                         </tr>
                         </tbody>
                     </table>

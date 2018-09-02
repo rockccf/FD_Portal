@@ -4,19 +4,12 @@
     <div class="panel-body">
         <!-- START table-responsive-->
         <div class="table-responsive">
-            <table st-pipe="package.packageListing" st-table="package.tableData" class="table table-striped table-hover">
+            <table st-pipe="bet.voidBetListing" st-table="bet.tableData" class="table table-striped table-hover">
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th st-sort="description" st-sort-default="true" st-skip-natural="true" translate="text.name"></th>
+                    <th translate="text.name"></th>
                     <th translate="text.description"></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th><input class="form-control" st-search="name"/></th>
-                    <th><input class="form-control" st-search="description"/></th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -41,7 +34,6 @@
                     </td>
                 </tr>
                 </tbody>
-
                 <tfoot>
                 <tr>
                     <td class="text-center" colspan="5">
