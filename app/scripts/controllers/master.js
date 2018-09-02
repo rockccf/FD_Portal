@@ -39,6 +39,7 @@
                     "prefix" : _this.master.prefix,
                     "active" : _this.master.active.id,
                     "locked" : _this.master.locked.id,
+                    "commissionRate" : _this.master.commissionRate,
                     "voidBetMinutes" : _this.master.voidBetMinutes,
                     "betMaxLimitBig" : _this.master.betMaxLimitBig,
                     "betMaxLimitSmall" : _this.master.betMaxLimitSmall,

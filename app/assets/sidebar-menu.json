@@ -40,7 +40,7 @@
                 "sref": "root.main.companyDrawListing",
                 "icon": "fas fa-dice",
                 "translate": "text.companyDraw",
-                "permission": "VIEW_COMPANY_DRAW"
+                "permission": "CREATE_COMPANY_DRAW"
             },
             {
                 "text": "Package",

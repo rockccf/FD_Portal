@@ -18,7 +18,7 @@
                    ng-model="user.user.username" ng-model-options="{ debounce: { 'default': 300, 'blur': 0 }  }"
                    ng-pattern="/^[a-zA-Z0-9\._-]*$/" ng-change="user.checkUsername(userForm.username)"
                    ng-disabled="$state.current.name == 'root.main.userEdit' || $state.current.name == 'root.main.myAccountEdit'"
-                   ng-minlength="6" ng-maxlength="100" required>
+                   ng-minlength="3" ng-maxlength="100" required>
         </div>
         <div class="help-block" ng-messages="userForm.username.$error" ng-show="userForm.username.$touched">
             <div ng-messages-include="views/common/messages.html"></div>
@@ -87,12 +87,12 @@
     <label class="col-lg-3 control-label" translate="text.active"></label>
     <div class="col-lg-6">
         <label class="radio-inline c-radio">
-            <input id="activeYes" type="radio" name="active" ng-model="user.user.active" value="{{APPCONSTANT.GLOBAL.TRUE}}"/>
+            <input id="activeYes" type="radio" name="active" ng-model="user.user.active" ng-required="!user.user.active" value="{{APPCONSTANT.GLOBAL.TRUE}}"/>
             <span class="fa fa-circle"></span>
             {{'text.yes' | translate}}
         </label>
         <label class="radio-inline c-radio">
-            <input id="activeNo" type="radio" name="active" ng-model="user.user.active" value="{{APPCONSTANT.GLOBAL.FALSE}}" />
+            <input id="activeNo" type="radio" name="active" ng-model="user.user.active" ng-required="!user.user.active" value="{{APPCONSTANT.GLOBAL.FALSE}}" />
             <span class="fa fa-circle"></span>
             {{'text.no' | translate}}
         </label>
@@ -101,7 +101,7 @@
         </div>
     </div>
 </div>
-<div ng-if="$state.current.name != 'root.main.myAccountEdit' && (user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT || user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER)" class="form-group required" ng-class="{ 'has-error' : userForm.package.$invalid && userForm.package.$touched}">
+<div ng-if="$state.current.name != 'root.main.myAccountEdit' && (user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT)" class="form-group required" ng-class="{ 'has-error' : userForm.package.$invalid && userForm.package.$touched}">
     <label for="package" class="col-lg-3 control-label" translate="text.package"></label>
     <div class="col-lg-6">
         <select class="form-control" id="package" name="package" ng-options="option.name | translate for option in user.packageOptions track by option.id"
@@ -196,12 +196,12 @@
     <label class="col-lg-3 control-label" translate="text.betMethod"></label>
     <div class="col-lg-6">
         <label class="radio-inline c-radio">
-            <input id="betMethodMultiple" type="radio" name="betMethod" ng-model="user.user.betMethod" value="{{APPCONSTANT.USER.DETAIL.BET_METHOD.MULTIPLE}}"/>
+            <input id="betMethodMultiple" type="radio" name="betMethod" ng-model="user.user.betMethod" ng-required="!user.user.betMethod" value="{{APPCONSTANT.USER.DETAIL.BET_METHOD.MULTIPLE}}"/>
             <span class="fa fa-circle"></span>
             {{'text.multiple' | translate}}
         </label>
         <label class="radio-inline c-radio">
-            <input id="betMethodDivide" type="radio" name="betMethod" ng-model="user.user.betMethod" value="{{APPCONSTANT.USER.DETAIL.BET_METHOD.DIVIDE}}" />
+            <input id="betMethodDivide" type="radio" name="betMethod" ng-model="user.user.betMethod" ng-required="!user.user.betMethod" value="{{APPCONSTANT.USER.DETAIL.BET_METHOD.DIVIDE}}" />
             <span class="fa fa-circle"></span>
             {{'text.divide' | translate}}
         </label>
@@ -210,7 +210,7 @@
         </div>
     </div>
 </div>
-<div ng-if="$state.current.name != 'root.main.myAccountEdit' && (user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT || user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER)" class="form-group required" ng-class="{ 'has-error' : userForm.betGdLotto.$invalid && userForm.betGdLotto.$touched}">
+<div ng-if="$state.current.name != 'root.main.myAccountEdit' && (user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT)" class="form-group required" ng-class="{ 'has-error' : userForm.betGdLotto.$invalid && userForm.betGdLotto.$touched}">
     <label class="col-lg-3 control-label" translate="text.betGdLotto"></label>
     <div class="col-lg-6">
         <label class="radio-inline c-radio">
@@ -228,7 +228,7 @@
         </div>
     </div>
 </div>
-<div ng-if="$state.current.name != 'root.main.myAccountEdit' && (user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT || user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER)" class="form-group required" ng-class="{ 'has-error' : userForm.bet6d.$invalid && userForm.bet6d.$touched}">
+<div ng-if="$state.current.name != 'root.main.myAccountEdit' && (user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT)" class="form-group required" ng-class="{ 'has-error' : userForm.bet6d.$invalid && userForm.bet6d.$touched}">
     <label class="col-lg-3 control-label" translate="text.bet6d"></label>
     <div class="col-lg-6">
         <label class="radio-inline c-radio">

@@ -106,7 +106,7 @@
                     masterId = _this.user.master.id; //Creating Master User
                 } else {
                     //Creating Agent/Player User
-                    packageId = _this.user.package.id;
+                    packageId = _this.user.package ? _this.user.package.id : null;
                     creditLimit = _this.user.creditLimit;
                     autoTransfer = _this.user.autoTransfer;
                     autoTransferMode = _this.user.autoTransferMode;
@@ -398,6 +398,7 @@
                     CommonService.getPackages(masterId).then(function (result) {
                         _this.packageOptions = result;
                     });
+                    _this.creditLimitAvailableToGrant = $rootScope.userIdentity.userDetail.creditLimitAvailableToGrant;
                     break;
                 case $rootScope.APPCONSTANT.USER.TYPE.PLAYER:
                     _this.canCreateUserType = false;
