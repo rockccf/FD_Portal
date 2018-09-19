@@ -183,13 +183,8 @@
                 CommonService.clearAlertMessage();
                 _this.isSaving = true;
 
-                _this.saveObj = {
-                    "oldName" : _this.package.oldName,
-                    "name" : _this.package.description,
-                    "remarks" : _this.package.remarks,
-                    "permissions" : _this.tempPermissions,
-                    "type" : $rootScope.APPCONSTANT.AUTH_ITEM.TYPE.ROLE
-                };
+                _this.package.masterId = masterId;
+                _this.saveObj = _this.package;
 
                 $http.put($rootScope.SYSCONSTANT.BACKEND_SERVER_URL+"/package/" + _this.package.id,_this.saveObj).
                 then(function(response) {

@@ -40,6 +40,9 @@
                 </div>
                 <fieldset ng-disabled="report.isSaving">
                     <div class="form-group">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <p class="text-warning" translate="text.notRecommendedToSearchForFutureDrawDate"></p>
+                        </div>
                         <div class="col-lg-8 col-lg-offset-4">
                             <button type="submit" class="btn btn-primary" ng-disabled="reportForm.$invalid" translate="button.search"></button>
                         </div>
