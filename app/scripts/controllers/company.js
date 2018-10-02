@@ -97,6 +97,11 @@
                 for (var s in _this.selectedDateArray) {
                     days.push(_this.selectedDateArray[s].format());
                 }
+                if (days.length > 0) {
+                    _this.canCreate = true;
+                } else {
+                    _this.canCreate = false;
+                }
                 for (var c in _this.companyArray) {
                     _this.companyArray[c].days = days
                 }

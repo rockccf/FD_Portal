@@ -12,7 +12,6 @@
         _this.isSaving = false; //Default to false
         var masterId = $rootScope.userIdentity.masterId;
         _this.userType = $rootScope.userIdentity.userType;
-        console.log($rootScope.userIdentity);
         _this.canCreateUserType = null;
         if (masterId) {
             _this.masterPrefix = $rootScope.userIdentity.master.prefix;
@@ -163,7 +162,10 @@
                     "betMethod" : _this.user.betMethod,
                     "betGdLotto" : _this.user.betGdLotto,
                     "bet6d" : _this.user.bet6d,
-                    "creditLimit" : _this.user.creditLimit
+                    "creditLimit" : _this.user.creditLimit,
+                    "extra4dCommRate" : _this.user.userDetail.extra4dCommRate,
+                    "extra6dCommRate" : _this.user.userDetail.extra6dCommRate,
+                    "extraGdCommRate" : _this.user.userDetail.extraGdCommRate
                 };
 
                 $http.put($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/user/" + _this.user.id, _this.saveObj).
@@ -291,6 +293,22 @@
             || stateName == "root.main.myAccount" || stateName == "root.main.myAccountEdit") {
             var deferred = $q.defer();
             var promises = [];
+
+            var currentUserPackageId = $rootScope.userIdentity.userDetail ? $rootScope.userIdentity.userDetail.packageId : null;
+            if (currentUserPackageId) {
+                var current4dAgentCommRate = 0;
+                var current6dAgentCommRate = 0;
+                var currentGdAgentCommRate = 0;
+                promises.push(
+                    $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/package/" + currentUserPackageId).
+                    then(function (response) {
+                        current4dAgentCommRate = response.data["4dAgentCommRate"];
+                        current6dAgentCommRate = response.data["6dAgentCommRate"];
+                        currentGdAgentCommRate = response.data["gdAgentCommRate"];
+                    })
+                )
+            }
+
             $q.all(promises).then(function () {
                 var userId = $stateParams.id;
                 if (stateName == "root.main.myAccount" || stateName == "root.main.myAccountEdit") {
@@ -307,11 +325,10 @@
                         return;
                     }
                 }
+
                 $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/user/" + userId+"?expand=userDetail.package").
                 then(function (response) {
                     _this.user = response.data;
-
-                    console.log(_this.user);
 
                     if (stateName == "root.main.userEdit" || stateName == "root.main.myAccountEdit") {
                         //Limit user to create certain type of users only
@@ -349,6 +366,9 @@
                                     }
                                 });
                                 _this.user.creditLimit = _this.user.userDetail.creditLimit;
+                                _this.user.maxExtra4dCommRate = current4dAgentCommRate - _this.user.userDetail.package["4dPlayerCommRate"];
+                                _this.user.maxExtra6dCommRate = current6dAgentCommRate - _this.user.userDetail.package["6dPlayerCommRate"];
+                                _this.user.maxExtraGdCommRate = currentGdAgentCommRate - _this.user.userDetail.package["gdPlayerCommRate"];
                                 _this.user.betMethod = _this.user.userDetail.betMethod;
                                 _this.user.betGdLotto = _this.user.userDetail.betGdLotto;
                                 _this.user.bet6d = _this.user.userDetail.bet6d;

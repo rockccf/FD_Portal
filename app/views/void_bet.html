@@ -9,8 +9,9 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th translate="text.number"></th>
-                        <th translate="text.drawDate"></th>
+                        <th class="text-center" translate="text.number"></th>
+                        <th class="text-center" translate="text.drawDate"></th>
+                        <th class="text-center" translate="text.voidDate"></th>
                         <th class="text-center" translate="text.company"></th>
                         <th class="text-right" translate="text.big"></th>
                         <th class="text-right" translate="text.small"></th>
@@ -44,8 +45,9 @@
                     <tbody>
                     <tr ng-repeat="betObj in bet.voidBets track by $index">
                         <td>{{$index+1}}</td>
-                        <td>{{betObj.number}}</td>
-                        <td>{{betObj.drawDate}}</td>
+                        <td class="text-center" >{{betObj.number}}</td>
+                        <td class="text-center" >{{betObj.drawDate}}</td>
+                        <td class="text-center">{{betObj.voidDate}}</td>
                         <td class="text-center">{{betObj.companyDraw.company.code}}</td>
                         <td class="text-right">{{betObj.big}}</td>
                         <td class="text-right">{{betObj.small}}</td>

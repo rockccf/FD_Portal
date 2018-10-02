@@ -55,7 +55,7 @@
                             <th translate="text.username"></th>
                             <th translate="text.drawDate"></th>
                             <th class="text-center" translate="text.company"></th>
-                            <th translate="text.number"></th>
+                            <th class="text-center" translate="text.number"></th>
                             <th class="text-right" translate="text.betAmount"></th>
                             <th translate="text.prize"></th>
                             <th class="text-right" translate="text.prizeAmount"></th>
@@ -70,7 +70,8 @@
                             <td>{{dataObj.username}}</td>
                             <td>{{dataObj.drawDate}}</td>
                             <td class="text-center">{{dataObj.company}}</td>
-                            <td>{{dataObj.number}}</td>
+                            <td class="text-center" ng-if="dataObj.threeDigitPrize">{{dataObj.number.substring(0,1)}} <span class="text-danger">{{dataObj.number.substring(1,4)}}</span></td>
+                            <td class="text-center" ng-if="!dataObj.threeDigitPrize">{{dataObj.number}}</td>
                             <td class="text-right">{{dataObj.betAmount | number:3}}</td>
                             <td>{{dataObj.prize}}</td>
                             <td class="text-right">{{dataObj.prizeAmount | number:2}}</td>
@@ -79,6 +80,12 @@
                             <td>{{dataObj.remarks}}</td>
                         </tr>
                         </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="8" class="text-right" translate="text.grandTotal"></td>
+                            <td class="text-right">{{report.reportData.grandTotalWin | number:2}}</td>
+                        </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

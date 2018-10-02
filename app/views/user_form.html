@@ -192,7 +192,7 @@
         </div>
     </div>
 </div>
-<div ng-if="user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT || user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER" class="form-group required" ng-class="{ 'has-error' : userForm.betMethod.$invalid && userForm.betMethod.$touched}">
+<div ng-if="$state.current.name != 'root.main.myAccountEdit' && (user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT || user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER)" class="form-group required" ng-class="{ 'has-error' : userForm.betMethod.$invalid && userForm.betMethod.$touched}">
     <label class="col-lg-3 control-label" translate="text.betMethod"></label>
     <div class="col-lg-6">
         <label class="radio-inline c-radio">
@@ -242,6 +242,48 @@
             {{'text.no' | translate}}
         </label>
         <div class="help-block" ng-messages="userForm.bet6d.$error" ng-show="userForm.bet6d.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div ng-if="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER"  class="form-group" ng-class="{ 'has-error' : userForm['extra4dCommRate'].$invalid && userForm['extra4dCommRate'].$touched}">
+    <label for="extra4dCommRate" class="col-lg-3 control-label" translate="text.extra4dCommRate"></label>
+    <div class="col-lg-6">
+        <div class="input-group">
+            <input type="number" class="form-control" id="extra4dCommRate" name="extra4dCommRate"
+                   placeholder="{{'placeholder.extra4dCommRate'|translate}}" ng-max="user.user['maxExtra4dCommRate']"
+                   ng-model="user.user.userDetail['extra4dCommRate']" required>
+            <span class="input-group-addon">{{'text.max' | translate}} {{user.user.maxExtra4dCommRate}}%</span>
+        </div>
+        <div class="help-block" ng-messages="packageForm['extra4dCommRate'].$error" ng-show="packageForm['extra4dCommRate'].$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div ng-if="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER"  class="form-group" ng-class="{ 'has-error' : userForm['extra6dCommRate'].$invalid && userForm['extra6dCommRate'].$touched}">
+    <label for="extra6dCommRate" class="col-lg-3 control-label" translate="text.extra6dCommRate"></label>
+    <div class="col-lg-6">
+        <div class="input-group">
+            <input type="number" class="form-control" id="extra6dCommRate" name="extra6dCommRate"
+                   placeholder="{{'placeholder.extra6dCommRate'|translate}}" ng-max="user.user['maxExtra6dCommRate']"
+                   ng-model="user.user.userDetail['extra6dCommRate']" required>
+            <span class="input-group-addon">{{'text.max' | translate}} {{user.user.maxExtra6dCommRate}}%</span>
+        </div>
+        <div class="help-block" ng-messages="packageForm['extra6dCommRate'].$error" ng-show="packageForm['extra6dCommRate'].$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div ng-if="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER"  class="form-group" ng-class="{ 'has-error' : userForm['extraGdCommRate'].$invalid && userForm['extraGdCommRate'].$touched}">
+    <label for="extraGdCommRate" class="col-lg-3 control-label" translate="text.extraGdCommRate"></label>
+    <div class="col-lg-6">
+        <div class="input-group">
+            <input type="number" class="form-control" id="extraGdCommRate" name="extraGdCommRate"
+                   placeholder="{{'placeholder.extraGdCommRate'|translate}}" ng-max="user.user['maxExtraGdCommRate']"
+                   ng-model="user.user.userDetail['extraGdCommRate']" required>
+            <span class="input-group-addon">{{'text.max' | translate}} {{user.user.maxExtraGdCommRate}}%</span>
+        </div>
+        <div class="help-block" ng-messages="packageForm['extraGdCommRate'].$error" ng-show="packageForm['extraGdCommRate'].$touched">
             <div ng-messages-include="views/common/messages.html"></div>
         </div>
     </div>

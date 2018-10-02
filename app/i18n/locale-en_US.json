@@ -171,7 +171,9 @@
         "5th" : "5th",
         "6th" : "6th",
         "or" : "Or",
-        "notRecommendedToSearchForFutureDrawDate" : "It's not recommended to search for future draw date as the results are not yet processed."
+        "notRecommendedToSearchForFutureDrawDate" : "It's not recommended to search for future draw date as the results are not yet processed.",
+        "grandTotal" : "Grand Total",
+        "voidBetView" : "Void Bet View"
     },
     "placeholder" : {
         "selectOneOrMore" : "--- Please select one or more ---",
@@ -206,7 +208,10 @@
         "drawDateEnd" : "Draw Date End",
         "betDateStart" : "Bet Date Start",
         "betDateEnd" : "Bet Date End",
-        "number" : "Number"
+        "number" : "Number",
+        "extra4dCommRate" : "Extra 4D Commission Rate",
+        "extra6dCommRate" : "Extra 6D Commission Rate",
+        "extraGdCommRate" : "Extra GD Commission Rate"
     },
     "button" : {
         "create": "Create",

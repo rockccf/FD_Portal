@@ -811,7 +811,7 @@
                     var acceptedBets = [], limitedBets = [], rejectedBets = [], voidBets = [];
                     angular.forEach(_this.bet.betDetailsSortByNumber, function(value,key) {
                         value.canVoid = false;
-                        if (moment().isBefore(moment(value.voidDateBy))) {
+                        if (moment().isBefore(moment(value.voidDateBy.date))) {
                             value.canVoid = true;
                         }
 
@@ -832,6 +832,7 @@
                             voidBets.push(value);
                         }
                     });
+                    console.log(_this.bet.betDetailsSortByNumber);
 
                     _this.bet.acceptedBets = acceptedBets;
                     _this.bet.limitedBets = limitedBets;

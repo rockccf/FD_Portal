@@ -119,11 +119,12 @@
                             <th class="text-right">3E</th>
                             <th class="text-right">5D</th>
                             <th class="text-right">6D</th>
+                            <th class="text-right" translate="text.total"></th>
                             <th translate="text.remarks"></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="dataObj in bet.betData track by $index">
+                        <tr ng-repeat="dataObj in bet.betData.numbers track by $index">
                             <td>{{$index+1}}</td>
                             <td class="text-center">{{dataObj.creator.username}}</td>
                             <td class="text-center">{{dataObj.betDate}}</td>
@@ -146,9 +147,32 @@
                             <td class="text-right">{{dataObj['3e']}}</td>
                             <td class="text-right">{{dataObj['5d']}}</td>
                             <td class="text-right">{{dataObj['6d']}}</td>
+                            <td class="text-right">{{dataObj['total']}}</td>
                             <td>{{dataObj.remarks}}</td>
                         </tr>
                         </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="6" class="text-right"><strong translate="text.total"></strong></td>
+                            <td class="text-right"><strong>{{bet.betData.totalBig}}</strong></td>
+                            <td class="text-right"><strong>{{bet.betData.totalSmall}}</strong></td>
+                            <td class="text-right"><strong>{{bet.betData.total4a}}</strong></td>
+                            <td class="text-right"><strong>{{bet.betData.total4b}}</strong></td>
+                            <td class="text-right"><strong>{{bet.betData.total4c}}</strong></td>
+                            <td class="text-right"><strong>{{bet.betData.total4d}}</strong></td>
+                            <td class="text-right"><strong>{{bet.betData.total4e}}</strong></td>
+                            <td class="text-right"><strong>{{bet.betData.total4f}}</strong></td>
+                            <td class="text-right"><strong>{{bet.betData.total3abc}}</strong></td>
+                            <td class="text-right"><strong>{{bet.betData.total3a}}</strong></td>
+                            <td class="text-right"><strong>{{bet.betData.total3b}}</strong></td>
+                            <td class="text-right"><strong>{{bet.betData.total3c}}</strong></td>
+                            <td class="text-right"><strong>{{bet.betData.total3d}}</strong></td>
+                            <td class="text-right"><strong>{{bet.betData.total3f}}</strong></td>
+                            <td class="text-right"><strong>{{bet.betData.total5d}}</strong></td>
+                            <td class="text-right"><strong>{{bet.betData.total6d}}</strong></td>
+                            <td class="text-right"><strong>{{bet.betData.grandTotal}}</strong></td>
+                        </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
