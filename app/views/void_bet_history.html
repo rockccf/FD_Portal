@@ -1,0 +1,186 @@
+<div class="panel panel-info">
+    <div class="panel-heading" translate="text.voidBetHistory"></div>
+    <div class="panel-body">
+        <form name="betForm" class="form-horizontal form-validate" ng-submit="bet.getVoidBetHistory()" novalidate>
+            <div class="form-group" ng-class="{ 'has-error' : betForm.drawDateStart.$invalid && betForm.drawDateStart.$touched}">
+                <label for="drawDateStart" class="col-lg-3 control-label" translate="text.drawDateStart"></label>
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <input class="form-control" type="text" id="drawDateStart" name="drawDateStart" placeholder="{{'placeholder.drawDateStart'|translate}}"
+                               uib-datepicker-popup="{{bet.datepicker.format}}" is-open="bet.datepicker.drawDateStart.opened" datepicker-options="bet.datepicker.drawDateStart.dateOptions"
+                               ng-model="bet.drawDateStart" close-text="{{'button.close'|translate}}"
+                               ng-required="(bet.drawDateEnd) || !(bet.betDateStart || bet.betDateEnd)"/>
+                        <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="bet.openDatepicker(1)"><em class="fa fa-calendar"></em></button>
+                                </span>
+                        <span class="input-group-addon">DD-MMM-YYYY</span>
+                    </div>
+                    <div class="help-block" ng-messages="betForm.drawDateStart.$error" ng-show="betForm.drawDateStart.$touched">
+                        <div ng-messages-include="views/common/messages.html"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : betForm.drawDateEnd.$invalid && betForm.drawDateEnd.$touched}">
+                <label for="drawDateEnd" class="col-lg-3 control-label" translate="text.drawDateEnd"></label>
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <input class="form-control" type="text" id="drawDateEnd" name="drawDateEnd" placeholder="{{'placeholder.drawDateEnd'|translate}}"
+                               uib-datepicker-popup="{{bet.datepicker.format}}" is-open="bet.datepicker.drawDateEnd.opened" datepicker-options="bet.datepicker.drawDateEnd.dateOptions"
+                               ng-model="bet.drawDateEnd" close-text="{{'button.close'|translate}}"
+                               ng-required="(bet.drawDateStart) || !(bet.betDateStart || bet.betDateEnd)"/>
+                        <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="bet.openDatepicker(2)"><em class="fa fa-calendar"></em></button>
+                                </span>
+                        <span class="input-group-addon">DD-MMM-YYYY</span>
+                    </div>
+                    <div class="help-block" ng-messages="betForm.drawDateEnd.$error" ng-show="betForm.drawDateEnd.$touched">
+                        <div ng-messages-include="views/common/messages.html"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : betForm.betDateStart.$invalid && betForm.betDateStart.$touched}">
+                <label for="betDateStart" class="col-lg-3 control-label" translate="text.betDateStart"></label>
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <input class="form-control" type="text" id="betDateStart" name="betDateStart" placeholder="{{'placeholder.betDateStart'|translate}}"
+                               uib-datepicker-popup="{{bet.datepicker.format}}" is-open="bet.datepicker.betDateStart.opened" datepicker-options="bet.datepicker.betDateStart.dateOptions"
+                               ng-model="bet.betDateStart" close-text="{{'button.close'|translate}}"
+                               ng-required="(bet.betDateEnd) || !(bet.drawDateStart || bet.drawDateEnd)"/>
+                        <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="bet.openDatepicker(3)"><em class="fa fa-calendar"></em></button>
+                                </span>
+                        <span class="input-group-addon">DD-MMM-YYYY</span>
+                    </div>
+                    <div class="help-block" ng-messages="betForm.betDateStart.$error" ng-show="betForm.betDateStart.$touched">
+                        <div ng-messages-include="views/common/messages.html"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : betForm.betDateEnd.$invalid && betForm.betDateEnd.$touched}">
+                <label for="betDateEnd" class="col-lg-3 control-label" translate="text.betDateEnd"></label>
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <input class="form-control" type="text" id="betDateEnd" name="betDateEnd" placeholder="{{'placeholder.betDateEnd'|translate}}"
+                               uib-datepicker-popup="{{bet.datepicker.format}}" is-open="bet.datepicker.betDateEnd.opened" datepicker-options="bet.datepicker.betDateEnd.dateOptions"
+                               ng-model="bet.betDateEnd" close-text="{{'button.close'|translate}}"
+                               ng-required="(bet.betDateStart) || !(bet.drawDateStart || bet.drawDateEnd)"/>
+                        <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="bet.openDatepicker(4)"><em class="fa fa-calendar"></em></button>
+                                </span>
+                        <span class="input-group-addon">DD-MMM-YYYY</span>
+                    </div>
+                    <div class="help-block" ng-messages="betForm.betDateEnd.$error" ng-show="betForm.betDateEnd.$touched">
+                        <div ng-messages-include="views/common/messages.html"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : betForm.number.$invalid && betForm.number.$touched}">
+                <label for="number" class="col-lg-3 control-label" translate="text.number"></label>
+                <div class="col-lg-6">
+                    <input type="text" class="form-control" id="number" name="number" placeholder="{{'placeholder.number'|translate}}"
+                           ng-model="bet.number" ng-pattern="/^\d+$/" ng-minlength="3" ng-maxlength="6">
+                    <div class="help-block" ng-messages="betForm.number.$error" ng-show="betForm.number.$touched">
+                        <div ng-messages-include="views/common/messages.html"></div>
+                    </div>
+                </div>
+            </div>
+            <fieldset ng-disabled="bet.isSaving">
+                <div class="form-group">
+                    <div class="col-lg-8 col-lg-offset-4">
+                        <button type="submit" class="btn btn-primary" ng-disabled="betForm.$invalid" translate="button.search"></button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <div class="row">
+            <div class="col-lg-12 table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr class="info">
+                        <th>#</th>
+                        <th translate="text.username"></th>
+                        <th class="text-center" translate="text.betDate"></th>
+                        <th class="text-center" translate="text.drawDate"></th>
+                        <th class="text-center" translate="text.voidDate"></th>
+                        <th class="text-center" translate="text.company"></th>
+                        <th class="text-center" translate="text.number"></th>
+                        <th class="text-right" translate="text.big"></th>
+                        <th class="text-right" translate="text.small"></th>
+                        <th class="text-right">4A</th>
+                        <th class="text-right">4B</th>
+                        <th class="text-right">4C</th>
+                        <th class="text-right">4D</th>
+                        <th class="text-right">4E</th>
+                        <th class="text-right">4F</th>
+                        <th class="text-right">3ABC</th>
+                        <th class="text-right">3A</th>
+                        <th class="text-right">3B</th>
+                        <th class="text-right">3C</th>
+                        <th class="text-right">3D</th>
+                        <th class="text-right">3E</th>
+                        <th class="text-right">5D</th>
+                        <th class="text-right">6D</th>
+                        <th class="text-right" translate="text.total"></th>
+                        <th translate="text.remarks"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="dataObj in bet.betData.numbers track by $index">
+                        <td>{{$index+1}}</td>
+                        <td class="text-center">{{dataObj.creator.username}}</td>
+                        <td class="text-center">{{dataObj.betDate}}</td>
+                        <td class="text-center">{{dataObj.drawDate}}</td>
+                        <td class="text-center">{{dataObj.voidDate}}</td>
+                        <td class="text-center">{{dataObj.companyDraw.company.code}}</td>
+                        <td class="text-center">{{dataObj.number}}</td>
+                        <td class="text-right">{{dataObj.big}}</td>
+                        <td class="text-right">{{dataObj.small}}</td>
+                        <td class="text-right">{{dataObj['4a']}}</td>
+                        <td class="text-right">{{dataObj['4b']}}</td>
+                        <td class="text-right">{{dataObj['4c']}}</td>
+                        <td class="text-right">{{dataObj['4d']}}</td>
+                        <td class="text-right">{{dataObj['4e']}}</td>
+                        <td class="text-right">{{dataObj['4f']}}</td>
+                        <td class="text-right">{{dataObj['3abc']}}</td>
+                        <td class="text-right">{{dataObj['3a']}}</td>
+                        <td class="text-right">{{dataObj['3b']}}</td>
+                        <td class="text-right">{{dataObj['3c']}}</td>
+                        <td class="text-right">{{dataObj['3d']}}</td>
+                        <td class="text-right">{{dataObj['3e']}}</td>
+                        <td class="text-right">{{dataObj['5d']}}</td>
+                        <td class="text-right">{{dataObj['6d']}}</td>
+                        <td class="text-right">{{dataObj['total']}}</td>
+                        <td>{{dataObj.remarks}}</td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="7" class="text-right"><strong translate="text.total"></strong></td>
+                        <td class="text-right"><strong>{{bet.betData.totalBig}}</strong></td>
+                        <td class="text-right"><strong>{{bet.betData.totalSmall}}</strong></td>
+                        <td class="text-right"><strong>{{bet.betData.total4a}}</strong></td>
+                        <td class="text-right"><strong>{{bet.betData.total4b}}</strong></td>
+                        <td class="text-right"><strong>{{bet.betData.total4c}}</strong></td>
+                        <td class="text-right"><strong>{{bet.betData.total4d}}</strong></td>
+                        <td class="text-right"><strong>{{bet.betData.total4e}}</strong></td>
+                        <td class="text-right"><strong>{{bet.betData.total4f}}</strong></td>
+                        <td class="text-right"><strong>{{bet.betData.total3abc}}</strong></td>
+                        <td class="text-right"><strong>{{bet.betData.total3a}}</strong></td>
+                        <td class="text-right"><strong>{{bet.betData.total3b}}</strong></td>
+                        <td class="text-right"><strong>{{bet.betData.total3c}}</strong></td>
+                        <td class="text-right"><strong>{{bet.betData.total3d}}</strong></td>
+                        <td class="text-right"><strong>{{bet.betData.total3f}}</strong></td>
+                        <td class="text-right"><strong>{{bet.betData.total5d}}</strong></td>
+                        <td class="text-right"><strong>{{bet.betData.total6d}}</strong></td>
+                        <td class="text-right"><strong>{{bet.betData.grandTotal}}</strong></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br/>
+</div>
+
+
+

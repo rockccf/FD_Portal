@@ -4,10 +4,10 @@
     <div class="navbar-header">
         <a href="/" class="navbar-brand">
             <div class="brand-logo">
-                <img src="/assets/images/logo-white.png" alt="HorecaBid" width="140"/>
+                <img class="img-responsive" src="/assets/images/logo.png" alt="HorecaBid"/>
             </div>
             <div class="brand-logo-collapsed">
-                <img src="/assets/images/logo-single.png" alt="HorecaBid" width="40"/>
+                <img class="img-responsive" src="/assets/images/logo-single.png" alt="HorecaBid"/>
             </div>
         </a>
     </div>
@@ -18,12 +18,12 @@
         <ul class="nav navbar-nav">
             <li>
                 <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
-            <a class="hidden-xs" href="" trigger-resize="" ng-click="app.layout.isCollapsed = !app.layout.isCollapsed" ng-if="!app.layout.isCollapsedText">
-               <em class="fa fa-navicon"></em>
+                <a class="hidden-xs" href="" trigger-resize="" ng-click="app.layout.isCollapsed = !app.layout.isCollapsed" ng-if="!app.layout.isCollapsedText">
+                    <em class="fas fa-bars"></em>
                 </a>
                 <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
-            <a class="visible-xs sidebar-toggle" href="" ng-click="app.asideToggled = !app.asideToggled">
-               <em class="fa fa-navicon"></em>
+                <a class="visible-xs sidebar-toggle" href="" ng-click="app.asideToggled = !app.asideToggled">
+                    <em class="fas fa-bars"></em>
                 </a>
             </li>
             <!-- START User avatar toggle-->
@@ -35,9 +35,8 @@
             </li>
             <!-- END User avatar toggle-->
             <li>
-                <p class="text-white vertical-center-nav-text"><strong>{{'header.fdPortalPortal'|translate}}</strong></p>
+                <p class="text-white vertical-center-nav-text"><strong>{{'text.fdPortal'|translate}}</strong></p>
             </li>
-        </ul>
         </ul>
         <!-- END Left navbar-->
         <!-- START Right Navbar-->
@@ -48,6 +47,9 @@
                     <em class="icon-magnifier"></em>
                 </a>
             </li-->
+            <li>
+                <p class="text-white vertical-center-nav-text"><strong>{{ home.clock | date:'dd-MM-yyyy HH:mm:ss'}}</strong></p>
+            </li>
             <!-- START Offsidebar button-->
             <li>
             <a href="" ng-click="app.offsidebarOpen = !app.offsidebarOpen">

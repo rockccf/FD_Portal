@@ -1,0 +1,123 @@
+<div class="panel panel-info">
+        <div class="panel-heading" translate="text.betSlipHistory"></div>
+        <div class="panel-body">
+            <form name="betForm" class="form-horizontal form-validate" ng-submit="bet.getBetSlipHistory()" novalidate>
+                <div class="form-group" ng-class="{ 'has-error' : betForm.drawDateStart.$invalid && betForm.drawDateStart.$touched}">
+                    <label for="drawDateStart" class="col-lg-3 control-label" translate="text.drawDateStart"></label>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="drawDateStart" name="drawDateStart" placeholder="{{'placeholder.drawDateStart'|translate}}"
+                                   uib-datepicker-popup="{{bet.datepicker.format}}" is-open="bet.datepicker.drawDateStart.opened" datepicker-options="bet.datepicker.drawDateStart.dateOptions"
+                                   ng-model="bet.drawDateStart" close-text="{{'button.close'|translate}}"
+                                   ng-required="(bet.drawDateEnd) || !(bet.betDateStart || bet.betDateEnd)"/>
+                            <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="bet.openDatepicker(1)"><em class="fa fa-calendar"></em></button>
+                                </span>
+                            <span class="input-group-addon">DD-MMM-YYYY</span>
+                        </div>
+                        <div class="help-block" ng-messages="betForm.drawDateStart.$error" ng-show="betForm.drawDateStart.$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : betForm.drawDateEnd.$invalid && betForm.drawDateEnd.$touched}">
+                    <label for="drawDateEnd" class="col-lg-3 control-label" translate="text.drawDateEnd"></label>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="drawDateEnd" name="drawDateEnd" placeholder="{{'placeholder.drawDateEnd'|translate}}"
+                                   uib-datepicker-popup="{{bet.datepicker.format}}" is-open="bet.datepicker.drawDateEnd.opened" datepicker-options="bet.datepicker.drawDateEnd.dateOptions"
+                                   ng-model="bet.drawDateEnd" close-text="{{'button.close'|translate}}"
+                                   ng-required="(bet.drawDateStart) || !(bet.betDateStart || bet.betDateEnd)"/>
+                            <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="bet.openDatepicker(2)"><em class="fa fa-calendar"></em></button>
+                                </span>
+                            <span class="input-group-addon">DD-MMM-YYYY</span>
+                        </div>
+                        <div class="help-block" ng-messages="betForm.drawDateEnd.$error" ng-show="betForm.drawDateEnd.$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : betForm.betDateStart.$invalid && betForm.betDateStart.$touched}">
+                    <label for="betDateStart" class="col-lg-3 control-label" translate="text.betDateStart"></label>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="betDateStart" name="betDateStart" placeholder="{{'placeholder.betDateStart'|translate}}"
+                                   uib-datepicker-popup="{{bet.datepicker.format}}" is-open="bet.datepicker.betDateStart.opened" datepicker-options="bet.datepicker.betDateStart.dateOptions"
+                                   ng-model="bet.betDateStart" close-text="{{'button.close'|translate}}"
+                                   ng-required="(bet.betDateEnd) || !(bet.drawDateStart || bet.drawDateEnd)"/>
+                            <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="bet.openDatepicker(3)"><em class="fa fa-calendar"></em></button>
+                                </span>
+                            <span class="input-group-addon">DD-MMM-YYYY</span>
+                        </div>
+                        <div class="help-block" ng-messages="betForm.betDateStart.$error" ng-show="betForm.betDateStart.$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : betForm.betDateEnd.$invalid && betForm.betDateEnd.$touched}">
+                    <label for="betDateEnd" class="col-lg-3 control-label" translate="text.betDateEnd"></label>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="betDateEnd" name="betDateEnd" placeholder="{{'placeholder.betDateEnd'|translate}}"
+                                   uib-datepicker-popup="{{bet.datepicker.format}}" is-open="bet.datepicker.betDateEnd.opened" datepicker-options="bet.datepicker.betDateEnd.dateOptions"
+                                   ng-model="bet.betDateEnd" close-text="{{'button.close'|translate}}"
+                                   ng-required="(bet.betDateStart) || !(bet.drawDateStart || bet.drawDateEnd)"/>
+                            <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="bet.openDatepicker(4)"><em class="fa fa-calendar"></em></button>
+                                </span>
+                            <span class="input-group-addon">DD-MMM-YYYY</span>
+                        </div>
+                        <div class="help-block" ng-messages="betForm.betDateEnd.$error" ng-show="betForm.betDateEnd.$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <fieldset ng-disabled="bet.isSaving">
+                    <div class="form-group">
+                        <div class="col-lg-8 col-lg-offset-4">
+                            <button type="submit" class="btn btn-primary" ng-disabled="betForm.$invalid" translate="button.search"></button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr class="info">
+                            <th>#</th>
+                            <th translate="text.username"></th>
+                            <th translate="text.betDate"></th>
+                            <th translate="text.betMethod"></th>
+                            <th class="text-right" translate="text.totalSales"></th>
+                            <th translate="text.slip"></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="dataObj in bet.betData track by $index">
+                            <td>{{$index+1}}</td>
+                            <td>{{dataObj.creator.username}}</td>
+                            <td>{{dataObj.createdAt}}</td>
+                            <td><common-get-text ng-if="dataObj.betMethod != void(0)" value="dataObj.betMethod" object="bet.betMethodOptions"></common-get-text></td>
+                            <td class="text-right">{{dataObj.totalSales | number:2}}</td>
+                            <td>
+                                <pre class="form-control-static pre-scrollable" style="max-height: 200px" ng-bind="dataObj.slipText"></pre>
+                                <button type="button" clipboard text="dataObj.slipText" on-copied="bet.copySuccess()" class="btn btn-circle btn-green">{{'text.copy' | translate}}</button>
+                            </td>
+                            <td class="text-center">
+                                <a ui-sref="root.main.betView({id:dataObj.id})" class="btn btn-oval btn-lg btn-info" role="button" translate="button.view"></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br/>
+    </div>
+
+
+

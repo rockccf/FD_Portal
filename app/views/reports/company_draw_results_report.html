@@ -1,0 +1,535 @@
+<div class="panel panel-info">
+        <div class="panel-heading" translate="text.companyDrawResults"></div>
+        <div class="panel-body">
+            <form name="reportForm" class="form-horizontal form-validate" ng-submit="report.getReport(APPCONSTANT.FILE_TEMPLATE.REPORT.COMPANY_DRAW_RESULTS)" novalidate>
+                <div class="form-group required" ng-class="{ 'has-error' : reportForm.drawDate.$invalid && reportForm.drawDate.$touched}">
+                    <label for="drawDate" class="col-lg-3 control-label" translate="text.drawDate"></label>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="drawDate" name="drawDate" placeholder="{{'placeholder.drawDate'|translate}}"
+                                   uib-datepicker-popup="{{report.datepicker.format}}" is-open="report.datepicker.drawDate.opened" datepicker-options="report.datepicker.drawDate.dateOptions"
+                                   ng-model="report.drawDate" required
+                                   close-text="{{'button.close'|translate}}"/>
+                            <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="report.openDatepicker(3)"><em class="fa fa-calendar"></em></button>
+                                </span>
+                            <span class="input-group-addon">DD-MMM-YYYY</span>
+                        </div>
+                        <div class="help-block" ng-messages="reportForm.drawDate.$error" ng-show="reportForm.drawDate.$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <fieldset ng-disabled="report.isSaving">
+                    <div class="form-group">
+                        <div class="col-lg-8 col-lg-offset-4">
+                            <button type="submit" class="btn btn-primary" ng-disabled="reportForm.$invalid" translate="button.search"></button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1"> <!-- Magnum -->
+                    <br/>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th colspan="5" class="text-center" style="background-color:yellow;color:black"><h4>Magnum (M)</h4></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.1st' | translate}} - <strong>{{report.reportData.magnum["1stPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.2nd' | translate}} - <strong>{{report.reportData.magnum["2ndPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.3rd' | translate}} - <strong>{{report.reportData.magnum["3rdPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr class="success">
+                            <td colspan="5" class="text-center"><strong translate="text.starters"></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.magnum["special1Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.magnum["special2Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.magnum["special3Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.magnum["special4Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.magnum["special5Prize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.magnum["special6Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.magnum["special7Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.magnum["special8Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.magnum["special9Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.magnum["special10Prize"]}}</td>
+                        </tr>
+                        <tr class="info">
+                            <td colspan="5" class="text-center"><strong translate="text.consolation"></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.magnum["consolation1Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.magnum["consolation2Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.magnum["consolation3Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.magnum["consolation4Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.magnum["consolation5Prize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.magnum["consolation6Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.magnum["consolation7Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.magnum["consolation8Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.magnum["consolation9Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.magnum["consolation10Prize"]}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-5"> <!-- PMP -->
+                    <br/>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th colspan="5" class="text-center" style="background-color:blue;color:white"><h4>PMP (P)</h4></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.1st' | translate}} - <strong>{{report.reportData.pmp["1stPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.2nd' | translate}} - <strong>{{report.reportData.pmp["2ndPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.3rd' | translate}} - <strong>{{report.reportData.pmp["3rdPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr class="success">
+                            <td colspan="5" class="text-center"><strong translate="text.starters"></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.pmp["special1Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.pmp["special2Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.pmp["special3Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.pmp["special4Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.pmp["special5Prize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.pmp["special6Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.pmp["special7Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.pmp["special8Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.pmp["special9Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.pmp["special10Prize"]}}</td>
+                        </tr>
+                        <tr class="info">
+                            <td colspan="5" class="text-center"><strong translate="text.consolation"></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.pmp["consolation1Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.pmp["consolation2Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.pmp["consolation3Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.pmp["consolation4Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.pmp["consolation5Prize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.pmp["consolation6Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.pmp["consolation7Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.pmp["consolation8Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.pmp["consolation9Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.pmp["consolation10Prize"]}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1"> <!-- Toto -->
+                    <br/>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th colspan="5" class="text-center" style="background-color:#CC0000;color:white"><h4>Toto (T)</h4></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.1st' | translate}} - <strong>{{report.reportData.toto["1stPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.2nd' | translate}} - <strong>{{report.reportData.toto["2ndPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.3rd' | translate}} - <strong>{{report.reportData.toto["3rdPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr class="success">
+                            <td colspan="5" class="text-center"><strong translate="text.starters"></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.toto["special1Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.toto["special2Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.toto["special3Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.toto["special4Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.toto["special5Prize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.toto["special6Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.toto["special7Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.toto["special8Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.toto["special9Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.toto["special10Prize"]}}</td>
+                        </tr>
+                        <tr class="info">
+                            <td colspan="5" class="text-center"><strong translate="text.consolation"></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.toto["consolation1Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.toto["consolation2Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.toto["consolation3Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.toto["consolation4Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.toto["consolation5Prize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.toto["consolation6Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.toto["consolation7Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.toto["consolation8Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.toto["consolation9Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.toto["consolation10Prize"]}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-5"> <!-- Toto 5D & 6D -->
+                    <br/>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th colspan="4" class="text-center" style="background-color:#CC0000;color:white"><h4>Toto 5D 6D (T)</h4></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="success">
+                            <td colspan="4" class="text-center"><strong>5D</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" translate="text.1st"></td>
+                            <td class="text-center">{{report.reportData.toto["5d1stPrize"]}}</td>
+                            <td class="text-center" translate="text.4th"></td>
+                            <td class="text-center">{{report.reportData.toto["5d4thPrize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" translate="text.2nd"></td>
+                            <td class="text-center">{{report.reportData.toto["5d2ndPrize"]}}</td>
+                            <td class="text-center" translate="text.5th"></td>
+                            <td class="text-center">{{report.reportData.toto["5d5thPrize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" translate="text.3rd"></td>
+                            <td class="text-center">{{report.reportData.toto["5d3rdPrize"]}}</td>
+                            <td class="text-center" translate="text.6th"></td>
+                            <td class="text-center">{{report.reportData.toto["5d6thPrize"]}}</td>
+                        </tr>
+                        <tr class="info">
+                            <td colspan="4" class="text-center"><strong>6D</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" translate="text.1st"></td>
+                            <td class="text-center" colspan="3">{{report.reportData.toto["6d1stPrize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" translate="text.2nd"></td>
+                            <td class="text-center">{{report.reportData.toto["6d2nd1Prize"]}}</td>
+                            <td class="text-center warning" translate="text.or"></td>
+                            <td class="text-center">{{report.reportData.toto["6d2nd2Prize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" translate="text.3rd"></td>
+                            <td class="text-center">{{report.reportData.toto["6d3rd1Prize"]}}</td>
+                            <td class="text-center warning" translate="text.or"></td>
+                            <td class="text-center">{{report.reportData.toto["6d3rd2Prize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" translate="text.4th"></td>
+                            <td class="text-center">{{report.reportData.toto["6d4th1Prize"]}}</td>
+                            <td class="text-center warning" translate="text.or"></td>
+                            <td class="text-center">{{report.reportData.toto["6d4th2Prize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" translate="text.5th"></td>
+                            <td class="text-center">{{report.reportData.toto["6d5th1Prize"]}}</td>
+                            <td class="text-center warning" translate="text.or"></td>
+                            <td class="text-center">{{report.reportData.toto["6d5th2Prize"]}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1"> <!-- Sarawak -->
+                    <br/>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th colspan="5" class="text-center" style="background-color:#00540E;color:white"><h4>Sarawak (W)</h4></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.1st' | translate}} - <strong>{{report.reportData.sarawak["1stPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.2nd' | translate}} - <strong>{{report.reportData.sarawak["2ndPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.3rd' | translate}} - <strong>{{report.reportData.sarawak["3rdPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr class="success">
+                            <td colspan="5" class="text-center"><strong translate="text.starters"></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.sarawak["special1Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sarawak["special2Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sarawak["special3Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sarawak["special4Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sarawak["special5Prize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.sarawak["special6Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sarawak["special7Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sarawak["special8Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sarawak["special9Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sarawak["special10Prize"]}}</td>
+                        </tr>
+                        <tr class="info">
+                            <td colspan="5" class="text-center"><strong translate="text.consolation"></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.sarawak["consolation1Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sarawak["consolation2Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sarawak["consolation3Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sarawak["consolation4Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sarawak["consolation5Prize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.sarawak["consolation6Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sarawak["consolation7Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sarawak["consolation8Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sarawak["consolation9Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sarawak["consolation10Prize"]}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-5"> <!-- Sandakan -->
+                    <br/>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th colspan="5" class="text-center" style="background-color:#008835;color:white"><h4>Sandakan (K)</h4></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.1st' | translate}} - <strong>{{report.reportData.sandakan["1stPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.2nd' | translate}} - <strong>{{report.reportData.sandakan["2ndPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.3rd' | translate}} - <strong>{{report.reportData.sandakan["3rdPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr class="success">
+                            <td colspan="5" class="text-center"><strong translate="text.starters"></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.sandakan["special1Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sandakan["special2Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sandakan["special3Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sandakan["special4Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sandakan["special5Prize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.sandakan["special6Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sandakan["special7Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sandakan["special8Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sandakan["special9Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sandakan["special10Prize"]}}</td>
+                        </tr>
+                        <tr class="info">
+                            <td colspan="5" class="text-center"><strong translate="text.consolation"></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.sandakan["consolation1Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sandakan["consolation2Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sandakan["consolation3Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sandakan["consolation4Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sandakan["consolation5Prize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.sandakan["consolation6Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sandakan["consolation7Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sandakan["consolation8Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sandakan["consolation9Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sandakan["consolation10Prize"]}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1"> <!-- Sabah -->
+                    <br/>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th colspan="5" class="text-center" style="background-color:#E51D20;color:white"><h4>Sabah (B)</h4></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.1st' | translate}} - <strong>{{report.reportData.sabah["1stPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.2nd' | translate}} - <strong>{{report.reportData.sabah["2ndPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.3rd' | translate}} - <strong>{{report.reportData.sabah["3rdPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr class="success">
+                            <td colspan="5" class="text-center"><strong translate="text.starters"></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.sabah["special1Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sabah["special2Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sabah["special3Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sabah["special4Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sabah["special5Prize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.sabah["special6Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sabah["special7Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sabah["special8Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sabah["special9Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sabah["special10Prize"]}}</td>
+                        </tr>
+                        <tr class="info">
+                            <td colspan="5" class="text-center"><strong translate="text.consolation"></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.sabah["consolation1Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sabah["consolation2Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sabah["consolation3Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sabah["consolation4Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sabah["consolation5Prize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.sabah["consolation6Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sabah["consolation7Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sabah["consolation8Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sabah["consolation9Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.sabah["consolation10Prize"]}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-5"> <!-- Singapore -->
+                    <br/>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th colspan="5" class="text-center" style="background-color:#4C8ED1;color:white"><h4>Singapore (S)</h4></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.1st' | translate}} - <strong>{{report.reportData.singapore["1stPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.2nd' | translate}} - <strong>{{report.reportData.singapore["2ndPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                {{'text.3rd' | translate}} - <strong>{{report.reportData.singapore["3rdPrize"]}}</strong>
+                            </td>
+                        </tr>
+                        <tr class="success">
+                            <td colspan="5" class="text-center"><strong translate="text.starters"></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.singapore["special1Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.singapore["special2Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.singapore["special3Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.singapore["special4Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.singapore["special5Prize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.singapore["special6Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.singapore["special7Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.singapore["special8Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.singapore["special9Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.singapore["special10Prize"]}}</td>
+                        </tr>
+                        <tr class="info">
+                            <td colspan="5" class="text-center"><strong translate="text.consolation"></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.singapore["consolation1Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.singapore["consolation2Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.singapore["consolation3Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.singapore["consolation4Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.singapore["consolation5Prize"]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">{{report.reportData.singapore["consolation6Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.singapore["consolation7Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.singapore["consolation8Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.singapore["consolation9Prize"]}}</td>
+                            <td class="text-center">{{report.reportData.singapore["consolation10Prize"]}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br/>
+    </div>
+
+
+

@@ -1,0 +1,555 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th class="text-center" ng-repeat="companyObj in bet.drawCompanyArray" style="background-color:{{companyObj.bgColor}};color:{{companyObj.fontColor}}">
+                {{companyObj.name | translate}}
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="drawDateObj in bet.sevenDaysDrawDateArray">
+            <td>{{drawDateObj | date:'EEE'}}</td>
+            <td class="text-center" ng-repeat="companyObj in drawDateObj.companyArray track by $index" style="background-color:{{companyObj.bgColor}};color:{{companyObj.fontColor}}">
+                <span>{{companyObj.drawDate | date:'dd-MM-yyyy'}}</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<br/>
+<fieldset ng-disabled="bet.isSaving">
+    <div class="form-group">
+        <div class="col-lg-8 col-lg-offset-3">
+            <button type="submit" class="btn btn-primary" ng-disabled="betForm.$invalid" translate="button.submit"></button>
+        </div>
+    </div>
+</fieldset>
+<div class="table-responsive">
+    <table ng-if="$state.current.name == 'root.main.bet'" class="table table-condensed">
+        <thead>
+        <tr class="active">
+            <th rowspan="3">#</th>
+            <th rowspan="3" class="text-center" translate="text.number"></th>
+            <th class="text-center" colspan="{{bet.amountColspan}}" translate="text.amount"></th>
+            <th class="text-center" colspan="{{bet.activeDrawDateArray.length}}" translate="text.drawDate"></th>
+            <th class="text-center" colspan="{{bet.drawCompanyArray.length}}" translate="text.drawCompany"></th>
+            <th class="text-center" rowspan="2" translate="text.option"></th>
+            <th rowspan="3" translate="text.remarks"></th>
+        </tr>
+        <tr class="active">
+            <th class="text-center">-{{'text.big' | translate}}-</th>
+            <th class="text-center">-{{'text.small' | translate}}-</th>
+            <th class="text-center">-4D 4A-</th>
+            <th class="text-center">-3D 3A-</th>
+            <th class="text-center">-3D 3ABC-</th>
+            <th ng-if="userIdentity.userDetail.bet6d" class="text-center">-  5D  -</th>
+            <th ng-if="userIdentity.userDetail.bet6d" class="text-center">-  6D  -</th>
+            <th class="text-center" ng-repeat="dateObj in bet.activeDrawDateArray">{{dateObj | date:'EEE'}}<br/>{{dateObj | date:'dd-MM'}}</th>
+            <th class="text-center" ng-repeat="companyObj in bet.drawCompanyArray" style="background-color:{{companyObj.bgColor}};color:{{companyObj.fontColor}}">
+                {{companyObj.code}}
+            </th>
+        </tr>
+        <tr class="active">
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="bigAllCheckbox" name="bigAllCheckbox"
+                               ng-change="bet.checkAllBet('big')" ng-model="bet.betAllCheckbox['big']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="smallAllCheckbox" name="smallAllCheckbox"
+                               ng-change="bet.checkAllBet('small')" ng-model="bet.betAllCheckbox['small']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="4aAllCheckbox" name="4aAllCheckbox"
+                               ng-change="bet.checkAllBet('4a')" ng-model="bet.betAllCheckbox['4a']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="3aAllCheckbox" name="3aAllCheckbox"
+                               ng-change="bet.checkAllBet('3a')" ng-model="bet.betAllCheckbox['3a']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="3abcAllCheckbox" name="3d3abcAllCheckbox"
+                               ng-change="bet.checkAllBet('3abc')" ng-model="bet.betAllCheckbox['3abc']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th ng-if="userIdentity.userDetail.bet6d" class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="5dAllCheckbox" name="5dAllCheckbox"
+                               ng-change="bet.checkAllBet('5d')" ng-model="bet.betAllCheckbox['5d']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th ng-if="userIdentity.userDetail.bet6d" class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="6dAllCheckbox" name="6dAllCheckbox"
+                               ng-change="bet.checkAllBet('6d')" ng-model="bet.betAllCheckbox['6d']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center" ng-repeat="dateObj in bet.activeDrawDateArray track by $index">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="dateAllCheckbox_{{$index}}" name="dateAllCheckbox_{{$index}}"
+                               ng-change="bet.checkAllDate(dateObj,$index)" ng-model="bet.dateAllCheckbox[$index]"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center" ng-repeat="companyObj in bet.drawCompanyArray" style="background-color:{{companyObj.bgColor}};color:{{companyObj.color}}">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="companyAllCheckbox_{{companyObj.code}}" name="companyAllCheckbox_{{companyObj.code}}"
+                               ng-change="bet.checkAllCompany(companyObj.code,$index)" ng-model="bet.companyAllCheckbox[$index]"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="optionAllCheckbox" name="optionAllCheckbox"
+                               ng-change="bet.checkAllOption()" ng-model="bet.optionAllCheckbox"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-class="{'success' : rowObj.selected, '' : !rowObj.selected}" ng-click="bet.selectRow($index)" ng-repeat="rowObj in bet.betFormRowsArray">
+            <td>{{$index+1}}</td>
+            <td>
+                <input type="text" class="form-control input-xs" pattern="\d*" minlength="3" maxlength="6" id="number_{{$index}}" name="number_{{$index}}" ng-model="rowObj.number"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5" id="big_{{$index}}" name="big_{{$index}}" ng-model="rowObj.big" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="small_{{$index}}" name="small_{{$index}}" ng-model="rowObj.small" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="4a_{{$index}}" name="4a_{{$index}}" ng-model="rowObj['4a']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="3a_{{$index}}" name="3a_{{$index}}" ng-model="rowObj['3a']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="3abc_{{$index}}" name="3abc_{{$index}}" ng-model="rowObj['3abc']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td ng-if="userIdentity.userDetail.bet6d">
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="5d_{{$index}}" name="5d_{{$index}}" ng-model="rowObj['5d']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td ng-if="userIdentity.userDetail.bet6d">
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="6d_{{$index}}" name="6d_{{$index}}" ng-model="rowObj['6d']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td class="text-center" ng-repeat="dateObj in bet.activeDrawDateArray">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" ng-model="rowObj[dateObj]"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </td>
+            <td class="text-center" ng-repeat="companyObj in bet.drawCompanyArray" style="background-color:{{companyObj.bgColor}};color:{{companyObj.color}}">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" ng-model="rowObj[companyObj.code]"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </td>
+            <td class="text-center">
+                <div class="col-lg-6">
+                    <select id="betOption_{{$index}}" name="betOption_{{$index}}" ng-options="option.name | translate for option in bet.betOptions track by option.id"
+                            ng-model="rowObj.betOption" ng-change="bet.changeBet($index)"></select>
+                    <div class="help-block" ng-messages="masterForm.active.$error" ng-show="masterForm.active.$touched">
+                        <div ng-messages-include="views/common/messages.html"></div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" id="remarks_{{$index}}" name="remarks_{{$index}}" ng-model="rowObj.remarks"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table ng-if="$state.current.name == 'root.main.4dSpecial'" class="table table-condensed">
+        <thead>
+        <tr class="active">
+            <th rowspan="3">#</th>
+            <th rowspan="3" class="text-center" translate="text.number"></th>
+            <th class="text-center" colspan="8" translate="text.amount"></th>
+            <th class="text-center" colspan="{{bet.activeDrawDateArray.length}}" translate="text.drawDate"></th>
+            <th class="text-center" colspan="{{bet.drawCompanyArray.length}}" translate="text.drawCompany"></th>
+            <th class="text-center" rowspan="2" translate="text.option"></th>
+            <th rowspan="3" translate="text.remarks"></th>
+        </tr>
+        <tr class="active">
+            <th class="text-center">-- 4A --</th>
+            <th class="text-center">-- 4B --</th>
+            <th class="text-center">-- 4C --</th>
+            <th class="text-center">-- 4D --</th>
+            <th class="text-center">-- 4E --</th>
+            <th class="text-center">-- 4F --</th>
+            <th class="text-center">-{{'text.big' | translate}}-</th>
+            <th class="text-center">-{{'text.small' | translate}}-</th>
+            <th class="text-center" ng-repeat="dateObj in bet.activeDrawDateArray">{{dateObj | date:'EEE'}}<br/>{{dateObj | date:'dd-MM'}}</th>
+            <th class="text-center" ng-repeat="companyObj in bet.drawCompanyArray" style="background-color:{{companyObj.bgColor}};color:{{companyObj.fontColor}}">
+                {{companyObj.code}}
+            </th>
+        </tr>
+        <tr class="active">
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="4aAllCheckbox" name="4aAllCheckbox"
+                               ng-change="bet.checkAllBet('4a')" ng-model="bet.betAllCheckbox['4a']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="4bAllCheckbox" name="4bAllCheckbox"
+                               ng-change="bet.checkAllBet('4b')" ng-model="bet.betAllCheckbox['4b']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="4cAllCheckbox" name="4cAllCheckbox"
+                               ng-change="bet.checkAllBet('4c')" ng-model="bet.betAllCheckbox['4c']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="4dAllCheckbox" name="4dAllCheckbox"
+                               ng-change="bet.checkAllBet('4d')" ng-model="bet.betAllCheckbox['4d']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="4eAllCheckbox" name="4eAllCheckbox"
+                               ng-change="bet.checkAllBet('4e')" ng-model="bet.betAllCheckbox['4e']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="4fAllCheckbox" name="4fAllCheckbox"
+                               ng-change="bet.checkAllBet('4f')" ng-model="bet.betAllCheckbox['4f']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="bigAllCheckbox" name="bigAllCheckbox"
+                               ng-change="bet.checkAllBet('big')" ng-model="bet.betAllCheckbox['big']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="smallAllCheckbox" name="smallAllCheckbox"
+                               ng-change="bet.checkAllBet('small')" ng-model="bet.betAllCheckbox['small']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center" ng-repeat="dateObj in bet.activeDrawDateArray track by $index">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="dateAllCheckbox_{{$index}}" name="dateAllCheckbox_{{$index}}"
+                               ng-change="bet.checkAllDate(dateObj,$index)" ng-model="bet.dateAllCheckbox[$index]"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center" ng-repeat="companyObj in bet.drawCompanyArray" style="background-color:{{companyObj.bgColor}};color:{{companyObj.color}}">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="companyAllCheckbox_{{companyObj.code}}" name="companyAllCheckbox_{{companyObj.code}}"
+                               ng-change="bet.checkAllCompany(companyObj.code,$index)" ng-model="bet.companyAllCheckbox[$index]"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="optionAllCheckbox" name="optionAllCheckbox"
+                               ng-change="bet.checkAllOption()" ng-model="bet.optionAllCheckbox"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-class="{'success' : rowObj.selected, '' : !rowObj.selected}" ng-click="bet.selectRow($index)" ng-repeat="rowObj in bet.betFormRowsArray">
+            <td>{{$index+1}}</td>
+            <td>
+                <input type="text" class="form-control input-xs" pattern="\d*" minlength="3" maxlength="6" id="number_{{$index}}" name="number_{{$index}}" ng-model="rowObj.number"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="4a_{{$index}}" name="4a_{{$index}}" ng-model="rowObj['4a']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="4b_{{$index}}" name="4b_{{$index}}" ng-model="rowObj['4b']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="4c_{{$index}}" name="4c{{$index}}" ng-model="rowObj['4c']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="4d_{{$index}}" name="4d_{{$index}}" ng-model="rowObj['4d']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="4e_{{$index}}" name="4e_{{$index}}" ng-model="rowObj['4e']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="4f_{{$index}}" name="4f_{{$index}}" ng-model="rowObj['4f']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5" id="big_{{$index}}" name="big_{{$index}}" ng-model="rowObj.big" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="small_{{$index}}" name="small_{{$index}}" ng-model="rowObj.small" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td class="text-center" ng-repeat="dateObj in bet.activeDrawDateArray">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" ng-model="rowObj[dateObj]"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </td>
+            <td class="text-center" ng-repeat="companyObj in bet.drawCompanyArray" style="background-color:{{companyObj.bgColor}};color:{{companyObj.color}}">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" ng-model="rowObj[companyObj.code]"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </td>
+            <td class="text-center">
+                <div class="col-lg-6">
+                    <select id="betOption_{{$index}}" name="betOption_{{$index}}" ng-options="option.name | translate for option in bet.betOptions track by option.id"
+                            ng-model="rowObj.betOption" ng-change="bet.changeBet($index)"></select>
+                    <div class="help-block" ng-messages="masterForm.active.$error" ng-show="masterForm.active.$touched">
+                        <div ng-messages-include="views/common/messages.html"></div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" id="remarks_{{$index}}" name="remarks_{{$index}}" ng-model="rowObj.remarks"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table ng-if="$state.current.name == 'root.main.3dSpecial'" class="table table-condensed">
+        <thead>
+        <tr class="active">
+            <th rowspan="3">#</th>
+            <th rowspan="3" class="text-center" translate="text.number"></th>
+            <th class="text-center" colspan="6" translate="text.amount"></th>
+            <th class="text-center" colspan="{{bet.activeDrawDateArray.length}}" translate="text.drawDate"></th>
+            <th class="text-center" colspan="{{bet.drawCompanyArray.length}}" translate="text.drawCompany"></th>
+            <th class="text-center" rowspan="2" translate="text.option"></th>
+            <th rowspan="3" translate="text.remarks"></th>
+        </tr>
+        <tr class="active">
+            <th class="text-center">-- 3A --</th>
+            <th class="text-center">-- 3B --</th>
+            <th class="text-center">-- 3C --</th>
+            <th class="text-center">-- 3D --</th>
+            <th class="text-center">-- 3E --</th>
+            <th class="text-center">-- 3ABC --</th>
+            <th class="text-center" ng-repeat="dateObj in bet.activeDrawDateArray">{{dateObj | date:'EEE'}}<br/>{{dateObj | date:'dd-MM'}}</th>
+            <th class="text-center" ng-repeat="companyObj in bet.drawCompanyArray" style="background-color:{{companyObj.bgColor}};color:{{companyObj.fontColor}}">
+                {{companyObj.code}}
+            </th>
+        </tr>
+        <tr class="active">
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="3aAllCheckbox" name="3aAllCheckbox"
+                               ng-change="bet.checkAllBet('3a')" ng-model="bet.betAllCheckbox['3a']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="3bAllCheckbox" name="3bAllCheckbox"
+                               ng-change="bet.checkAllBet('3b')" ng-model="bet.betAllCheckbox['3b']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="3cAllCheckbox" name="3cAllCheckbox"
+                               ng-change="bet.checkAllBet('3c')" ng-model="bet.betAllCheckbox['3c']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="3dAllCheckbox" name="3dAllCheckbox"
+                               ng-change="bet.checkAllBet('3d')" ng-model="bet.betAllCheckbox['3d']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="3eAllCheckbox" name="3eAllCheckbox"
+                               ng-change="bet.checkAllBet('3e')" ng-model="bet.betAllCheckbox['3e']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="3abcAllCheckbox" name="3d3abcAllCheckbox"
+                               ng-change="bet.checkAllBet('3abc')" ng-model="bet.betAllCheckbox['3abc']"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center" ng-repeat="dateObj in bet.activeDrawDateArray track by $index">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="dateAllCheckbox_{{$index}}" name="dateAllCheckbox_{{$index}}"
+                               ng-change="bet.checkAllDate(dateObj,$index)" ng-model="bet.dateAllCheckbox[$index]"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center" ng-repeat="companyObj in bet.drawCompanyArray" style="background-color:{{companyObj.bgColor}};color:{{companyObj.color}}">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="companyAllCheckbox_{{companyObj.code}}" name="companyAllCheckbox_{{companyObj.code}}"
+                               ng-change="bet.checkAllCompany(companyObj.code,$index)" ng-model="bet.companyAllCheckbox[$index]"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+            <th class="text-center">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" id="optionAllCheckbox" name="optionAllCheckbox"
+                               ng-change="bet.checkAllOption()" ng-model="bet.optionAllCheckbox"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-class="{'success' : rowObj.selected, '' : !rowObj.selected}" ng-click="bet.selectRow($index)" ng-repeat="rowObj in bet.betFormRowsArray">
+            <td>{{$index+1}}</td>
+            <td>
+                <input type="text" class="form-control input-xs" pattern="\d*" minlength="3" maxlength="6" id="number_{{$index}}" name="number_{{$index}}" ng-model="rowObj.number"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="3a_{{$index}}" name="3a_{{$index}}" ng-model="rowObj['3a']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="3b_{{$index}}" name="3b_{{$index}}" ng-model="rowObj['3b']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="3c_{{$index}}" name="3c_{{$index}}" ng-model="rowObj['3c']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="3d_{{$index}}" name="3d_{{$index}}" ng-model="rowObj['3d']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="3e_{{$index}}" name="3e_{{$index}}" ng-model="rowObj['3e']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="3abc_{{$index}}" name="3abc_{{$index}}" ng-model="rowObj['3abc']" ng-change="bet.changeBet($index)"/>
+            </td>
+            <td class="text-center" ng-repeat="dateObj in bet.activeDrawDateArray">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" ng-model="rowObj[dateObj]"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </td>
+            <td class="text-center" ng-repeat="companyObj in bet.drawCompanyArray" style="background-color:{{companyObj.bgColor}};color:{{companyObj.color}}">
+                <div class="checkbox c-checkbox needsclick">
+                    <label class="needsclick">
+                        <input class="needsclick" type="checkbox" ng-model="rowObj[companyObj.code]"/>
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </td>
+            <td class="text-center">
+                <div class="col-lg-6">
+                    <select id="betOption_{{$index}}" name="betOption_{{$index}}" ng-options="option.name | translate for option in bet.betOptions track by option.id"
+                            ng-model="rowObj.betOption" ng-change="bet.changeBet($index)"></select>
+                    <div class="help-block" ng-messages="masterForm.active.$error" ng-show="masterForm.active.$touched">
+                        <div ng-messages-include="views/common/messages.html"></div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <input type="text" class="form-control input-xs" id="remarks_{{$index}}" name="remarks_{{$index}}" ng-model="rowObj.remarks"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

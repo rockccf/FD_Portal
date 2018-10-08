@@ -1,154 +1,46 @@
 <div class="panel panel-primary">
-    <div class="panel-heading" translate="user.heading.userEdit"></div>
+    <div class="panel-heading" ng-if="$state.current.name == 'root.main.userEdit'" translate="text.userEdit"></div>
+    <div class="panel-heading" ng-if="$state.current.name == 'root.main.myAccountEdit'" translate="text.myAccountEdit"></div>
     <div class="panel-body">
         <alert-message-div/>
         <uib-tabset>
-            <uib-tab heading="{{'user.heading.userInformation'|translate}}">
+            <uib-tab heading="{{'text.userInformation'|translate}}">
                 <form name="userForm" class="form-horizontal form-validate" ng-submit="user.updateUser(userForm.$valid)" novalidate>
-                    <div class="form-group required">
-                        <label for="username" class="col-lg-3 control-label" translate="user.label.username"></label>
-                        <div class="col-lg-6">
-                            <input type="text" class="form-control" id="username" name="username" ng-model="user.user.username" disabled>
-                        </div>
-                    </div>
-                    <div class="form-group required" ng-class="{ 'has-error' : userForm.firstName.$invalid && userForm.firstName.$touched}">
-                        <label for="firstName" class="col-lg-3 control-label" translate="user.label.firstName"></label>
-                        <div class="col-lg-6">
-                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="{{'user.placeholder.firstName'|translate}}"
-                                   ng-model="user.user.userProfile.firstName" ng-minlength="3" ng-maxlength="100" required>
-                            <div class="help-block" ng-messages="userForm.firstName.$error" ng-show="userForm.firstName.$touched">
-                                <div ng-messages-include="views/common/messages.html"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group required" ng-class="{ 'has-error' : userForm.lastName.$invalid && userForm.lastName.$touched}">
-                        <label for="lastName" class="col-lg-3 control-label" translate="user.label.lastName"></label>
-                        <div class="col-lg-6">
-                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="{{'user.placeholder.lastName'|translate}}"
-                                   ng-model="user.user.userProfile.lastName" ng-minlength="2" ng-maxlength="100" required>
-                            <div class="help-block" ng-messages="userForm.lastName.$error" ng-show="userForm.lastName.$touched">
-                                <div ng-messages-include="views/common/messages.html"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group required" ng-class="{ 'has-error' : userForm.email.$invalid && userForm.email.$touched}">
-                        <label for="email" class="col-lg-3 control-label" translate="user.label.email"></label>
-                        <div class="col-lg-6">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="{{'user.placeholder.email'|translate}}"
-                                   ng-model="user.user.email" ng-minlength="6" ng-maxlength="100" required>
-                            <div class="help-block" ng-messages="userForm.email.$error" ng-show="userForm.email.$touched">
-                                <div ng-messages-include="views/common/messages.html"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group required" ng-class="{ 'has-error' : userForm.jobTitle.$invalid && userForm.jobTitle.$touched}">
-                        <label for="jobTitle" class="col-lg-3 control-label" translate="user.label.jobTitle"></label>
-                        <div class="col-lg-6">
-                            <input type="jobTitle" class="form-control" id="jobTitle" name="jobTitle" placeholder="{{'user.placeholder.jobTitle'|translate}}"
-                                   ng-model="user.user.userProfile.jobTitle" ng-minlength="6" ng-maxlength="100" required>
-                            <div class="help-block" ng-messages="userForm.jobTitle.$error" ng-show="userForm.jobTitle.$touched">
-                                <div ng-messages-include="views/common/messages.html"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group required" ng-class="{ 'has-error' : userForm.departmentId.$invalid && userForm.departmentId.$touched}">
-                        <label for="department" class="col-lg-3 control-label" translate="user.label.department"></label>
-                        <div class="col-lg-6">
-                            <select class="form-control" id="department" name="department" ng-options="option.name for option in user.departmentOptions track by option.id"
-                                    ng-model="user.user.department" required></select>
-                            <div class="help-block" ng-messages="userForm.department.$error" ng-show="userForm.department.$touched">
-                                <div ng-messages-include="views/common/messages.html"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group required" ng-class="{ 'has-error' : userForm.roleId.$invalid && userForm.roleId.$touched}">
-                        <label for="role" class="col-lg-3 control-label" translate="user.label.role"></label>
-                        <div class="col-lg-6">
-                            <select class="form-control" id="role" name="role" ng-options="option.name for option in user.roleOptions track by option.id"
-                                    ng-model="user.user.role" required></select>
-                            <div class="help-block" ng-messages="userForm.role.$error" ng-show="userForm.role.$touched">
-                                <div ng-messages-include="views/common/messages.html"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group required" ng-class="{ 'has-error' : userForm.active.$invalid && userForm.active.$touched}">
-                        <label for="active" class="col-lg-3 control-label" translate="user.label.active"></label>
-                        <div class="col-lg-6">
-                            <select class="form-control" id="active" name="active"
-                                    ng-options="option.name | translate for option in user.activeOptions track by option.id"
-                                    ng-model="user.user.active"></select>
-                            <div class="help-block" ng-messages="userForm.active.$error" ng-show="userForm.active.$touched">
-                                <div ng-messages-include="views/common/messages.html"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group" ng-class="{ 'has-error' : userForm.profileImage.$invalid && userForm.profileImageDirtyFlag}">
-                        <label class="col-lg-3 control-label" translate="user.label.profileImage"></label>
-                        <div class="col-lg-6">
-                            <div class="row" ng-if="user.showProfileUploadBoxFlag == false">
-                                <div class="col-lg-11">
-                                    <!--
-                                    Hide the upload box if image is present
-                                    -->
-                                    <img class="img-responsive" ng-if="user.profileImageDirtyFlag == false && user.user.userProfile.profileImage" ng-src="{{backendImageURL}}/{{user.user.userProfile.profileImage.id}}">
-                                    <img class="img-responsive" ng-if="user.profileImageDirtyFlag == true && user.user.userProfile.profileImageFile" ngf-src="user.user.userProfile.profileImageFile">
-                                </div>
-                                <div class="col-lg-1 text-center">
-                                    <a ng-click="user.deleteProfileImage()" role="button"><span class="fa fa-times fa-2x"></span></a><br/>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12" ng-if="user.showProfileUploadBoxFlag">
-                                    <div id="profileImage" name="profileImage" ngf-drop ngf-select
-                                         ng-model="user.user.userProfile.profileImageFile" class="upload-drop-zone" ng-model-options="{allowInvalid: true}"
-                                         ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
-                                         ngf-min-height="75" ngf-min-width="75"
-                                         ngf-max-size="1MB" accept="image/*" ngf-change="user.checkProfileUpload(userForm.profileImage)"
-                                         ngf-pattern="'image/*'">
-                                        {{'user.label.profileImage.dropImageHere'|translate}}
-                                    </div>
-                                    <div class="help-block">
-                                        <p ng-show="profileForm.profileImage.$error.required && user.profileImageDirtyFlag">{{'user.label.profileImage.required'|translate}}</p>
-                                        <p ng-show="profileForm.profileImage.$error.maxSize">
-                                            File {{user.user.userProfile.profileImageFile.name}} is too large
-                                            {{user.user.userProfile.profileImageFile.size / 1000000|number:1}}MB, Max file size allowed: {{user.user.userProfile.profileImageFile.$errorParam}}
-                                        </p>
-                                        <p ng-show="profileForm.profileImage.$error.pattern">
-                                            File {{user.user.userProfile.profileImageFile.name}} is not a valid image.
-                                        </p>
-                                        <p ng-show="profileForm.profileImage.$error.minHeight || profileForm.profileImage.$error.minWidth">
-                                            {{profileForm.profileImage.$error.minHeight}}
-                                            File {{user.user.userProfile.profileImageFile.name}} should not less than 75px(width) x 75px(height).
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div ng-include src="'views/user_form.html'"></div>
                     <br/>
                     <fieldset ng-disabled="user.isSaving">
                         <div class="form-group">
                             <div class="col-lg-8 col-lg-offset-3">
-                                <a ui-sref="root.main.userListing" class="btn btn-default" translate="user.button.btnBack"></a>
-                                <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" translate="user.button.btnUpdate"></button>
+                                <a ng-if="$state.current.name == 'root.main.userEdit'" ui-sref="root.main.userListing" class="btn btn-default" translate="button.back"></a>
+                                <a ng-if="$state.current.name == 'root.main.myAccountEdit'" ui-sref="root.main.myAccount" class="btn btn-default" translate="button.back"></a>
+                                <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" translate="button.update"></button>
                             </div>
                         </div>
                     </fieldset>
                 </form>
             </uib-tab>
-
-            <uib-tab heading="{{'user.heading.userPassword'|translate}}">
+            <uib-tab heading="{{'text.userPassword'|translate}}">
                 <form name="userPasswordForm" class="form-horizontal form-validate" ng-submit="user.changeUserPassword(userPasswordForm.$valid)" novalidate>
                     <div class="form-group required">
-                        <label for="username" class="col-lg-3 control-label" translate="user.label.username"></label>
+                        <label for="usernameDisplay" class="col-lg-3 control-label" translate="text.username"></label>
                         <div class="col-lg-6">
                             <input type="text" class="form-control" id="usernameDisplay" name="usernameDisplay" value="{{user.user.username}}" disabled>
                         </div>
                     </div>
-                    <div class="form-group required" ng-class="{ 'has-error' : userPasswordForm.password.$invalid && userPasswordForm.password.$touched}">
-                        <label for="password" class="col-lg-3 control-label" translate="user.label.password"></label>
+                    <div ng-if="$state.current.name == 'root.main.myAccountEdit'" class="form-group required" ng-class="{ 'has-error' : userPasswordForm.currentPassword.$invalid && userPasswordForm.currentPassword.$touched}">
+                        <label for="currentPassword" class="col-lg-3 control-label" translate="text.currentPassword"></label>
                         <div class="col-lg-6">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="{{'user.placeholder.password'|translate}}"
+                            <input type="password" class="form-control" id="currentPassword" name="currentPassword" placeholder="{{'placeholder.currentPassword'|translate}}"
+                                   ng-model="user.user.currentPassword" ng-minlength="6" ng-maxlength="100" required>
+                            <div class="help-block" ng-messages="userPasswordForm.currentPassword.$error" ng-show="userPasswordForm.currentPassword.$touched">
+                                <div ng-messages-include="views/common/messages.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group required" ng-class="{ 'has-error' : userPasswordForm.password.$invalid && userPasswordForm.password.$touched}">
+                        <label for="password" class="col-lg-3 control-label" translate="text.password"></label>
+                        <div class="col-lg-6">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="{{'placeholder.password'|translate}}"
                                    ng-model="user.user.password" ng-minlength="6" ng-maxlength="100" ng-model-options="{ debounce: { 'default': 300, 'blur': 0 }  }"
                                    ng-change="user.checkPassword(userPasswordForm.password,userPasswordForm.confirmPassword)" required>
                             <div class="help-block" ng-messages="userPasswordForm.password.$error" ng-show="userPasswordForm.password.$touched">
@@ -157,9 +49,9 @@
                         </div>
                     </div>
                     <div class="form-group required" ng-class="{ 'has-error' : userPasswordForm.confirmPassword.$invalid && userPasswordForm.confirmPassword.$touched}">
-                        <label for="confirmPassword" class="col-lg-3 control-label" translate="user.label.confirmPassword"></label>
+                        <label for="confirmPassword" class="col-lg-3 control-label" translate="text.confirmPassword"></label>
                         <div class="col-lg-6">
-                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="{{'user.placeholder.confirmPassword'|translate}}"
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="{{'placeholder.confirmPassword'|translate}}"
                                    ng-model="user.user.confirmPassword" ng-minlength="6" ng-maxlength="100" ng-model-options="{ debounce: { 'default': 300, 'blur': 0 }  }"
                                    ng-change="user.checkPassword(userPasswordForm.password,userPasswordForm.confirmPassword)" required>
                             <div class="help-block" ng-messages="userPasswordForm.confirmPassword.$error" ng-show="userPasswordForm.confirmPassword.$touched">
@@ -167,12 +59,13 @@
                             </div>
                         </div>
                     </div>
-
+                    <br/>
                     <fieldset ng-disabled="user.isSaving">
                         <div class="form-group">
                             <div class="col-lg-8 col-lg-offset-3">
-                                <a ui-sref="root.main.userListing" class="btn btn-default" translate="user.button.btnBack"></a>
-                                <button type="submit" class="btn btn-primary" ng-disabled="userPasswordForm.$invalid" translate="user.button.btnUpdate"></button>
+                                <a ng-if="$state.current.name == 'root.main.userEdit'" ui-sref="root.main.userListing" class="btn btn-default" translate="button.back"></a>
+                                <a ng-if="$state.current.name == 'root.main.myAccountEdit'" ui-sref="root.main.myAccount" class="btn btn-default" translate="button.back"></a>
+                                <button type="submit" class="btn btn-primary" ng-disabled="userPasswordForm.$invalid" translate="button.update"></button>
                             </div>
                         </div>
                     </fieldset>

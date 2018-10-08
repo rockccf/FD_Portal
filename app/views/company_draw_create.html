@@ -1,0 +1,133 @@
+<menu-button-div/>
+<div class="panel panel-primary">
+    <div class="panel-heading" translate="text.companyDrawCreate"></div>
+    <div class="panel-body">
+        <alert-message-div/>
+        <form name="companyForm" class="form-horizontal form-validate" ng-submit="company.createCompanyDraw(companyForm.$valid)" novalidate>
+            <div class="form-group required" ng-class="{ 'has-error' : companyForm.company.$invalid && companyForm.company.$touched}">
+                <label for="company" class="col-lg-3 control-label" translate="text.company"></label>
+                <div class="col-lg-6">
+                    <ui-select multiple="" ng-model="company.companyArray"
+                               id="company" name="company" append-to-body="true" theme="bootstrap" required>
+                        <ui-select-match class="ui-select-match" placeholder="{{'placeholder.selectOneOrMore'|translate}}">{{$item.name}}</ui-select-match>
+                        <ui-select-choices class="ui-select-choices"
+                                           repeat="companyObj as companyObj in company.companyOptions | filter: $select.search">
+                            <div ng-bind-html="companyObj.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                    <div class="help-block" ng-messages="companyForm.company.$error" ng-show="companyForm.company.$touched">
+                        <div ng-messages-include="views/common/messages.html"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group required" ng-class="{ 'has-error' : companyForm.mode.$invalid && companyForm.mode.$touched}">
+                <label class="col-lg-3 control-label" translate="text.mode"></label>
+                <div class="col-lg-6">
+                    <label class="radio-inline c-radio">
+                        <input id="modeDays" type="radio" name="mode" ng-model="company.mode" value="1" required/>
+                        <span class="fa fa-circle"></span>
+                        {{'text.days' | translate}}
+                    </label>
+                    <label class="radio-inline c-radio">
+                        <input id="modeDates" type="radio" name="mode" ng-model="company.mode" value="2" required/>
+                        <span class="fa fa-circle"></span>
+                        {{'text.dates' | translate}}
+                    </label>
+                    <div class="help-block" ng-messages="companyForm.mode.$error" ng-show="companyForm.mode.$touched">
+                        <div ng-messages-include="views/common/messages.html"></div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="company.mode == 2" class="form-group required">
+                <label class="col-lg-3 control-label" translate="text.dates"></label>
+                <div class="col-lg-6">
+                    <multiple-date-picker moment="moment" disable-days-before="company.today" ng-model="company.selectedDateArray"></multiple-date-picker>
+                </div>
+            </div>
+            <div ng-if="company.mode == 1" class="form-group required" ng-class="{ 'has-error' : companyForm.startDate.$invalid && companyForm.startDate.$touched}">
+                <label for="startDate" class="col-lg-3 control-label" translate="text.startDate"></label>
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <input class="form-control" type="text" id="startDate" name="startDate" placeholder="{{'placeholder.startDate'|translate}}"
+                               uib-datepicker-popup="{{company.datepicker.format}}" is-open="company.datepicker.startDate.opened" datepicker-options="company.datepicker.startDate.dateOptions"
+                               ng-model="company.startDate" required
+                               close-text="{{'button.close'|translate}}"/>
+                        <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="company.openDatepicker(1)"><em class="fa fa-calendar"></em></button>
+                                </span>
+                        <span class="input-group-addon">DD-MMM-YYYY</span>
+                    </div>
+                    <div class="help-block" ng-messages="companyForm.startDate.$error" ng-show="companyForm.startDate.$touched">
+                        <div ng-messages-include="views/common/messages.html"></div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="company.mode == 1" class="form-group required" ng-class="{ 'has-error' : companyForm.endDate.$invalid && companyForm.endDate.$touched}">
+                <label for="endDate" class="col-lg-3 control-label" translate="text.endDate"></label>
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <input class="form-control" type="text" id="endDate" name="endDate" placeholder="{{'placeholder.endDate'|translate}}"
+                               uib-datepicker-popup="{{company.datepicker.format}}" is-open="company.datepicker.endDate.opened" datepicker-options="company.datepicker.endDate.dateOptions"
+                               ng-model="company.endDate" required
+                               close-text="{{'button.close'|translate}}"/>
+                        <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="company.openDatepicker(2)"><em class="fa fa-calendar"></em></button>
+                                </span>
+                        <span class="input-group-addon">DD-MMM-YYYY</span>
+                    </div>
+                    <div class="help-block" ng-messages="companyForm.endDate.$error" ng-show="companyForm.endDate.$touched">
+                        <div ng-messages-include="views/common/messages.html"></div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="company.mode == 1" class="form-group required" ng-class="{ 'has-error' : companyForm.day.$invalid && companyForm.day.$touched}">
+                <label class="col-lg-3 control-label" translate="text.days"></label>
+                <div class="col-lg-6">
+                    <ui-select multiple="" ng-model="company.dayArray"
+                               id="day" name="day" append-to-body="true" theme="bootstrap" required>
+                        <ui-select-match class="ui-select-match" placeholder="{{'placeholder.selectOneOrMore'|translate}}">{{$item.name | translate}}</ui-select-match>
+                        <ui-select-choices class="ui-select-choices"
+                                           repeat="dayObj.id as dayObj in company.dayOptions | filter: $select.search">
+                            <div ng-bind-html="dayObj.name | translate | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                    <div class="help-block" ng-messages="companyForm.day.$error" ng-show="companyForm.day.$touched">
+                        <div ng-messages-include="views/common/messages.html"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-8 col-lg-offset-3">
+                    <button class="btn btn-primary" type="button" ng-disabled="companyForm.$invalid" translate="button.populate" ng-click="company.populateDraw()"></button>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-7 col-lg-offset-2">
+                    <h4 ng-repeat-start="companyObj in company.companyArray" ng-init="companyIndex = $index">{{companyObj.name}}</h4>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr class="info">
+                            <th>#</th>
+                            <th translate="text.drawDate"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="dayObj in companyObj.days track by $index">
+                            <td>{{$index+1}}</td>
+                            <td>{{dayObj | date:'dd-MM-yyyy'}} ({{dayObj | date:'EEEE'}})</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div ng-repeat-end="">&nbsp;</div>
+                </div>
+            </div>
+            <fieldset ng-disabled="company.isSaving">
+                <div class="form-group">
+                    <div class="col-lg-8 col-lg-offset-3">
+                        <button type="submit" class="btn btn-primary" ng-disabled="companyForm.$invalid || !company.canCreate" translate="button.create"></button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

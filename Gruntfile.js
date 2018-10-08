@@ -50,11 +50,6 @@ module.exports = function (grunt) {
                     'SYSCONSTANT': grunt.file.readJSON('./env/staging.json')
                 }
             },
-            demo: {
-                constants: {
-                    'SYSCONSTANT': grunt.file.readJSON('./env/demo.json')
-                }
-            },
             production: {
                 constants: {
                     'SYSCONSTANT': grunt.file.readJSON('./env/production.json')
@@ -101,7 +96,7 @@ module.exports = function (grunt) {
         // The actual grunt server settings
         connect: {
             options: {
-                port: 9100,
+                port: 9200,
                 // Change this to '0.0.0.0' to access the server from outside.
                 hostname: '*',
                 livereload: 35729
@@ -110,7 +105,7 @@ module.exports = function (grunt) {
             livereload: {
                 options: {
                     open: {
-                        target: 'http://localhost:9100'
+                        target: 'http://localhost:9200'
                     },
                     middleware: function (connect) {
                         return [

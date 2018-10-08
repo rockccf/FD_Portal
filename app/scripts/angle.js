@@ -27,7 +27,8 @@
             'app.settings',
 			'app.panels',
 			'app.forms',
-            'app.utils'
+            'app.utils',
+            'app.notify'
         ]);
 })();
 
@@ -128,6 +129,12 @@
         .module('app.utils', [
           'app.colors'
           ]);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.notify', []);
 })();
 
 (function() {
@@ -319,7 +326,7 @@
         .constant('APP_REQUIRES', {
             // jQuery based and standalone scripts
             scripts: {
-                'icons' : {files: ['assets/vendor/font-awesome/css/font-awesome.min.css','assets/vendor/simple-line-icons/css/simple-line-icons.css'], cache: true},
+                'icons' : {files: ['assets/vendor/font-awesome/css/fontawesome-all.min.css','assets/vendor/simple-line-icons/css/simple-line-icons.css'], cache: true},
                 'spinkit':  {files: ['assets/vendor/spinkit.css'], cache: true},
                 'loaders.css': {files: ['assets/vendor/loaders.min.css'], cache: true},
                 'filestyle': {files: ['assets/vendor/bootstrap-filestyle/src/bootstrap-filestyle.js'], cache: true},
@@ -334,6 +341,10 @@
                 {name: 'profile', files: ['scripts/controllers/profile.js'], cache: true},
                 {name: 'user', files: ['scripts/controllers/user.js'], cache: true},
                 {name: 'role', files: ['scripts/controllers/role.js'], cache: true},
+                {name: 'master', files: ['scripts/controllers/master.js'], cache: true},
+                {name: 'company', files: ['scripts/controllers/company.js'], cache: true},
+                {name: 'package', files: ['scripts/controllers/package.js'], cache: true},
+                {name: 'bet', files: ['scripts/controllers/bet.js'], cache: true},
                 {name: 'report', files: ['scripts/controllers/report.js'], cache: true}
             ]
         })
@@ -764,9 +775,10 @@
         // Global Settings
         // -----------------------------------
         $rootScope.app = {
-            name: 'HorecaBid Admin Portal',
-            company: 'Horecabid Sdn. Bhd.',
+            name: 'TBT88 Portal',
+            company: 'TBT88',
             description: 'Home',
+            version: '1.0.0',
             year: ((new Date()).getFullYear()),
             layout: {
                 isFixed: true,
@@ -776,7 +788,7 @@
                 horizontal: false,
                 isFloat: false,
                 asideHover: true,
-                theme: '/assets/css/theme-hrcb.css',
+                theme: '/assets/css/theme-a.css',
           		asideScrollbar: true,
           		isCollapsedText: false
             },
@@ -1118,12 +1130,17 @@
 
                             //looping first level submenu
                             while (j--) {
+                                if (items[i].submenu[j].bypassPermission) {
+                                    //Skip the checking and continue the loop
+                                    continue;
+                                }
+
                                 //if dont have permission/valid permission at all
                                 if (items[i].submenu[j].permission == null && items[i].submenu[j].submenu == null) {
                                     //delete submenu item because don't have both permissions and submenu
                                     items[i].submenu.splice(j,1);
                                 } else if (items[i].submenu[j].permission != null){
-                                    if (userPermissions.indexOf($rootScope.APPCONSTANT.AUTH_ITEM.PERMISSION_PREFIX.TENANT+items[i].submenu[j].permission) < 0) {
+                                    if (userPermissions.indexOf(items[i].submenu[j].permission) < 0) {
                                         //delete submenu item because don't have valid permissions
                                         items[i].submenu.splice(j,1);
                                     } else {
@@ -1139,7 +1156,7 @@
                                             //delete inner submenu item because don't have permissions
                                             items[i].submenu[j].submenu.splice(k,1);
                                         } else if (items[i].submenu[j].submenu[k].permission != null) {
-                                            if (userPermissions.indexOf($rootScope.APPCONSTANT.AUTH_ITEM.PERMISSION_PREFIX.TENANT+items[i].submenu[j].submenu[k].permission) < 0) {
+                                            if (userPermissions.indexOf(items[i].submenu[j].submenu[k].permission) < 0) {
                                                 //delete inner submenu item because don't have valid permissions
                                                 items[i].submenu[j].submenu.splice(k,1);
                                             } else {
@@ -1162,7 +1179,7 @@
                             }
                         } else {
                             //No sub-menu defined, check the parent menu permission
-                            if (userPermissions.indexOf($rootScope.APPCONSTANT.AUTH_ITEM.PERMISSION_PREFIX.TENANT+items[i].permission) < 0) {
+                            if (userPermissions.indexOf(items[i].permission) < 0) {
                                 //No valid permissions found
                                 items.splice(i,1);
                             }
@@ -2121,3 +2138,194 @@
         };
     }
 })();
+
+/**=========================================================
+ * Module: notify.js
+ * Directive for notify plugin
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.notify')
+        .directive('notify', notify);
+
+    notify.$inject = ['$window', 'Notify'];
+    function notify ($window, Notify) {
+
+        var directive = {
+            link: link,
+            restrict: 'A',
+            scope: {
+                options: '=',
+                message: '='
+            }
+        };
+        return directive;
+
+        function link(scope, element) {
+
+            element.on('click', function (e) {
+                e.preventDefault();
+                Notify.alert(scope.message, scope.options);
+            });
+        }
+
+    }
+
+})();
+
+
+/**=========================================================
+ * Module: notify.js
+ * Create a notifications that fade out automatically.
+ * Based on Notify addon from UIKit (http://getuikit.com/docs/addons_notify.html)
+ =========================================================*/
+
+(function() {
+    'use strict';
+    angular
+        .module('app.notify')
+        .service('Notify', Notify);
+
+    Notify.$inject = ['$timeout'];
+    function Notify($timeout) {
+
+        this.alert = notifyAlert;
+
+        ////////////////
+
+        function notifyAlert(msg, opts) {
+            if ( msg ) {
+                $timeout(function(){
+                    $.notify(msg, opts || {});
+                });
+            }
+        }
+    }
+
+})();
+
+/**
+ * Notify Addon definition as jQuery plugin
+ * Adapted version to work with Bootstrap classes
+ * More information http://getuikit.com/docs/addons_notify.html
+ */
+(function($){
+    'use strict';
+    var containers = {},
+        messages   = {},
+        notify     =  function(options){
+            if ($.type(options) === 'string') {
+                options = { message: options };
+            }
+            if (arguments[1]) {
+                options = $.extend(options, $.type(arguments[1]) === 'string' ? {status:arguments[1]} : arguments[1]);
+            }
+            return (new Message(options)).show();
+        },
+        closeAll  = function(group, instantly){
+            var id;
+            if(group) {
+                for(id in messages) { if(group===messages[id].group) messages[id].close(instantly); }
+            } else {
+                for(id in messages) { messages[id].close(instantly); }
+            }
+        };
+    var Message = function(options){
+        // var $this = this;
+        this.options = $.extend({}, Message.defaults, options);
+        this.uuid    = 'ID'+(new Date().getTime())+'RAND'+(Math.ceil(Math.random() * 100000));
+        this.element = $([
+            // @geedmo: alert-dismissable enables bs close icon
+            '<div class="uk-notify-message alert-dismissable">',
+            '<a class="close">&times;</a>',
+            '<div>'+this.options.message+'</div>',
+            '</div>'
+        ].join('')).data('notifyMessage', this);
+        // status
+        if (this.options.status) {
+            this.element.addClass('alert alert-'+this.options.status);
+            this.currentstatus = this.options.status;
+        }
+        this.group = this.options.group;
+        messages[this.uuid] = this;
+        if(!containers[this.options.pos]) {
+            containers[this.options.pos] = $('<div class="uk-notify uk-notify-'+this.options.pos+'"></div>').appendTo('body').on('click', '.uk-notify-message', function(){
+                $(this).data('notifyMessage').close();
+            });
+        }
+    };
+    $.extend(Message.prototype, {
+        uuid: false,
+        element: false,
+        timout: false,
+        currentstatus: '',
+        group: false,
+        show: function() {
+            if (this.element.is(':visible')) return;
+            var $this = this;
+            containers[this.options.pos].show().prepend(this.element);
+            var marginbottom = parseInt(this.element.css('margin-bottom'), 10);
+            this.element.css({'opacity':0, 'margin-top': -1*this.element.outerHeight(), 'margin-bottom':0}).animate({'opacity':1, 'margin-top': 0, 'margin-bottom':marginbottom}, function(){
+                if ($this.options.timeout) {
+                    var closefn = function(){ $this.close(); };
+                    $this.timeout = setTimeout(closefn, $this.options.timeout);
+                    $this.element.hover(
+                        function() { clearTimeout($this.timeout); },
+                        function() { $this.timeout = setTimeout(closefn, $this.options.timeout);  }
+                    );
+                }
+            });
+            return this;
+        },
+        close: function(instantly) {
+            var $this    = this,
+                finalize = function(){
+                    $this.element.remove();
+                    if(!containers[$this.options.pos].children().length) {
+                        containers[$this.options.pos].hide();
+                    }
+                    delete messages[$this.uuid];
+                };
+            if(this.timeout) clearTimeout(this.timeout);
+            if(instantly) {
+                finalize();
+            } else {
+                this.element.animate({'opacity':0, 'margin-top': -1* this.element.outerHeight(), 'margin-bottom':0}, function(){
+                    finalize();
+                });
+            }
+        },
+        content: function(html){
+            var container = this.element.find('>div');
+            if(!html) {
+                return container.html();
+            }
+            container.html(html);
+            return this;
+        },
+        status: function(status) {
+            if(!status) {
+                return this.currentstatus;
+            }
+            this.element.removeClass('alert alert-'+this.currentstatus).addClass('alert alert-'+status);
+            this.currentstatus = status;
+            return this;
+        }
+    });
+    Message.defaults = {
+        message: '',
+        status: 'normal',
+        timeout: 5000,
+        group: null,
+        pos: 'top-center'
+    };
+
+    $.notify          = notify;
+    $.notify.message  = Message;
+    $.notify.closeAll = closeAll;
+
+    return notify;
+}(jQuery));

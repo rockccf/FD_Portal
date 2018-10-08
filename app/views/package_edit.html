@@ -1,0 +1,17 @@
+<div class="panel panel-primary">
+    <div class="panel-heading" translate="text.packageEdit"></div>
+    <div class="panel-body">
+        <alert-message-div/>
+        <form name="packageForm" class="form-horizontal form-validate" ng-submit="package.updatePackage(packageForm.$valid)" novalidate>
+            <div ng-include src="'views/package_form.html'"></div>
+            <fieldset ng-disabled="package.isSaving">
+                <div class="form-group">
+                    <div class="col-lg-8 col-lg-offset-3">
+                        <a ui-sref="root.main.packageListing" class="btn btn-default" translate="button.back"></a>
+                        <button type="submit" class="btn btn-primary" ng-disabled="packageForm.$invalid" translate="button.update"></button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

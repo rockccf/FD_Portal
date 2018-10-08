@@ -1,0 +1,22 @@
+<menu-button-div/>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        {{'text.bet' | translate}} -
+        <span ng-if="$state.current.name == 'root.main.4dSpecial'" translate="text.4dSpecial"></span>
+        <span ng-if="$state.current.name == 'root.main.3dSpecial'" translate="text.3dSpecial"></span>
+    </div>
+    <div class="panel-body">
+        <alert-message-div/>
+        <form name="betForm" class="form-horizontal form-validate" ng-submit="bet.submitBet(betForm.$valid)" novalidate>
+            <div ng-include src="'views/bet_form.html'"></div>
+            <br/>
+            <fieldset ng-disabled="bet.isSaving">
+                <div class="form-group">
+                    <div class="col-lg-8 col-lg-offset-3">
+                        <button type="submit" class="btn btn-primary" ng-disabled="betForm.$invalid" translate="button.submit"></button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

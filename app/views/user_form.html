@@ -1,0 +1,300 @@
+<div class="form-group required" ng-class="{ 'has-error' : userForm.master.$invalid && userForm.master.$touched}"
+     ng-if="user.userType == APPCONSTANT.USER.TYPE.ADMIN && $state.current.name != 'root.main.userEdit' && $state.current.name != 'root.main.myAccountEdit'">
+    <label for="master" class="col-lg-3 control-label" translate="text.master"></label>
+    <div class="col-lg-6">
+        <select class="form-control" id="master" name="master" ng-options="option.prefix + ' - ' + option.name | translate for option in user.masterOptions track by option.id"
+                ng-model="user.user.master" ng-change="user.changeMaster()" required></select>
+        <div class="help-block" ng-messages="userForm.master.$error" ng-show="userForm.master.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div class="form-group required" ng-class="{ 'has-error' : userForm.username.$invalid && userForm.username.$touched}">
+    <label for="username" class="col-lg-3 control-label" translate="text.username"></label>
+    <div class="col-lg-6">
+        <div class="input-group">
+            <span class="input-group-addon" ng-show="$state.current.name == 'root.main.userCreate'">{{user.masterPrefix}}</span>
+            <input type="text" class="form-control" id="username" name="username" placeholder="{{'placeholder.username'|translate}}"
+                   ng-model="user.user.username" ng-model-options="{ debounce: { 'default': 300, 'blur': 0 }  }"
+                   ng-pattern="/^[a-zA-Z0-9\._-]*$/" ng-change="user.checkUsername(userForm.username)"
+                   ng-disabled="$state.current.name == 'root.main.userEdit' || $state.current.name == 'root.main.myAccountEdit'"
+                   ng-minlength="3" ng-maxlength="100" required>
+        </div>
+        <div class="help-block" ng-messages="userForm.username.$error" ng-show="userForm.username.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div class="form-group required" ng-class="{ 'has-error' : userForm.name.$invalid && userForm.name.$touched}">
+    <label for="name" class="col-lg-3 control-label" translate="text.name"></label>
+    <div class="col-lg-6">
+        <input type="text" class="form-control" id="name" name="name" placeholder="{{'placeholder.name'|translate}}"
+               ng-model="user.user.name" ng-minlength="2" ng-maxlength="100" required>
+        <div class="help-block" ng-messages="userForm.name.$error" ng-show="userForm.name.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-class="{ 'has-error' : userForm.mobileNo.$invalid && userForm.mobileNo.$touched}">
+    <label for="mobileNo" class="col-lg-3 control-label" translate="text.mobileNo"></label>
+    <div class="col-lg-6">
+        <input type="text" class="form-control" id="mobileNo" name="mobileNo" placeholder="{{'placeholder.mobileNo'|translate}}"
+               ng-model="user.user.mobileNo" ng-minlength="6" ng-maxlength="100">
+        <div class="help-block" ng-messages="userForm.mobileNo.$error" ng-show="userForm.mobileNo.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div ng-if="$state.current.name == 'root.main.userCreate'" class="form-group required" ng-class="{ 'has-error' : userForm.password.$invalid && userForm.password.$touched}">
+    <label for="password" class="col-lg-3 control-label" translate="text.password"></label>
+    <div class="col-lg-6">
+        <input type="password" class="form-control" id="password" name="password" placeholder="{{'placeholder.password'|translate}}"
+               ng-model="user.user.password" ng-minlength="6" ng-maxlength="100" required>
+        <div class="help-block" ng-messages="userForm.password.$error" ng-show="userForm.password.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div ng-if="$state.current.name == 'root.main.userCreate'" class="form-group required" ng-class="{ 'has-error' : userForm.confirmPassword.$invalid && userForm.confirmPassword.$touched}">
+    <label for="confirmPassword" class="col-lg-3 control-label" translate="text.confirmPassword"></label>
+    <div class="col-lg-6">
+        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="{{'placeholder.confirmPassword'|translate}}"
+               ng-model="user.user.confirmPassword" ng-minlength="6" ng-maxlength="100" ng-model-options="{ debounce: { 'default': 300, 'blur': 0 }  }"
+               ng-change="user.checkPassword(userForm.password,userForm.confirmPassword)" required>
+        <div class="help-block" ng-messages="userForm.confirmPassword.$error" ng-show="userForm.confirmPassword.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div ng-if="$state.current.name != 'root.main.myAccountEdit'" class="form-group required" ng-class="{ 'has-error' : userForm.creditLimit.$invalid && userForm.creditLimit.$touched}">
+    <label for="creditLimit" class="col-lg-3 control-label" translate="text.creditLimit"></label>
+    <div class="col-lg-6">
+        <div class="input-group" ng-if="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER">
+            <input type="number" class="form-control" id="creditLimit" name="creditLimit"
+                   placeholder="{{'placeholder.creditLimit'|translate}}" min="1" ng-max="user.creditLimitAvailableToGrant"
+                   ng-model="user.user.creditLimit" required>
+            <span class="input-group-addon">{{'text.max' | translate}} {{user.creditLimitAvailableToGrant | number:2}}</span>
+        </div>
+        <input ng-if="user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT" type="number" class="form-control" id="creditLimit" name="creditLimit"
+               placeholder="{{'placeholder.creditLimit'|translate}}" min="1"
+               ng-model="user.user.creditLimit" required>
+        <div class="help-block" ng-messages="userForm.creditLimit.$error" ng-show="userForm.creditLimit.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div ng-if="$state.current.name != 'root.main.myAccountEdit'" class="form-group required" ng-class="{ 'has-error' : userForm.active.$invalid && userForm.active.$touched}">
+    <label class="col-lg-3 control-label" translate="text.active"></label>
+    <div class="col-lg-6">
+        <label class="radio-inline c-radio">
+            <input id="activeYes" type="radio" name="active" ng-model="user.user.active" ng-required="!user.user.active" value="{{APPCONSTANT.GLOBAL.TRUE}}"/>
+            <span class="fa fa-circle"></span>
+            {{'text.yes' | translate}}
+        </label>
+        <label class="radio-inline c-radio">
+            <input id="activeNo" type="radio" name="active" ng-model="user.user.active" ng-required="!user.user.active" value="{{APPCONSTANT.GLOBAL.FALSE}}" />
+            <span class="fa fa-circle"></span>
+            {{'text.no' | translate}}
+        </label>
+        <div class="help-block" ng-messages="userForm.active.$error" ng-show="userForm.active.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div ng-if="$state.current.name != 'root.main.myAccountEdit' && (user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT)" class="form-group required" ng-class="{ 'has-error' : userForm.package.$invalid && userForm.package.$touched}">
+    <label for="package" class="col-lg-3 control-label" translate="text.package"></label>
+    <div class="col-lg-6">
+        <select class="form-control" id="package" name="package" ng-options="option.name | translate for option in user.packageOptions track by option.id"
+                ng-model="user.user.package" ng-disabled="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER" required></select>
+        <div class="help-block" ng-messages="userForm.package.$error" ng-show="userForm.package.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<!--div ng-if="$state.current.name != 'root.main.myAccountEdit' && (user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT || user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER)" class="form-group required" ng-class="{ 'has-error' : userForm.autoTransfer.$invalid && userForm.autoTransfer.$touched}">
+    <label class="col-lg-3 control-label" translate="text.autoTransfer"></label>
+    <div class="col-lg-6">
+        <label class="radio-inline c-radio">
+            <input id="autoTransferYes" type="radio" name="autoTransfer" ng-model="user.user.autoTransfer" value="{{APPCONSTANT.GLOBAL.TRUE}}"/>
+            <span class="fa fa-circle"></span>
+            {{'text.yes' | translate}}
+        </label>
+        <label class="radio-inline c-radio">
+            <input id="autoTransferNo" type="radio" name="autoTransfer" ng-model="user.user.autoTransfer" value="{{APPCONSTANT.GLOBAL.FALSE}}" />
+            <span class="fa fa-circle"></span>
+            {{'text.no' | translate}}
+        </label>
+        <div class="help-block" ng-messages="userForm.autoTransfer.$error" ng-show="userForm.autoTransfer.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div-->
+<div ng-if="$state.current.name != 'root.main.myAccountEdit' && user.user.autoTransfer == APPCONSTANT.GLOBAL.TRUE && (user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT || user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER)" class="form-group required" ng-class="{ 'has-error' : userForm.autoTransferMode.$invalid && userForm.autoTransferMode.$touched}">
+    <label class="col-lg-3 control-label" translate="text.autoTransferMode"></label>
+    <div class="col-lg-6">
+        <label class="radio-inline c-radio">
+            <input id="autoTransferModeDaily" type="radio" name="autoTransferMode" ng-model="user.user.autoTransferMode" value="{{APPCONSTANT.USER.DETAIL.AUTO_TRANSFER_MODE.DAILY}}"/>
+            <span class="fa fa-circle"></span>
+            {{'text.daily' | translate}}
+        </label>
+        <label class="radio-inline c-radio">
+            <input id="autoTransferModeWeekly" type="radio" name="autoTransferMode" ng-model="user.user.autoTransferMode" value="{{APPCONSTANT.USER.DETAIL.AUTO_TRANSFER_MODE.WEEKLY}}"/>
+            <span class="fa fa-circle"></span>
+            {{'text.weekly' | translate}}
+        </label>
+        <div class="help-block" ng-messages="userForm.autoTransferMode.$error" ng-show="userForm.autoTransferMode.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div ng-if="$state.current.name != 'root.main.myAccountEdit'
+&& user.user.autoTransfer == APPCONSTANT.GLOBAL.TRUE && user.user.autoTransferMode == APPCONSTANT.USER.DETAIL.AUTO_TRANSFER_MODE.WEEKLY
+&& (user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT || user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER)" class="form-group required" ng-class="{ 'has-error' : userForm.autoTransferDays.$invalid && userForm.autoTransferDays.$touched}">
+    <label class="col-lg-3 control-label" translate="text.autoTransferDays"></label>
+    <div class="col-lg-8">
+        <label class="checkbox-inline c-checkbox">
+            <input id="autoTransferDays1" name="autoTransferDays1" type="checkbox" value="1"/>
+            <span class="fa fa-check"></span>
+            {{'text.monday' | translate}}
+        </label>
+        <label class="checkbox-inline c-checkbox">
+            <input id="autoTransferDays2" name="autoTransferDays2" type="checkbox" value="2"/>
+            <span class="fa fa-check"></span>
+            {{'text.tuesday' | translate}}
+        </label>
+        <label class="checkbox-inline c-checkbox">
+            <input id="autoTransferDays3" name="autoTransferDays3" type="checkbox" value="3"/>
+            <span class="fa fa-check"></span>
+            {{'text.wednesday' | translate}}
+        </label>
+        <label class="checkbox-inline c-checkbox">
+            <input id="autoTransferDays4" name="autoTransferDays4" type="checkbox" value="4"/>
+            <span class="fa fa-check"></span>
+            {{'text.thursday' | translate}}
+        </label>
+        <label class="checkbox-inline c-checkbox">
+            <input id="autoTransferDays5" name="autoTransferDays5" type="checkbox" value="5"/>
+            <span class="fa fa-check"></span>
+            {{'text.friday' | translate}}
+        </label>
+        <label class="checkbox-inline c-checkbox">
+            <input id="autoTransferDays6" name="autoTransferDays6" type="checkbox" value="6"/>
+            <span class="fa fa-check"></span>
+            {{'text.saturday' | translate}}
+        </label>
+        <label class="checkbox-inline c-checkbox">
+            <input id="autoTransferDays7" name="autoTransferDays7" type="checkbox" value="7"/>
+            <span class="fa fa-check"></span>
+            {{'text.sunday' | translate}}
+        </label>
+        <div class="help-block" ng-messages="userForm.autoTransferDays.$error" ng-show="userForm.autoTransferDays.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div ng-if="$state.current.name != 'root.main.myAccountEdit' && (user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT || user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER)" class="form-group required" ng-class="{ 'has-error' : userForm.betMethod.$invalid && userForm.betMethod.$touched}">
+    <label class="col-lg-3 control-label" translate="text.betMethod"></label>
+    <div class="col-lg-6">
+        <label class="radio-inline c-radio">
+            <input id="betMethodMultiple" type="radio" name="betMethod" ng-model="user.user.betMethod" ng-required="!user.user.betMethod" value="{{APPCONSTANT.USER.DETAIL.BET_METHOD.MULTIPLE}}"/>
+            <span class="fa fa-circle"></span>
+            {{'text.multiple' | translate}}
+        </label>
+        <label class="radio-inline c-radio">
+            <input id="betMethodDivide" type="radio" name="betMethod" ng-model="user.user.betMethod" ng-required="!user.user.betMethod" value="{{APPCONSTANT.USER.DETAIL.BET_METHOD.DIVIDE}}" />
+            <span class="fa fa-circle"></span>
+            {{'text.divide' | translate}}
+        </label>
+        <div class="help-block" ng-messages="userForm.betMethod.$error" ng-show="userForm.betMethod.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div ng-if="$state.current.name != 'root.main.myAccountEdit' && (user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT)" class="form-group required" ng-class="{ 'has-error' : userForm.betGdLotto.$invalid && userForm.betGdLotto.$touched}">
+    <label class="col-lg-3 control-label" translate="text.betGdLotto"></label>
+    <div class="col-lg-6">
+        <label class="radio-inline c-radio">
+            <input id="betGdLottoYes" type="radio" name="betGdLotto" ng-model="user.user.betGdLotto" ng-disabled="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER" value="{{APPCONSTANT.GLOBAL.TRUE}}"/>
+            <span class="fa fa-circle"></span>
+            {{'text.yes' | translate}}
+        </label>
+        <label class="radio-inline c-radio">
+            <input id="betGdLottoNo" type="radio" name="betGdLotto" ng-model="user.user.betGdLotto" ng-disabled="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER" value="{{APPCONSTANT.GLOBAL.FALSE}}" />
+            <span class="fa fa-circle"></span>
+            {{'text.no' | translate}}
+        </label>
+        <div class="help-block" ng-messages="userForm.betGdLotto.$error" ng-show="userForm.betGdLotto.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div ng-if="$state.current.name != 'root.main.myAccountEdit' && (user.canCreateUserType == APPCONSTANT.USER.TYPE.AGENT)" class="form-group required" ng-class="{ 'has-error' : userForm.bet6d.$invalid && userForm.bet6d.$touched}">
+    <label class="col-lg-3 control-label" translate="text.bet6d"></label>
+    <div class="col-lg-6">
+        <label class="radio-inline c-radio">
+            <input id="bet6dYes" type="radio" name="bet6d" ng-model="user.user.bet6d" ng-disabled="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER" value="{{APPCONSTANT.GLOBAL.TRUE}}"/>
+            <span class="fa fa-circle"></span>
+            {{'text.yes' | translate}}
+        </label>
+        <label class="radio-inline c-radio">
+            <input id="bet6dNo" type="radio" name="bet6d" ng-model="user.user.bet6d" ng-disabled="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER" value="{{APPCONSTANT.GLOBAL.FALSE}}" />
+            <span class="fa fa-circle"></span>
+            {{'text.no' | translate}}
+        </label>
+        <div class="help-block" ng-messages="userForm.bet6d.$error" ng-show="userForm.bet6d.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div ng-if="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER"  class="form-group" ng-class="{ 'has-error' : userForm['extra4dCommRate'].$invalid && userForm['extra4dCommRate'].$touched}">
+    <label for="extra4dCommRate" class="col-lg-3 control-label" translate="text.extra4dCommRate"></label>
+    <div class="col-lg-6">
+        <div class="input-group">
+            <input type="number" class="form-control" id="extra4dCommRate" name="extra4dCommRate"
+                   placeholder="{{'placeholder.extra4dCommRate'|translate}}" ng-max="user.user['maxExtra4dCommRate']"
+                   ng-model="user.user.userDetail['extra4dCommRate']" required>
+            <span class="input-group-addon">{{'text.max' | translate}} {{user.user.maxExtra4dCommRate}}%</span>
+        </div>
+        <div class="help-block" ng-messages="packageForm['extra4dCommRate'].$error" ng-show="packageForm['extra4dCommRate'].$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div ng-if="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER"  class="form-group" ng-class="{ 'has-error' : userForm['extra6dCommRate'].$invalid && userForm['extra6dCommRate'].$touched}">
+    <label for="extra6dCommRate" class="col-lg-3 control-label" translate="text.extra6dCommRate"></label>
+    <div class="col-lg-6">
+        <div class="input-group">
+            <input type="number" class="form-control" id="extra6dCommRate" name="extra6dCommRate"
+                   placeholder="{{'placeholder.extra6dCommRate'|translate}}" ng-max="user.user['maxExtra6dCommRate']"
+                   ng-model="user.user.userDetail['extra6dCommRate']" required>
+            <span class="input-group-addon">{{'text.max' | translate}} {{user.user.maxExtra6dCommRate}}%</span>
+        </div>
+        <div class="help-block" ng-messages="packageForm['extra6dCommRate'].$error" ng-show="packageForm['extra6dCommRate'].$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div ng-if="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER"  class="form-group" ng-class="{ 'has-error' : userForm['extraGdCommRate'].$invalid && userForm['extraGdCommRate'].$touched}">
+    <label for="extraGdCommRate" class="col-lg-3 control-label" translate="text.extraGdCommRate"></label>
+    <div class="col-lg-6">
+        <div class="input-group">
+            <input type="number" class="form-control" id="extraGdCommRate" name="extraGdCommRate"
+                   placeholder="{{'placeholder.extraGdCommRate'|translate}}" ng-max="user.user['maxExtraGdCommRate']"
+                   ng-model="user.user.userDetail['extraGdCommRate']" required>
+            <span class="input-group-addon">{{'text.max' | translate}} {{user.user.maxExtraGdCommRate}}%</span>
+        </div>
+        <div class="help-block" ng-messages="packageForm['extraGdCommRate'].$error" ng-show="packageForm['extraGdCommRate'].$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div ng-if="$state.current.name != 'root.main.myAccountEdit'" class="form-group required" ng-class="{ 'has-error' : userForm.userType.$invalid && userForm.userType.$touched}">
+    <label for="userType" class="col-lg-3 control-label" translate="text.userType"></label>
+    <div class="col-lg-6">
+        <select class="form-control" id="userType" name="userType" ng-options="option.name | translate for option in user.userTypeOptions track by option.id"
+                ng-model="user.user.userType" disabled required></select>
+        <div class="help-block" ng-messages="userForm.userType.$error" ng-show="userForm.userType.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>

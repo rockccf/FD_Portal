@@ -1,0 +1,183 @@
+<div class="form-group required" ng-class="{ 'has-error' : masterForm.name.$invalid && masterForm.name.$touched}">
+    <label for="name" class="col-lg-3 control-label" translate="text.name"></label>
+    <div class="col-lg-6">
+        <input type="text" class="form-control" id="name" name="name" placeholder="{{'placeholder.name'|translate}}"
+               ng-model="master.master.name" ng-pattern="/^[a-zA-Z0-9\._ -]*$/" ng-disabled="$state.current.name == 'root.main.masterEdit'"
+               ng-minlength="2" ng-maxlength="100" required/>
+        <div class="help-block" ng-messages="masterForm.name.$error" ng-show="masterForm.name.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div class="form-group required" ng-class="{ 'has-error' : masterForm.prefix.$invalid && masterForm.prefix.$touched}">
+    <label for="prefix" class="col-lg-3 control-label" translate="text.prefix"></label>
+    <div class="col-lg-6">
+        <input type="text" class="form-control" id="prefix" name="prefix" placeholder="{{'placeholder.prefix'|translate}}"
+               ng-model="master.master.prefix" ng-pattern="/^[a-zA-Z0-9]*$/" ng-disabled="$state.current.name == 'root.main.masterEdit'"
+               ng-minlength="3" maxlength="3" required/>
+        <div class="help-block" ng-messages="masterForm.prefix.$error" ng-show="masterForm.prefix.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div class="form-group required" ng-class="{ 'has-error' : masterForm.commissionRate.$invalid && masterForm.commissionRate.$touched}">
+    <label for="prefix" class="col-lg-3 control-label" translate="text.commissionRate"></label>
+    <div class="col-lg-6">
+        <input type="number" class="form-control" id="commissionRate" name="commissionRate" placeholder="{{'placeholder.commissionRate'|translate}}"
+               ng-model="master.master.commissionRate" required/>
+        <div class="help-block" ng-messages="masterForm.commissionRate.$error" ng-show="masterForm.commissionRate.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div class="form-group required" ng-class="{ 'has-error' : masterForm.active.$invalid && masterForm.active.$touched}">
+    <label for="active" class="col-lg-3 control-label" translate="text.active"></label>
+    <div class="col-lg-6">
+        <select class="form-control" id="active" name="active" ng-options="option.name | translate for option in master.yesNoOptions track by option.id"
+                ng-model="master.master.active" required></select>
+        <div class="help-block" ng-messages="masterForm.active.$error" ng-show="masterForm.active.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div class="form-group required" ng-class="{ 'has-error' : masterForm.locked.$invalid && masterForm.locked.$touched}">
+    <label for="locked" class="col-lg-3 control-label" translate="text.locked"></label>
+    <div class="col-lg-6">
+        <select class="form-control" id="locked" name="locked" ng-options="option.name | translate for option in master.yesNoOptions track by option.id"
+                ng-model="master.master.locked" required></select>
+        <div class="help-block" ng-messages="masterForm.locked.$error" ng-show="masterForm.locked.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div class="form-group required" ng-class="{ 'has-error' : masterForm.locked.$invalid && masterForm.locked.$touched}">
+    <label for="voidBetMinutes" class="col-lg-3 control-label" translate="text.voidBetMinutes"></label>
+    <div class="col-lg-6">
+        <input type="number" min="1" class="form-control" id="voidBetMinutes" name="voidBetMinutes" placeholder="{{'placeholder.voidBetMinutes'|translate}}"
+               ng-model="master.master.voidBetMinutes" required/>
+        <div class="help-block" ng-messages="masterForm.locked.$error" ng-show="masterForm.locked.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>
+<div class="form-group required" ng-class="{ 'has-error' : masterForm.locked.$invalid && masterForm.locked.$touched}">
+    <div class="col-lg-6 col-lg-offset-3">
+        <div class="panel panel-primary" id="betMaxLimitPanel">
+            <div class="panel-heading" translate="text.betMaxLimit"></div>
+            <div class="panel-wrapper">
+                <div class="panel-body">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td translate="text.big"></td>
+                            <td>
+                                <input type="number" class="form-control" id="betMaxLimitBig" name="betMaxLimitBig" placeholder="{{'placeholder.big'|translate}}"
+                                       ng-model="master.master.betMaxLimitBig" required/>
+                            </td>
+                            <td translate="text.small"></td>
+                            <td>
+                                <input type="number" class="form-control" id="betMaxLimitSmall" name="betMaxLimitSmall" placeholder="{{'placeholder.small'|translate}}"
+                                       ng-model="master.master.betMaxLimitSmall" required/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4A</td>
+                            <td>
+                                <input type="number" class="form-control" id="betMaxLimit4a" name="betMaxLimit4a" placeholder="4A"
+                                       ng-model="master.master.betMaxLimit4a" required/>
+                            </td>
+                            <td>4B</td>
+                            <td>
+                                <input type="number" class="form-control" id="betMaxLimit4b" name="betMaxLimit4b" placeholder="4B"
+                                       ng-model="master.master.betMaxLimit4b" required/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4C</td>
+                            <td>
+                                <input type="number" class="form-control" id="betMaxLimit4c" name="betMaxLimit4c" placeholder="4C"
+                                       ng-model="master.master.betMaxLimit4c" required/>
+                            </td>
+                            <td>4D</td>
+                            <td>
+                                <input type="number" class="form-control" id="betMaxLimit4d" name="betMaxLimit4d" placeholder="4D"
+                                       ng-model="master.master.betMaxLimit4d" required/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4E</td>
+                            <td>
+                                <input type="number" class="form-control" id="betMaxLimit4e" name="betMaxLimit4e" placeholder="4E"
+                                       ng-model="master.master.betMaxLimit4e" required/>
+                            </td>
+                            <td>4F</td>
+                            <td>
+                                <input type="number" class="form-control" id="betMaxLimit4f" name="betMaxLimit4f" placeholder="4F"
+                                       ng-model="master.master.betMaxLimit4f" required/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3ABC</td>
+                            <td>
+                                <input type="number" class="form-control" id="betMaxLimit3abc" name="betMaxLimit3abc" placeholder="3ABC"
+                                       ng-model="master.master.betMaxLimit3abc" required/>
+                            </td>
+                            <td>3A</td>
+                            <td>
+                                <input type="number" class="form-control" id="betMaxLimit3a" name="betMaxLimit3a" placeholder="3A"
+                                       ng-model="master.master.betMaxLimit3a" required/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3B</td>
+                            <td>
+                                <input type="number" class="form-control" id="betMaxLimit3b" name="betMaxLimit3b" placeholder="3B"
+                                       ng-model="master.master.betMaxLimit3b" required/>
+                            </td>
+                            <td>3C</td>
+                            <td>
+                                <input type="number" class="form-control" id="betMaxLimit3c" name="betMaxLimit3c" placeholder="3C"
+                                       ng-model="master.master.betMaxLimit3c" required/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3D</td>
+                            <td>
+                                <input type="number" class="form-control" id="betMaxLimit3d" name="betMaxLimit3d" placeholder="3D"
+                                       ng-model="master.master.betMaxLimit3d" required/>
+                            </td>
+                            <td>3E</td>
+                            <td>
+                                <input type="number" class="form-control" id="betMaxLimit3e" name="betMaxLimit3e" placeholder="3E"
+                                       ng-model="master.master.betMaxLimit3e" required/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5D</td>
+                            <td>
+                                <input type="number" class="form-control" id="betMaxLimit5d" name="betMaxLimit5d" placeholder="5D"
+                                       ng-model="master.master.betMaxLimit5d" required/>
+                            </td>
+                            <td>6D</td>
+                            <td>
+                                <input type="number" class="form-control" id="betMaxLimit6d" name="betMaxLimit6d" placeholder="6D"
+                                       ng-model="master.master.betMaxLimit6d" required/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-class="{ 'has-error' : masterForm.remarks.$invalid && masterForm.remarks.$touched}">
+    <label for="remarks" class="col-lg-3 control-label" translate="text.remarks"></label>
+    <div class="col-lg-6">
+        <textarea class="form-control" id="remarks" name="remarks" placeholder="{{'placeholder.remarks'|translate}}"
+                  ng-model="master.master.remarks" ng-minlength="2" ng-maxlength="500" rows="4"/>
+        <div class="help-block" ng-messages="masterForm.remarks.$error" ng-show="masterForm.remarks.$touched">
+            <div ng-messages-include="views/common/messages.html"></div>
+        </div>
+    </div>
+</div>

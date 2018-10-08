@@ -1,0 +1,64 @@
+<menu-button-div/>
+<div class="panel panel-info">
+    <div class="panel-heading" translate="text.masterListing"></div>
+    <div class="panel-body">
+        <!-- START table-responsive-->
+        <div class="table-responsive">
+            <table st-pipe="master.masterListing" st-table="master.tableData" class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th st-sort="name" st-sort-default="true" st-skip-natural="true" translate="text.name"></th>
+                    <th st-sort="prefix" st-skip-natural="true" translate="text.prefix"></th>
+                    <th st-sort="active" st-skip-natural="true" translate="text.active"></th>
+                    <th st-sort="locked" st-skip-natural="true" translate="text.locked"></th>
+                    <th translate="text.remarks"></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th><input class="form-control" st-search="name"/></th>
+                    <th><input class="form-control" st-search="prefix"/></th>
+                    <th><input class="form-control" st-search="active"/></th>
+                    <th><input class="form-control" st-search="locked"/></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody ng-show="!master.isLoading">
+                <tr ng-repeat="masterObj in master.tableData" ng-dblclick="master.viewMaster(masterObj.id)">
+                    <td data-title="#">{{master.recordsToSkip + $index + 1}}</td>
+                    <td data-title="Name">{{masterObj.name}}</td>
+                    <td data-title="Prefix">{{masterObj.prefix}}</td>
+                    <td data-title="Active"><common-get-text ng-if="masterObj.active != void(0)" value="masterObj.active" object="master.yesNoOptions"></common-get-text></td>
+                    <td data-title="Active"><common-get-text ng-if="masterObj.locked != void(0)" value="masterObj.locked" object="master.yesNoOptions"></common-get-text></td>
+                    <td data-title="Remarks">{{masterObj.remarks}}</td>
+                    <td class="text-right">
+                        <a ui-sref="root.main.masterView({id:masterObj.id})" class="btn btn-oval btn-lg btn-info" master="button" translate="button.view"></a>
+                    </td>
+                    <td class="text-left">
+                        <a ui-sref="root.main.masterEdit({id:masterObj.id})" class="btn btn-oval btn-lg btn-primary" master="button" translate="button.edit"></a>
+                    </td>
+                </tr>
+                </tbody>
+                <tbody ng-show="master.isLoading">
+                <tr>
+                    <td colspan="8" class="bg-white loader-hrcb">
+                        <loader-div/>
+                    </td>
+                </tr>
+                </tbody>
+
+                <tfoot>
+                <tr>
+                    <td class="text-center" colspan="8">
+                        <div st-items-by-page="master.recordsPerPage" st-pagination="" st-template="views/common/pagination_template.html"></div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

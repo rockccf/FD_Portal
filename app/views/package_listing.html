@@ -1,0 +1,47 @@
+<menu-button-div/>
+<div class="panel panel-info">
+    <div class="panel-heading" translate="text.packageListing"></div>
+    <div class="panel-body">
+        <!-- START table-responsive-->
+        <div class="table-responsive">
+            <table st-pipe="package.packageListing" st-table="package.tableData" class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th translate="text.name"></th>
+                    <th translate="text.description"></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody ng-show="!package.isLoading">
+                <tr ng-repeat="packageObj in package.tableData" ng-dblclick="package.viewPackage(packageObj.id)">
+                    <td data-title="#">{{package.recordsToSkip + $index + 1}}</td>
+                    <td data-title="Name">{{packageObj.name}}</td>
+                    <td data-title="Description">{{packageObj.description}}</td>
+                    <td class="text-right">
+                        <a ui-sref="root.main.packageView({id:packageObj.id})" class="btn btn-oval btn-lg btn-info" package="button" translate="button.view"></a>
+                    </td>
+                    <td class="text-left">
+                        <a ui-sref="root.main.packageEdit({id:packageObj.id})" class="btn btn-oval btn-lg btn-primary" package="button" translate="button.edit"></a>
+                    </td>
+                </tr>
+                </tbody>
+                <tbody ng-show="package.isLoading">
+                <tr>
+                    <td colspan="5" class="bg-white loader-hrcb">
+                        <loader-div/>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td class="text-center" colspan="5">
+                        <div st-items-by-page="package.recordsPerPage" st-pagination="" st-template="views/common/pagination_template.html"></div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

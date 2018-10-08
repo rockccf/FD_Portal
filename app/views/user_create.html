@@ -1,132 +1,18 @@
 <menu-button-div/>
 <div class="panel panel-primary">
-    <div class="panel-heading" translate="user.heading.userCreate"></div>
+    <div class="panel-heading" translate="text.userCreate"></div>
     <div class="panel-body">
         <alert-message-div/>
-        <uib-tabset>
-            <uib-tab heading="{{'user.heading.userInformation'|translate}}">
-                <form name="userForm" class="form-horizontal form-validate" ng-submit="user.createUser(userForm.$valid)" novalidate>
-
-                    <div class="form-group required" ng-class="{ 'has-error' : userForm.username.$invalid && userForm.username.$touched}">
-                        <label for="username" class="col-lg-3 control-label" translate="user.label.username"></label>
-                        <div class="col-lg-6">
-                            <input type="text" class="form-control" id="username" name="username" placeholder="{{'user.placeholder.username'|translate}}"
-                                   ng-model="user.user.username" ng-model-options="{ debounce: { 'default': 300, 'blur': 0 }  }"
-                                   ng-pattern="/^[a-zA-Z0-9\._-]*$/" ng-change="user.checkUsername(userForm.username)"
-                                   ng-minlength="6" ng-maxlength="100" required>
-                            <div class="help-block" ng-messages="userForm.username.$error" ng-show="userForm.username.$touched">
-                                <div ng-messages-include="views/common/messages.html"></div>
-                            </div>
-                        </div>
+        <form name="userForm" class="form-horizontal form-validate" ng-submit="user.createUser(userForm.$valid)" novalidate>
+            <div ng-include src="'views/user_form.html'"></div>
+            <br/>
+            <fieldset ng-disabled="user.isSaving">
+                <div class="form-group">
+                    <div class="col-lg-8 col-lg-offset-3">
+                        <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" translate="button.create"></button>
                     </div>
-                    <div class="form-group required" ng-class="{ 'has-error' : userForm.firstName.$invalid && userForm.firstName.$touched}">
-                        <label for="firstName" class="col-lg-3 control-label" translate="user.label.firstName"></label>
-                        <div class="col-lg-6">
-                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="{{'user.placeholder.firstName'|translate}}"
-                                   ng-model="user.user.firstName" ng-minlength="3" ng-maxlength="100" required>
-                            <div class="help-block" ng-messages="userForm.firstName.$error" ng-show="userForm.firstName.$touched">
-                                <div ng-messages-include="views/common/messages.html"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group required" ng-class="{ 'has-error' : userForm.lastName.$invalid && userForm.lastName.$touched}">
-                        <label for="lastName" class="col-lg-3 control-label" translate="user.label.lastName"></label>
-                        <div class="col-lg-6">
-                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="{{'user.placeholder.lastName'|translate}}"
-                                   ng-model="user.user.lastName" ng-minlength="2" ng-maxlength="100" required>
-                            <div class="help-block" ng-messages="userForm.lastName.$error" ng-show="userForm.lastName.$touched">
-                                <div ng-messages-include="views/common/messages.html"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group required" ng-class="{ 'has-error' : userForm.email.$invalid && userForm.email.$touched}">
-                        <label for="email" class="col-lg-3 control-label" translate="user.label.email"></label>
-                        <div class="col-lg-6">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="{{'user.placeholder.email'|translate}}"
-                                   ng-model="user.user.email" ng-minlength="6" ng-maxlength="100" required>
-                            <div class="help-block" ng-messages="userForm.email.$error" ng-show="userForm.email.$touched">
-                                <div ng-messages-include="views/common/messages.html"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group required" ng-class="{ 'has-error' : userForm.password.$invalid && userForm.password.$touched}">
-                        <label for="password" class="col-lg-3 control-label" translate="user.label.password"></label>
-                        <div class="col-lg-6">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="{{'user.placeholder.password'|translate}}"
-                                   ng-model="user.user.password" ng-minlength="6" ng-maxlength="100" required>
-                            <div class="help-block" ng-messages="userForm.password.$error" ng-show="userForm.password.$touched">
-                                <div ng-messages-include="views/common/messages.html"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group required" ng-class="{ 'has-error' : userForm.confirmPassword.$invalid && userForm.confirmPassword.$touched}">
-                        <label for="confirmPassword" class="col-lg-3 control-label" translate="user.label.confirmPassword"></label>
-                        <div class="col-lg-6">
-                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="{{'user.placeholder.confirmPassword'|translate}}"
-                                   ng-model="user.user.confirmPassword" ng-minlength="6" ng-maxlength="100" ng-model-options="{ debounce: { 'default': 300, 'blur': 0 }  }"
-                                   ng-change="user.checkPassword(userForm.password,userForm.confirmPassword)" required>
-                            <div class="help-block" ng-messages="userForm.confirmPassword.$error" ng-show="userForm.confirmPassword.$touched">
-                                <div ng-messages-include="views/common/messages.html"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group required" ng-class="{ 'has-error' : userForm.jobTitle.$invalid && userForm.jobTitle.$touched}">
-                        <label for="jobTitle" class="col-lg-3 control-label" translate="user.label.jobTitle"></label>
-                        <div class="col-lg-6">
-                            <input type="text" class="form-control" id="jobTitle" name="jobTitle" placeholder="{{'user.placeholder.jobTitle'|translate}}"
-                                   ng-model="user.user.jobTitle" ng-minlength="6" ng-maxlength="100" required>
-                            <div class="help-block" ng-messages="userForm.jobTitle.$error" ng-show="userForm.jobTitle.$touched">
-                                <div ng-messages-include="views/common/messages.html"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group required" ng-class="{ 'has-error' : userForm.department.$invalid && userForm.department.$touched}">
-                        <label for="department" class="col-lg-3 control-label" translate="user.label.department"></label>
-                        <div class="col-lg-6">
-                            <select class="form-control" id="department" name="department" ng-model="user.user.department" required>
-                                <option value="">{{'user.placeholder.selectOne'|translate}}</option>
-                                <option ng-repeat="departmentObj in user.departments" value="{{departmentObj.id}}">{{departmentObj.name}}</option>
-                            </select>
-                            <div class="help-block" ng-messages="userForm.department.$error" ng-show="userForm.department.$touched">
-                                <div ng-messages-include="views/common/messages.html"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group required" ng-class="{ 'has-error' : userForm.role.$invalid && userForm.role.$touched}">
-                        <label for="role" class="col-lg-3 control-label" translate="user.label.role"></label>
-                        <div class="col-lg-6">
-                            <select class="form-control" id="role" name="role" ng-model="user.user.role" required>
-                                <option value="">{{'user.placeholder.selectOne'|translate}}</option>
-                                <option ng-repeat="roleObj in user.roles" value="{{roleObj.name}}" name="role">{{roleObj.description}}</option>
-                            </select>
-                            <div class="help-block" ng-messages="userForm.role.$error" ng-show="userForm.role.$touched">
-                                <div ng-messages-include="views/common/messages.html"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group required" ng-class="{ 'has-error' : userForm.active.$invalid && userForm.active.$touched}">
-                        <label for="active" class="col-lg-3 control-label" translate="user.label.active"></label>
-                        <div class="col-lg-6">
-                            <select class="form-control" id="active" name="active" ng-model="user.user.active" required convert-to-number>
-                                <option value="">{{'user.placeholder.selectOne'|translate}}</option>
-                                <option ng-repeat="activeObj in user.activeOptions" value="{{activeObj.id}}">
-                                    {{activeObj.name | translate}}
-                                </option>
-                            </select>
-                            <div class="help-block" ng-messages="userForm.active.$error" ng-show="userForm.active.$touched">
-                                <div ng-messages-include="views/common/messages.html"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <fieldset ng-disabled="user.isSaving">
-                        <div class="form-group">
-                            <div class="col-lg-8 col-lg-offset-3">
-                                <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" translate="user.button.btnCreate"></button>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
-            </uib-tab>
-        </uib-tabset>
+                </div>
+            </fieldset>
+        </form>
     </div>
 </div>

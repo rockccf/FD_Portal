@@ -60,15 +60,14 @@ app.factory('PrincipalService', ['$rootScope', '$q', '$http', '$timeout', 'SYSCO
                 deferred.resolve(_identity);
 
                 return deferred.promise;
-            } /*else {
+            }/* else {
                 //otherwise, retrieve the identity data from the server, update the identity object, and then resolve.
-                $http.get('/svc/account/identity', { ignoreErrors: true })
-                    .success(function(data) {
-                        _identity = data;
+                $http.get('/user/getIdentity')
+                    .then(function(response) {
+                        _identity = response.data;
                         _authenticated = true;
                         deferred.resolve(_identity);
-                    })
-                    .error(function () {
+                    }, function (response) {
                         _identity = null;
                         _authenticated = false;
                         deferred.resolve(_identity);

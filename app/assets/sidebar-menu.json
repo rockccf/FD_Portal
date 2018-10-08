@@ -13,19 +13,45 @@
         "bypassPermission": "true"
     },
     {
+        "text": "My Account",
+        "sref": "root.main.myAccount",
+        "icon": "fas fa-user",
+        "translate": "text.myAccount",
+        "bypassPermission": "true"
+    },
+    {
         "text": "Setup",
         "sref": "#",
-        "icon": "fa fa-cog",
+        "icon": "fas fa-cog",
         "submenu": [
             {
-                "text": "Profile",
-                "sref": "root.main.profileView",
-                "icon": "fa fa-info-circle",
-                "substate": [
-                    {"sref":"root.main.profileView"}
+                "text": "Master",
+                "sref": "root.main.masterListing",
+                "icon": "fa fa-building",
+                "substate" : [
+                    {"sref": "root.main.masterCreate"},
+                    {"sref": "root.main.masterListing"}
                 ],
-                "translate": "text.profile",
-                "permission" : "VIEW_TENANT"
+                "translate": "text.master",
+                "permission" : "VIEW_MASTER"
+            },
+            {
+                "text": "Company Draw",
+                "sref": "root.main.companyDrawListing",
+                "icon": "fas fa-dice",
+                "translate": "text.companyDraw",
+                "permission": "CREATE_COMPANY_DRAW"
+            },
+            {
+                "text": "Package",
+                "sref": "root.main.packageListing",
+                "icon": "fa fa-briefcase",
+                "substate" : [
+                    {"sref": "root.main.packageCreate"},
+                    {"sref": "root.main.packageListing"}
+                ],
+                "translate": "text.package",
+                "permission" : "VIEW_PACKAGE"
             },
             {
                 "text": "User",
@@ -38,45 +64,80 @@
                     {"sref":"root.main.userEdit"}
                 ],
                 "translate": "text.user",
-                "permission" : "VIEW_USER"
-            },
-            {
-                "text": "Role",
-                "sref": "root.main.roleListing",
-                "icon": "fa fa-street-view",
-                "substate": [
-                    {"sref":"root.main.roleCreate"},
-                    {"sref":"root.main.roleListing"}
-                ],
-                "translate": "text.role",
-                "permission" : "VIEW_ROLE"
+                "permission" : "CREATE_USER"
             }
         ],
-        "translate": "sidebar.menu.setup"
+        "translate": "text.setup"
     },
     {
-        "text": "Maintenance",
+        "text": "Bet",
         "sref": "#",
-        "icon": "fa fa-cogs",
+        "icon": "fas fa-play",
         "submenu": [
             {
-                "text": "Master",
-                "sref": "root.main.masterListing",
-                "icon": "fa fa-shopping-basket",
-                "substate" : [
-                    {"sref": "root.main.masterCreate"},
-                    {"sref": "root.main.masterListing"}
-                ],
-                "translate": "text.master",
-                "permission" : "VIEW_MASTER"
+                "text": "Bet",
+                "sref": "root.main.bet",
+                "icon": "fas fa-play",
+                "translate": "text.bet",
+                "permission" : "BET"
+            },
+            {
+                "text": "4d Special",
+                "sref": "root.main.4dSpecial",
+                "icon": "fas fa-dice-four",
+                "translate": "text.4dSpecial",
+                "permission" : "BET"
+            },
+            {
+                "text": "3D Special",
+                "sref": "root.main.3dSpecial",
+                "icon": "fas fa-dice-three",
+                "translate": "text.3dSpecial",
+                "permission" : "BET"
+            },
+            {
+                "text": "Void Bet",
+                "sref": "root.main.voidBet",
+                "icon": "fas fa-ban",
+                "translate": "text.voidBet",
+                "permission" : "BET"
             }
         ],
-        "translate": "text.maintenance"
+        "translate": "text.bet"
+    },
+    {
+        "text" : "History",
+        "sref": "#",
+        "icon": "fas fa-history",
+        "submenu": [
+            {
+                "text": "Bet Slip History",
+                "sref": "root.main.betSlipHistory",
+                "icon": "fas fa-clipboard-list",
+                "translate": "text.betSlipHistory",
+                "permission" : "BET"
+            },
+            {
+                "text": "Bet Number History",
+                "sref": "root.main.betNumberHistory",
+                "icon": "fas fa-list-ol",
+                "translate": "text.betNumberHistory",
+                "permission" : "BET"
+            },
+            {
+                "text": "Void Bet History",
+                "sref": "root.main.voidBetHistory",
+                "icon": "fas fa-ban",
+                "translate": "text.voidBetHistory",
+                "permission" : "BET"
+            }
+        ],
+        "translate": "text.history"
     },
     {
         "text": "Report",
         "sref": "root.main.report",
-        "icon": "fa fa-book",
+        "icon": "fas fa-chart-line",
         "substate": [
             {"sref": "root.main.poReport"}
         ],

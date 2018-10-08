@@ -1,6 +1,6 @@
 <div class="block-center mt-xl wd-xl">
     <!-- START panel-->
-    <div class="panel panel-flat">
+    <div class="panel panel-dark panel-flat">
         <div class="panel-heading text-center">
             <a href="#">
                 <img src="/assets/images/logo.png" alt="Horeca Bid" class="block-center img-responsive"/>
@@ -10,16 +10,16 @@
             <p class="text-center pv">SIGN IN TO CONTINUE.</p>
             <form role="form" ng-submit="main.auth(loginForm.$valid)" name="loginForm" novalidate="" class="form-validate mb-lg">
                 <div class="form-group has-feedback" ng-class="{ 'has-error' : loginForm.username.$invalid && loginForm.username.$touched}">
-                    <input id="username" type="text" name="username" placeholder="Username" autocomplete="off" required="" class="form-control"
-                           ng-model="main.login.username" ng-minlength="6" autofocus/>
+                    <input id="username" type="text" name="username" placeholder="Username" autocomplete="off" class="form-control"
+                           ng-model="main.login.username" ng-minlength="6" autofocus required/>
                     <span class="fa fa-user form-control-feedback text-muted"></span>
                     <div class="help-block" ng-messages="loginForm.username.$error" ng-show="loginForm.username.$touched">
                         <div ng-messages-include="views/common/messages.html"></div>
                     </div>
                 </div>
                 <div class="form-group has-feedback" ng-class="{ 'has-error' : loginForm.password.$invalid && loginForm.password.$touched}">
-                    <input id="password" type="password" name="password" placeholder="Password" ng-model="main.login.password" required="" class="form-control"
-                           ng-model="main.login.username" ng-minlength="6"/>
+                    <input id="password" type="password" name="password" placeholder="Password" class="form-control"
+                           ng-model="main.login.password" ng-minlength="6"/ required>
                     <span class="fa fa-lock form-control-feedback text-muted"></span>
                     <div class="help-block" ng-messages="loginForm.password.$error" ng-show="loginForm.password.$touched">
                         <div ng-messages-include="views/common/messages.html"></div>
@@ -41,5 +41,6 @@
         <span ng-bind="app.year"></span>
         <span>-</span>
         <span ng-bind="app.name"></span>
+        (<span ng-bind="app.version"></span>)
     </div>
 </div>

@@ -1,6 +1,6 @@
 <menu-button-div/>
 <div class="panel panel-info">
-    <div class="panel-heading" translate="user.heading.userListing"></div>
+    <div class="panel-heading" translate="text.userListing"></div>
     <div class="panel-body">
         <!-- START table-responsive-->
         <div class="table-responsive">
@@ -8,35 +8,36 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th st-sort="username" st-sort-default="true" st-skip-natural="true" translate="user.label.username"></th>
-                    <th st-sort="firstName" st-skip-natural="true" translate="user.label.firstName"></th>
-                    <th st-sort="lastName" st-skip-natural="true" translate="user.label.lastName"></th>
-                    <th st-sort="email" st-skip-natural="true" translate="user.label.email"></th>
-                    <th st-sort="name" st-skip-natural="true" translate="user.label.department"></th>
-                    <th st-sort="item_name" st-skip-natural="true" translate="user.label.role"></th>
-                    <th st-sort="active" st-skip-natural="true" translate="user.label.active"></th>
+                    <th st-sort="username" st-sort-default="true" st-skip-natural="true" translate="text.username"></th>
+                    <th st-sort="name" st-skip-natural="true" translate="text.name"></th>
+                    <th st-sort="mobileNo" st-skip-natural="true" translate="text.mobileNo"></th>
+                    <th st-sort="active" st-skip-natural="true" translate="text.active"></th>
+                    <th st-sort="master" st-skip-natural="true" translate="text.master"></th>
+                    <th st-sort="userType" st-skip-natural="true" translate="text.userType"></th>
                     <th></th>
                     <th></th>
                 </tr>
                 <tr>
                     <th></th>
                     <th><input class="form-control" st-search="username"/></th>
-                    <th><input class="form-control" st-search="firstName"/></th>
-                    <th><input class="form-control" st-search="lastName"/></th>
-                    <th><input class="form-control" st-search="email"/></th>
-                    <th>
-                        <select class="form-control" st-search="departmentId">
-                            <option ng-repeat="departmentObj in user.departmentFilters" value="{{departmentObj.id}}">{{departmentObj.name | translate}}</option>
-                        </select>
-                    </th>
-                    <th>
-                        <select class="form-control" st-search="item_name">
-                            <option ng-repeat="roleObj in user.roleFilters" value="{{roleObj.id}}">{{roleObj.name | translate}}</option>
-                        </select>
-                    </th>
+                    <th><input class="form-control" st-search="name"/></th>
+                    <th><input class="form-control" st-search="mobileNo"/></th>
                     <th>
                         <select class="form-control" st-search="active">
-                            <option ng-repeat="activeObj in user.activeFilters" value="{{activeObj.id}}">{{activeObj.name | translate}}</option>
+                            <option value="" translate="text.all"></option>
+                            <option ng-repeat="yesNoObj in user.yesNoOptions" value="{{yesNoObj.id}}">{{yesNoObj.name | translate}}</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select class="form-control" st-search="masterId">
+                            <option value="" translate="text.all"></option>
+                            <option ng-repeat="masterObj in user.masterOptions" value="{{masterObj.id}}">{{masterObj.name}}</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select class="form-control" st-search="userType">
+                            <option value="" translate="text.all"></option>
+                            <option ng-repeat="userTypeObj in user.userTypeOptions" value="{{userTypeObj.id}}">{{userTypeObj.name | translate}}</option>
                         </select>
                     </th>
                     <th></th>
@@ -47,30 +48,29 @@
                 <tr ng-repeat="userObj in user.tableData" ng-dblclick="user.viewUser(userObj.id)">
                     <td data-title="#">{{user.recordsToSkip + $index + 1}}</td>
                     <td data-title="User Name">{{userObj.username}}</td>
-                    <td data-title="First Name">{{userObj.userProfile.firstName}}</td>
-                    <td data-title="Last Name">{{userObj.userProfile.lastName}}</td>
-                    <td data-title="Email">{{userObj.email}}</td>
-                    <td data-title="Department">{{userObj.department.name}}</td>
-                    <td data-title="Role">{{userObj.roles[0].description}}</td>
-                    <td data-title="Active">{{userObj.active}}</td>
+                    <td data-title="Name">{{userObj.name}}</td>
+                    <td data-title="Mobile No">{{userObj.mobileNo}}</td>
+                    <td data-title="Active"><common-get-text ng-if="userObj.active != void(0)" value="userObj.active" object="user.yesNoOptions"></common-get-text></td>
+                    <td data-title="Master">{{userObj.master.name}}</td>
+                    <td data-title="User Type"><common-get-text ng-if="userObj.userType != void(0)" value="userObj.userType" object="user.userTypeOptions"></common-get-text></td>
                     <td class="text-center">
-                        <a ui-sref="root.main.userView({id:userObj.id})" class="btn btn-oval btn-lg btn-info" role="button" translate="user.button.btnView"></a>
+                        <a ui-sref="root.main.userView({id:userObj.id})" class="btn btn-oval btn-lg btn-info" role="button" translate="button.view"></a>
                     </td>
                     <td class="text-center">
-                        <a ui-sref="root.main.userEdit({id:userObj.id})" class="btn btn-oval btn-lg btn-primary" role="button" translate="user.button.btnEdit"></a>
+                        <a ui-sref="root.main.userEdit({id:userObj.id})" class="btn btn-oval btn-lg btn-primary" role="button" translate="button.edit"></a>
                     </td>
                 </tr>
                 </tbody>
                 <tbody ng-show="user.isLoading">
                 <tr>
-                    <td colspan="10" class="bg-white loader-hrcb">
+                    <td colspan="8" class="bg-white loader-hrcb">
                         <loader-div/>
                     </td>
                 </tr>
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td class="text-center" colspan="10">
+                    <td class="text-center" colspan="8">
                         <div st-items-by-page="user.recordsPerPage" st-pagination="" st-template="views/common/pagination_template.html"></div>
                     </td>
                 </tr>
