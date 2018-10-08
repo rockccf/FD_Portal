@@ -17,14 +17,16 @@
         </tr>
         </tbody>
     </table>
-    <br/>
-    <fieldset ng-disabled="bet.isSaving">
-        <div class="form-group">
-            <div class="col-lg-8 col-lg-offset-3">
-                <button type="submit" class="btn btn-primary" ng-disabled="betForm.$invalid" translate="button.submit"></button>
-            </div>
+</div>
+<br/>
+<fieldset ng-disabled="bet.isSaving">
+    <div class="form-group">
+        <div class="col-lg-8 col-lg-offset-3">
+            <button type="submit" class="btn btn-primary" ng-disabled="betForm.$invalid" translate="button.submit"></button>
         </div>
-    </fieldset>
+    </div>
+</fieldset>
+<div class="table-responsive">
     <table ng-if="$state.current.name == 'root.main.bet'" class="table table-condensed">
         <thead>
         <tr class="active">
