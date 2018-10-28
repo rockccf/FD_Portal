@@ -100,6 +100,7 @@
                 _this.user.username = angular.lowercase(_this.user.username);
                 var packageId = null, creditLimit = null, betMethod = null, betGdLotto = null, bet6d = null;
                 var autoTransfer = null, autoTransferMode = null, autoTransferDays = {};
+                var extra4dCommRate = null, extra6dCommRate = null, extraGdCommRate = null;
 
                 if (_this.userType == $rootScope.APPCONSTANT.USER.TYPE.ADMIN) {
                     masterId = _this.user.master.id; //Creating Master User
@@ -112,6 +113,9 @@
                     betMethod = _this.user.betMethod;
                     betGdLotto = _this.user.betGdLotto;
                     bet6d = _this.user.bet6d;
+                    extra4dCommRate = _this.user.extra4dCommRate;
+                    extra6dCommRate = _this.user.extra6dCommRate;
+                    extraGdCommRate = _this.user.extraGdCommRate;
                 }
 
                 _this.saveObj = {
@@ -129,6 +133,9 @@
                     "betMethod" : betMethod,
                     "betGdLotto" : betGdLotto,
                     "bet6d" : bet6d,
+                    "extra4dCommRate" : extra4dCommRate,
+                    "extra6dCommRate" : extra6dCommRate,
+                    "extraGdCommRate" : extraGdCommRate,
                     "masterId" : masterId
                 };
 
@@ -163,9 +170,9 @@
                     "betGdLotto" : _this.user.betGdLotto,
                     "bet6d" : _this.user.bet6d,
                     "creditLimit" : _this.user.creditLimit,
-                    "extra4dCommRate" : _this.user.userDetail.extra4dCommRate,
-                    "extra6dCommRate" : _this.user.userDetail.extra6dCommRate,
-                    "extraGdCommRate" : _this.user.userDetail.extraGdCommRate
+                    "extra4dCommRate" : _this.user.extra4dCommRate,
+                    "extra6dCommRate" : _this.user.extra6dCommRate,
+                    "extraGdCommRate" : _this.user.extraGdCommRate
                 };
 
                 $http.put($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/user/" + _this.user.id, _this.saveObj).
