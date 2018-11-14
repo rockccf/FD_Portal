@@ -30,7 +30,7 @@
 <div class="table-responsive">
     <table ng-if="$state.current.name == 'root.main.bet'" class="table table-condensed">
         <thead>
-        <tr class="active">
+        <tr class="warning">
             <th rowspan="3">#</th>
             <th rowspan="3" class="text-center" translate="text.number"></th>
             <th class="text-center" colspan="{{bet.amountColspan}}" translate="text.amount"></th>
@@ -40,7 +40,7 @@
             <th class="text-center" rowspan="2" translate="text.remarks"></th>
             <th class="text-right" rowspan="3" translate="text.total"></th>
         </tr>
-        <tr class="active">
+        <tr class="warning">
             <th class="text-center">-{{'text.big' | translate}}-</th>
             <th class="text-center">-{{'text.small' | translate}}-</th>
             <th class="text-center">-4D 4A-</th>
@@ -53,7 +53,7 @@
                 {{companyObj.code}}
             </th>
         </tr>
-        <tr class="active">
+        <tr class="warning">
             <th class="text-center">
                 <div class="checkbox c-checkbox needsclick">
                     <label class="needsclick">
@@ -156,7 +156,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-class="{'success' : rowObj.selected, '' : !rowObj.selected}" ng-click="bet.selectRow($index)" ng-repeat="rowObj in bet.betFormRowsArray">
+        <tr ng-class="{'success' : rowObj.selected, 'info' : !rowObj.selected}" ng-click="bet.selectRow($index)" ng-repeat="rowObj in bet.betFormRowsArray">
             <td>{{$index+1}}</td>
             <td>
                 <input type="text" class="form-control input-xs" pattern="\d*" minlength="3" maxlength="6" id="number_{{$index}}" name="number_{{$index}}" ng-model="rowObj.number" ng-change="bet.calculateBetsTotal()"/>
@@ -216,7 +216,7 @@
     </table>
     <table ng-if="$state.current.name == 'root.main.4dSpecial'" class="table table-condensed">
         <thead>
-        <tr class="active">
+        <tr class="warning">
             <th rowspan="3">#</th>
             <th rowspan="3" class="text-center" translate="text.number"></th>
             <th class="text-center" colspan="8" translate="text.amount"></th>
@@ -226,7 +226,7 @@
             <th class="text-center" rowspan="2" translate="text.remarks"></th>
             <th class="text-right" rowspan="3" translate="text.total"></th>
         </tr>
-        <tr class="active">
+        <tr class="warning">
             <th class="text-center">-- 4A --</th>
             <th class="text-center">-- 4B --</th>
             <th class="text-center">-- 4C --</th>
@@ -240,7 +240,7 @@
                 {{companyObj.code}}
             </th>
         </tr>
-        <tr class="active">
+        <tr class="warning">
             <th class="text-center">
                 <div class="checkbox c-checkbox needsclick">
                     <label class="needsclick">
@@ -352,7 +352,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-class="{'success' : rowObj.selected, '' : !rowObj.selected}" ng-click="bet.selectRow($index)" ng-repeat="rowObj in bet.betFormRowsArray">
+        <tr ng-class="{'success' : rowObj.selected, 'info' : !rowObj.selected}" ng-click="bet.selectRow($index)" ng-repeat="rowObj in bet.betFormRowsArray">
             <td>{{$index+1}}</td>
             <td>
                 <input type="text" class="form-control input-xs" pattern="\d*" minlength="3" maxlength="6" id="number_{{$index}}" name="number_{{$index}}" ng-model="rowObj.number" ng-change="bet.calculateBetsTotal()" />
@@ -415,7 +415,7 @@
     </table>
     <table ng-if="$state.current.name == 'root.main.3dSpecial'" class="table table-condensed">
         <thead>
-        <tr class="active">
+        <tr class="warning">
             <th rowspan="3">#</th>
             <th rowspan="3" class="text-center" translate="text.number"></th>
             <th class="text-center" colspan="6" translate="text.amount"></th>
@@ -425,7 +425,7 @@
             <th class="text-center" rowspan="2" translate="text.remarks"></th>
             <th class="text-right" rowspan="3" translate="text.total"></th>
         </tr>
-        <tr class="active">
+        <tr class="warning">
             <th class="text-center">-- 3A --</th>
             <th class="text-center">-- 3B --</th>
             <th class="text-center">-- 3C --</th>
@@ -437,7 +437,7 @@
                 {{companyObj.code}}
             </th>
         </tr>
-        <tr class="active">
+        <tr class="warning">
             <th class="text-center">
                 <div class="checkbox c-checkbox needsclick">
                     <label class="needsclick">
@@ -531,7 +531,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-class="{'success' : rowObj.selected, '' : !rowObj.selected}" ng-click="bet.selectRow($index)" ng-repeat="rowObj in bet.betFormRowsArray">
+        <tr ng-class="{'success' : rowObj.selected, 'info' : !rowObj.selected}" ng-click="bet.selectRow($index)" ng-repeat="rowObj in bet.betFormRowsArray">
             <td>{{$index+1}}</td>
             <td>
                 <input type="text" class="form-control input-xs" pattern="\d*" minlength="3" maxlength="6" id="number_{{$index}}" name="number_{{$index}}" ng-model="rowObj.number" ng-change="bet.calculateBetsTotal()"/>
