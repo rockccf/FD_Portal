@@ -53,7 +53,7 @@
                 {{companyObj.code}}
             </th>
         </tr>
-        <tr class="warning">
+        <tr>
             <th class="text-center">
                 <div class="checkbox c-checkbox needsclick">
                     <label class="needsclick">
@@ -182,7 +182,7 @@
             <td ng-if="userIdentity.userDetail.bet6d">
                 <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="6d_{{$index}}" name="6d_{{$index}}" ng-model="rowObj['6d']" ng-change="bet.calculateBetsTotal()"/>
             </td>
-            <td class="text-center" ng-repeat="dateObj in bet.activeDrawDateArray">
+            <td class="text-center" style="background-color: white;" ng-repeat="dateObj in bet.activeDrawDateArray">
                 <div class="checkbox c-checkbox needsclick">
                     <label class="needsclick">
                         <input class="needsclick" type="checkbox" ng-model="rowObj[dateObj]" ng-change="bet.calculateBetsTotal()"/>
@@ -240,7 +240,7 @@
                 {{companyObj.code}}
             </th>
         </tr>
-        <tr class="warning">
+        <tr>
             <th class="text-center">
                 <div class="checkbox c-checkbox needsclick">
                     <label class="needsclick">
@@ -381,7 +381,7 @@
             <td>
                 <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="small_{{$index}}" name="small_{{$index}}" ng-model="rowObj.small" ng-change="bet.calculateBetsTotal()"/>
             </td>
-            <td class="text-center" ng-repeat="dateObj in bet.activeDrawDateArray">
+            <td class="text-center" style="background-color: white;" ng-repeat="dateObj in bet.activeDrawDateArray">
                 <div class="checkbox c-checkbox needsclick">
                     <label class="needsclick">
                         <input class="needsclick" type="checkbox" ng-model="rowObj[dateObj]" ng-change="bet.calculateBetsTotal()"/>
@@ -437,7 +437,7 @@
                 {{companyObj.code}}
             </th>
         </tr>
-        <tr class="warning">
+        <tr>
             <th class="text-center">
                 <div class="checkbox c-checkbox needsclick">
                     <label class="needsclick">
@@ -554,7 +554,7 @@
             <td>
                 <input type="text" class="form-control input-xs" ng-pattern="bet.betRegex" minlength="1" maxlength="5"  id="3abc_{{$index}}" name="3abc_{{$index}}" ng-model="rowObj['3abc']" ng-change="bet.calculateBetsTotal()"/>
             </td>
-            <td class="text-center" ng-repeat="dateObj in bet.activeDrawDateArray">
+            <td class="text-center" style="background-color: white;" ng-repeat="dateObj in bet.activeDrawDateArray">
                 <div class="checkbox c-checkbox needsclick">
                     <label class="needsclick">
                         <input class="needsclick" type="checkbox" ng-model="rowObj[dateObj]" ng-change="bet.calculateBetsTotal()"/>
