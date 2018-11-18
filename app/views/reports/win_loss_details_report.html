@@ -64,8 +64,8 @@
                             <th class="text-right" translate="text.sales"></th>
                             <th class="text-right" translate="text.commission"></th>
                             <th class="text-right" translate="text.payout"></th>
-                            <th class="text-right" translate="text.collect"></th>
                             <th class="text-right" translate="text.extraCommission"></th>
+                            <th class="text-right" translate="text.collect"></th>
                             <th class="text-right" translate="text.sales"></th>
                             <th class="text-right" translate="text.commission"></th>
                             <th class="text-right" translate="text.superiorCommission"></th>
@@ -81,8 +81,8 @@
                             <td class="text-right">{{dataObj.sales | number:2}}</td>
                             <td class="text-right">{{dataObj.commission | number:2}}</td>
                             <td class="text-right">{{dataObj.payout | number:2}}</td>
-                            <td class="text-right" ng-class="{'text-danger' : dataObj.collect < 0}">{{dataObj.collect | number:2}}</td>
                             <td class="text-right">{{dataObj.extraCommission | number:2}}</td>
+                            <td class="text-right" ng-class="{'text-danger' : dataObj.collect < 0}">{{dataObj.collect | number:2}}</td>
                             <td class="text-right">{{dataObj.companySales | number:2}}</td>
                             <td class="text-right">{{dataObj.companyCommission | number:2}}</td>
                             <td class="text-right">{{dataObj.superiorCommission | number:2}}</td>
@@ -96,8 +96,8 @@
                             <td class="text-right"><strong>{{report.reportData.grandTotalUserSales | number:2}}</strong></td>
                             <td class="text-right"><strong>{{report.reportData.grandTotalUserCommission | number:2}}</strong></td>
                             <td class="text-right"><strong>{{report.reportData.grandTotalUserPayout | number:2}}</strong></td>
-                            <td class="text-right" ng-class="{'text-danger' : report.reportData.grandTotalCollect < 0}"><strong>{{report.reportData.grandTotalCollect | number:2}}</strong></td>
                             <td class="text-right"><strong>{{report.reportData.grandTotalExtraCommission | number:2}}</strong></td>
+                            <td class="text-right" ng-class="{'text-danger' : report.reportData.grandTotalCollect < 0}"><strong>{{report.reportData.grandTotalCollect | number:2}}</strong></td>
                             <td class="text-right"><strong>{{report.reportData.grandTotalCompanySales | number:2}}</strong></td>
                             <td class="text-right"><strong>{{report.reportData.grandTotalCompanyCommission | number:2}}</strong></td>
                             <td class="text-right"><strong>{{report.reportData.grandTotalCompanySuperiorCommission | number:2}}</strong></td>
