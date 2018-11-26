@@ -8,15 +8,16 @@
         var stateName = $state.current.name;
         var _this = this; //Declare local variable _this to refer to "this" controller
         _this.isSaving = false; //Default to false
-        _this.betMethod = $rootScope.userIdentity.userDetail.betMethod;
+        _this.betMethod = $rootScope.userIdentity.userDetail ? $rootScope.userIdentity.userDetail.betMethod : null;
         _this.canVoid = false;
         _this.aBetVoidCheckAll = false;
         _this.lBetVoidCheckAll = false;
         _this.betVoidCheckAll = false;
         _this.voidArray = [];
         _this.betRegex = "^\\d{0,3}(?:\\.\\d)?$";
+        _this.grandTotal = 0;
 
-        if ($rootScope.userIdentity.userDetail.bet6d) {
+        if ($rootScope.userIdentity.userDetail && $rootScope.userIdentity.userDetail.bet6d) {
             _this.amountColspan = 7;
         } else {
             _this.amountColspan = 5;
@@ -108,6 +109,7 @@
                 _this.betFormRowsArray.map(function(a) {
                     a[bet] = firstEnteredAmount;
                 });
+                _this.calculateBetsTotal();
             }
         };
 
@@ -115,12 +117,14 @@
             _this.betFormRowsArray.map(function(a) {
                 a[dateObj] = _this.dateAllCheckbox[index];
             });
+            _this.calculateBetsTotal();
         };
 
         _this.checkAllCompany = function(companyCode,index) {
             _this.betFormRowsArray.map(function(a) {
                 a[companyCode] = _this.companyAllCheckbox[index];
             });
+            _this.calculateBetsTotal();
         };
 
         _this.checkAllOption = function() {
@@ -131,9 +135,20 @@
                 _this.betFormRowsArray.map(function(a) {
                     a.betOption = firstSelectedOption;
                 });
+                _this.calculateBetsTotal();
             }
         };
 
+        _this.checkAllRemarks = function() {
+            //Take the first selected option and override the rest with it
+            //Only do something if it's checked
+            if (_this.remarksAllCheckbox) {
+                var firstEnteredRemarks = _this.betFormRowsArray[0].remarks;
+                _this.betFormRowsArray.map(function(a) {
+                    a.remarks = firstEnteredRemarks;
+                });
+            }
+        };
 
         //Populate this week of draw dates (excluding past dates)
         _this.drawDateArray = [];
@@ -219,7 +234,7 @@
                         break;
                     case $rootScope.APPCONSTANT.COMPANY.CODE.GD:
                         value.name = "text.gdLotto";
-                        if ($rootScope.userIdentity.userDetail.betGdLotto) {
+                        if ($rootScope.userIdentity.userDetail && $rootScope.userIdentity.userDetail.betGdLotto) {
                             _this.drawCompanyArray.push(value);
                         }
                         break;
@@ -643,7 +658,8 @@
                                     betObj.betOption = row.betOption.id;
                                     betObj.big = big;
                                     betObj.small = small;
-                                    betObj['4a'] = amount4a;
+                                    //betObj['4a'] = amount4a;
+                                    betObj['4a'] = null; //Modified on 13-10-2018, forcibly do not accept 4A bet on sandakan
                                     betObj['4b'] = amount4b;
                                     betObj['4c'] = amount4c;
                                     betObj['4d'] = amount4d;
@@ -724,23 +740,158 @@
             return result;
         };
 
-        //To calculate total
-        /*_this.changeBet = function(index) {
-            var grandTotal = 0, totalBig = 0, totalSmall = 0, total4a = 0, total3d = 0, total3abc = 0, total5d = 0, total6d = 0;
-            var row = _this.betFormRowsArray[index];
+        function permute(string) {
+            if (string.length < 2) return string; // This is our break condition
 
-            //Rule 1 : Either one of B, S, 4a, 3d, 3abc, 5d, 6d must be entered.
-            //Rule 2 : One of the draw dates must be checked.
-            //Rule 3 : One of the draw companies must be checked
-            //Rule 4 : The draw must be available for the checked dates for the checked companies
+            var permutations = []; // This array will hold our permutations
 
-            //Rule 1
-            if (row.big > 0 || row.small > 0 || row['4a'] > 0 || row['3d'] > 0 || row['3abc'] || row['5d'] > 0 || row['6d'] > 0) {
+            for (var i=0; i<string.length; i++) {
+                var char = string[i];
+
+                // Cause we don't want any duplicates:
+                if (string.indexOf(char) != i) // if char was used already
+                    continue;           // skip it this time
+
+                var remainingString = string.slice(0,i) + string.slice(i+1,string.length); //Note: you can concat Strings via '+' in JS
+
+                for (var subPermutation of permute(remainingString))
+                    permutations.push(char + subPermutation)
 
             }
-            grandTotal = totalBig+totalSmall+total4a+total3d+total3abc+total5d+total6d;
-            row.total = grandTotal;
-        };*/
+            return permutations;
+        }
+
+        //To calculate total
+        _this.calculateBetsTotal = function() {
+            var grandTotal = 0;
+
+            //Rule 1 : Number must be entered
+            //Rule 2 : Either one of B, S, 4a, 3d, 3abc, 5d, 6d must be entered.
+            //Rule 3 : One of the draw dates must be checked.
+            //Rule 4 : One of the draw companies must be checked
+            //Rule 5 : Check the betOption
+
+            _this.betFormRowsArray.map(function(row) {
+                var total = 0;
+                row.total = 0; //Reset to 0
+                if (row.number) {
+                    if (row.big > 0 || row.small > 0 || row['4a'] > 0 || row['3d'] > 0 || row['3abc'] || row['5d'] > 0 || row['6d'] > 0) {
+                        for (var d in _this.activeDrawDateArray) {
+                            var activeDrawDate = _this.activeDrawDateArray[d];
+                            if (row[activeDrawDate] == true) {
+                                //Check betMethod
+                                var big = row.big ? row.big : 0;
+                                var small = row.small ? row.small : 0;
+                                var amount4a = row['4a'] ? row['4a'] : 0;
+                                var amount4b = row['4b'] ? row['4b'] : 0;
+                                var amount4c = row['4c'] ? row['4c'] : 0;
+                                var amount4d = row['4d'] ? row['4d'] : 0;
+                                var amount4e = row['4e'] ? row['4e'] : 0;
+                                var amount4f = row['4f'] ? row['4f'] : 0;
+                                var amount3abc = row['3abc'] ? row['3abc'] : 0;
+                                var amount3a = row['3a'] ? row['3a'] : 0;
+                                var amount3b = row['3b'] ? row['3b'] : 0;
+                                var amount3c = row['3c'] ? row['3c'] : 0;
+                                var amount3d = row['3d'] ? row['3d'] : 0;
+                                var amount3e = row['3e'] ? row['3e'] : 0;
+                                var amount5d = row['5d'] ? row['5d'] : 0;
+                                var amount6d = row['6d'] ? row['6d'] : 0;
+                                var betCompaniesCount = 0;
+                                if (row[$rootScope.APPCONSTANT.COMPANY.CODE.MAGNUM]) {
+                                    betCompaniesCount++;
+                                }
+                                if (row[$rootScope.APPCONSTANT.COMPANY.CODE.PMP]) {
+                                    betCompaniesCount++;
+                                }
+                                if (row[$rootScope.APPCONSTANT.COMPANY.CODE.TOTO]) {
+                                    betCompaniesCount++;
+                                }
+                                if (row[$rootScope.APPCONSTANT.COMPANY.CODE.SINGAPORE]) {
+                                    betCompaniesCount++;
+                                }
+                                if (row[$rootScope.APPCONSTANT.COMPANY.CODE.SABAH]) {
+                                    betCompaniesCount++;
+                                }
+                                if (row[$rootScope.APPCONSTANT.COMPANY.CODE.SANDAKAN]) {
+                                    betCompaniesCount++;
+                                }
+                                if (row[$rootScope.APPCONSTANT.COMPANY.CODE.SARAWAK]) {
+                                    betCompaniesCount++;
+                                }
+                                if (row[$rootScope.APPCONSTANT.COMPANY.CODE.GD]) {
+                                    betCompaniesCount++;
+                                }
+
+                                if (_this.betMethod == $rootScope.APPCONSTANT.USER.DETAIL.BET_METHOD.DIVIDE) {
+                                    //Need to divide the amount by the number of companies that the user has placed bets for
+                                    if (betCompaniesCount > 0) {
+                                        big = big ? (big/betCompaniesCount).toFixed(3) : 0;
+                                        small = small ? (small/betCompaniesCount).toFixed(3) : 0;
+                                        amount4a = amount4a ? (amount4a/betCompaniesCount).toFixed(3) : 0;
+                                        amount4b = amount4b ? (amount4b/betCompaniesCount).toFixed(3) : 0;
+                                        amount4c = amount4c ? (amount4c/betCompaniesCount).toFixed(3) : 0;
+                                        amount4d = amount4d ? (amount4d/betCompaniesCount).toFixed(3) : 0;
+                                        amount4e = amount4e ? (amount4e/betCompaniesCount).toFixed(3) : 0;
+                                        amount4f = amount4f ? (amount4f/betCompaniesCount).toFixed(3) : 0;
+                                        amount3abc = amount3abc ? (amount3abc/betCompaniesCount).toFixed(3) : 0;
+                                        amount3a = amount3a ? (amount3a/betCompaniesCount).toFixed(3) : 0;
+                                        amount3b = amount3b ? (amount3b/betCompaniesCount).toFixed(3) : 0;
+                                        amount3c = amount3c ? (amount3c/betCompaniesCount).toFixed(3) : 0;
+                                        amount3d = amount3d ? (amount3d/betCompaniesCount).toFixed(3) : 0;
+                                        amount3e = amount3e ? (amount3e/betCompaniesCount).toFixed(3) : 0;
+                                        amount5d = amount5d ? (amount5d/betCompaniesCount).toFixed(3) : 0;
+                                        amount6d = amount6d ? (amount6d/betCompaniesCount).toFixed(3) : 0;
+                                    }
+                                }
+
+                                big = parseFloat(big);
+                                small = parseFloat(small);
+                                amount4a = parseFloat(amount4a);
+                                amount4b = parseFloat(amount4b);
+                                amount4c = parseFloat(amount4c);
+                                amount4d = parseFloat(amount4d);
+                                amount4e = parseFloat(amount4e);
+                                amount4f = parseFloat(amount4f);
+                                amount3abc = parseFloat(amount3abc);
+                                amount3a = parseFloat(amount3a);
+                                amount3b = parseFloat(amount3b);
+                                amount3c = parseFloat(amount3c);
+                                amount3d = parseFloat(amount3d);
+                                amount3e = parseFloat(amount3e);
+                                amount5d = parseFloat(amount5d);
+                                amount6d = parseFloat(amount6d);
+
+                                total = big+small+amount4a+amount4b+amount4c+amount4d+amount4e+amount4f;
+                                total += amount3abc+amount3a+amount3b+amount3c+amount3d+amount3e;
+                                total += amount5d+amount6d;
+                                if (_this.betMethod == $rootScope.APPCONSTANT.USER.DETAIL.BET_METHOD.MULTIPLE) {
+                                    total = total * betCompaniesCount;
+                                }
+
+                                //Check the betOption
+                                var numberArray = [];
+                                if (row.betOption.id == $rootScope.APPCONSTANT.BET.NUMBER.OPTION.RETURN) {
+                                    numberArray = permute(row.number);
+                                    if (numberArray.length > 1) { //Meaning the user did not enter a number with the same 4 digits. 1111,2222 etc
+                                        total = total * 2;
+                                    }
+                                } else if (row.betOption.id == $rootScope.APPCONSTANT.BET.NUMBER.OPTION.BOX) {
+                                    numberArray = permute(row.number);
+                                    total = total * numberArray.length;
+                                } else if (row.betOption.id == $rootScope.APPCONSTANT.BET.NUMBER.OPTION.PH) {
+                                    numberArray = permute(row.number.substring(1));
+                                    total = total * numberArray.length;
+                                }
+
+                                row.total = total;
+                                grandTotal += total;
+                            } //End if (row[activeDrawDate] == true) {
+                        } //End for (var d in _this.activeDrawDateArray) {
+                    }
+                }
+            });
+            _this.grandTotal = grandTotal;
+        };
 
         _this.submitBet = function(isValid) {
             if (isValid) {

@@ -115,21 +115,21 @@
                 "sref": "root.main.betSlipHistory",
                 "icon": "fas fa-clipboard-list",
                 "translate": "text.betSlipHistory",
-                "permission" : "BET"
+                "permission" : "VIEW_BET_HISTORY"
             },
             {
                 "text": "Bet Number History",
                 "sref": "root.main.betNumberHistory",
                 "icon": "fas fa-list-ol",
                 "translate": "text.betNumberHistory",
-                "permission" : "BET"
+                "permission" : "VIEW_BET_HISTORY"
             },
             {
                 "text": "Void Bet History",
                 "sref": "root.main.voidBetHistory",
                 "icon": "fas fa-ban",
                 "translate": "text.voidBetHistory",
-                "permission" : "BET"
+                "permission" : "VIEW_BET_HISTORY"
             }
         ],
         "translate": "text.history"
