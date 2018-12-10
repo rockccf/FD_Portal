@@ -298,3 +298,1285 @@
         </div>
     </div>
 </div>
+<div class="form-group" ng-if="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER" >
+    <div class="col-lg-10 col-lg-offset-1">
+        <div class="panel panel-primary" id="fourdMainPanel">
+            <div class="panel-heading" ng-class="{'panel-heading-collapsed':'fourdMainPanel'}">{{'text.3d4dPrizePackages'|translate}}
+                <paneltool tool-collapse="tool-collapse"></paneltool>
+            </div>
+            <div class="panel-wrapper" uib-collapse="fourdMainPanel">
+                <div class="panel-body">
+                    <div class="panel panel-default" id="fourdPanel">
+                        <div class="panel-heading" ng-class="{'panel-heading-collapsed':'fourdPanel'}">4D</div>
+                        <div class="panel-wrapper" uib-collapse="fourdPanel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">{{'text.big'|translate}}</div>
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <tr ng-class="{ 'has-error danger' : userForm['4dBigPrize1'].$invalid && userForm['4dBigPrize1'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 1 (A:{{user.packageData['4dBigPrize1']}})<br/>(M:{{user.masterData['4dBigPrize1']}})</td>
+                                                        <td>:</td>
+                                                        <td class="col-xs-7">
+                                                            <input type="number" class="form-control" id="4dBigPrize1" name="4dBigPrize1"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['4dBigPrize1']"
+                                                                   ng-max="user.packageData['4dBigPrize1']"
+                                                                   ng-model="user.user.userDetail['4dBigPrize1']">
+                                                            <div class="help-block" ng-messages="userForm['4dBigPrize1'].$error" ng-show="userForm['4dBigPrize1'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['4dBigPrize2'].$invalid && userForm['4dBigPrize2'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 2 (A:{{user.packageData['4dBigPrize2']}})<br/>(M:{{user.masterData['4dBigPrize2']}})</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="4dBigPrize2" name="4dBigPrize2"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['4dBigPrize2']"
+                                                                   ng-max="user.packageData['4dBigPrize2']"
+                                                                   ng-model="user.user.userDetail['4dBigPrize2']">
+                                                            <div class="help-block" ng-messages="userForm['4dBigPrize2'].$error" ng-show="userForm['4dBigPrize2'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['4dBigPrize3'].$invalid && userForm['4dBigPrize3'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 3 (A:{{user.packageData['4dBigPrize3']}})<br/>(M:{{user.masterData['4dBigPrize3']}})</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="4dBigPrize3" name="4dBigPrize3"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['4dBigPrize3']"
+                                                                   ng-max="user.packageData['4dBigPrize3']"
+                                                                   ng-model="user.user.userDetail['4dBigPrize3']">
+                                                            <div class="help-block" ng-messages="userForm['4dBigPrize3'].$error" ng-show="userForm['4dBigPrize3'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['4dBigStarters'].$invalid && userForm['4dBigStarters'].$touched}">
+                                                        <td>{{'text.starters'|translate}} (A:{{user.packageData['4dBigStarters']}})<br/>(M:{{user.masterData['4dBigStarters']}})</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="4dBigStarters" name="4dBigStarters"
+                                                                   placeholder="{{'placeholder.starters'|translate}}" ng-min="user.masterData['4dBigStarters']"
+                                                                   ng-max="user.packageData['4dBigStarters']"
+                                                                   ng-model="user.user.userDetail['4dBigStarters']">
+                                                            <div class="help-block" ng-messages="userForm['4dBigPrize3'].$error" ng-show="userForm['4dBigPrize3'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['4dBigConsolation'].$invalid && userForm['4dBigConsolation'].$touched}">
+                                                        <td>{{'text.consolation'|translate}} (A:{{user.packageData['4dBigConsolation']}})<br/>(M:{{user.masterData['4dBigConsolation']}})</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="4dBigConsolation" name="4dBigConsolation"
+                                                                   placeholder="{{'placeholder.consolation'|translate}}" ng-min="user.masterData['4dBigConsolation']"
+                                                                   ng-max="user.packageData['4dBigConsolation']"
+                                                                   ng-model="user.user.userDetail['4dBigConsolation']">
+                                                            <div class="help-block" ng-messages="userForm['4dBigConsolation'].$error" ng-show="userForm['4dBigConsolation'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">{{'text.small'|translate}}</div>
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <tr ng-class="{ 'has-error danger' : userForm['4dSmallPrize1'].$invalid && userForm['4dSmallPrize1'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 1 (A:{{user.packageData['4dSmallPrize1']}})<br/>(M:{{user.masterData['4dSmallPrize1']}})</td>
+                                                        <td>:</td>
+                                                        <td class="col-xs-7">
+                                                            <input type="number" class="form-control" id="4dSmallPrize1" name="4dSmallPrize1"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['4dSmallPrize1']"
+                                                                   ng-max="user.packageData['4dSmallPrize1']"
+                                                                   ng-model="user.user.userDetail['4dSmallPrize1']">
+                                                            <div class="help-block" ng-messages="userForm['4dSmallPrize1'].$error" ng-show="userForm['4dSmallPrize1'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['4dSmallPrize2'].$invalid && userForm['4dSmallPrize2'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 2 (A:{{user.packageData['4dSmallPrize2']}})<br/>(M:{{user.masterData['4dSmallPrize2']}})</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="4dSmallPrize2" name="4dSmallPrize2"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['4dSmallPrize2']"
+                                                                   ng-max="user.packageData['4dSmallPrize2']"
+                                                                   ng-model="user.user.userDetail['4dSmallPrize2']">
+                                                            <div class="help-block" ng-messages="userForm['4dSmallPrize2'].$error" ng-show="userForm['4dSmallPrize2'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['4dSmallPrize3'].$invalid && userForm['4dSmallPrize3'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 3 (A:{{user.packageData['4dSmallPrize3']}})<br/>(M:{{user.masterData['4dSmallPrize3']}})</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="4dSmallPrize3" name="4dSmallPrize3"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['4dSmallPrize3']"
+                                                                   ng-max="user.packageData['4dSmallPrize3']"
+                                                                   ng-model="user.user.userDetail['4dSmallPrize3']">
+                                                            <div class="help-block" ng-messages="userForm['4dSmallPrize3'].$error" ng-show="userForm['4dSmallPrize3'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">4A</div>
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <tr ng-class="{ 'has-error danger' : userForm['4d4aPrize'].$invalid && userForm['4d4aPrize'].$touched}">
+                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['4d4aPrize']}})<br/>(M:{{user.masterData['4d4aPrize']}})</td>
+                                                        <td>:</td>
+                                                        <td class="col-xs-7">
+                                                            <input type="number" class="form-control" id="4d4aPrize" name="4d4aPrize"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['4d4aPrize']"
+                                                                   ng-max="user.packageData['4d4aPrize']"
+                                                                   ng-model="user.user.userDetail['4d4aPrize']">
+                                                            <div class="help-block" ng-messages="userForm['4d4aPrize'].$error" ng-show="userForm['4d4aPrize'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">4B</div>
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <tr ng-class="{ 'has-error danger' : userForm['4d4bPrize'].$invalid && userForm['4d4bPrize'].$touched}">
+                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['4d4bPrize']}})<br/>(M:{{user.masterData['4d4bPrize']}})</td>
+                                                        <td>:</td>
+                                                        <td class="col-xs-7">
+                                                            <input type="number" class="form-control" id="4d4bPrize" name="4d4bPrize"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['4d4bPrize']"
+                                                                   ng-max="user.packageData['4d4bPrize']"
+                                                                   ng-model="user.user.userDetail['4d4bPrize']">
+                                                            <div class="help-block" ng-messages="userForm['4d4bPrize'].$error" ng-show="userForm['4d4bPrize'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">4C</div>
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <tr ng-class="{ 'has-error danger' : userForm['4d4cPrize'].$invalid && userForm['4d4cPrize'].$touched}">
+                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['4d4cPrize']}})<br/>(M:{{user.masterData['4d4cPrize']}})</td>
+                                                        <td>:</td>
+                                                        <td class="col-xs-7">
+                                                            <input type="number" class="form-control" id="4d4cPrize" name="4d4aPrize"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['4d4cPrize']"
+                                                                   ng-max="user.packageData['4d4cPrize']"
+                                                                   ng-model="user.user.userDetail['4d4cPrize']">
+                                                            <div class="help-block" ng-messages="userForm['4d4cPrize'].$error" ng-show="userForm['4d4cPrize'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">4D</div>
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <tr ng-class="{ 'has-error danger' : userForm['4d4dPrize'].$invalid && userForm['4d4dPrize'].$touched}">
+                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['4d4dPrize']}})<br/>(M:{{user.masterData['4d4dPrize']}})</td>
+                                                        <td>:</td>
+                                                        <td class="col-xs-7">
+                                                            <input type="number" class="form-control" id="4d4dPrize" name="4d4aPrize"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['4d4dPrize']"
+                                                                   ng-max="user.packageData['4d4dPrize']"
+                                                                   ng-model="user.user.userDetail['4d4dPrize']">
+                                                            <div class="help-block" ng-messages="userForm['4d4dPrize'].$error" ng-show="userForm['4d4dPrize'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">4E</div>
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <tr ng-class="{ 'has-error danger' : userForm['4d4ePrize'].$invalid && userForm['4d4ePrize'].$touched}">
+                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['4d4ePrize']}})<br/>(M:{{user.masterData['4d4ePrize']}})</td>
+                                                        <td>:</td>
+                                                        <td class="col-xs-7">
+                                                            <input type="number" class="form-control" id="4d4ePrize" name="4d4ePrize"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['4d4ePrize']"
+                                                                   ng-max="user.packageData['4d4ePrize']"
+                                                                   ng-model="user.user.userDetail['4d4ePrize']">
+                                                            <div class="help-block" ng-messages="userForm['4d4ePrize'].$error" ng-show="userForm['4d4ePrize'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">4F</div>
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <tr ng-class="{ 'has-error danger' : userForm['4d4fPrize'].$invalid && userForm['4d4fPrize'].$touched}">
+                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['4d4fPrize']}})<br/>(M:{{user.masterData['4d4fPrize']}})</td>
+                                                        <td>:</td>
+                                                        <td class="col-xs-7">
+                                                            <input type="number" class="form-control" id="4d4fPrize" name="4d4fPrize"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['4d4fPrize']"
+                                                                   ng-max="user.packageData['4d4fPrize']"
+                                                                   ng-model="user.user.userDetail['4d4fPrize']">
+                                                            <div class="help-block" ng-messages="userForm['4d4fPrize'].$error" ng-show="userForm['4d4fPrize'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-warning">
+                                            <div class="panel-heading">IBOX</div>
+                                            <div class="panel-body table-responsive">
+                                                <table class="table">
+                                                    <tr>
+                                                        <td>{{'text.big'|translate}}</td>
+                                                        <td>IBOX 24</td>
+                                                        <td>IBOX 12</td>
+                                                        <td>IBOX 6</td>
+                                                        <td>IBOX 4</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{'text.prize'|translate}} 1</td>
+                                                        <td>{{user.user.userDetail["4dBigPrize1"]/24 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dBigPrize1"]/12 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dBigPrize1"]/6 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dBigPrize1"]/4 | number:2}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{'text.prize'|translate}} 2</td>
+                                                        <td>{{user.user.userDetail["4dBigPrize2"]/24 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dBigPrize2"]/12 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dBigPrize2"]/6 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dBigPrize2"]/4 | number:2}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{'text.prize'|translate}} 3</td>
+                                                        <td>{{user.user.userDetail["4dBigPrize3"]/24 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dBigPrize3"]/12 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dBigPrize3"]/6 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dBigPrize3"]/4 | number:2}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{'text.starters'|translate}}</td>
+                                                        <td>{{user.user.userDetail["4dBigStarters"]/24 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dBigStarters"]/12 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dBigStarters"]/6 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dBigStarters"]/4 | number:2}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{'text.consolation'|translate}}</td>
+                                                        <td>{{user.user.userDetail["4dBigConsolation"]/24 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dBigConsolation"]/12 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dBigConsolation"]/6 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dBigConsolation"]/4 | number:2}}</td>
+                                                    </tr>
+                                                </table>
+                                                <br/>
+                                                <table class="table">
+                                                    <tr>
+                                                        <td>{{'text.small'|translate}}</td>
+                                                        <td>IBOX 24</td>
+                                                        <td>IBOX 12</td>
+                                                        <td>IBOX 6</td>
+                                                        <td>IBOX 4</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{'text.prize'|translate}} 1</td>
+                                                        <td>{{user.user.userDetail["4dSmallPrize1"]/24 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dSmallPrize1"]/12 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dSmallPrize1"]/6 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dSmallPrize1"]/4 | number:2}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{'text.prize'|translate}} 2</td>
+                                                        <td>{{user.user.userDetail["4dSmallPrize2"]/24 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dSmallPrize2"]/12 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dSmallPrize2"]/6 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dSmallPrize2"]/4 | number:2}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{'text.prize'|translate}} 3</td>
+                                                        <td>{{user.user.userDetail["4dSmallPrize3"]/24 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dSmallPrize3"]/12 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dSmallPrize3"]/6 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4dSmallPrize3"]/4 | number:2}}</td>
+                                                    </tr>
+                                                </table>
+                                                <br/>
+                                                <table class="table">
+                                                    <tr>
+                                                        <td>4A</td>
+                                                        <td>IBOX 24</td>
+                                                        <td>IBOX 12</td>
+                                                        <td>IBOX 6</td>
+                                                        <td>IBOX 4</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{'text.prize'|translate}}</td>
+                                                        <td>{{user.user.userDetail["4d4aPrize"]/24 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4d4aPrize"]/12 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4d4aPrize"]/6 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["4d4aPrize"]/4 | number:2}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-dark">
+                                            <div class="panel-heading">3D</div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="panel panel-purple">
+                                                            <div class="panel-heading">3ABC</div>
+                                                            <div class="panel-body">
+                                                                <table class="table">
+                                                                    <tr ng-class="{ 'has-error danger' : userForm['3dAbcPrize1'].$invalid && userForm['3dAbcPrize1'].$touched}">
+                                                                        <td>{{'text.prize'|translate}} 1 (A:{{user.packageData['3dAbcPrize1']}})<br/>(M:{{user.masterData['3dAbcPrize1']}})</td>
+                                                                        <td>:</td>
+                                                                        <td class="col-xs-7">
+                                                                            <input type="number" class="form-control" id="3dAbcPrize1" name="3dAbcPrize1"
+                                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['3dAbcPrize1']"
+                                                                                   ng-max="user.packageData['3dAbcPrize1']"
+                                                                                   ng-model="user.user.userDetail['3dAbcPrize1']">
+                                                                            <div class="help-block" ng-messages="userForm['3dAbcPrize1'].$error" ng-show="userForm['3dAbcPrize1'].$touched">
+                                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr ng-class="{ 'has-error danger' : userForm['3dAbcPrize2'].$invalid && userForm['3dAbcPrize2'].$touched}">
+                                                                        <td>{{'text.prize'|translate}} 2 (A:{{user.packageData['3dAbcPrize2']}})<br/>(M:{{user.masterData['3dAbcPrize2']}})</td>
+                                                                        <td>:</td>
+                                                                        <td>
+                                                                            <input type="number" class="form-control" id="3dAbcPrize2" name="3dAbcPrize2"
+                                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['3dAbcPrize2']"
+                                                                                   ng-max="user.packageData['3dAbcPrize2']"
+                                                                                   ng-model="user.user.userDetail['3dAbcPrize2']">
+                                                                            <div class="help-block" ng-messages="userForm['3dAbcPrize2'].$error" ng-show="userForm['3dAbcPrize2'].$touched">
+                                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr ng-class="{ 'has-error danger' : userForm['3dAbcPrize3'].$invalid && userForm['3dAbcPrize3'].$touched}">
+                                                                        <td>{{'text.prize'|translate}} 3 (A:{{user.packageData['3dAbcPrize3']}})<br/>(M:{{user.masterData['3dAbcPrize3']}})</td>
+                                                                        <td>:</td>
+                                                                        <td>
+                                                                            <input type="number" class="form-control" id="3dAbcPrize3" name="3dAbcPrize3"
+                                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['3dAbcPrize3']"
+                                                                                   ng-max="user.packageData['3dAbcPrize3']"
+                                                                                   ng-model="user.user.userDetail['3dAbcPrize3']">
+                                                                            <div class="help-block" ng-messages="userForm['3dAbcPrize3'].$error" ng-show="userForm['3dAbcPrize3'].$touched">
+                                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="panel panel-purple">
+                                                            <div class="panel-heading">3A</div>
+                                                            <div class="panel-body">
+                                                                <table class="table">
+                                                                    <tr ng-class="{ 'has-error danger' : userForm['3d3aPrize'].$invalid && userForm['3d3aPrize'].$touched}">
+                                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['3d3aPrize']}})<br/>(M:{{user.masterData['3d3aPrize']}})</td>
+                                                                        <td>:</td>
+                                                                        <td class="col-xs-7">
+                                                                            <input type="number" class="form-control" id="3d3aPrize" name="3d3aPrize"
+                                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['3d3aPrize']"
+                                                                                   ng-max="user.packageData['3d3aPrize']"
+                                                                                   ng-model="user.user.userDetail['3d3aPrize']">
+                                                                            <div class="help-block" ng-messages="userForm['3d3aPrize'].$error" ng-show="userForm['3d3aPrize'].$touched">
+                                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="panel panel-purple">
+                                                            <div class="panel-heading">3B</div>
+                                                            <div class="panel-body">
+                                                                <table class="table">
+                                                                    <tr ng-class="{ 'has-error danger' : userForm['3d3bPrize'].$invalid && userForm['3d3bPrize'].$touched}">
+                                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['3d3bPrize']}})<br/>(M:{{user.masterData['3d3bPrize']}})</td>
+                                                                        <td>:</td>
+                                                                        <td class="col-xs-7">
+                                                                            <input type="number" class="form-control" id="3d3bPrize" name="3d3bPrize"
+                                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['3d3bPrize']"
+                                                                                   ng-max="user.packageData['3d3bPrize']"
+                                                                                   ng-model="user.user.userDetail['3d3bPrize']">
+                                                                            <div class="help-block" ng-messages="userForm['3d3bPrize'].$error" ng-show="userForm['3d3bPrize'].$touched">
+                                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="panel panel-purple">
+                                                            <div class="panel-heading">3C</div>
+                                                            <div class="panel-body">
+                                                                <table class="table">
+                                                                    <tr ng-class="{ 'has-error danger' : userForm['3d3cPrize'].$invalid && userForm['3d3cPrize'].$touched}">
+                                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['3d3cPrize']}})<br/>(M:{{user.masterData['3d3cPrize']}})</td>
+                                                                        <td>:</td>
+                                                                        <td class="col-xs-7">
+                                                                            <input type="number" class="form-control" id="3d3cPrize" name="3d3cPrize"
+                                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['3d3cPrize']"
+                                                                                   ng-max="user.packageData['3d3cPrize']"
+                                                                                   ng-model="user.user.userDetail['3d3cPrize']">
+                                                                            <div class="help-block" ng-messages="userForm['3d3cPrize'].$error" ng-show="userForm['3d3cPrize'].$touched">
+                                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="panel panel-purple">
+                                                            <div class="panel-heading">3D</div>
+                                                            <div class="panel-body">
+                                                                <table class="table">
+                                                                    <tr ng-class="{ 'has-error danger' : userForm['3d3dPrize'].$invalid && userForm['3d3dPrize'].$touched}">
+                                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['3d3dPrize']}})<br/>(M:{{user.masterData['3d3dPrize']}})</td>
+                                                                        <td>:</td>
+                                                                        <td class="col-xs-7">
+                                                                            <input type="number" class="form-control" id="3d3dPrize" name="3d3dPrize"
+                                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['3d3dPrize']"
+                                                                                   ng-max="user.packageData['3d3dPrize']"
+                                                                                   ng-model="user.user.userDetail['3d3dPrize']">
+                                                                            <div class="help-block" ng-messages="userForm['3d3dPrize'].$error" ng-show="userForm['3d3dPrize'].$touched">
+                                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="panel panel-purple">
+                                                            <div class="panel-heading">3E</div>
+                                                            <div class="panel-body">
+                                                                <table class="table">
+                                                                    <tr ng-class="{ 'has-error danger' : userForm['3d3ePrize'].$invalid && userForm['3d3ePrize'].$touched}">
+                                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['3d3ePrize']}})<br/>(M:{{user.masterData['3d3ePrize']}})</td>
+                                                                        <td>:</td>
+                                                                        <td class="col-xs-7">
+                                                                            <input type="number" class="form-control" id="3d3ePrize" name="3d3ePrize"
+                                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['3d3ePrize']"
+                                                                                   ng-max="user.packageData['3d3ePrize']"
+                                                                                   ng-model="user.user.userDetail['3d3ePrize']">
+                                                                            <div class="help-block" ng-messages="userForm['3d3ePrize'].$error" ng-show="userForm['3d3ePrize'].$touched">
+                                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER" >
+    <div class="col-lg-10 col-lg-offset-1">
+        <div class="panel panel-success" id="gdMainPanel">
+            <div class="panel-heading" ng-class="{'panel-heading-collapsed':'gdMainPanel'}">{{'text.gdLottoPrizePackages'|translate}}
+                <paneltool tool-collapse="tool-collapse"></paneltool>
+            </div>
+            <div class="panel-wrapper" uib-collapse="gdMainPanel">
+                <div class="panel-body">
+                    <div class="panel panel-default" id="gdPanel">
+                        <div class="panel-heading" ng-class="{'panel-heading-collapsed':'gdPanel'}">4D</div>
+                        <div class="panel-wrapper" uib-collapse="gdPanel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">{{'text.big'|translate}}</div>
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <tr ng-class="{ 'has-error danger' : userForm['gd4dBigPrize1'].$invalid && userForm['gd4dBigPrize1'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 1 (A:{{user.packageData['gd4dBigPrize1']}})<br/>(M:{{user.masterData['gd4dBigPrize1']}})</td>
+                                                        <td>:</td>
+                                                        <td class="col-xs-7">
+                                                            <input type="number" class="form-control" id="gd4dBigPrize1" name="gd4dBigPrize1"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd4dBigPrize1']"
+                                                                   ng-max="user.packageData['gd4dBigPrize1']"
+                                                                   ng-model="user.user.userDetail['gd4dBigPrize1']">
+                                                            <div class="help-block" ng-messages="userForm['gd4dBigPrize1'].$error" ng-show="userForm['gd4dBigPrize1'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['gd4dBigPrize2'].$invalid && userForm['gd4dBigPrize2'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 2 (A:{{user.packageData['gd4dBigPrize2']}})<br/>(M:{{user.masterData['gd4dBigPrize2']}})</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="gd4dBigPrize2" name="gd4dBigPrize2"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd4dBigPrize2']"
+                                                                   ng-max="user.packageData['gd4dBigPrize2']"
+                                                                   ng-model="user.user.userDetail['gd4dBigPrize2']">
+                                                            <div class="help-block" ng-messages="userForm['gd4dBigPrize2'].$error" ng-show="userForm['gd4dBigPrize2'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['gd4dBigPrize3'].$invalid && userForm['gd4dBigPrize3'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 3 (A:{{user.packageData['gd4dBigPrize3']}})<br/>(M:{{user.masterData['gd4dBigPrize3']}})</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="gd4dBigPrize3" name="gd4dBigPrize3"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd4dBigPrize3']"
+                                                                   ng-max="user.packageData['gd4dBigPrize3']"
+                                                                   ng-model="user.user.userDetail['gd4dBigPrize3']">
+                                                            <div class="help-block" ng-messages="userForm['gd4dBigPrize3'].$error" ng-show="userForm['gd4dBigPrize3'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['gd4dBigStarters'].$invalid && userForm['gd4dBigStarters'].$touched}">
+                                                        <td>{{'text.starters'|translate}} (A:{{user.packageData['gd4dBigStarters']}})<br/>(M:{{user.masterData['gd4dBigStarters']}})</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="gd4dBigStarters" name="gd4dBigStarters"
+                                                                   placeholder="{{'placeholder.starters'|translate}}" ng-min="user.masterData['gd4dBigStarters']"
+                                                                   ng-max="user.packageData['gd4dBigStarters']"
+                                                                   ng-model="user.user.userDetail['gd4dBigStarters']">
+                                                            <div class="help-block" ng-messages="userForm['gd4dBigStarters'].$error" ng-show="userForm['gd4dBigStarters'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['gd4dBigConsolation'].$invalid && userForm['gd4dBigConsolation'].$touched}">
+                                                        <td>{{'text.consolation'|translate}} (A:{{user.packageData['gd4dBigConsolation']}})<br/>(M:{{user.masterData['gd4dBigConsolation']}})</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="gd4dBigConsolation" name="gd4dBigConsolation"
+                                                                   placeholder="{{'placeholder.consolation'|translate}}" ng-min="user.masterData['gd4dBigConsolation']"
+                                                                   ng-max="user.packageData['gd4dBigConsolation']"
+                                                                   ng-model="user.user.userDetail['gd4dBigConsolation']">
+                                                            <div class="help-block" ng-messages="userForm['gd4dBigConsolation'].$error" ng-show="userForm['gd4dBigConsolation'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">{{'text.small'|translate}}</div>
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <tr ng-class="{ 'has-error danger' : userForm['gd4dSmallPrize1'].$invalid && userForm['gd4dSmallPrize1'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 1 (A:{{user.packageData['gd4dSmallPrize1']}})<br/>(M:{{user.masterData['gd4dSmallPrize1']}})</td>
+                                                        <td>:</td>
+                                                        <td class="col-xs-7">
+                                                            <input type="number" class="form-control" id="gd4dSmallPrize1" name="gd4dSmallPrize1"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd4dSmallPrize1']"
+                                                                   ng-max="user.packageData['gd4dSmallPrize1']"
+                                                                   ng-model="user.user.userDetail['gd4dSmallPrize1']">
+                                                            <div class="help-block" ng-messages="userForm['gd4dSmallPrize1'].$error" ng-show="userForm['gd4dSmallPrize1'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['gd4dSmallPrize2'].$invalid && userForm['gd4dSmallPrize2'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 2 (A:{{user.packageData['gd4dSmallPrize2']}})<br/>(M:{{user.masterData['gd4dSmallPrize2']}})</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="gd4dSmallPrize2" name="gd4dSmallPrize2"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd4dSmallPrize2']"
+                                                                   ng-max="user.packageData['gd4dSmallPrize2']"
+                                                                   ng-model="user.user.userDetail['gd4dSmallPrize2']">
+                                                            <div class="help-block" ng-messages="userForm['gd4dSmallPrize2'].$error" ng-show="userForm['gd4dSmallPrize2'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-class="{ 'has-error danger' : userForm['gd4dSmallPrize3'].$invalid && userForm['gd4dSmallPrize3'].$touched}">
+                                                        <td>{{'text.prize'|translate}} 3 (A:{{user.packageData['gd4dSmallPrize3']}})<br/>(M:{{user.masterData['gd4dSmallPrize3']}})</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <input type="number" class="form-control" id="gd4dSmallPrize3" name="gd4dSmallPrize3"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd4dSmallPrize3']"
+                                                                   ng-max="user.packageData['gd4dSmallPrize3']"
+                                                                   ng-model="user.user.userDetail['gd4dSmallPrize3']">
+                                                            <div class="help-block" ng-messages="userForm['gd4dSmallPrize3'].$error" ng-show="userForm['gd4dSmallPrize3'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">4A</div>
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <tr ng-class="{ 'has-error danger' : userForm['gd4d4aPrize'].$invalid && userForm['gd4d4aPrize'].$touched}">
+                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['gd4d4aPrize']}})<br/>(M:{{user.masterData['gd4d4aPrize']}})</td>
+                                                        <td>:</td>
+                                                        <td class="col-xs-7">
+                                                            <input type="number" class="form-control" id="gd4d4aPrize" name="gd4d4aPrize"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd4d4aPrize']"
+                                                                   ng-max="user.packageData['gd4d4aPrize']"
+                                                                   ng-model="user.user.userDetail['gd4d4aPrize']">
+                                                            <div class="help-block" ng-messages="userForm['gd4d4aPrize'].$error" ng-show="userForm['gd4d4aPrize'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">4B</div>
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <tr ng-class="{ 'has-error danger' : userForm['gd4d4bPrize'].$invalid && userForm['gd4d4bPrize'].$touched}">
+                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['gd4d4bPrize']}})<br/>(M:{{user.masterData['gd4d4bPrize']}})</td>
+                                                        <td>:</td>
+                                                        <td class="col-xs-7">
+                                                            <input type="number" class="form-control" id="gd4d4bPrize" name="gd4d4bPrize"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd4d4bPrize']"
+                                                                   ng-max="user.packageData['gd4d4bPrize']"
+                                                                   ng-model="user.user.userDetail['gd4d4bPrize']">
+                                                            <div class="help-block" ng-messages="userForm['gd4d4bPrize'].$error" ng-show="userForm['gd4d4bPrize'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">4C</div>
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <tr ng-class="{ 'has-error danger' : userForm['gd4d4cPrize'].$invalid && userForm['gd4d4cPrize'].$touched}">
+                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['gd4d4cPrize']}})<br/>(M:{{user.masterData['gd4d4cPrize']}})</td>
+                                                        <td>:</td>
+                                                        <td class="col-xs-7">
+                                                            <input type="number" class="form-control" id="gd4d4cPrize" name="4d4aPrize"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd4d4cPrize']"
+                                                                   ng-max="user.packageData['gd4d4cPrize']"
+                                                                   ng-model="user.user.userDetail['gd4d4cPrize']">
+                                                            <div class="help-block" ng-messages="userForm['gd4d4cPrize'].$error" ng-show="userForm['gd4d4cPrize'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">4D</div>
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <tr ng-class="{ 'has-error danger' : userForm['gd4d4dPrize'].$invalid && userForm['gd4d4dPrize'].$touched}">
+                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['gd4d4dPrize']}})<br/>(M:{{user.masterData['gd4d4dPrize']}})</td>
+                                                        <td>:</td>
+                                                        <td class="col-xs-7">
+                                                            <input type="number" class="form-control" id="gd4d4dPrize" name="4d4aPrize"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd4d4dPrize']"
+                                                                   ng-max="user.packageData['gd4d4dPrize']"
+                                                                   ng-model="user.user.userDetail['gd4d4dPrize']">
+                                                            <div class="help-block" ng-messages="userForm['gd4d4dPrize'].$error" ng-show="userForm['gd4d4dPrize'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">4E</div>
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <tr ng-class="{ 'has-error danger' : userForm['gd4d4ePrize'].$invalid && userForm['gd4d4ePrize'].$touched}">
+                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['gd4d4ePrize']}})<br/>(M:{{user.masterData['gd4d4ePrize']}})</td>
+                                                        <td>:</td>
+                                                        <td class="col-xs-7">
+                                                            <input type="number" class="form-control" id="gd4d4ePrize" name="gd4d4ePrize"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd4d4ePrize']"
+                                                                   ng-max="user.packageData['gd4d4ePrize']"
+                                                                   ng-model="user.user.userDetail['gd4d4ePrize']">
+                                                            <div class="help-block" ng-messages="userForm['gd4d4ePrize'].$error" ng-show="userForm['gd4d4ePrize'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">4F</div>
+                                            <div class="panel-body">
+                                                <table class="table">
+                                                    <tr ng-class="{ 'has-error danger' : userForm['gd4d4fPrize'].$invalid && userForm['gd4d4fPrize'].$touched}">
+                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['gd4d4fPrize']}})<br/>(M:{{user.masterData['gd4d4fPrize']}})</td>
+                                                        <td>:</td>
+                                                        <td class="col-xs-7">
+                                                            <input type="number" class="form-control" id="gd4d4fPrize" name="gd4d4fPrize"
+                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd4d4fPrize']"
+                                                                   ng-max="user.packageData['gd4d4fPrize']"
+                                                                   ng-model="user.user.userDetail['gd4d4fPrize']">
+                                                            <div class="help-block" ng-messages="userForm['gd4d4fPrize'].$error" ng-show="userForm['gd4d4fPrize'].$touched">
+                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-warning">
+                                            <div class="panel-heading">IBOX</div>
+                                            <div class="panel-body table-responsive">
+                                                <table class="table">
+                                                    <tr>
+                                                        <td>{{'text.big'|translate}}</td>
+                                                        <td>IBOX 24</td>
+                                                        <td>IBOX 12</td>
+                                                        <td>IBOX 6</td>
+                                                        <td>IBOX 4</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{'text.prize'|translate}} 1</td>
+                                                        <td>{{user.user.userDetail["gd4dBigPrize1"]/24 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dBigPrize1"]/12 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dBigPrize1"]/6 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dBigPrize1"]/4 | number:2}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{'text.prize'|translate}} 2</td>
+                                                        <td>{{user.user.userDetail["gd4dBigPrize2"]/24 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dBigPrize2"]/12 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dBigPrize2"]/6 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dBigPrize2"]/4 | number:2}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{'text.prize'|translate}} 3</td>
+                                                        <td>{{user.user.userDetail["gd4dBigPrize3"]/24 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dBigPrize3"]/12 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dBigPrize3"]/6 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dBigPrize3"]/4 | number:2}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{'text.starters'|translate}}</td>
+                                                        <td>{{user.user.userDetail["gd4dBigStarters"]/24 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dBigStarters"]/12 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dBigStarters"]/6 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dBigStarters"]/4 | number:2}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{'text.consolation'|translate}}</td>
+                                                        <td>{{user.user.userDetail["gd4dBigConsolation"]/24 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dBigConsolation"]/12 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dBigConsolation"]/6 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dBigConsolation"]/4 | number:2}}</td>
+                                                    </tr>
+                                                </table>
+                                                <br/>
+                                                <table class="table">
+                                                    <tr>
+                                                        <td>{{'text.small'|translate}}</td>
+                                                        <td>IBOX 24</td>
+                                                        <td>IBOX 12</td>
+                                                        <td>IBOX 6</td>
+                                                        <td>IBOX 4</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{'text.prize'|translate}} 1</td>
+                                                        <td>{{user.user.userDetail["gd4dSmallPrize1"]/24 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dSmallPrize1"]/12 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dSmallPrize1"]/6 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dSmallPrize1"]/4 | number:2}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{'text.prize'|translate}} 2</td>
+                                                        <td>{{user.user.userDetail["gd4dSmallPrize2"]/24 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dSmallPrize2"]/12 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dSmallPrize2"]/6 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dSmallPrize2"]/4 | number:2}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{'text.prize'|translate}} 3</td>
+                                                        <td>{{user.user.userDetail["gd4dSmallPrize3"]/24 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dSmallPrize3"]/12 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dSmallPrize3"]/6 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4dSmallPrize3"]/4 | number:2}}</td>
+                                                    </tr>
+                                                </table>
+                                                <br/>
+                                                <table class="table">
+                                                    <tr>
+                                                        <td>4A</td>
+                                                        <td>IBOX 24</td>
+                                                        <td>IBOX 12</td>
+                                                        <td>IBOX 6</td>
+                                                        <td>IBOX 4</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{'text.prize'|translate}}</td>
+                                                        <td>{{user.user.userDetail["gd4d4aPrize"]/24 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4d4aPrize"]/12 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4d4aPrize"]/6 | number:2}}</td>
+                                                        <td>{{user.user.userDetail["gd4d4aPrize"]/4 | number:2}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-dark">
+                                            <div class="panel-heading">3D</div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="panel panel-purple">
+                                                            <div class="panel-heading">3ABC</div>
+                                                            <div class="panel-body">
+                                                                <table class="table">
+                                                                    <tr ng-class="{ 'has-error danger' : userForm['gd3dAbcPrize1'].$invalid && userForm['gd3dAbcPrize1'].$touched}">
+                                                                        <td>{{'text.prize'|translate}} 1 (A:{{user.packageData['gd3dAbcPrize1']}})<br/>(M:{{user.masterData['gd3dAbcPrize1']}})</td>
+                                                                        <td>:</td>
+                                                                        <td class="col-xs-7">
+                                                                            <input type="number" class="form-control" id="gd3dAbcPrize1" name="gd3dAbcPrize1"
+                                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd3dAbcPrize1']"
+                                                                                   ng-max="user.packageData['gd3dAbcPrize1']"
+                                                                                   ng-model="user.user.userDetail['gd3dAbcPrize1']">
+                                                                            <div class="help-block" ng-messages="userForm['gd3dAbcPrize1'].$error" ng-show="userForm['gd3dAbcPrize1'].$touched">
+                                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr ng-class="{ 'has-error danger' : userForm['gd3dAbcPrize2'].$invalid && userForm['gd3dAbcPrize2'].$touched}">
+                                                                        <td>{{'text.prize'|translate}} 2 (A:{{user.packageData['gd3dAbcPrize2']}})<br/>(M:{{user.masterData['gd3dAbcPrize2']}})</td>
+                                                                        <td>:</td>
+                                                                        <td>
+                                                                            <input type="number" class="form-control" id="gd3dAbcPrize2" name="gd3dAbcPrize2"
+                                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd3dAbcPrize2']"
+                                                                                   ng-max="user.packageData['gd3dAbcPrize2']"
+                                                                                   ng-model="user.user.userDetail['gd3dAbcPrize2']">
+                                                                            <div class="help-block" ng-messages="userForm['gd3dAbcPrize2'].$error" ng-show="userForm['gd3dAbcPrize2'].$touched">
+                                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr ng-class="{ 'has-error danger' : userForm['gd3dAbcPrize3'].$invalid && userForm['gd3dAbcPrize3'].$touched}">
+                                                                        <td>{{'text.prize'|translate}} 3 (A:{{user.packageData['gd3dAbcPrize3']}})<br/>(M:{{user.masterData['gd3dAbcPrize3']}})</td>
+                                                                        <td>:</td>
+                                                                        <td>
+                                                                            <input type="number" class="form-control" id="gd3dAbcPrize3" name="gd3dAbcPrize3"
+                                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd3dAbcPrize3']"
+                                                                                   ng-max="user.packageData['gd3dAbcPrize3']"
+                                                                                   ng-model="user.user.userDetail['gd3dAbcPrize3']">
+                                                                            <div class="help-block" ng-messages="userForm['gd3dAbcPrize3'].$error" ng-show="userForm['gd3dAbcPrize3'].$touched">
+                                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="panel panel-purple">
+                                                            <div class="panel-heading">3A</div>
+                                                            <div class="panel-body">
+                                                                <table class="table">
+                                                                    <tr ng-class="{ 'has-error danger' : userForm['gd3d3aPrize'].$invalid && userForm['gd3d3aPrize'].$touched}">
+                                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['gd3d3aPrize']}})<br/>(M:{{user.masterData['gd3d3aPrize']}})</td>
+                                                                        <td>:</td>
+                                                                        <td class="col-xs-7">
+                                                                            <input type="number" class="form-control" id="gd3d3aPrize" name="gd3d3aPrize"
+                                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd3d3aPrize']"
+                                                                                   ng-max="user.packageData['gd3d3aPrize']"
+                                                                                   ng-model="user.user.userDetail['gd3d3aPrize']">
+                                                                            <div class="help-block" ng-messages="userForm['gd3d3aPrize'].$error" ng-show="userForm['gd3d3aPrize'].$touched">
+                                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="panel panel-purple">
+                                                            <div class="panel-heading">3B</div>
+                                                            <div class="panel-body">
+                                                                <table class="table">
+                                                                    <tr ng-class="{ 'has-error danger' : userForm['gd3d3bPrize'].$invalid && userForm['gd3d3bPrize'].$touched}">
+                                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['gd3d3bPrize']}})<br/>(M:{{user.masterData['gd3d3bPrize']}})</td>
+                                                                        <td>:</td>
+                                                                        <td class="col-xs-7">
+                                                                            <input type="number" class="form-control" id="gd3d3bPrize" name="gd3d3bPrize"
+                                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd3d3bPrize']"
+                                                                                   ng-max="user.packageData['gd3d3bPrize']"
+                                                                                   ng-model="user.user.userDetail['gd3d3bPrize']">
+                                                                            <div class="help-block" ng-messages="userForm['gd3d3bPrize'].$error" ng-show="userForm['gd3d3bPrize'].$touched">
+                                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="panel panel-purple">
+                                                            <div class="panel-heading">3C</div>
+                                                            <div class="panel-body">
+                                                                <table class="table">
+                                                                    <tr ng-class="{ 'has-error danger' : userForm['gd3d3cPrize'].$invalid && userForm['gd3d3cPrize'].$touched}">
+                                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['gd3d3cPrize']}})<br/>(M:{{user.masterData['gd3d3cPrize']}})</td>
+                                                                        <td>:</td>
+                                                                        <td class="col-xs-7">
+                                                                            <input type="number" class="form-control" id="gd3d3cPrize" name="gd3d3cPrize"
+                                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd3d3cPrize']"
+                                                                                   ng-max="user.packageData['gd3d3cPrize']"
+                                                                                   ng-model="user.user.userDetail['gd3d3cPrize']">
+                                                                            <div class="help-block" ng-messages="userForm['gd3d3cPrize'].$error" ng-show="userForm['gd3d3cPrize'].$touched">
+                                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="panel panel-purple">
+                                                            <div class="panel-heading">3D</div>
+                                                            <div class="panel-body">
+                                                                <table class="table">
+                                                                    <tr ng-class="{ 'has-error danger' : userForm['gd3d3dPrize'].$invalid && userForm['gd3d3dPrize'].$touched}">
+                                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['gd3d3dPrize']}})<br/>(M:{{user.masterData['gd3d3dPrize']}})</td>
+                                                                        <td>:</td>
+                                                                        <td class="col-xs-7">
+                                                                            <input type="number" class="form-control" id="gd3d3dPrize" name="gd3d3dPrize"
+                                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd3d3dPrize']"
+                                                                                   ng-max="user.packageData['gd3d3dPrize']"
+                                                                                   ng-model="user.user.userDetail['gd3d3dPrize']">
+                                                                            <div class="help-block" ng-messages="userForm['gd3d3dPrize'].$error" ng-show="userForm['gd3d3dPrize'].$touched">
+                                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="panel panel-purple">
+                                                            <div class="panel-heading">3E</div>
+                                                            <div class="panel-body">
+                                                                <table class="table">
+                                                                    <tr ng-class="{ 'has-error danger' : userForm['gd3d3ePrize'].$invalid && userForm['gd3d3ePrize'].$touched}">
+                                                                        <td>{{'text.prize'|translate}} (A:{{user.packageData['gd3d3ePrize']}})<br/>(M:{{user.masterData['gd3d3ePrize']}})</td>
+                                                                        <td>:</td>
+                                                                        <td class="col-xs-7">
+                                                                            <input type="number" class="form-control" id="gd3d3ePrize" name="gd3d3ePrize"
+                                                                                   placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['gd3d3ePrize']"
+                                                                                   ng-max="user.packageData['gd3d3ePrize']"
+                                                                                   ng-model="user.user.userDetail['gd3d3ePrize']">
+                                                                            <div class="help-block" ng-messages="userForm['gd3d3ePrize'].$error" ng-show="userForm['gd3d3ePrize'].$touched">
+                                                                                <div ng-messages-include="views/common/messages.html"></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="user.canCreateUserType == APPCONSTANT.USER.TYPE.PLAYER" >
+    <div class="col-lg-10 col-lg-offset-1">
+        <div class="panel panel-danger" id="sixdMainPanel">
+            <div class="panel-heading" ng-class="{'panel-heading-collapsed':'sixdMainPanel'}">{{'text.5d6dLottoPrizePackages'|translate}}
+                <paneltool tool-collapse="tool-collapse"></paneltool>
+            </div>
+            <div class="panel-wrapper" uib-collapse="sixdMainPanel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">5D</div>
+                                <div class="panel-body">
+                                    <table class="table">
+                                        <tr ng-class="{ 'has-error danger' : userForm['5dPrize1'].$invalid && userForm['5dPrize1'].$touched}">
+                                            <td>{{'text.prize'|translate}} 1 (A:{{user.packageData['5dPrize1']}})<br/>(M:{{user.masterData['5dPrize1']}})</td>
+                                            <td>:</td>
+                                            <td class="col-xs-7">
+                                                <input type="number" class="form-control" id="5dPrize1" name="5dPrize1"
+                                                       placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['5dPrize1']"
+                                                       ng-max="user.packageData['5dPrize1']"
+                                                       ng-model="user.user.userDetail['5dPrize1']">
+                                                <div class="help-block" ng-messages="userForm['5dPrize1'].$error" ng-show="userForm['5dPrize1'].$touched">
+                                                    <div ng-messages-include="views/common/messages.html"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr ng-class="{ 'has-error danger' : userForm['5dPrize2'].$invalid && userForm['5dPrize2'].$touched}">
+                                            <td>{{'text.prize'|translate}} 2 (A:{{user.packageData['5dPrize2']}})<br/>(M:{{user.masterData['5dPrize2']}})</td>
+                                            <td>:</td>
+                                            <td>
+                                                <input type="number" class="form-control" id="5dPrize2" name="5dPrize2"
+                                                       placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['5dPrize2']"
+                                                       ng-max="user.packageData['5dPrize2']"
+                                                       ng-model="user.user.userDetail['5dPrize2']">
+                                                <div class="help-block" ng-messages="userForm['5dPrize2'].$error" ng-show="userForm['5dPrize2'].$touched">
+                                                    <div ng-messages-include="views/common/messages.html"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr ng-class="{ 'has-error danger' : userForm['5dPrize3'].$invalid && userForm['5dPrize3'].$touched}">
+                                            <td>{{'text.prize'|translate}} 3 (A:{{user.packageData['5dPrize3']}})<br/>(M:{{user.masterData['5dPrize3']}})</td>
+                                            <td>:</td>
+                                            <td>
+                                                <input type="number" class="form-control" id="5dPrize3" name="5dPrize3"
+                                                       placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['5dPrize3']"
+                                                       ng-max="user.packageData['5dPrize3']"
+                                                       ng-model="user.user.userDetail['5dPrize3']">
+                                                <div class="help-block" ng-messages="userForm['5dPrize3'].$error" ng-show="userForm['5dPrize3'].$touched">
+                                                    <div ng-messages-include="views/common/messages.html"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr ng-class="{ 'has-error danger' : userForm['5dPrize4'].$invalid && userForm['5dPrize4'].$touched}">
+                                            <td>{{'text.prize'|translate}} 4 (A:{{user.packageData['5dPrize4']}})<br/>(M:{{user.masterData['5dPrize4']}})</td>
+                                            <td>:</td>
+                                            <td>
+                                                <input type="number" class="form-control" id="5dPrize4" name="5dPrize4"
+                                                       placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['5dPrize4']"
+                                                       ng-max="user.packageData['5dPrize4']"
+                                                       ng-model="user.user.userDetail['5dPrize4']">
+                                                <div class="help-block" ng-messages="userForm['5dPrize4'].$error" ng-show="userForm['5dPrize4'].$touched">
+                                                    <div ng-messages-include="views/common/messages.html"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr ng-class="{ 'has-error danger' : userForm['5dPrize5'].$invalid && userForm['5dPrize5'].$touched}">
+                                            <td>{{'text.prize'|translate}} 5 (A:{{user.packageData['5dPrize5']}})<br/>(M:{{user.masterData['5dPrize5']}})</td>
+                                            <td>:</td>
+                                            <td>
+                                                <input type="number" class="form-control" id="5dPrize5" name="5dPrize5"
+                                                       placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['5dPrize5']"
+                                                       ng-max="user.packageData['5dPrize5']"
+                                                       ng-model="user.user.userDetail['5dPrize5']">
+                                                <div class="help-block" ng-messages="userForm['5dPrize5'].$error" ng-show="userForm['5dPrize5'].$touched">
+                                                    <div ng-messages-include="views/common/messages.html"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr ng-class="{ 'has-error danger' : userForm['5dPrize6'].$invalid && userForm['5dPrize6'].$touched}">
+                                            <td>{{'text.prize'|translate}} 6 (A:{{user.packageData['5dPrize6']}})<br/>(M:{{user.masterData['5dPrize6']}})</td>
+                                            <td>:</td>
+                                            <td>
+                                                <input type="number" class="form-control" id="5dPrize6" name="5dPrize6"
+                                                       placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['5dPrize6']"
+                                                       ng-max="user.packageData['5dPrize6']"
+                                                       ng-model="user.user.userDetail['5dPrize6']">
+                                                <div class="help-block" ng-messages="userForm['5dPrize6'].$error" ng-show="userForm['5dPrize6'].$touched">
+                                                    <div ng-messages-include="views/common/messages.html"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">6D</div>
+                                <div class="panel-body">
+                                    <table class="table">
+                                        <tr ng-class="{ 'has-error danger' : userForm['6dPrize1'].$invalid && userForm['6dPrize1'].$touched}">
+                                            <td>{{'text.prize'|translate}} 1 (A:{{user.packageData['6dPrize1']}})<br/>(M:{{user.masterData['6dPrize1']}})</td>
+                                            <td>:</td>
+                                            <td class="col-xs-7">
+                                                <input type="number" class="form-control" id="6dPrize1" name="6dPrize1"
+                                                       placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['6dPrize1']"
+                                                       ng-max="user.packageData['6dPrize1']"
+                                                       ng-model="user.user.userDetail['6dPrize1']">
+                                                <div class="help-block" ng-messages="userForm['6dPrize1'].$error" ng-show="userForm['6dPrize1'].$touched">
+                                                    <div ng-messages-include="views/common/messages.html"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr ng-class="{ 'has-error danger' : userForm['6dPrize2'].$invalid && userForm['6dPrize2'].$touched}">
+                                            <td>{{'text.prize'|translate}} 2 (A:{{user.packageData['6dPrize2']}})<br/>(M:{{user.masterData['6dPrize2']}})</td>
+                                            <td>:</td>
+                                            <td>
+                                                <input type="number" class="form-control" id="6dPrize2" name="6dPrize2"
+                                                       placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['6dPrize2']"
+                                                       ng-max="user.packageData['6dPrize2']"
+                                                       ng-model="user.user.userDetail['6dPrize2']">
+                                                <div class="help-block" ng-messages="userForm['6dPrize2'].$error" ng-show="userForm['6dPrize2'].$touched">
+                                                    <div ng-messages-include="views/common/messages.html"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr ng-class="{ 'has-error danger' : userForm['6dPrize3'].$invalid && userForm['6dPrize3'].$touched}">
+                                            <td>{{'text.prize'|translate}} 3 (A:{{user.packageData['6dPrize3']}})<br/>(M:{{user.masterData['6dPrize3']}})</td>
+                                            <td>:</td>
+                                            <td>
+                                                <input type="number" class="form-control" id="6dPrize3" name="6dPrize3"
+                                                       placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['6dPrize3']"
+                                                       ng-max="user.packageData['6dPrize3']"
+                                                       ng-model="user.user.userDetail['6dPrize3']">
+                                                <div class="help-block" ng-messages="userForm['6dPrize3'].$error" ng-show="userForm['6dPrize3'].$touched">
+                                                    <div ng-messages-include="views/common/messages.html"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr ng-class="{ 'has-error danger' : userForm['6dPrize4'].$invalid && userForm['6dPrize4'].$touched}">
+                                            <td>{{'text.prize'|translate}} 4 (A:{{user.packageData['6dPrize4']}})<br/>(M:{{user.masterData['6dPrize4']}})</td>
+                                            <td>:</td>
+                                            <td>
+                                                <input type="number" class="form-control" id="6dPrize4" name="6dPrize4"
+                                                       placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['6dPrize4']"
+                                                       ng-max="user.packageData['6dPrize4']"
+                                                       ng-model="user.user.userDetail['6dPrize4']">
+                                                <div class="help-block" ng-messages="userForm['6dPrize4'].$error" ng-show="userForm['6dPrize4'].$touched">
+                                                    <div ng-messages-include="views/common/messages.html"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr ng-class="{ 'has-error danger' : userForm['6dPrize5'].$invalid && userForm['6dPrize5'].$touched}">
+                                            <td>{{'text.prize'|translate}} 5 (A:{{user.packageData['6dPrize5']}})<br/>(M:{{user.masterData['6dPrize5']}})</td>
+                                            <td>:</td>
+                                            <td>
+                                                <input type="number" class="form-control" id="6dPrize5" name="6dPrize5"
+                                                       placeholder="{{'placeholder.prize'|translate}}" ng-min="user.masterData['6dPrize5']"
+                                                       ng-max="user.packageData['6dPrize5']"
+                                                       ng-model="user.user.userDetail['6dPrize5']">
+                                                <div class="help-block" ng-messages="userForm['6dPrize5'].$error" ng-show="userForm['6dPrize5'].$touched">
+                                                    <div ng-messages-include="views/common/messages.html"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

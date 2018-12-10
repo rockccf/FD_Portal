@@ -60,6 +60,7 @@
                             <th translate="text.prize"></th>
                             <th class="text-right" translate="text.prizeAmount"></th>
                             <th class="text-right" translate="text.totalWin"></th>
+                            <th ng-if="userIdentity.userType != APPCONSTANT.USER.TYPE.PLAYER" class="text-right" translate="text.superiorBonus"></th>
                             <th translate="text.betDate"></th>
                             <th translate="text.remarks"></th>
                         </tr>
@@ -76,6 +77,7 @@
                             <td>{{dataObj.prize}}</td>
                             <td class="text-right">{{dataObj.prizeAmount | number:2}}</td>
                             <td class="text-right">{{dataObj.totalWin | number:2}}</td>
+                            <td ng-if="userIdentity.userType != APPCONSTANT.USER.TYPE.PLAYER" class="text-right">{{dataObj.superiorBonus | number:2}}</td>
                             <td>{{dataObj.betDate}}</td>
                             <td>{{dataObj.remarks}}</td>
                         </tr>
@@ -84,6 +86,7 @@
                         <tr>
                             <td colspan="8" class="text-right" translate="text.grandTotal"></td>
                             <td class="text-right">{{report.reportData.grandTotalWin | number:2}}</td>
+                            <td ng-if="userIdentity.userType != APPCONSTANT.USER.TYPE.PLAYER" class="text-right">{{report.reportData.grandTotalSuperiorBonus | number:2}}</td>
                         </tr>
                         </tfoot>
                     </table>

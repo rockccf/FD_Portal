@@ -128,6 +128,1068 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group required">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="panel panel-primary" id="fourdMainPanel">
+                        <div class="panel-heading" ng-class="{'panel-heading-collapsed':'fourdMainPanel'}">{{'text.3d4dPrizePackages'|translate}}
+                            <paneltool tool-collapse="tool-collapse"></paneltool>
+                        </div>
+                        <div class="panel-wrapper" uib-collapse="fourdMainPanel">
+                            <div class="panel-body">
+                                <div class="panel panel-default" id="fourdPanel">
+                                    <div class="panel-heading" ng-class="{'panel-heading-collapsed':'fourdPanel'}">4D</div>
+                                    <div class="panel-wrapper" uib-collapse="fourdPanel">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">{{'text.big'|translate}}</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['4dBigPrize1'].$invalid && masterForm['4dBigPrize1'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 1</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="4dBigPrize1" name="4dBigPrize1"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['4dBigPrize1']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['4dBigPrize1'].$error" ng-show="masterForm['4dBigPrize1'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['4dBigPrize2'].$invalid && masterForm['4dBigPrize2'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 2</td>
+                                                                    <td>:</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="4dBigPrize2" name="4dBigPrize2"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['4dBigPrize2']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['4dBigPrize2'].$error" ng-show="masterForm['4dBigPrize2'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['4dBigPrize3'].$invalid && masterForm['4dBigPrize3'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 3</td>
+                                                                    <td>:</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="4dBigPrize3" name="4dBigPrize3"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['4dBigPrize3']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['4dBigPrize3'].$error" ng-show="masterForm['4dBigPrize3'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['4dBigStarters'].$invalid && masterForm['4dBigStarters'].$touched}">
+                                                                    <td>{{'text.starters'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="4dBigStarters" name="4dBigStarters"
+                                                                               placeholder="{{'placeholder.starters'|translate}}" min="1"
+                                                                               ng-model="master.master['4dBigStarters']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['4dBigStarters'].$error" ng-show="masterForm['4dBigStarters'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['4dBigConsolation'].$invalid && masterForm['4dBigConsolation'].$touched}">
+                                                                    <td>{{'text.consolation'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="4dBigConsolation" name="4dBigConsolation"
+                                                                               placeholder="{{'placeholder.consolation'|translate}}" min="1"
+                                                                               ng-model="master.master['4dBigConsolation']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['4dBigConsolation'].$error" ng-show="masterForm['4dBigConsolation'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">{{'text.small'|translate}}</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['4dSmallPrize1'].$invalid && masterForm['4dSmallPrize1'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 1</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="4dSmallPrize1" name="4dSmallPrize1"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['4dSmallPrize1']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['4dSmallPrize1'].$error" ng-show="masterForm['4dSmallPrize1'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['4dSmallPrize2'].$invalid && masterForm['4dSmallPrize2'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 2</td>
+                                                                    <td>:</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="4dSmallPrize2" name="4dSmallPrize2"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['4dSmallPrize2']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['4dSmallPrize2'].$error" ng-show="masterForm['4dSmallPrize2'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['4dSmallPrize3'].$invalid && masterForm['4dSmallPrize3'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 3</td>
+                                                                    <td>:</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="4dSmallPrize3" name="4dSmallPrize3"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['4dSmallPrize3']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['4dSmallPrize3'].$error" ng-show="masterForm['4dSmallPrize3'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4A</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['4d4aPrize'].$invalid && masterForm['4d4aPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="4d4aPrize" name="4d4aPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['4d4aPrize']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['4d4aPrize'].$error" ng-show="masterForm['4d4aPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4B</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['4d4bPrize'].$invalid && masterForm['4d4bPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="4d4bPrize" name="4d4bPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['4d4bPrize']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['4d4bPrize'].$error" ng-show="masterForm['4d4bPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4C</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['4d4cPrize'].$invalid && masterForm['4d4cPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="4d4cPrize" name="4d4aPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['4d4cPrize']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['4d4cPrize'].$error" ng-show="masterForm['4d4cPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4D</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['4d4dPrize'].$invalid && masterForm['4d4dPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="4d4dPrize" name="4d4aPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['4d4dPrize']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['4d4dPrize'].$error" ng-show="masterForm['4d4dPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4E</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['4d4ePrize'].$invalid && masterForm['4d4ePrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="4d4ePrize" name="4d4ePrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['4d4ePrize']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['4d4ePrize'].$error" ng-show="masterForm['4d4ePrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4F</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['4d4fPrize'].$invalid && masterForm['4d4fPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="4d4fPrize" name="4d4fPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['4d4fPrize']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['4d4fPrize'].$error" ng-show="masterForm['4d4fPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="panel panel-warning">
+                                                        <div class="panel-heading">IBOX</div>
+                                                        <div class="panel-body table-responsive">
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>{{'text.big'|translate}}</td>
+                                                                    <td>IBOX 24</td>
+                                                                    <td>IBOX 12</td>
+                                                                    <td>IBOX 6</td>
+                                                                    <td>IBOX 4</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 1</td>
+                                                                    <td>{{master.master["4dBigPrize1"]/24 | number:2}}</td>
+                                                                    <td>{{master.master["4dBigPrize1"]/12 | number:2}}</td>
+                                                                    <td>{{master.master["4dBigPrize1"]/6 | number:2}}</td>
+                                                                    <td>{{master.master["4dBigPrize1"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 2</td>
+                                                                    <td>{{master.master["4dBigPrize2"]/24 | number:2}}</td>
+                                                                    <td>{{master.master["4dBigPrize2"]/12 | number:2}}</td>
+                                                                    <td>{{master.master["4dBigPrize2"]/6 | number:2}}</td>
+                                                                    <td>{{master.master["4dBigPrize2"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 3</td>
+                                                                    <td>{{master.master["4dBigPrize3"]/24 | number:2}}</td>
+                                                                    <td>{{master.master["4dBigPrize3"]/12 | number:2}}</td>
+                                                                    <td>{{master.master["4dBigPrize3"]/6 | number:2}}</td>
+                                                                    <td>{{master.master["4dBigPrize3"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.starters'|translate}}</td>
+                                                                    <td>{{master.master["4dBigStarters"]/24 | number:2}}</td>
+                                                                    <td>{{master.master["4dBigStarters"]/12 | number:2}}</td>
+                                                                    <td>{{master.master["4dBigStarters"]/6 | number:2}}</td>
+                                                                    <td>{{master.master["4dBigStarters"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.consolation'|translate}}</td>
+                                                                    <td>{{master.master["4dBigConsolation"]/24 | number:2}}</td>
+                                                                    <td>{{master.master["4dBigConsolation"]/12 | number:2}}</td>
+                                                                    <td>{{master.master["4dBigConsolation"]/6 | number:2}}</td>
+                                                                    <td>{{master.master["4dBigConsolation"]/4 | number:2}}</td>
+                                                                </tr>
+                                                            </table>
+                                                            <br/>
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>{{'text.small'|translate}}</td>
+                                                                    <td>IBOX 24</td>
+                                                                    <td>IBOX 12</td>
+                                                                    <td>IBOX 6</td>
+                                                                    <td>IBOX 4</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 1</td>
+                                                                    <td>{{master.master["4dSmallPrize1"]/24 | number:2}}</td>
+                                                                    <td>{{master.master["4dSmallPrize1"]/12 | number:2}}</td>
+                                                                    <td>{{master.master["4dSmallPrize1"]/6 | number:2}}</td>
+                                                                    <td>{{master.master["4dSmallPrize1"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 2</td>
+                                                                    <td>{{master.master["4dSmallPrize2"]/24 | number:2}}</td>
+                                                                    <td>{{master.master["4dSmallPrize2"]/12 | number:2}}</td>
+                                                                    <td>{{master.master["4dSmallPrize2"]/6 | number:2}}</td>
+                                                                    <td>{{master.master["4dSmallPrize2"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 3</td>
+                                                                    <td>{{master.master["4dSmallPrize3"]/24 | number:2}}</td>
+                                                                    <td>{{master.master["4dSmallPrize3"]/12 | number:2}}</td>
+                                                                    <td>{{master.master["4dSmallPrize3"]/6 | number:2}}</td>
+                                                                    <td>{{master.master["4dSmallPrize3"]/4 | number:2}}</td>
+                                                                </tr>
+                                                            </table>
+                                                            <br/>
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>4A</td>
+                                                                    <td>IBOX 24</td>
+                                                                    <td>IBOX 12</td>
+                                                                    <td>IBOX 6</td>
+                                                                    <td>IBOX 4</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>{{master.master["4d4aPrize"]/24 | number:2}}</td>
+                                                                    <td>{{master.master["4d4aPrize"]/12 | number:2}}</td>
+                                                                    <td>{{master.master["4d4aPrize"]/6 | number:2}}</td>
+                                                                    <td>{{master.master["4d4aPrize"]/4 | number:2}}</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="panel panel-dark">
+                                                        <div class="panel-heading">3D</div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3ABC</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : masterForm['3dAbcPrize1'].$invalid && masterForm['3dAbcPrize1'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}} 1</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="3dAbcPrize1" name="3dAbcPrize1"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="master.master['3dAbcPrize1']" required disabled>
+                                                                                        <div class="help-block" ng-messages="masterForm['3dAbcPrize1'].$error" ng-show="masterForm['3dAbcPrize1'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr ng-class="{ 'has-error danger' : masterForm['3dAbcPrize2'].$invalid && masterForm['3dAbcPrize2'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}} 2</td>
+                                                                                    <td>:</td>
+                                                                                    <td>
+                                                                                        <input type="number" class="form-control" id="3dAbcPrize2" name="3dAbcPrize2"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="master.master['3dAbcPrize2']" required disabled>
+                                                                                        <div class="help-block" ng-messages="masterForm['3dAbcPrize2'].$error" ng-show="masterForm['3dAbcPrize2'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr ng-class="{ 'has-error danger' : masterForm['3dAbcPrize3'].$invalid && masterForm['3dAbcPrize3'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}} 3</td>
+                                                                                    <td>:</td>
+                                                                                    <td>
+                                                                                        <input type="number" class="form-control" id="3dAbcPrize3" name="3dAbcPrize3"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="master.master['3dAbcPrize3']" required disabled>
+                                                                                        <div class="help-block" ng-messages="masterForm['3dAbcPrize3'].$error" ng-show="masterForm['3dAbcPrize3'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3A</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : masterForm['3d3aPrize'].$invalid && masterForm['3d3aPrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="3d3aPrize" name="3d3aPrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="master.master['3d3aPrize']" required disabled>
+                                                                                        <div class="help-block" ng-messages="masterForm['3d3aPrize'].$error" ng-show="masterForm['3d3aPrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3B</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : masterForm['3d3bPrize'].$invalid && masterForm['3d3bPrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="3d3bPrize" name="3d3bPrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="master.master['3d3bPrize']" required disabled>
+                                                                                        <div class="help-block" ng-messages="masterForm['3d3bPrize'].$error" ng-show="masterForm['3d3bPrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3C</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : masterForm['3d3cPrize'].$invalid && masterForm['3d3cPrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="3d3cPrize" name="3d3cPrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="master.master['3d3cPrize']" required disabled>
+                                                                                        <div class="help-block" ng-messages="masterForm['3d3cPrize'].$error" ng-show="masterForm['3d3cPrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3D</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : masterForm['3d3dPrize'].$invalid && masterForm['3d3dPrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="3d3dPrize" name="3d3dPrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="master.master['3d3dPrize']" required disabled>
+                                                                                        <div class="help-block" ng-messages="masterForm['3d3dPrize'].$error" ng-show="masterForm['3d3dPrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3E</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : masterForm['3d3ePrize'].$invalid && masterForm['3d3ePrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="3d3ePrize" name="3d3ePrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="master.master['3d3ePrize']" required disabled>
+                                                                                        <div class="help-block" ng-messages="masterForm['3d3ePrize'].$error" ng-show="masterForm['3d3ePrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group required">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="panel panel-success" id="gdMainPanel">
+                        <div class="panel-heading" ng-class="{'panel-heading-collapsed':'gdMainPanel'}">{{'text.gdLottoPrizePackages'|translate}}
+                            <paneltool tool-collapse="tool-collapse"></paneltool>
+                        </div>
+                        <div class="panel-wrapper" uib-collapse="gdMainPanel">
+                            <div class="panel-body">
+                                <div class="panel panel-default" id="gdPanel">
+                                    <div class="panel-heading" ng-class="{'panel-heading-collapsed':'gdPanel'}">4D</div>
+                                    <div class="panel-wrapper" uib-collapse="gdPanel">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">{{'text.big'|translate}}</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd4dBigPrize1'].$invalid && masterForm['gd4dBigPrize1'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 1</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="gd4dBigPrize1" name="gd4dBigPrize1"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['gd4dBigPrize1']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['gd4dBigPrize1'].$error" ng-show="masterForm['gd4dBigPrize1'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd4dBigPrize2'].$invalid && masterForm['gd4dBigPrize2'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 2</td>
+                                                                    <td>:</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="gd4dBigPrize2" name="gd4dBigPrize2"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['gd4dBigPrize2']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['gd4dBigPrize2'].$error" ng-show="masterForm['gd4dBigPrize2'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd4dBigPrize3'].$invalid && masterForm['gd4dBigPrize3'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 3</td>
+                                                                    <td>:</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="gd4dBigPrize3" name="gd4dBigPrize3"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['gd4dBigPrize3']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['gd4dBigPrize3'].$error" ng-show="masterForm['gd4dBigPrize3'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd4dBigStarters'].$invalid && masterForm['gd4dBigStarters'].$touched}">
+                                                                    <td>{{'text.starters'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="gd4dBigStarters" name="gd4dBigStarters"
+                                                                               placeholder="{{'placeholder.starters'|translate}}" min="1"
+                                                                               ng-model="master.master['gd4dBigStarters']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['gd4dBigStarters'].$error" ng-show="masterForm['gd4dBigStarters'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd4dBigConsolation'].$invalid && masterForm['gd4dBigConsolation'].$touched}">
+                                                                    <td>{{'text.consolation'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="gd4dBigConsolation" name="gd4dBigConsolation"
+                                                                               placeholder="{{'placeholder.consolation'|translate}}" min="1"
+                                                                               ng-model="master.master['gd4dBigConsolation']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['gd4dBigConsolation'].$error" ng-show="masterForm['gd4dBigConsolation'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">{{'text.small'|translate}}</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd4dSmallPrize1'].$invalid && masterForm['gd4dSmallPrize1'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 1</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="gd4dSmallPrize1" name="gd4dSmallPrize1"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['gd4dSmallPrize1']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['gd4dSmallPrize1'].$error" ng-show="masterForm['gd4dSmallPrize1'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd4dSmallPrize2'].$invalid && masterForm['gd4dSmallPrize2'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 2</td>
+                                                                    <td>:</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="gd4dSmallPrize2" name="gd4dSmallPrize2"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['gd4dSmallPrize2']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['gd4dSmallPrize2'].$error" ng-show="masterForm['gd4dSmallPrize2'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd4dSmallPrize3'].$invalid && masterForm['gd4dSmallPrize3'].$touched}">
+                                                                    <td>{{'text.prize'|translate}} 3</td>
+                                                                    <td>:</td>
+                                                                    <td>
+                                                                        <input type="number" class="form-control" id="gd4dSmallPrize3" name="gd4dSmallPrize3"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['gd4dSmallPrize3']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['gd4dSmallPrize3'].$error" ng-show="masterForm['gd4dSmallPrize3'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4A</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd4d4aPrize'].$invalid && masterForm['gd4d4aPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="gd4d4aPrize" name="gd4d4aPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['gd4d4aPrize']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['gd4d4aPrize'].$error" ng-show="masterForm['gd4d4aPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4B</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd4d4bPrize'].$invalid && masterForm['gd4d4bPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="gd4d4bPrize" name="gd4d4bPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['gd4d4bPrize']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['gd4d4bPrize'].$error" ng-show="masterForm['gd4d4bPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4C</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd4d4cPrize'].$invalid && masterForm['gd4d4cPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="gd4d4cPrize" name="4d4aPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['gd4d4cPrize']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['gd4d4cPrize'].$error" ng-show="masterForm['gd4d4cPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4D</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd4d4dPrize'].$invalid && masterForm['gd4d4dPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="gd4d4dPrize" name="4d4aPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['gd4d4dPrize']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['gd4d4dPrize'].$error" ng-show="masterForm['gd4d4dPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4E</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd4d4ePrize'].$invalid && masterForm['gd4d4ePrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="gd4d4ePrize" name="gd4d4ePrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['gd4d4ePrize']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['gd4d4ePrize'].$error" ng-show="masterForm['gd4d4ePrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading">4F</div>
+                                                        <div class="panel-body">
+                                                            <table class="table">
+                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd4d4fPrize'].$invalid && masterForm['gd4d4fPrize'].$touched}">
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>:</td>
+                                                                    <td class="col-xs-7">
+                                                                        <input type="number" class="form-control" id="gd4d4fPrize" name="gd4d4fPrize"
+                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                               ng-model="master.master['gd4d4fPrize']" required disabled>
+                                                                        <div class="help-block" ng-messages="masterForm['gd4d4fPrize'].$error" ng-show="masterForm['gd4d4fPrize'].$touched">
+                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="panel panel-warning">
+                                                        <div class="panel-heading">IBOX</div>
+                                                        <div class="panel-body table-responsive">
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>{{'text.big'|translate}}</td>
+                                                                    <td>IBOX 24</td>
+                                                                    <td>IBOX 12</td>
+                                                                    <td>IBOX 6</td>
+                                                                    <td>IBOX 4</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 1</td>
+                                                                    <td>{{master.master["gd4dBigPrize1"]/24 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dBigPrize1"]/12 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dBigPrize1"]/6 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dBigPrize1"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 2</td>
+                                                                    <td>{{master.master["gd4dBigPrize2"]/24 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dBigPrize2"]/12 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dBigPrize2"]/6 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dBigPrize2"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 3</td>
+                                                                    <td>{{master.master["gd4dBigPrize3"]/24 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dBigPrize3"]/12 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dBigPrize3"]/6 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dBigPrize3"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.starters'|translate}}</td>
+                                                                    <td>{{master.master["gd4dBigStarters"]/24 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dBigStarters"]/12 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dBigStarters"]/6 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dBigStarters"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.consolation'|translate}}</td>
+                                                                    <td>{{master.master["gd4dBigConsolation"]/24 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dBigConsolation"]/12 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dBigConsolation"]/6 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dBigConsolation"]/4 | number:2}}</td>
+                                                                </tr>
+                                                            </table>
+                                                            <br/>
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>{{'text.small'|translate}}</td>
+                                                                    <td>IBOX 24</td>
+                                                                    <td>IBOX 12</td>
+                                                                    <td>IBOX 6</td>
+                                                                    <td>IBOX 4</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 1</td>
+                                                                    <td>{{master.master["gd4dSmallPrize1"]/24 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dSmallPrize1"]/12 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dSmallPrize1"]/6 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dSmallPrize1"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 2</td>
+                                                                    <td>{{master.master["gd4dSmallPrize2"]/24 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dSmallPrize2"]/12 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dSmallPrize2"]/6 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dSmallPrize2"]/4 | number:2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}} 3</td>
+                                                                    <td>{{master.master["gd4dSmallPrize3"]/24 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dSmallPrize3"]/12 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dSmallPrize3"]/6 | number:2}}</td>
+                                                                    <td>{{master.master["gd4dSmallPrize3"]/4 | number:2}}</td>
+                                                                </tr>
+                                                            </table>
+                                                            <br/>
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>4A</td>
+                                                                    <td>IBOX 24</td>
+                                                                    <td>IBOX 12</td>
+                                                                    <td>IBOX 6</td>
+                                                                    <td>IBOX 4</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                    <td>{{master.master["gd4d4aPrize"]/24 | number:2}}</td>
+                                                                    <td>{{master.master["gd4d4aPrize"]/12 | number:2}}</td>
+                                                                    <td>{{master.master["gd4d4aPrize"]/6 | number:2}}</td>
+                                                                    <td>{{master.master["gd4d4aPrize"]/4 | number:2}}</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="panel panel-dark">
+                                                        <div class="panel-heading">3D</div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3ABC</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd3dAbcPrize1'].$invalid && masterForm['gd3dAbcPrize1'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}} 1</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="gd3dAbcPrize1" name="gd3dAbcPrize1"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="master.master['gd3dAbcPrize1']" required disabled>
+                                                                                        <div class="help-block" ng-messages="masterForm['gd3dAbcPrize1'].$error" ng-show="masterForm['gd3dAbcPrize1'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd3dAbcPrize2'].$invalid && masterForm['gd3dAbcPrize2'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}} 2</td>
+                                                                                    <td>:</td>
+                                                                                    <td>
+                                                                                        <input type="number" class="form-control" id="gd3dAbcPrize2" name="gd3dAbcPrize2"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="master.master['gd3dAbcPrize2']" required disabled>
+                                                                                        <div class="help-block" ng-messages="masterForm['gd3dAbcPrize2'].$error" ng-show="masterForm['gd3dAbcPrize2'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd3dAbcPrize3'].$invalid && masterForm['gd3dAbcPrize3'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}} 3</td>
+                                                                                    <td>:</td>
+                                                                                    <td>
+                                                                                        <input type="number" class="form-control" id="gd3dAbcPrize3" name="gd3dAbcPrize3"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="master.master['gd3dAbcPrize3']" required disabled>
+                                                                                        <div class="help-block" ng-messages="masterForm['gd3dAbcPrize3'].$error" ng-show="masterForm['gd3dAbcPrize3'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3A</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd3d3aPrize'].$invalid && masterForm['gd3d3aPrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="gd3d3aPrize" name="gd3d3aPrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="master.master['gd3d3aPrize']" required disabled>
+                                                                                        <div class="help-block" ng-messages="masterForm['gd3d3aPrize'].$error" ng-show="masterForm['gd3d3aPrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3B</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd3d3bPrize'].$invalid && masterForm['gd3d3bPrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="gd3d3bPrize" name="gd3d3bPrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="master.master['gd3d3bPrize']" required disabled>
+                                                                                        <div class="help-block" ng-messages="masterForm['gd3d3bPrize'].$error" ng-show="masterForm['gd3d3bPrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3C</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd3d3cPrize'].$invalid && masterForm['gd3d3cPrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="gd3d3cPrize" name="gd3d3cPrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="master.master['gd3d3cPrize']" required disabled>
+                                                                                        <div class="help-block" ng-messages="masterForm['gd3d3cPrize'].$error" ng-show="masterForm['gd3d3cPrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3D</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd3d3dPrize'].$invalid && masterForm['gd3d3dPrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="gd3d3dPrize" name="gd3d3dPrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="master.master['gd3d3dPrize']" required disabled>
+                                                                                        <div class="help-block" ng-messages="masterForm['gd3d3dPrize'].$error" ng-show="masterForm['gd3d3dPrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="panel panel-purple">
+                                                                        <div class="panel-heading">3E</div>
+                                                                        <div class="panel-body">
+                                                                            <table class="table">
+                                                                                <tr ng-class="{ 'has-error danger' : masterForm['gd3d3ePrize'].$invalid && masterForm['gd3d3ePrize'].$touched}">
+                                                                                    <td>{{'text.prize'|translate}}</td>
+                                                                                    <td>:</td>
+                                                                                    <td class="col-xs-7">
+                                                                                        <input type="number" class="form-control" id="gd3d3ePrize" name="gd3d3ePrize"
+                                                                                               placeholder="{{'placeholder.prize'|translate}}" min="1"
+                                                                                               ng-model="master.master['gd3d3ePrize']" required disabled>
+                                                                                        <div class="help-block" ng-messages="masterForm['gd3d3ePrize'].$error" ng-show="masterForm['gd3d3ePrize'].$touched">
+                                                                                            <div ng-messages-include="views/common/messages.html"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-lg-3 control-label" translate="text.remarks"></label>
                 <div class="col-lg-6">

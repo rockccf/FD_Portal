@@ -46,6 +46,8 @@
         ];
         _this.betMethodOptions = [{id:$rootScope.APPCONSTANT.USER.DETAIL.BET_METHOD.MULTIPLE, "name":"text.multiple"}, {id:$rootScope.APPCONSTANT.USER.DETAIL.BET_METHOD.DIVIDE, "name":"text.divide"}];
         _this.yesNoOptions = [{id:trueValue, "name":"text.yes"}, {id:falseValue, "name":"text.no"}];
+        _this.packageData = {};
+        _this.masterData = {};
 
         _this.viewUser = function (userId) {
             $state.go("root.main.userView",{"id":userId});
@@ -89,6 +91,42 @@
             if (_this.user.master) {
                 _this.masterPrefix = _this.user.master.prefix;
             }
+        };
+
+        _this.getMasterMinimumPrizes = function() {
+            $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/master/"+masterId,
+                null)
+                .then(function (response) {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    _this.masterData = response.data;
+                }, function (response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    CommonService.SweetAlert({
+                        title: "Error",
+                        text: "Failed to retrieve master details.",
+                        type: "error"
+                    });
+                });
+        };
+
+        _this.getPackageData = function(packageId) {
+            $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/package/"+packageId,
+                null)
+                .then(function (response) {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    _this.packageData = response.data;
+                }, function (response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    CommonService.SweetAlert({
+                        title: "Error",
+                        text: "Failed to retrieve package details.",
+                        type: "error"
+                    });
+                });
         };
 
         //Function to create the user
@@ -164,7 +202,7 @@
                 _this.saveObj = {
                     "name" : _this.user.name,
                     "mobileNo" : _this.user.mobileNo,
-                    "active" : _this.user.active.id,
+                    "active" : _this.user.active,
                     "packageId" : _this.user.package.id,
                     "betMethod" : _this.user.betMethod,
                     "betGdLotto" : _this.user.betGdLotto,
@@ -174,6 +212,16 @@
                     "extra6dCommRate" : _this.user.extra6dCommRate,
                     "extraGdCommRate" : _this.user.extraGdCommRate
                 };
+
+
+                angular.forEach(_this.user.userDetail, function(value, key) {
+                    var keyFirst2Chars = key.substring(0, 2);
+                    if (keyFirst2Chars == "3d" || keyFirst2Chars == "4d" || keyFirst2Chars == "5d" || keyFirst2Chars == "6d" || keyFirst2Chars == "gd") {
+                        if (value) {
+                            _this.saveObj[key] = value;
+                        }
+                    }
+                });
 
                 $http.put($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/user/" + _this.user.id, _this.saveObj).
                 then(function (response) {
@@ -316,6 +364,9 @@
                 )
             }
 
+            promises.push(_this.getMasterMinimumPrizes());
+            promises.push(_this.getPackageData($rootScope.userIdentity.userDetail.packageId));
+
             $q.all(promises).then(function () {
                 var userId = $stateParams.id;
                 if (stateName == "root.main.myAccount" || stateName == "root.main.myAccountEdit") {
@@ -426,6 +477,8 @@
                         _this.packageOptions = result;
                     });
                     _this.creditLimitAvailableToGrant = $rootScope.userIdentity.userDetail.creditLimitAvailableToGrant;
+                    _this.getMasterMinimumPrizes();
+                    _this.getPackageData($rootScope.userIdentity.userDetail.packageId);
                     break;
                 case $rootScope.APPCONSTANT.USER.TYPE.PLAYER:
                     _this.canCreateUserType = false;

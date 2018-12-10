@@ -125,7 +125,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="dataObj in bet.betData.numbers track by $index">
+                    <tr ng-class="{'danger':dataObj.status == APPCONSTANT.BET.DETAIL.STATUS.VOIDED}" ng-repeat="dataObj in bet.betData.numbers track by $index">
                         <td>{{$index+1}}</td>
                         <td class="text-center">{{dataObj.creator.username}}</td>
                         <td class="text-center">{{dataObj.betDate}}</td>
