@@ -50,7 +50,7 @@
                 </fieldset>
             </form>
             <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 table-responsive">
+                <div class="col-lg-12 table-responsive">
                     <table class="table table-bordered table-striped table-condensed" ng-if="userIdentity.userType != APPCONSTANT.USER.TYPE.PLAYER">
                         <thead>
                         <tr class="info">
@@ -58,7 +58,7 @@
                             <th rowspan="2" translate="text.name"></th>
                             <th rowspan="2" translate="text.username"></th>
                             <th colspan="5" class="text-center">{{userIdentity.username}}</th>
-                            <th colspan="5" class="text-center" translate="text.company"></th>
+                            <th colspan="6" class="text-center" translate="text.company"></th>
                         </tr>
                         <tr class="info">
                             <th class="text-right" translate="text.sales"></th>
@@ -70,6 +70,7 @@
                             <th class="text-right" translate="text.commission"></th>
                             <th class="text-right" translate="text.superiorCommission"></th>
                             <th class="text-right" translate="text.payout"></th>
+                            <th class="text-right" translate="text.superiorBonus"></th>
                             <th class="text-right" translate="text.balance"></th>
                         </tr>
                         </thead>
@@ -87,6 +88,7 @@
                             <td class="text-right">{{dataObj.companyCommission | number:2}}</td>
                             <td class="text-right">{{dataObj.superiorCommission | number:2}}</td>
                             <td class="text-right">{{dataObj.companyPayout | number:2}}</td>
+                            <td class="text-right">{{dataObj.companyTotalSuperiorBonus | number:2}}</td>
                             <td class="text-right" ng-class="{'text-danger' : dataObj.balance < 0}">{{dataObj.balance | number:2}}</td>
                         </tr>
                         </tbody>
@@ -102,6 +104,7 @@
                             <td class="text-right"><strong>{{report.reportData.grandTotalCompanyCommission | number:2}}</strong></td>
                             <td class="text-right"><strong>{{report.reportData.grandTotalCompanySuperiorCommission | number:2}}</strong></td>
                             <td class="text-right"><strong>{{report.reportData.grandTotalCompanyPayout | number:2}}</strong></td>
+                            <td class="text-right"><strong>{{report.reportData.grandTotalCompanySuperiorBonus | number:2}}</strong></td>
                             <td class="text-right" ng-class="{'text-danger' : report.reportData.grandTotalCompanyBalance < 0}"><strong>{{report.reportData.grandTotalCompanyBalance | number:2}}</strong></td>
                         </tr>
                         </tfoot>

@@ -106,6 +106,9 @@
                             <td>
                                 <pre class="form-control-static pre-scrollable" style="max-height: 200px" ng-bind="dataObj.slipText"></pre>
                                 <button type="button" clipboard text="dataObj.slipText" on-copied="bet.copySuccess()" class="btn btn-circle btn-green">{{'text.copy' | translate}}</button>
+                                <i ng-if="dataObj.voidedBetsCount > 0" class="fas fa-trash" style="color:#f05050;"
+                                   uib-tooltip="{{dataObj.voidedBetsCount}} {{'text.betsVoided' | translate}}"
+                                   tooltip-placement="top" tooltip-append-to-body="true" ></i>
                             </td>
                             <td class="text-center">
                                 <a ui-sref="root.main.betView({id:dataObj.id})" class="btn btn-oval btn-lg btn-info" role="button" translate="button.view"></a>

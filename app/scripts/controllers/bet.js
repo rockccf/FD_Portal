@@ -959,7 +959,7 @@
                     // when the response is available
                     _this.bet = response.data;
 
-                    var acceptedBets = [], limitedBets = [], rejectedBets = [], voidBets = [];
+                    var acceptedBets = [], limitedBets = [], rejectedBets = [], voidedBets = [];
                     angular.forEach(_this.bet.betDetailsSortByNumber, function(value,key) {
                         value.canVoid = false;
                         if (moment().isBefore(moment(value.voidDateBy.date))) {
@@ -980,15 +980,14 @@
                         } else if (value.status == $rootScope.APPCONSTANT.BET.DETAIL.STATUS.REJECTED) {
                             rejectedBets.push(value);
                         } else if (value.status == $rootScope.APPCONSTANT.BET.DETAIL.STATUS.VOIDED) {
-                            voidBets.push(value);
+                            voidedBets.push(value);
                         }
                     });
-                    console.log(_this.bet.betDetailsSortByNumber);
 
                     _this.bet.acceptedBets = acceptedBets;
                     _this.bet.limitedBets = limitedBets;
                     _this.bet.rejectedBets = rejectedBets;
-                    _this.bet.voidBets = voidBets;
+                    _this.bet.voidedBets = voidedBets;
                 }, function (response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.

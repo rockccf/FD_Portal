@@ -24,6 +24,65 @@
             {"active": {"attribute" : "active", "operator" : "like", "model" : "master", "isChild" : false}}
         ];
 
+        _this.loadRecommendedPrizes = function() {
+            //Load system recommended prizes value
+            _this.master["4dBigPrize1"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["4D_BIG_PRIZE_1"];
+            _this.master["4dBigPrize2"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["4D_BIG_PRIZE_2"];
+            _this.master["4dBigPrize3"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["4D_BIG_PRIZE_3"];
+            _this.master["4dBigStarters"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["4D_BIG_STARTERS"];
+            _this.master["4dBigConsolation"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["4D_BIG_CONSOLATION"];
+            _this.master["4dSmallPrize1"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["4D_SMALL_PRIZE_1"];
+            _this.master["4dSmallPrize2"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["4D_SMALL_PRIZE_2"];
+            _this.master["4dSmallPrize3"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["4D_SMALL_PRIZE_3"];
+            _this.master["4d4aPrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["4D_4A_PRIZE"];
+            _this.master["4d4bPrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["4D_4B_PRIZE"];
+            _this.master["4d4cPrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["4D_4C_PRIZE"];
+            _this.master["4d4dPrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["4D_4D_PRIZE"];
+            _this.master["4d4ePrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["4D_4E_PRIZE"];
+            _this.master["4d4fPrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["4D_4F_PRIZE"];
+            _this.master["3dAbcPrize1"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["3D_ABC_PRIZE_1"];
+            _this.master["3dAbcPrize2"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["3D_ABC_PRIZE_2"];
+            _this.master["3dAbcPrize3"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["3D_ABC_PRIZE_3"];
+            _this.master["3d3aPrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["3D_3A_PRIZE"];
+            _this.master["3d3bPrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["3D_3B_PRIZE"];
+            _this.master["3d3cPrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["3D_3C_PRIZE"];
+            _this.master["3d3dPrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["3D_3D_PRIZE"];
+            _this.master["3d3ePrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["3D_3E_PRIZE"];
+            _this.master["gd4dBigPrize1"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_4D_BIG_PRIZE_1"];
+            _this.master["gd4dBigPrize2"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_4D_BIG_PRIZE_2"];
+            _this.master["gd4dBigPrize3"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_4D_BIG_PRIZE_3"];
+            _this.master["gd4dBigStarters"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_4D_BIG_STARTERS"];
+            _this.master["gd4dBigConsolation"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_4D_BIG_CONSOLATION"];
+            _this.master["gd4dSmallPrize1"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_4D_SMALL_PRIZE_1"];
+            _this.master["gd4dSmallPrize2"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_4D_SMALL_PRIZE_2"];
+            _this.master["gd4dSmallPrize3"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_4D_SMALL_PRIZE_3"];
+            _this.master["gd4d4aPrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_4D_4A_PRIZE"];
+            _this.master["gd4d4bPrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_4D_4B_PRIZE"];
+            _this.master["gd4d4cPrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_4D_4C_PRIZE"];
+            _this.master["gd4d4dPrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_4D_4D_PRIZE"];
+            _this.master["gd4d4ePrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_4D_4E_PRIZE"];
+            _this.master["gd4d4fPrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_4D_4F_PRIZE"];
+            _this.master["gd3dAbcPrize1"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_3D_ABC_PRIZE_1"];
+            _this.master["gd3dAbcPrize2"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_3D_ABC_PRIZE_2"];
+            _this.master["gd3dAbcPrize3"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_3D_ABC_PRIZE_3"];
+            _this.master["gd3d3aPrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_3D_3A_PRIZE"];
+            _this.master["gd3d3bPrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_3D_3B_PRIZE"];
+            _this.master["gd3d3cPrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_3D_3C_PRIZE"];
+            _this.master["gd3d3dPrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_3D_3D_PRIZE"];
+            _this.master["gd3d3ePrize"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["GD_3D_3E_PRIZE"];
+            _this.master["5dPrize1"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["5D_PRIZE_1"];
+            _this.master["5dPrize2"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["5D_PRIZE_2"];
+            _this.master["5dPrize3"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["5D_PRIZE_3"];
+            _this.master["5dPrize4"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["5D_PRIZE_4"];
+            _this.master["5dPrize5"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["5D_PRIZE_5"];
+            _this.master["5dPrize6"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["5D_PRIZE_6"];
+            _this.master["6dPrize1"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["6D_PRIZE_1"];
+            _this.master["6dPrize2"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["6D_PRIZE_2"];
+            _this.master["6dPrize3"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["6D_PRIZE_3"];
+            _this.master["6dPrize4"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["6D_PRIZE_4"];
+            _this.master["6dPrize5"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["6D_PRIZE_5"];
+        };
+
         _this.viewMaster = function (masterId) {
             $state.go("root.main.masterView",{"id":masterId});
         };
@@ -35,11 +94,11 @@
                 _this.isSaving = true;
 
                 _this.saveObj = {
-                    "name" : _this.master.name,
-                    "prefix" : _this.master.prefix,
+                    //"name" : _this.master.name,
+                    //"prefix" : _this.master.prefix,
                     "active" : _this.master.active.id,
                     "locked" : _this.master.locked.id,
-                    "commissionRate" : _this.master.commissionRate,
+                    /*"commissionRate" : _this.master.commissionRate,
                     "voidBetMinutes" : _this.master.voidBetMinutes,
                     "betMaxLimitBig" : _this.master.betMaxLimitBig,
                     "betMaxLimitSmall" : _this.master.betMaxLimitSmall,
@@ -57,8 +116,14 @@
                     "betMaxLimit3e" : _this.master.betMaxLimit3e,
                     "betMaxLimit5d" : _this.master.betMaxLimit5d,
                     "betMaxLimit6d" : _this.master.betMaxLimit6d,
-                    "remarks" : _this.master.remarks,
+                    "remarks" : _this.master.remarks,*/
                 };
+
+                angular.forEach(_this.master, function(value,key) {
+                    if (key != "active" && key != "locked") {
+                        _this.saveObj[key] = value;
+                    }
+                });
 
                 $http.post($rootScope.SYSCONSTANT.BACKEND_SERVER_URL+"/master",_this.saveObj).
                 then (function(response){
@@ -82,7 +147,7 @@
                 _this.saveObj = {
                     "active" : _this.master.active.id,
                     "locked" : _this.master.locked.id,
-                    "voidBetMinutes" : _this.master.voidBetMinutes,
+                    /*"voidBetMinutes" : _this.master.voidBetMinutes,
                     "betMaxLimitBig" : _this.master.betMaxLimitBig,
                     "betMaxLimitSmall" : _this.master.betMaxLimitSmall,
                     "betMaxLimit4a" : _this.master.betMaxLimit4a,
@@ -99,8 +164,14 @@
                     "betMaxLimit3e" : _this.master.betMaxLimit3e,
                     "betMaxLimit5d" : _this.master.betMaxLimit5d,
                     "betMaxLimit6d" : _this.master.betMaxLimit6d,
-                    "remarks" : _this.master.remarks,
+                    "remarks" : _this.master.remarks,*/
                 };
+
+                angular.forEach(_this.master, function(value,key) {
+                    if (key != "active" && key != "locked") {
+                        _this.saveObj[key] = value;
+                    }
+                });
 
                 $http.put($rootScope.SYSCONSTANT.BACKEND_SERVER_URL+"/master/" + _this.master.id,_this.saveObj).
                 then(function(response) {

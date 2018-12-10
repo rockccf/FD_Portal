@@ -75,7 +75,7 @@
                     </tbody>
                 </table>
                 <br/>
-                <strong translate="text.limitedBets"></strong>
+                <strong translate="text.limitedBets" class="text-warning"></strong>
                 <table class="table table-striped table-condensed table-bordered">
                     <thead>
                     <tr class="info">
@@ -146,7 +146,7 @@
                     </tbody>
                 </table>
                 <br/>
-                <strong translate="text.rejectedBets"></strong>
+                <strong translate="text.rejectedBets" class="text-danger"></strong>
                 <table class="table table-striped table-condensed table-bordered">
                     <thead>
                     <tr class="info">
@@ -174,6 +174,58 @@
                     </thead>
                     <tbody>
                     <tr class="danger" ng-repeat="betObj in bet.bet.rejectedBets track by $index">
+                        <td>{{$index+1}}</td>
+                        <td>{{betObj.number}}</td>
+                        <td>{{betObj.drawDate}}</td>
+                        <td class="text-center">{{betObj.companyDraw.company.code}}</td>
+                        <td class="text-right">{{betObj.big}}</td>
+                        <td class="text-right">{{betObj.small}}</td>
+                        <td class="text-right">{{betObj["4a"]}}</td>
+                        <td class="text-right">{{betObj["4b"]}}</td>
+                        <td class="text-right">{{betObj["4c"]}}</td>
+                        <td class="text-right">{{betObj["4d"]}}</td>
+                        <td class="text-right">{{betObj["4e"]}}</td>
+                        <td class="text-right">{{betObj["4f"]}}</td>
+                        <td class="text-right">{{betObj["3abc"]}}</td>
+                        <td class="text-right">{{betObj["3a"]}}</td>
+                        <td class="text-right">{{betObj["3b"]}}</td>
+                        <td class="text-right">{{betObj["3c"]}}</td>
+                        <td class="text-right">{{betObj["3d"]}}</td>
+                        <td class="text-right">{{betObj["3e"]}}</td>
+                        <td class="text-right">{{betObj["5d"]}}</td>
+                        <td class="text-right">{{betObj["6d"]}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <strong translate="text.voidedBets" class="text-danger"></strong>
+                <table class="table table-striped table-condensed table-bordered">
+                    <thead>
+                    <tr class="info">
+                        <th>#</th>
+                        <th translate="text.number"></th>
+                        <th translate="text.drawDate"></th>
+                        <th translate="text.company"></th>
+                        <th class="text-right" translate="text.big"></th>
+                        <th class="text-right" translate="text.small"></th>
+                        <th class="text-right">4A</th>
+                        <th class="text-right">4B</th>
+                        <th class="text-right">4C</th>
+                        <th class="text-right">4D</th>
+                        <th class="text-right">4E</th>
+                        <th class="text-right">4F</th>
+                        <th class="text-right">3ABC</th>
+                        <th class="text-right">3A</th>
+                        <th class="text-right">3B</th>
+                        <th class="text-right">3C</th>
+                        <th class="text-right">3D</th>
+                        <th class="text-right">3E</th>
+                        <th class="text-right">5D</th>
+                        <th class="text-right">6D</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="danger" ng-repeat="betObj in bet.bet.voidedBets track by $index">
                         <td>{{$index+1}}</td>
                         <td>{{betObj.number}}</td>
                         <td>{{betObj.drawDate}}</td>
