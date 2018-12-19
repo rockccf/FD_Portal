@@ -5,9 +5,9 @@ var app = angular.module('fdPortal');
 app.constant("APPCONSTANT", {
     "GLOBAL" : {
         "PAGING" : {
-            "RECORDS_PER_PAGE" : 10, //Default number of records per page
+            "RECORDS_PER_PAGE" : 50, //Default number of records per page
             "MAX_PAGE_SIZE" : 5, //Limit the number of pages in the pagination bar
-            "PAGING_BUTTONS" : [20, 30, 40, 50], //pagination perpage button
+            "PAGING_BUTTONS" : [50, 100, 150, 200], //pagination perpage button
             "MAX_RECORD_SIZE" : 99999
         },
         "TRUE" : 1,
