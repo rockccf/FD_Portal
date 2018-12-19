@@ -98,7 +98,7 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="dataObj in bet.betData track by $index">
-                            <td>{{$index+1}}</td>
+                            <td>{{bet.recordsToSkip + $index+1}}</td>
                             <td>{{dataObj.creator.username}}</td>
                             <td>{{dataObj.createdAt}}</td>
                             <td><common-get-text ng-if="dataObj.betMethod != void(0)" value="dataObj.betMethod" object="bet.betMethodOptions"></common-get-text></td>
@@ -115,6 +115,22 @@
                             </td>
                         </tr>
                         </tbody>
+                        <tfoot>
+                        <tr>
+                            <td class="text-center" colspan="7">
+                                <ul uib-pagination
+                                    total-items="bet.totalItemsCount" items-per-page="bet.recordsPerPage"
+                                    ng-change="bet.getBetSlipHistory(bet.currentPageNo)" ng-model="bet.currentPageNo"
+                                    max-size="5" class="pagination-sm" boundary-links="true" force-ellipses="true">
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-right" colspan="7">
+                                <select ng-options="option as option for option in APPCONSTANT.GLOBAL.PAGING.PAGING_BUTTONS" ng-model="bet.recordsPerPage" ng-change="bet.getBetSlipHistory(bet.currentPageNo)"></select>
+                            </td>
+                        </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
