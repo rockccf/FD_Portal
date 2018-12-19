@@ -124,8 +124,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="dataObj in bet.betData.numbers track by $index">
-                            <td>{{$index+1}}</td>
+                        <tr ng-class="{'danger':dataObj.status == APPCONSTANT.BET.DETAIL.STATUS.VOIDED}" ng-repeat="dataObj in bet.betData.numbers track by $index">
+                            <td>{{bet.recordsToSkip + $index+1}}</td>
                             <td class="text-center">{{dataObj.creator.username}}</td>
                             <td class="text-center">{{dataObj.betDate}}</td>
                             <td class="text-center">{{dataObj.drawDate}}</td>
@@ -171,6 +171,20 @@
                             <td class="text-right"><strong>{{bet.betData.total5d}}</strong></td>
                             <td class="text-right"><strong>{{bet.betData.total6d}}</strong></td>
                             <td class="text-right"><strong>{{bet.betData.grandTotal}}</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="24">
+                                <ul uib-pagination
+                                    total-items="bet.totalItemsCount" items-per-page="bet.recordsPerPage"
+                                    ng-change="bet.getBetNumberHistory(bet.currentPageNo)" ng-model="bet.currentPageNo"
+                                    max-size="5" class="pagination-sm" boundary-links="true" force-ellipses="true">
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-right" colspan="24">
+                                <select ng-options="option as option for option in APPCONSTANT.GLOBAL.PAGING.PAGING_BUTTONS" ng-model="bet.recordsPerPage" ng-change="bet.getBetNumberHistory(bet.currentPageNo)"></select>
+                            </td>
                         </tr>
                         </tfoot>
                     </table>

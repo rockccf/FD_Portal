@@ -16,6 +16,9 @@
         _this.voidArray = [];
         _this.betRegex = "^\\d{0,3}(?:\\.\\d)?$";
         _this.grandTotal = 0;
+        _this.currentPageNo = 1;
+        _this.recordsPerPage = $rootScope.recordsPerPage; //Default to the setting in constant
+        _this.recordsToSkip = (_this.currentPageNo - 1) * _this.recordsPerPage;
 
         if ($rootScope.userIdentity.userDetail && $rootScope.userIdentity.userDetail.bet6d) {
             _this.amountColspan = 7;
@@ -114,16 +117,28 @@
         };
 
         _this.checkAllDate = function(dateObj,index) {
-            _this.betFormRowsArray.map(function(a) {
-                a[dateObj] = _this.dateAllCheckbox[index];
-            });
+            if (_this.dateAllCheckbox[index]) {
+                _this.betFormRowsArray.map(function(a) {
+                    a[dateObj] = _this.dateAllCheckbox[index];
+                });
+            } else {
+                for (var i in _this.betFormRowsArray) {
+                    delete _this.betFormRowsArray[i][dateObj];
+                }
+            }
             _this.calculateBetsTotal();
         };
 
         _this.checkAllCompany = function(companyCode,index) {
-            _this.betFormRowsArray.map(function(a) {
-                a[companyCode] = _this.companyAllCheckbox[index];
-            });
+            if (_this.companyAllCheckbox[index]) {
+                _this.betFormRowsArray.map(function (a) {
+                    a[companyCode] = true;
+                });
+            } else {
+                for (var i in _this.betFormRowsArray) {
+                    delete _this.betFormRowsArray[i][companyCode];
+                }
+            }
             _this.calculateBetsTotal();
         };
 
@@ -339,95 +354,175 @@
             }
         };
 
-        _this.getBetSlipHistory = function() {
+        _this.getBetSlipHistory = function(currentPageNo) {
             CommonService.clearAlertMessage();
             _this.isSaving = true;
+
+            if (!currentPageNo) currentPageNo = 1;
+
+            _this.recordsToSkip = (currentPageNo - 1) * _this.recordsPerPage;
             var dataJsonParams = {
                 "drawDateStart": _this.drawDateStart ?  moment(_this.drawDateStart).format() : null,
                 "drawDateEnd": _this.drawDateEnd ? moment(_this.drawDateEnd).format() : null,
                 "betDateStart": _this.betDateStart ? moment(_this.betDateStart).format() : null,
                 "betDateEnd": _this.betDateEnd ? moment(_this.betDateEnd).format() : null,
+                "pageSize":_this.recordsPerPage,
+                "offset":_this.recordsToSkip,
+                "mode" : 2
             };
 
-            //Proceed to retrieve the data with pagination settings
-            $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/bet/get-bet-slip-history?expand=creator", {
+            //Proceed to get total items count
+            $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/bet/get-bet-slip-history", {
                 params: dataJsonParams
             }).then(function (response) {
                 // this callback will be called asynchronously
                 // when the response is available
-                _this.betData = response.data;
+                _this.totalItemsCount = response.data;
 
-                _this.isSaving = false;
+                //Proceed to get the records
+                dataJsonParams["mode"] = 1;
+                //Proceed to retrieve the data with pagination settings
+                $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/bet/get-bet-slip-history?expand=creator", {
+                    params: dataJsonParams
+                }).then(function (response) {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    _this.betData = response.data;
+
+                    _this.isSaving = false;
+                }, function (response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    CommonService.SweetAlert({
+                        title: "Error",
+                        text: "Failed to retrieve bet slip history.",
+                        type: "error"
+                    });
+                    _this.isSaving = false;
+                });
             }, function (response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
                 CommonService.SweetAlert({
                     title: "Error",
-                    text: "Failed to retrieve bet slip history.",
+                    text: "Failed to retrieve bet slip history total items count.",
                     type: "error"
                 });
                 _this.isSaving = false;
             });
         };
 
-        _this.getBetNumberHistory = function() {
+        _this.getBetNumberHistory = function(currentPageNo) {
             CommonService.clearAlertMessage();
             _this.isSaving = true;
+
+            //Get the total items count first
+            if (!currentPageNo) currentPageNo = 1;
+            _this.recordsToSkip = (currentPageNo - 1) * _this.recordsPerPage;
             var dataJsonParams = {
                 "drawDateStart": _this.drawDateStart ?  moment(_this.drawDateStart).format() : null,
                 "drawDateEnd": _this.drawDateEnd ? moment(_this.drawDateEnd).format() : null,
                 "betDateStart": _this.betDateStart ? moment(_this.betDateStart).format() : null,
                 "betDateEnd": _this.betDateEnd ? moment(_this.betDateEnd).format() : null,
-                "number": _this.number
+                "number": _this.number,
+                "pageSize":_this.recordsPerPage,
+                "offset":_this.recordsToSkip,
+                "mode" : 2
             };
-
-            //Proceed to retrieve the data with pagination settings
+            //Proceed to get total items count
             $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/bet/get-bet-number-history", {
                 params: dataJsonParams
             }).then(function (response) {
                 // this callback will be called asynchronously
                 // when the response is available
-                _this.betData = response.data;
+                _this.totalItemsCount = response.data;
 
-                _this.isSaving = false;
+                //Proceed to get the records
+                dataJsonParams["mode"] = 1;
+                //Proceed to retrieve the data with pagination settings
+                $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/bet/get-bet-number-history", {
+                    params: dataJsonParams
+                }).then(function (response) {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    _this.betData = response.data;
+
+                    _this.isSaving = false;
+                }, function (response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    CommonService.SweetAlert({
+                        title: "Error",
+                        text: "Failed to retrieve bet number history.",
+                        type: "error"
+                    });
+                    _this.isSaving = false;
+                });
             }, function (response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
                 CommonService.SweetAlert({
                     title: "Error",
-                    text: "Failed to retrieve bet slip history.",
+                    text: "Failed to retrieve bet number history total items count.",
                     type: "error"
                 });
                 _this.isSaving = false;
             });
         };
 
-        _this.getVoidBetHistory = function() {
+        _this.getVoidBetHistory = function(currentPageNo) {
             CommonService.clearAlertMessage();
             _this.isSaving = true;
+
+            if (!currentPageNo) currentPageNo = 1;
+
+            _this.recordsToSkip = (currentPageNo - 1) * _this.recordsPerPage;
             var dataJsonParams = {
                 "drawDateStart": _this.drawDateStart ?  moment(_this.drawDateStart).format() : null,
                 "drawDateEnd": _this.drawDateEnd ? moment(_this.drawDateEnd).format() : null,
                 "betDateStart": _this.betDateStart ? moment(_this.betDateStart).format() : null,
                 "betDateEnd": _this.betDateEnd ? moment(_this.betDateEnd).format() : null,
-                "number": _this.number
+                "number": _this.number,
+                "pageSize":_this.recordsPerPage,
+                "offset":_this.recordsToSkip,
+                "mode" : 2
             };
 
-            //Proceed to retrieve the data with pagination settings
+            //Proceed to get total items count
             $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/bet/get-void-bet-history", {
                 params: dataJsonParams
             }).then(function (response) {
                 // this callback will be called asynchronously
                 // when the response is available
-                _this.betData = response.data;
+                _this.totalItemsCount = response.data;
 
-                _this.isSaving = false;
+                //Proceed to get the records
+                dataJsonParams["mode"] = 1;
+                //Proceed to retrieve the data with pagination settings
+                $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/bet/get-void-bet-history", {
+                    params: dataJsonParams
+                }).then(function (response) {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    _this.betData = response.data;
+
+                    _this.isSaving = false;
+                }, function (response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    CommonService.SweetAlert({
+                        title: "Error",
+                        text: "Failed to retrieve void bet history.",
+                        type: "error"
+                    });
+                    _this.isSaving = false;
+                });
             }, function (response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
                 CommonService.SweetAlert({
                     title: "Error",
-                    text: "Failed to retrieve void bet history.",
+                    text: "Failed to retrieve void bet history total items count.",
                     type: "error"
                 });
                 _this.isSaving = false;
@@ -909,6 +1004,22 @@
                     return;
                 }
 
+                //Check if the checkboxes for the dates/companies are unchecked, proceed to remove them from each row object.
+                for (var i in _this.betFormRowsArray) {
+                    for (var c in _this.drawCompanyArray) {
+                        var companyObj = _this.drawCompanyArray[c];
+                        if (_this.betFormRowsArray[i][companyObj.code] == false) {
+                            delete _this.betFormRowsArray[i][companyObj.code];
+                        }
+                    }
+                    for (var d in _this.activeDrawDateArray) {
+                        var dateObj = _this.activeDrawDateArray[d];
+                        if (_this.betFormRowsArray[i][dateObj] == false) {
+                            delete _this.betFormRowsArray[i][dateObj];
+                        }
+                    }
+                }
+
                 _this.saveObj = {
                     "betArray" : betArray,
                     "betFormRowsArray" : _this.betFormRowsArray
@@ -959,7 +1070,7 @@
                     // when the response is available
                     _this.bet = response.data;
 
-                    var acceptedBets = [], limitedBets = [], rejectedBets = [], voidBets = [];
+                    var acceptedBets = [], limitedBets = [], rejectedBets = [], voidedBets = [];
                     angular.forEach(_this.bet.betDetailsSortByNumber, function(value,key) {
                         value.canVoid = false;
                         if (moment().isBefore(moment(value.voidDateBy.date))) {
@@ -980,15 +1091,14 @@
                         } else if (value.status == $rootScope.APPCONSTANT.BET.DETAIL.STATUS.REJECTED) {
                             rejectedBets.push(value);
                         } else if (value.status == $rootScope.APPCONSTANT.BET.DETAIL.STATUS.VOIDED) {
-                            voidBets.push(value);
+                            voidedBets.push(value);
                         }
                     });
-                    console.log(_this.bet.betDetailsSortByNumber);
 
                     _this.bet.acceptedBets = acceptedBets;
                     _this.bet.limitedBets = limitedBets;
                     _this.bet.rejectedBets = rejectedBets;
-                    _this.bet.voidBets = voidBets;
+                    _this.bet.voidedBets = voidedBets;
                 }, function (response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.

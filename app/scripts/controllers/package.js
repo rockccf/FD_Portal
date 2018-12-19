@@ -155,6 +155,24 @@
             _this.package["6dPrize5"] = $rootScope.APPCONSTANT.PACKAGE.RECOMMENDED_PRIZE["6D_PRIZE_5"];
         };
 
+        _this.getMasterMinimumPrizes = function() {
+            $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/master/"+masterId,
+                null)
+                .then(function (response) {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    _this.masterData = response.data;
+                }, function (response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    CommonService.SweetAlert({
+                        title: "Error",
+                        text: "Failed to retrieve master details.",
+                        type: "error"
+                    });
+                });
+        };
+
         //function to create the package & bind in package_create.html
         _this.createPackage = function createPackage(isValid){
             if (isValid) {
@@ -277,6 +295,7 @@
                         // this callback will be called asynchronously
                         // when the response is available
                         _this.package = response.data;
+                        _this.getMasterMinimumPrizes();
                     }, function (response) {
                         // called asynchronously if an error occurs
                         // or server returns response with an error status.
@@ -286,6 +305,8 @@
                             type: "error"
                         });
                     });
+        } else if (stateName == "root.main.packageCreate") {
+            _this.getMasterMinimumPrizes();
         }
     }; // End var Ctrl
 

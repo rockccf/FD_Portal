@@ -142,6 +142,7 @@
         "acceptedBets" : "Accepted Bet(s)",
         "limitedBets" : "Limited Bet(s)",
         "rejectedBets" : "Rejected Bet(s)",
+        "voidedBets" : "Voided Bet(s)",
         "void" : "Void",
         "collect" : "Collect",
         "extraCommission" : "Extra Commission",
@@ -174,7 +175,11 @@
         "notRecommendedToSearchForFutureDrawDate" : "It's not recommended to search for future draw date as the results are not yet processed.",
         "grandTotal" : "Grand Total",
         "voidBetView" : "Void Bet View",
-        "superiorCommission" : "Superior Commission"
+        "superiorCommission" : "Superior Commission",
+        "min" : "Min",
+        "agentPrize" : "Agent Prize",
+        "superiorBonus" : "Superior Bonus",
+        "betsVoided" : "Bet(s) Voided"
     },
     "placeholder" : {
         "selectOneOrMore" : "--- Please select one or more ---",
