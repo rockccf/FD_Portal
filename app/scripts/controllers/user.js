@@ -384,7 +384,8 @@
                     }
                 }
 
-                $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/user/" + userId+"?expand=userDetail.package").
+                $http.get($rootScope.SYSCONSTANT.BACKEND_SERVER_URL + "/user/" + userId+"?expand=userDetail.package," +
+                    "userDetail.realtimeOutstanding,userDetail.realtimeOutstandingDownline,userDetail.realtimeBalance").
                 then(function (response) {
                     _this.user = response.data;
 
