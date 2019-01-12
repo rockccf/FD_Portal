@@ -362,11 +362,12 @@
                         currentGdAgentCommRate = response.data["gdAgentCommRate"];
                     })
                 )
+                promises.push(_this.getPackageData($rootScope.userIdentity.userDetail.packageId));
             }
 
-            promises.push(_this.getMasterMinimumPrizes());
-            promises.push(_this.getPackageData($rootScope.userIdentity.userDetail.packageId));
-
+            if (_this.userType != $rootScope.APPCONSTANT.USER.TYPE.ADMIN) {
+                promises.push(_this.getMasterMinimumPrizes());
+            }
             $q.all(promises).then(function () {
                 var userId = $stateParams.id;
                 if (stateName == "root.main.myAccount" || stateName == "root.main.myAccountEdit") {
@@ -401,18 +402,20 @@
                                 break;
                             case $rootScope.APPCONSTANT.USER.TYPE.MASTER:
                                 _this.canCreateUserType = $rootScope.APPCONSTANT.USER.TYPE.AGENT;
-                                CommonService.getPackages(masterId).then(function (result) {
-                                    _this.packageOptions = result;
-                                    for (var o in _this.packageOptions) {
-                                        if (_this.user.userDetail.packageId == _this.packageOptions[o].id) {
-                                            _this.user.package = _this.packageOptions[o];
+                                if (stateName == "root.main.userEdit") {
+                                    CommonService.getPackages(masterId).then(function (result) {
+                                        _this.packageOptions = result;
+                                        for (var o in _this.packageOptions) {
+                                            if (_this.user.userDetail.packageId == _this.packageOptions[o].id) {
+                                                _this.user.package = _this.packageOptions[o];
+                                            }
                                         }
-                                    }
-                                });
-                                _this.user.creditLimit = _this.user.userDetail.creditLimit;
-                                _this.user.betMethod = _this.user.userDetail.betMethod;
-                                _this.user.betGdLotto = _this.user.userDetail.betGdLotto;
-                                _this.user.bet6d = _this.user.userDetail.bet6d;
+                                    });
+                                    _this.user.creditLimit = _this.user.userDetail.creditLimit;
+                                    _this.user.betMethod = _this.user.userDetail.betMethod;
+                                    _this.user.betGdLotto = _this.user.userDetail.betGdLotto;
+                                    _this.user.bet6d = _this.user.userDetail.bet6d;
+                                }
                                 break;
                             case $rootScope.APPCONSTANT.USER.TYPE.AGENT:
                                 _this.canCreateUserType = $rootScope.APPCONSTANT.USER.TYPE.PLAYER;
