@@ -778,7 +778,7 @@
             name: 'TBT88 Portal',
             company: 'TBT88',
             description: 'Home',
-            version: '1.2.1',
+            version: '1.2.2',
             year: ((new Date()).getFullYear()),
             layout: {
                 isFixed: true,
