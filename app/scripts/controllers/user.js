@@ -151,9 +151,9 @@
                     betMethod = _this.user.betMethod;
                     betGdLotto = _this.user.betGdLotto;
                     bet6d = _this.user.bet6d;
-                    extra4dCommRate = _this.user.extra4dCommRate;
-                    extra6dCommRate = _this.user.extra6dCommRate;
-                    extraGdCommRate = _this.user.extraGdCommRate;
+                    extra4dCommRate = _this.user.userDetail.extra4dCommRate;
+                    extra6dCommRate = _this.user.userDetail.extra6dCommRate;
+                    extraGdCommRate = _this.user.userDetail.extraGdCommRate;
                 }
 
                 _this.saveObj = {
@@ -208,9 +208,9 @@
                     "betGdLotto" : _this.user.betGdLotto,
                     "bet6d" : _this.user.bet6d,
                     "creditLimit" : _this.user.creditLimit,
-                    "extra4dCommRate" : _this.user.extra4dCommRate,
-                    "extra6dCommRate" : _this.user.extra6dCommRate,
-                    "extraGdCommRate" : _this.user.extraGdCommRate
+                    "extra4dCommRate" : _this.user.userDetail.extra4dCommRate,
+                    "extra6dCommRate" : _this.user.userDetail.extra6dCommRate,
+                    "extraGdCommRate" : _this.user.userDetail.extraGdCommRate
                 };
 
 
