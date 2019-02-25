@@ -252,7 +252,7 @@
         <div class="input-group">
             <input type="number" class="form-control" id="extra4dCommRate" name="extra4dCommRate"
                    placeholder="{{'placeholder.extra4dCommRate'|translate}}" ng-max="user.user['maxExtra4dCommRate']"
-                   ng-model="user.user.extra4dCommRate">
+                   ng-model="user.user.userDetail.extra4dCommRate">
             <span class="input-group-addon">{{'text.max' | translate}} {{user.user.maxExtra4dCommRate}}%</span>
         </div>
         <div class="help-block" ng-messages="packageForm['extra4dCommRate'].$error" ng-show="packageForm['extra4dCommRate'].$touched">
@@ -266,7 +266,7 @@
         <div class="input-group">
             <input type="number" class="form-control" id="extra6dCommRate" name="extra6dCommRate"
                    placeholder="{{'placeholder.extra6dCommRate'|translate}}" ng-max="user.user['maxExtra6dCommRate']"
-                   ng-model="user.user.extra6dCommRate">
+                   ng-model="user.user.userDetail.extra6dCommRate">
             <span class="input-group-addon">{{'text.max' | translate}} {{user.user.maxExtra6dCommRate}}%</span>
         </div>
         <div class="help-block" ng-messages="packageForm['extra6dCommRate'].$error" ng-show="packageForm['extra6dCommRate'].$touched">
@@ -280,7 +280,7 @@
         <div class="input-group">
             <input type="number" class="form-control" id="extraGdCommRate" name="extraGdCommRate"
                    placeholder="{{'placeholder.extraGdCommRate'|translate}}" ng-max="user.user['maxExtraGdCommRate']"
-                   ng-model="user.user.extraGdCommRate">
+                   ng-model="user.user.userDetail.extraGdCommRate">
             <span class="input-group-addon">{{'text.max' | translate}} {{user.user.maxExtraGdCommRate}}%</span>
         </div>
         <div class="help-block" ng-messages="packageForm['extraGdCommRate'].$error" ng-show="packageForm['extraGdCommRate'].$touched">
