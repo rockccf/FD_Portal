@@ -151,9 +151,11 @@
                     betMethod = _this.user.betMethod;
                     betGdLotto = _this.user.betGdLotto;
                     bet6d = _this.user.bet6d;
-                    extra4dCommRate = _this.user.userDetail.extra4dCommRate;
-                    extra6dCommRate = _this.user.userDetail.extra6dCommRate;
-                    extraGdCommRate = _this.user.userDetail.extraGdCommRate;
+                    if (_this.user.userDetail) {
+                        extra4dCommRate = _this.user.userDetail.extra4dCommRate;
+                        extra6dCommRate = _this.user.userDetail.extra6dCommRate;
+                        extraGdCommRate = _this.user.userDetail.extraGdCommRate;
+                    }
                 }
 
                 _this.saveObj = {
@@ -199,6 +201,13 @@
                 CommonService.clearAlertMessage();
                 _this.isSaving = true;
 
+                var extra4dCommRate = null, extra6dCommRate = null, extraGdCommRate = null;
+                if (_this.user.userDetail) {
+                    extra4dCommRate = _this.user.userDetail.extra4dCommRate;
+                    extra6dCommRate = _this.user.userDetail.extra6dCommRate;
+                    extraGdCommRate = _this.user.userDetail.extraGdCommRate;
+                }
+
                 _this.saveObj = {
                     "name" : _this.user.name,
                     "mobileNo" : _this.user.mobileNo,
@@ -208,11 +217,10 @@
                     "betGdLotto" : _this.user.betGdLotto,
                     "bet6d" : _this.user.bet6d,
                     "creditLimit" : _this.user.creditLimit,
-                    "extra4dCommRate" : _this.user.userDetail.extra4dCommRate,
-                    "extra6dCommRate" : _this.user.userDetail.extra6dCommRate,
-                    "extraGdCommRate" : _this.user.userDetail.extraGdCommRate
+                    "extra4dCommRate" : extra4dCommRate,
+                    "extra6dCommRate" : extra6dCommRate,
+                    "extraGdCommRate" : extraGdCommRate
                 };
-
 
                 angular.forEach(_this.user.userDetail, function(value, key) {
                     var keyFirst2Chars = key.substring(0, 2);
