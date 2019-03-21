@@ -367,3 +367,15 @@
     line-height: 1.5; /* If Placeholder of the input is moved up, rem/modify this. */
     border-radius: 3px;
 }
+
+@media only screen and (max-width: 767px) {
+    .sidebar-toggle-clock {
+        position: absolute !important;
+        top: 5px;
+        right: 30px;
+        z-index: 3001;
+    }
+    .sidebar-toggle-clock > strong {
+        color: white;
+    }
+}
