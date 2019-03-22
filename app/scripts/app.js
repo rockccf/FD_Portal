@@ -734,6 +734,21 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'RouteH
             resolve: helper.resolveFor('report'),
             controller: "ReportController",
             controllerAs: 'report'
+        })
+        .state('root.main.betAmountNumberReport', {
+            url: "/betAmountNumberReport",
+            title: "text.betAmountNumber",
+            data: {
+                permissions: []
+            },
+            ncyBreadcrumb: {
+                label: 'text.betAmountNumber',
+                parent: 'root.main.report'
+            },
+            templateUrl: "views/reports/bet_amount_number_report.html",
+            resolve: helper.resolveFor('report'),
+            controller: "ReportController",
+            controllerAs: 'report'
         });
 
     // use the HTML5 History API

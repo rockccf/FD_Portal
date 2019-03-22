@@ -138,9 +138,6 @@
         "text": "Report",
         "sref": "root.main.report",
         "icon": "fas fa-chart-line",
-        "substate": [
-            {"sref": "root.main.poReport"}
-        ],
         "translate": "text.report",
         "bypassPermission": "true"
     }

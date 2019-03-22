@@ -1,0 +1,274 @@
+<div class="panel panel-info">
+        <div class="panel-heading" translate="text.betAmountNumber"></div>
+        <div class="panel-body">
+            <form name="reportForm" class="form-horizontal form-validate" ng-submit="report.getReport(APPCONSTANT.FILE_TEMPLATE.REPORT.BET_AMOUNT_NUMBER)" novalidate>
+                <div class="form-group required" ng-class="{ 'has-error' : reportForm.drawDateStart.$invalid && reportForm.drawDateStart.$touched}">
+                    <label for="drawDateStart" class="col-lg-3 control-label" translate="text.drawDateStart"></label>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="drawDateStart" name="drawDateStart" placeholder="{{'placeholder.drawDateStart'|translate}}"
+                                   uib-datepicker-popup="{{report.datepicker.format}}" is-open="report.datepicker.drawDateStart.opened" datepicker-options="report.datepicker.drawDateStart.dateOptions"
+                                   ng-model="report.drawDateStart" required
+                                   close-text="{{'button.close'|translate}}"/>
+                            <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="report.openDatepicker(1)"><em class="fa fa-calendar"></em></button>
+                                </span>
+                            <span class="input-group-addon">DD-MMM-YYYY</span>
+                        </div>
+                        <div class="help-block" ng-messages="reportForm.drawDateStart.$error" ng-show="reportForm.drawDateStart.$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group required" ng-class="{ 'has-error' : reportForm.drawDateEnd.$invalid && reportForm.drawDateEnd.$touched}">
+                    <label for="drawDateEnd" class="col-lg-3 control-label" translate="text.drawDateEnd"></label>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="drawDateEnd" name="drawDateEnd" placeholder="{{'placeholder.drawDateEnd'|translate}}"
+                                   uib-datepicker-popup="{{report.datepicker.format}}" is-open="report.datepicker.drawDateEnd.opened" datepicker-options="report.datepicker.drawDateEnd.dateOptions"
+                                   ng-model="report.drawDateEnd" required
+                                   close-text="{{'button.close'|translate}}"/>
+                            <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="report.openDatepicker(2)"><em class="fa fa-calendar"></em></button>
+                                </span>
+                            <span class="input-group-addon">DD-MMM-YYYY</span>
+                        </div>
+                        <div class="help-block" ng-messages="reportForm.drawDateEnd.$error" ng-show="reportForm.drawDateEnd.$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : reportForm.big.$invalid && reportForm.big.$touched}">
+                    <label for="big" class="col-lg-3 control-label" translate="text.big"></label>
+                    <div class="col-lg-2">
+                        <input type="number" class="form-control" id="big" name="big" placeholder="{{'placeholder.big'|translate}}"
+                               ng-model="report.big" min="1">
+                        <div class="help-block" ng-messages="reportForm.big.$error" ng-show="reportForm.big.$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : reportForm.small.$invalid && reportForm.small.$touched}">
+                    <label for="small" class="col-lg-3 control-label" translate="text.small"></label>
+                    <div class="col-lg-2">
+                        <input type="number" class="form-control" id="small" name="small" placeholder="{{'placeholder.small'|translate}}"
+                               ng-model="report.small" min="1">
+                        <div class="help-block" ng-messages="reportForm.small.$error" ng-show="reportForm.small.$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : reportForm['3a'].$invalid && reportForm['3a'].$touched}">
+                    <label for="3a" class="col-lg-3 control-label">3A</label>
+                    <div class="col-lg-2">
+                        <input type="number" class="form-control" id="3a" name="3a" placeholder="3A"
+                               ng-model="report['3a']" min="1">
+                        <div class="help-block" ng-messages="reportForm['3a'].$error" ng-show="reportForm['3a'].$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : reportForm['3b'].$invalid && reportForm['3b'].$touched}">
+                    <label for="3b" class="col-lg-3 control-label">3B</label>
+                    <div class="col-lg-2">
+                        <input type="number" class="form-control" id="3b" name="3b" placeholder="3B"
+                               ng-model="report['3b']" min="1">
+                        <div class="help-block" ng-messages="reportForm['3b'].$error" ng-show="reportForm['3b'].$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : reportForm['3c'].$invalid && reportForm['3c'].$touched}">
+                    <label for="3c" class="col-lg-3 control-label">3C</label>
+                    <div class="col-lg-2">
+                        <input type="number" class="form-control" id="3c" name="3c" placeholder="3C"
+                               ng-model="report['3c']" min="1">
+                        <div class="help-block" ng-messages="reportForm['3c'].$error" ng-show="reportForm['3c'].$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : reportForm['3d'].$invalid && reportForm['3d'].$touched}">
+                    <label for="3d" class="col-lg-3 control-label">3D</label>
+                    <div class="col-lg-2">
+                        <input type="number" class="form-control" id="3d" name="3d" placeholder="3D"
+                               ng-model="report['3d']" min="1">
+                        <div class="help-block" ng-messages="reportForm['3d'].$error" ng-show="reportForm['3d'].$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : reportForm['3e'].$invalid && reportForm['3e'].$touched}">
+                    <label for="3e" class="col-lg-3 control-label">3E</label>
+                    <div class="col-lg-2">
+                        <input type="number" class="form-control" id="3e" name="3e" placeholder="3E"
+                               ng-model="report['3e']" min="1">
+                        <div class="help-block" ng-messages="reportForm['3e'].$error" ng-show="reportForm['3e'].$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : reportForm['3f'].$invalid && reportForm['3f'].$touched}">
+                    <label for="3f" class="col-lg-3 control-label">3F</label>
+                    <div class="col-lg-2">
+                        <input type="number" class="form-control" id="3f" name="3f" placeholder="3F"
+                               ng-model="report['3f']" min="1">
+                        <div class="help-block" ng-messages="reportForm['3f'].$error" ng-show="reportForm['3f'].$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : reportForm['3abc'].$invalid && reportForm['3abc'].$touched}">
+                    <label for="3abc" class="col-lg-3 control-label">3ABC</label>
+                    <div class="col-lg-2">
+                        <input type="number" class="form-control" id="3abc" name="3abc" placeholder="3ABC"
+                               ng-model="report['3abc']" min="1">
+                        <div class="help-block" ng-messages="reportForm['3abc'].$error" ng-show="reportForm['3abc'].$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : reportForm['4a'].$invalid && reportForm['4a'].$touched}">
+                    <label for="4a" class="col-lg-3 control-label">4A</label>
+                    <div class="col-lg-2">
+                        <input type="number" class="form-control" id="4a" name="4a" placeholder="4A"
+                               ng-model="report['4a']" min="1">
+                        <div class="help-block" ng-messages="reportForm['4a'].$error" ng-show="reportForm['4a'].$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : reportForm['4b'].$invalid && reportForm['4b'].$touched}">
+                    <label for="4b" class="col-lg-3 control-label">4B</label>
+                    <div class="col-lg-2">
+                        <input type="number" class="form-control" id="4b" name="4b" placeholder="4B"
+                               ng-model="report['4b']" min="1">
+                        <div class="help-block" ng-messages="reportForm['4b'].$error" ng-show="reportForm['4b'].$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : reportForm['4c'].$invalid && reportForm['4c'].$touched}">
+                    <label for="4c" class="col-lg-3 control-label">4C</label>
+                    <div class="col-lg-2">
+                        <input type="number" class="form-control" id="4c" name="4c" placeholder="4C"
+                               ng-model="report['4c']" min="1">
+                        <div class="help-block" ng-messages="reportForm['4c'].$error" ng-show="reportForm['4c'].$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : reportForm['4d'].$invalid && reportForm['4d'].$touched}">
+                    <label for="4d" class="col-lg-3 control-label">4D</label>
+                    <div class="col-lg-2">
+                        <input type="number" class="form-control" id="4d" name="4d" placeholder="4D"
+                               ng-model="report['4d']" min="1">
+                        <div class="help-block" ng-messages="reportForm['4d'].$error" ng-show="reportForm['4d'].$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : reportForm['4e'].$invalid && reportForm['4e'].$touched}">
+                    <label for="4e" class="col-lg-3 control-label">4E</label>
+                    <div class="col-lg-2">
+                        <input type="number" class="form-control" id="4e" name="4e" placeholder="4E"
+                               ng-model="report['4e']" min="1">
+                        <div class="help-block" ng-messages="reportForm['4e'].$error" ng-show="reportForm['4e'].$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : reportForm['5d'].$invalid && reportForm['5d'].$touched}">
+                    <label for="5d" class="col-lg-3 control-label">5D</label>
+                    <div class="col-lg-2">
+                        <input type="number" class="form-control" id="5d" name="5d" placeholder="5D"
+                               ng-model="report['5d']" min="1">
+                        <div class="help-block" ng-messages="reportForm['5d'].$error" ng-show="reportForm['5d'].$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : reportForm['6d'].$invalid && reportForm['6d'].$touched}">
+                    <label for="6d" class="col-lg-3 control-label">6D</label>
+                    <div class="col-lg-2">
+                        <input type="number" class="form-control" id="6d" name="6d" placeholder="6D"
+                               ng-model="report['6d']" min="1">
+                        <div class="help-block" ng-messages="reportForm['6d'].$error" ng-show="reportForm['6d'].$touched">
+                            <div ng-messages-include="views/common/messages.html"></div>
+                        </div>
+                    </div>
+                </div>
+                <fieldset ng-disabled="report.isSaving">
+                    <div class="form-group">
+                        <div class="col-lg-8 col-lg-offset-4">
+                            <button type="submit" class="btn btn-primary" ng-disabled="reportForm.$invalid" translate="button.search"></button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <div class="row">
+                <div class="col-lg-12 table-responsive">
+                    <table class="table table-striped table-condensed">
+                        <thead>
+                        <tr class="info">
+                            <th>#</th>
+                            <th translate="text.username"></th>
+                            <th translate="text.drawDate"></th>
+                            <th translate="text.betDate"></th>
+                            <th class="text-center" translate="text.company"></th>
+                            <th class="text-center" translate="text.number"></th>
+                            <th class="text-right" translate="text.big"></th>
+                            <th class="text-right" translate="text.small"></th>
+                            <th class="text-right">4A</th>
+                            <th class="text-right">4B</th>
+                            <th class="text-right">4C</th>
+                            <th class="text-right">4D</th>
+                            <th class="text-right">4E</th>
+                            <th class="text-right">4F</th>
+                            <th class="text-right">3ABC</th>
+                            <th class="text-right">3A</th>
+                            <th class="text-right">3B</th>
+                            <th class="text-right">3C</th>
+                            <th class="text-right">3D</th>
+                            <th class="text-right">3E</th>
+                            <th class="text-right">5D</th>
+                            <th class="text-right">6D</th>
+                            <th translate="text.remarks"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="dataObj in report.reportData.rowArray track by $index">
+                            <td>{{$index+1}}</td>
+                            <td>{{dataObj.username}}</td>
+                            <td>{{dataObj.drawDate}}</td>
+                            <td>{{dataObj.betDate}}</td>
+                            <td class="text-center">{{dataObj.company}}</td>
+                            <td class="text-center">{{dataObj.number}}</td>
+                            <td class="text-right">{{dataObj.big}}</td>
+                            <td class="text-right">{{dataObj.small}}</td>
+                            <td class="text-right">{{dataObj['4a']}}</td>
+                            <td class="text-right">{{dataObj['4b']}}</td>
+                            <td class="text-right">{{dataObj['4c']}}</td>
+                            <td class="text-right">{{dataObj['4d']}}</td>
+                            <td class="text-right">{{dataObj['4e']}}</td>
+                            <td class="text-right">{{dataObj['4f']}}</td>
+                            <td class="text-right">{{dataObj['3abc']}}</td>
+                            <td class="text-right">{{dataObj['3a']}}</td>
+                            <td class="text-right">{{dataObj['3b']}}</td>
+                            <td class="text-right">{{dataObj['3c']}}</td>
+                            <td class="text-right">{{dataObj['3d']}}</td>
+                            <td class="text-right">{{dataObj['3e']}}</td>
+                            <td class="text-right">{{dataObj['5d']}}</td>
+                            <td class="text-right">{{dataObj['6d']}}</td>
+                            <td>{{dataObj.remarks}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br/>
+    </div>
+
+
+
