@@ -1,7 +1,7 @@
 <div class="panel panel-info">
         <div class="panel-heading" translate="text.betAmountNumber"></div>
         <div class="panel-body">
-            <form name="reportForm" class="form-horizontal form-validate" ng-submit="report.getReport(APPCONSTANT.FILE_TEMPLATE.REPORT.BET_AMOUNT_NUMBER)" novalidate>
+            <form name="reportForm" class="form-horizontal form-validate" ng-submit="report.getReport(APPCONSTANT.FILE_TEMPLATE.REPORT.MASTER.BET_SUM_AMOUNT_NUMBER)" novalidate>
                 <div class="form-group required" ng-class="{ 'has-error' : reportForm.drawDateStart.$invalid && reportForm.drawDateStart.$touched}">
                     <label for="drawDateStart" class="col-lg-3 control-label" translate="text.drawDateStart"></label>
                     <div class="col-lg-6">
@@ -212,9 +212,7 @@
                         <thead>
                         <tr class="info">
                             <th>#</th>
-                            <th translate="text.username"></th>
                             <th translate="text.drawDate"></th>
-                            <th translate="text.betDate"></th>
                             <th class="text-center" translate="text.company"></th>
                             <th class="text-center" translate="text.number"></th>
                             <th class="text-right" translate="text.big"></th>
@@ -239,9 +237,7 @@
                         <tbody>
                         <tr ng-repeat="dataObj in report.reportData.rowArray track by $index">
                             <td>{{$index+1}}</td>
-                            <td>{{dataObj.username}}</td>
                             <td>{{dataObj.drawDate}}</td>
-                            <td>{{dataObj.betDate}}</td>
                             <td class="text-center">{{dataObj.company}}</td>
                             <td class="text-center">{{dataObj.number}}</td>
                             <td class="text-right">{{dataObj.big}}</td>

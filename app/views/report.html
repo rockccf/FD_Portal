@@ -24,11 +24,17 @@
                     <a ui-sref="root.main.companyDrawResultsReport" class="btn btn-oval btn-lg btn-info" role="button" translate="button.view"></a>
                 </td>
             </tr>
+        </table>
+        <br/>
+        <table class="table table-striped table-hover" ng-if="report.userType == APPCONSTANT.USER.TYPE.MASTER">
             <tr>
-                <td class="col-xs-1">4.</td>
-                <td translate="text.betAmountNumber"></td>
+                <td colspan="3" class="info"><strong translate="text.masterReportListing"></strong></td>
+            </tr>
+            <tr>
+                <td class="col-xs-1">1.</td>
+                <td translate="text.betSumAmountNumber"></td>
                 <td class="text-right">
-                    <a ui-sref="root.main.betAmountNumberReport" class="btn btn-oval btn-lg btn-info" role="button" translate="button.view"></a>
+                    <a ui-sref="root.main.betSumAmountNumberReport" class="btn btn-oval btn-lg btn-info" role="button" translate="button.view"></a>
                 </td>
             </tr>
         </table>
