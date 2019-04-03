@@ -8,6 +8,7 @@
         var stateName = $state.current.name;
         var _this = this; //Declare local variable _this to refer to "this" controller
         _this.isSaving = false; //Default to false
+        _this.userType = $rootScope.userIdentity.userType;
 
         _this.big = null;
         _this.small = null;
