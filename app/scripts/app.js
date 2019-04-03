@@ -735,17 +735,17 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'RouteH
             controller: "ReportController",
             controllerAs: 'report'
         })
-        .state('root.main.betAmountNumberReport', {
-            url: "/betAmountNumberReport",
-            title: "text.betAmountNumber",
+        .state('root.main.betSumAmountNumberReport', {
+            url: "/betSumAmountNumberReport",
+            title: "text.betSumAmountNumber",
             data: {
                 permissions: []
             },
             ncyBreadcrumb: {
-                label: 'text.betAmountNumber',
+                label: 'text.betSumAmountNumber',
                 parent: 'root.main.report'
             },
-            templateUrl: "views/reports/bet_amount_number_report.html",
+            templateUrl: "views/reports/bet_sum_amount_number_report.html",
             resolve: helper.resolveFor('report'),
             controller: "ReportController",
             controllerAs: 'report'

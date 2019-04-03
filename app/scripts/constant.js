@@ -124,9 +124,8 @@ app.constant("APPCONSTANT", {
             "WIN_LOSS_DETAILS" : 1000,
             "DRAW_WINNING_NUMBER" : 1001,
             "COMPANY_DRAW_RESULTS" : 1002,
-            "BET_AMOUNT_NUMBER" : 1003,
             "MASTER" : {
-
+                "BET_SUM_AMOUNT_NUMBER" : 2000,
             },
             "ADMIN" : {
 
